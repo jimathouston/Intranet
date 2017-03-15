@@ -1,0 +1,23 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:57496/",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "INTRANET_JWT": "mysupersecret_secretkey!123",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Intranet.Web": {
+      "commandName": "Project"
+    }
+  }
+}
