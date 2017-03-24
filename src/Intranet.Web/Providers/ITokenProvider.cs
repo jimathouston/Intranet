@@ -8,6 +8,6 @@ namespace Intranet.Web.Providers
 {
   public interface ITokenProvider
   {
-    object GenerateToken(ClaimsPrincipal user);
+    (string accessToken, int expiresIn) GenerateToken(ClaimsPrincipal user);
   }
 }

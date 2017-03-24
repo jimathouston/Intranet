@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intranet.API", "Intranet.AP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intranet.Web", "Intranet.Web\Intranet.Web.csproj", "{C71A0DA5-0B4E-441C-91DE-903EDB711B8B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{2B3C673D-290D-44E3-8702-077B4607C2A0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.Web.UnitTests", "Intranet.Web.UnitTests\Intranet.Web.UnitTests.csproj", "{0E439046-857A-4C0D-AB9B-103CD28C0DAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intranet.API.UnitTests", "Intranet.API.UnitTests\Intranet.API.UnitTests.csproj", "{2E866925-6504-4B07-9558-D43725673AF3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +27,20 @@ Global
 		{C71A0DA5-0B4E-441C-91DE-903EDB711B8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C71A0DA5-0B4E-441C-91DE-903EDB711B8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C71A0DA5-0B4E-441C-91DE-903EDB711B8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E439046-857A-4C0D-AB9B-103CD28C0DAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E439046-857A-4C0D-AB9B-103CD28C0DAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E439046-857A-4C0D-AB9B-103CD28C0DAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E439046-857A-4C0D-AB9B-103CD28C0DAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E866925-6504-4B07-9558-D43725673AF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E866925-6504-4B07-9558-D43725673AF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E866925-6504-4B07-9558-D43725673AF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E866925-6504-4B07-9558-D43725673AF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0E439046-857A-4C0D-AB9B-103CD28C0DAE} = {2B3C673D-290D-44E3-8702-077B4607C2A0}
+		{2E866925-6504-4B07-9558-D43725673AF3} = {2B3C673D-290D-44E3-8702-077B4607C2A0}
 	EndGlobalSection
 EndGlobal

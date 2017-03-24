@@ -9,8 +9,8 @@ namespace Intranet.Web.Models
   public class User : IUser
   {
     public string FirstName { get; set; }
-    public string AuthenticationType { get; internal set; }
-    public bool IsVerified { get; internal set; } = false;
-    public string Sid { get; internal set; }
+    public string AuthenticationType { get; set; }
+    public bool IsVerified { get; set; } = false;
+    public string Sid { get; set; }
   }
 }

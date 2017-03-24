@@ -22,7 +22,7 @@ namespace Intranet.Web.Providers
       _dateTimeFactory = dateTimeFactory;
     }
 
-    public object GenerateToken(ClaimsPrincipal user)
+    public (string accessToken, int expiresIn) GenerateToken(ClaimsPrincipal user)
     {
       var now = _dateTimeFactory.GetCurrentDateTimeOffset();
 
@@ -49,11 +49,11 @@ namespace Intranet.Web.Providers
 
       var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-      return new
-      {
-        accessToken = encodedJwt,
-        expiresIn = (int)_settings.Expiration.TotalSeconds
-      };
+      return
+      (
+        accessToken: encodedJwt,
+        expiresIn: (int)_settings.Expiration.TotalSeconds
+      );
     }
   }
 }
