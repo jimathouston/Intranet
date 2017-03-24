@@ -1,0 +1,31 @@
+version: '2'
+services:
+  db:
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: pguser
+      POSTGRED_DB: pgdb
+    volumes:
+      - ./db:/var/lib/postgresql
+  nginx:
+    build: ./nginx
+    links:
+      - client:client
+      - api:api
+    ports:
+      - "80:80"
+  client:
+    build: ./Intranet.Web
+    ports:
+      - "5000:80"
+    env_file: development.env
+  api:
+    build: ./Intranet.API
+    ports:
+      - "3000:80"
+    env_file: development.env
+    links:
+      - db
