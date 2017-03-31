@@ -1,6 +1,10 @@
 {
   "name": "Intranet_Web",
   "version": "0.0.0",
+  "scripts": {
+    "lint": "tslint \"./ClientApp/**/*.ts?(x)\" --exclude \"./**/node_modules/**/*.ts?(x)\"",
+    "lint:fix": "tslint --fix \"./ClientApp/**/*.ts?(x)\" --exclude \"./**/node_modules/**/*.ts?(x)\""
+  },
   "dependencies": {
     "@types/history": "^2.0.0",
     "@types/react": "^0.14.29",
@@ -41,5 +45,8 @@
     "webpack": "^2.2.0",
     "webpack-hot-middleware": "^2.12.2",
     "webpack-merge": "^0.14.1"
+  },
+  "devDependencies": {
+    "tslint": "^5.0.0"
   }
 }
