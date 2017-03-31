@@ -3,7 +3,24 @@
   "version": "0.0.0",
   "scripts": {
     "lint": "tslint \"./ClientApp/**/*.ts?(x)\" --exclude \"./**/node_modules/**/*.ts?(x)\"",
-    "lint:fix": "tslint --fix \"./ClientApp/**/*.ts?(x)\" --exclude \"./**/node_modules/**/*.ts?(x)\""
+    "lint:fix": "tslint --fix \"./ClientApp/**/*.ts?(x)\" --exclude \"./**/node_modules/**/*.ts?(x)\"",
+    "pretest": "npm run lint",
+    "test": "jest",
+    "pretest:watch": "npm run lint",
+    "test:watch": "jest --watch"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "moduleDirectories": ["node_modules", "."],
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js",
+    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$"
   },
   "dependencies": {
     "@types/history": "^2.0.0",
@@ -47,6 +64,11 @@
     "webpack-merge": "^0.14.1"
   },
   "devDependencies": {
+    "@types/jest": "^19.2.2",
+    "@types/react-test-renderer": "^15.4.3",
+    "jest": "^19.0.2",
+    "react-test-renderer": "^15.4.2",
+    "ts-jest": "^19.0.6",
     "tslint": "^5.0.0"
   }
 }

@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "moduleResolution": "node",
     "target": "es6",
-    "jsx": "preserve",
+    "jsx": "react",
     "experimentalDecorators": true,
     "sourceMap": true,
     "skipDefaultLibCheck": true,
