@@ -1,8 +1,119 @@
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+}
+
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 0;
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #428bca;
+}
+
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.newsitem {
+  background-color: #f5f5f5;
+}
+
+/*
 .main-nav li .glyphicon {
     margin-right: 10px;
 }
 
-/* Highlighting rules for nav menu items */
+/* Highlighting rules for nav menu items 
 .main-nav li a.active,
 .main-nav li a.active:hover,
 .main-nav li a.active:focus {
@@ -10,7 +121,7 @@
     color: white;
 }
 
-/* Keep the nav menu independent of scrolling and on top of other items */
+/* Keep the nav menu independent of scrolling and on top of other items 
 .main-nav {
     position: fixed;
     top: 0;
@@ -20,14 +131,19 @@
 }
 
 @media (max-width: 767px) {
-    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
+    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. 
     body {
         padding-top: 50px;
     }
 }
 
 @media (min-width: 768px) {
-    /* On small screens, convert the nav menu to a vertical sidebar */
+    /* On small screens, convert the nav menu to a vertical sidebar    
+    .col-sm-offset-3 {
+        background-color: green;
+        padding-top: 40px;
+        padding-left: 40px;
+    }
     .main-nav {
         height: 100%;
         width: calc(25% - 20px);
@@ -39,6 +155,8 @@
     }
     .main-nav .navbar-header {
         float: none;
+        background-color: red;
+        width: 1280px;
     }
     .main-nav .navbar-collapse {
         border-top: 1px solid #444;
@@ -57,10 +175,10 @@
         border-radius: 4px;
     }
     .main-nav .navbar a {
-        /* If a menu item's text is too long, truncate it */
+        /* If a menu item's text is too long, truncate it 
         width: 100%;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
     }
-}
+}*/

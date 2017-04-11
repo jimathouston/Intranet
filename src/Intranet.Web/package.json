@@ -15,7 +15,10 @@
       "tsx",
       "js"
     ],
-    "moduleDirectories": ["node_modules", "."],
+    "moduleDirectories": [
+      "node_modules",
+      "."
+    ],
     "transform": {
       "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
@@ -48,9 +51,11 @@
     "file-loader": "^0.8.5",
     "jquery": "^2.2.1",
     "json-loader": "^0.5.4",
+    "jwt-decode": "^2.2.0",
     "node-noop": "^1.0.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
+    "react-form": "^1.2.6",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
     "react-router-redux": "^4.0.6",

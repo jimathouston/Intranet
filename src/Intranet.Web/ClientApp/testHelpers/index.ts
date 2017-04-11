@@ -7,3 +7,4 @@ export const snap = (children: ReactElement<any>) => {
   const component = ReactTestRenderer.create(children)
   expect(component).toMatchSnapshot()
 }
+

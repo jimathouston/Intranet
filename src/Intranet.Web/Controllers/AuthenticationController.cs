@@ -60,13 +60,13 @@ namespace Intranet.Web.Controllers
       return new JsonResult(new { success = true });
     }
 
-    [HttpPost]
+    [HttpGet]
     public IActionResult GenerateToken()
     {
       var user = HttpContext.User;
       var response = _tokenProvider.GenerateToken(user);
 
-      return new JsonResult(response);
+      return new JsonResult(new { accessToken = response.accessToken, expiresIn = response.expiresIn });
     }
   }
 }
