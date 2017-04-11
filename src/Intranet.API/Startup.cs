@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,9 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Intranet.API
 {
@@ -32,6 +35,8 @@ namespace Intranet.API
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      var pathToDoc = ".xml";
+
       // Add framework services.
       services.AddMvc(config =>
       {
@@ -41,6 +46,30 @@ namespace Intranet.API
           .Build();
 
         config.Filters.Add(new AuthorizeFilter(policy));
+      });
+
+      // Add Swagger Generator
+      services.AddSwaggerGen(options =>
+      {
+        options.SwaggerDoc("v1",
+          new Info
+          {
+            Title = "Certaincy Intranet",
+            Version = "v1",
+            Description = "Documentation for Certaincy Intranet API. Only available on the development enviroment.",
+          });
+
+        var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, pathToDoc);
+        options.IncludeXmlComments(filePath);
+        options.DescribeAllEnumsAsStrings();
+
+        options.AddSecurityDefinition("Bearer", new ApiKeyScheme()
+        {
+          Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+          Name = "Authorization",
+          In = "header",
+          Type = "apiKey",
+        });
       });
     }
 
@@ -80,6 +109,20 @@ namespace Intranet.API
         AutomaticChallenge = true,
         TokenValidationParameters = tokenValidationParameters
       });
+
+      if (env.IsDevelopment())
+      {
+        app.UseSwagger(c => 
+        {
+          c.RouteTemplate = "api-docs/swagger/{documentName}/swagger.json";
+        });
+
+        app.UseSwaggerUI(c =>
+        {
+          c.RoutePrefix = "api-docs";
+          c.SwaggerEndpoint("/api-docs/swagger/v1/swagger.json", "v1 docs");
+        });
+      }
 
       app.UseMvc();
     }
