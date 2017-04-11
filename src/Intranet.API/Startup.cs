@@ -13,6 +13,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore;
+using Intranet.API.Domain.Data;
+using Intranet.API.Data;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Intranet.API
@@ -35,6 +39,15 @@ namespace Intranet.API
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      var sqlConnectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION");
+      
+      services.AddDbContext<DomainModelPostgreSqlContext>(options =>
+        options.UseNpgsql(
+          sqlConnectionString,
+          b => b.MigrationsAssembly("Intranet.API")   
+        )
+      );
+      
       var pathToDoc = ".xml";
 
       // Add framework services.
@@ -46,6 +59,11 @@ namespace Intranet.API
           .Build();
 
         config.Filters.Add(new AuthorizeFilter(policy));
+      })
+      .AddJsonOptions(opt =>
+      {
+        // output in UTC with Json, source: http://stackoverflow.com/questions/41728737/iso-utc-datetime-format-as-default-json-output-format-in-mvc-6-api-response
+        opt.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
       });
 
       // Add Swagger Generator
@@ -125,6 +143,12 @@ namespace Intranet.API
       }
 
       app.UseMvc();
+
+      if (env.IsDevelopment())
+      {
+        // Seed DB if empty
+        app.SeedData();
+      }
     }
   }
 }

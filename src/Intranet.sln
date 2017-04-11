@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intranet.API", "Intranet.API\Intranet.API.csproj", "{51B5A554-ED44-4A3F-ACEA-E809F6D3928F}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.Web.UnitTests", "Intranet.Web.UnitTests\Intranet.Web.UnitTests.csproj", "{0E439046-857A-4C0D-AB9B-103CD28C0DAE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intranet.API.UnitTests", "Intranet.API.UnitTests\Intranet.API.UnitTests.csproj", "{2E866925-6504-4B07-9558-D43725673AF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intranet.API.Domain", "Intranet.API.Domain\Intranet.API.Domain.csproj", "{F1433FA7-B06D-4EF1-B836-339E6DC92F26}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{2E866925-6504-4B07-9558-D43725673AF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E866925-6504-4B07-9558-D43725673AF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E866925-6504-4B07-9558-D43725673AF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1433FA7-B06D-4EF1-B836-339E6DC92F26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1433FA7-B06D-4EF1-B836-339E6DC92F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1433FA7-B06D-4EF1-B836-339E6DC92F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1433FA7-B06D-4EF1-B836-339E6DC92F26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
