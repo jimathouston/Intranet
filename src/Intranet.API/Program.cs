@@ -16,7 +16,7 @@ namespace Intranet.API
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
-                .UseStartup<Startup>()
+                .UseStartup("Intranet.API")
                 .UseApplicationInsights()
                 .Build();
 

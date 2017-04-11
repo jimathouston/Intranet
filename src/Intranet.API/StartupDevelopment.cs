@@ -21,9 +21,9 @@ using Swashbuckle.AspNetCore.Swagger;
 
 namespace Intranet.API
 {
-  public class Startup
+  public class StartupDevelopment
   {
-    public Startup(IHostingEnvironment env)
+    public StartupDevelopment(IHostingEnvironment env)
     {
       var builder = new ConfigurationBuilder()
           .SetBasePath(env.ContentRootPath)
@@ -89,6 +89,15 @@ namespace Intranet.API
           Type = "apiKey",
         });
       });
+
+      services.AddCors(options =>
+      {
+        options.AddPolicy("CorsPolicy",
+          builder => builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+      });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -128,27 +137,23 @@ namespace Intranet.API
         TokenValidationParameters = tokenValidationParameters
       });
 
-      if (env.IsDevelopment())
+      app.UseSwagger(c =>
       {
-        app.UseSwagger(c => 
-        {
-          c.RouteTemplate = "api-docs/swagger/{documentName}/swagger.json";
-        });
+        c.RouteTemplate = "api-docs/swagger/{documentName}/swagger.json";
+      });
 
-        app.UseSwaggerUI(c =>
-        {
-          c.RoutePrefix = "api-docs";
-          c.SwaggerEndpoint("/api-docs/swagger/v1/swagger.json", "v1 docs");
-        });
-      }
+      app.UseSwaggerUI(c =>
+      {
+        c.RoutePrefix = "api-docs";
+        c.SwaggerEndpoint("/api-docs/swagger/v1/swagger.json", "v1 docs");
+      });
+
+      app.UseCors("CorsPolicy");
 
       app.UseMvc();
 
-      if (env.IsDevelopment())
-      {
-        // Seed DB if empty
-        app.SeedData();
-      }
+      // Seed DB if empty
+      app.SeedData();
     }
   }
 }
