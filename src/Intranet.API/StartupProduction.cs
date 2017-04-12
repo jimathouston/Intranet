@@ -25,11 +25,7 @@ namespace Intranet.API
   {
     public StartupProduction(IHostingEnvironment env)
     {
-      var builder = new ConfigurationBuilder()
-          .SetBasePath(env.ContentRootPath)
-          .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-          .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-          .AddEnvironmentVariables();
+      var builder = CommonStartupConfigurations.BuildConfig(env);
 
       Configuration = builder.Build();
     }
@@ -41,7 +37,7 @@ namespace Intranet.API
     {
       var sqlConnectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION");
       
-      services.AddDbContext<DomainModelPostgreSqlContext>(options =>
+      services.AddDbContext<IntranetApiContext>(options =>
         options.UseNpgsql(
           sqlConnectionString,
           b => b.MigrationsAssembly("Intranet.API")   
@@ -69,33 +65,10 @@ namespace Intranet.API
       var secretKey = Configuration["INTRANET_JWT"];
       var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
 
-      var tokenValidationParameters = new TokenValidationParameters
-      {
-        // The signing key must match!
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = signingKey,
+      var tokenValidationParameters = CommonStartupConfigurations.GetTokenValidationParameters(signingKey);
+      var jwtBearerOptions = CommonStartupConfigurations.GetJwtBearerOptions(tokenValidationParameters);
 
-        // Validate the JWT Issuer (iss) claim
-        ValidateIssuer = true,
-        ValidIssuer = "ExampleIssuer",
-
-        // Validate the JWT Audience (aud) claim
-        ValidateAudience = true,
-        ValidAudience = "ExampleAudience",
-
-        // Validate the token expiry
-        ValidateLifetime = true,
-
-        // If you want to allow a certain amount of clock drift, set that here:
-        ClockSkew = TimeSpan.Zero,
-      };
-
-      app.UseJwtBearerAuthentication(new JwtBearerOptions
-      {
-        AutomaticAuthenticate = true,
-        AutomaticChallenge = true,
-        TokenValidationParameters = tokenValidationParameters
-      });
+      app.UseJwtBearerAuthentication(jwtBearerOptions);
 
       app.UseMvc();
     }

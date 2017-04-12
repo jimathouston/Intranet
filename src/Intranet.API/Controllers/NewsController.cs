@@ -17,14 +17,14 @@ using System.Net;
 namespace Intranet.API.Controllers
 {
   [Produces("application/json")]
-  [Route("/api/[controller]")]
+  [Route("/api/v1/[controller]")]
   public class NewsController : Controller
   {
-    private readonly DomainModelPostgreSqlContext _newsContext;
+    private readonly IntranetApiContext _intranetApiContext;
 
-    public NewsController(DomainModelPostgreSqlContext context)
+    public NewsController(IntranetApiContext intranetApiContext)
     {
-      _newsContext = context;
+      _intranetApiContext = intranetApiContext;
     }
 
     [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
@@ -34,7 +34,7 @@ namespace Intranet.API.Controllers
     {
       try
       {
-        var fetchNews = _newsContext.News.ToList();
+        var fetchNews = _intranetApiContext.News.ToList();
         foreach (var newsItem in fetchNews)
         {
           if (string.IsNullOrWhiteSpace(newsItem.Title))
@@ -63,7 +63,7 @@ namespace Intranet.API.Controllers
     // GET api/news/5 returns a specific newsid
     public IActionResult Get(int id)
     {
-      var FetchSpecificNews = _newsContext.News.FirstOrDefault(n => n.Id == id);
+      var FetchSpecificNews = _intranetApiContext.News.FirstOrDefault(n => n.Id == id);
      
       if (FetchSpecificNews == null)
       {

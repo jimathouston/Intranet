@@ -13,64 +13,52 @@ namespace Intranet.API.Data
   {
     /// Check if DB is empty and seed it.
     /// source: http://stackoverflow.com/questions/34536021/seed-initial-data-in-entity-framework-7-rc-1-and-asp-net-mvc-6
-    public static void SeedData(this IApplicationBuilder app)
+    public static void SeedDb(IntranetApiContext context)
     {
-      var _context = app.ApplicationServices.GetService<DomainModelPostgreSqlContext>();
+      context.Database.EnsureCreated();
 
-      _context.Database.EnsureCreated();
-
-      if (_context.News.Any())
-      {
-        return;
-      }
-
-      // Test dates/times generated from unix epoch time.
-      // For online time converter see: http://www.freeformatter.com/epoch-timestamp-to-date-converter.html
-      News[] NewNews = new News[]
+      var News = new News[]
       {
         new News
         {
-          Date = DateTimeOffset.FromUnixTimeSeconds(1491177600),    // date is 2017-04-03 Time is 00:00:00 (UTC) and 02:00:00 when GMT+2
+          Date = new DateTimeOffset(new DateTime(2017, 04, 03)),
           Title = "Rubrik 1",
           Text = "Detta är en text till nyhet 1",
           Author = "Charlotta Utterström"
         },
         new News
         {
-          Date = DateTimeOffset.FromUnixTimeSeconds(1491091200),    // date is 2017-04-02 Time is 00:00:00 (UTC)
+          Date = new DateTimeOffset(new DateTime(2017, 04, 02)),
           Title = "Rubrik 2",
           Text = "Detta är en text till nyhet 2",
           Author = "Charlotta Utterström"
         },
         new News
         {
-          Date = DateTimeOffset.FromUnixTimeSeconds(1490918400),    // date is 2017-03-31 Time is 00:00:00 (UTC)
+          Date = new DateTimeOffset(new DateTime(2017, 03, 31)),
           Title = "Rubrik 3",
           Text = "Detta är en text till nyhet 3",
           Author = "Charlotta Utterström"
         },
         new News
         {
-          Date = DateTimeOffset.FromUnixTimeSeconds(1490832000),    // date is 2017-03-30 Time is 00:00:00 (UTC)
+          Date = new DateTimeOffset(new DateTime(2017, 03, 30)),
           Title = "Rubrik 4",
           Text = "Detta är en text till nyhet 4",
           Author = "Charlotta Utterström"
         },
         new News
         {
-          Date = DateTimeOffset.FromUnixTimeSeconds(1490745600),    // date is 2017-03-29 Time is 00:00:00 (UTC)
+          Date = new DateTimeOffset(new DateTime(2017, 03, 29)),
           Title = "Rubrik 5",
           Text = "Detta är en text till nyhet 5",
           Author = "Charlotta Utterström"
         }
       };
 
-      foreach (News item in NewNews)
-      {
-        _context.News.Add(item);
-      }
-
-      _context.SaveChanges();
+      context.News.AddRange(News);
+      
+      context.SaveChanges();
     }
   }
 }
