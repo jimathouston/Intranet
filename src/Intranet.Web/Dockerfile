@@ -1,6 +1,6 @@
 FROM microsoft/aspnetcore-build
 COPY . /app
-WORKDIR /app
+WORKDIR /app/Intranet.Web
 RUN ["dotnet", "restore"]
 RUN ["npm", "install"]
 # FIX for: https://github.com/aspnet/JavaScriptServices/issues/363

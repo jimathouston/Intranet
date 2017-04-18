@@ -1,6 +1,6 @@
 # Intranet
 
-Certaincy's intranet, built with .Net Core and React/Redux
+Certaincy's intranet, built with .Net Core and Angular
 
 ## Development
 
@@ -24,32 +24,10 @@ Some linting issues can be fixed automatically by `tslint`:
 
 #### Unit Testing
 
-Jest is used for unit testing.
+Karma is used for unit testing.
 
 Run the unit tests with:
 
 ```
 > npm test
-```
-
-You can also run Jest in watch-mode by running:
-
-```
-> npm run test:watch
-```
-
-#### Test Helper
-
-The test helper for React snapshot testing from [tscomp](https://github.com/beanloop/tscomp) is included:
-
-```
-import * as React from 'react'
-import {snap} from './testHelpers'
-import Component from '../component'
-
-describe('component', () => {
-  it('works', () => {
-    snap(<Component />)
-  })
-})
 ```
