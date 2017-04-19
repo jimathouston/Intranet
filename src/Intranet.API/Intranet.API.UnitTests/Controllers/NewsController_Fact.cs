@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Intranet.API.Domain.Models.Entities;
-using Xunit;
-using Moq;
+﻿using Intranet.API.Controllers;
 using Intranet.API.Domain.Data;
+using Intranet.API.Domain.Models.Entities;
 using Intranet.API.UnitTests.Mocks;
-using Intranet.API.Controllers;
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
+using Moq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Xunit;
 
 namespace Intranet.API.UnitTests.Controllers
 {
@@ -39,14 +38,14 @@ namespace Intranet.API.UnitTests.Controllers
       Assert.Equal(newsFromController.Text, newsText);
       Assert.Equal(newsFromController.Author, newsAuthor);
     }
-    
+
     [Fact]
     public void ReturnSpecificNewsById()
     {
       // Assign
       var id = 1;
       var news = GetFakeNews();
-      var mockSet = DbSetMock.MockSet(news);
+      var mockSet = DbSetMock.MockSet(news, nameof(News.Id));
 
       var mockContext = new Mock<IntranetApiContext>();
       mockContext.Setup(m => m.News).Returns(mockSet.Object);
@@ -69,7 +68,7 @@ namespace Intranet.API.UnitTests.Controllers
       int id = 1;
       int statusCode = 200;
       var news = GetFakeNews();
-      var mockSet = DbSetMock.MockSet(news);
+      var mockSet = DbSetMock.MockSet(news, nameof(News.Id));
 
       var mockContext = new Mock<IntranetApiContext>();
       mockContext.Setup(m => m.News).Returns(mockSet.Object);
@@ -90,7 +89,7 @@ namespace Intranet.API.UnitTests.Controllers
       int id = 2;
       int statusCode = 404;
       var news = GetFakeNews();
-      var mockSet = DbSetMock.MockSet(news);
+      var mockSet = DbSetMock.MockSet(news, nameof(News.Id));
 
       var mockContext = new Mock<IntranetApiContext>();
       mockContext.Setup(m => m.News).Returns(mockSet.Object);
@@ -119,7 +118,7 @@ namespace Intranet.API.UnitTests.Controllers
 
       // Act
       var newsFromController = newsController.Get();
-      
+
       // Assert
       Assert.Equal(newsFromController, shouldBeNull ? null : news);
     }
