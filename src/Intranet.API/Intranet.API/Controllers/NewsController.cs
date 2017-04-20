@@ -9,10 +9,6 @@ using Intranet.API.Domain.Data;
 using Intranet.API.Domain.Models.Entities;
 using Intranet.API.Data;
 using Microsoft.AspNetCore.Authorization;
-using Newtonsoft.Json;
-using System.Reflection;
-using System.Net.Http;
-using System.Net;
 
 namespace Intranet.API.Controllers
 {
@@ -34,27 +30,11 @@ namespace Intranet.API.Controllers
     {
       try
       {
-        var fetchNews = _intranetApiContext.News.ToList();
-        foreach (var newsItem in fetchNews)
-        {
-          if (string.IsNullOrWhiteSpace(newsItem.Title))
-          {
-            newsItem.Title = "Title is missing.";
-          }
-          if (string.IsNullOrWhiteSpace(newsItem.Text))
-          {
-            newsItem.Text = "News context is missing.";
-          }
-          if (string.IsNullOrWhiteSpace(newsItem.Author))
-          {
-            newsItem.Author = "This news item is unsigned.";
-          }
-        }
-        return fetchNews;
+        return _intranetApiContext.News.Any() ? _intranetApiContext.News.ToList() : new List<News>();
       }
       catch (Exception)
       {
-        return null;      // TODO return something useful 
+        return new List<News>();
       }
     }
 
@@ -63,13 +43,20 @@ namespace Intranet.API.Controllers
     // GET api/news/5 returns a specific newsid
     public IActionResult Get(int id)
     {
-      var FetchSpecificNews = _intranetApiContext.News.FirstOrDefault(n => n.Id == id);
-     
-      if (FetchSpecificNews == null)
+      try
       {
-        return NotFound();
+        var fetchNewsById = _intranetApiContext.News.Find(id);
+
+        if (fetchNewsById == null)
+        {
+          return NotFound();
+        }
+        return new OkObjectResult(fetchNewsById);
       }
-      return new ObjectResult(FetchSpecificNews);
+      catch (Exception)
+      {
+        return StatusCode(StatusCodes.Status500InternalServerError, new News());
+      }
     }
   }
 }

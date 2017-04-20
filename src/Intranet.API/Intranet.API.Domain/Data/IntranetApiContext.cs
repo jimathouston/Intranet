@@ -9,6 +9,11 @@ namespace Intranet.API.Domain.Data
 {
   public class IntranetApiContext : DbContext
   {
+    public IntranetApiContext()
+    {
+      // Empty
+    }
+
     public IntranetApiContext(DbContextOptions<IntranetApiContext> options)
       : base(options)
     {
