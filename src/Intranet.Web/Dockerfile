@@ -8,4 +8,4 @@ RUN ["npm", "install", "-g", "webpack"]
 RUN ["webpack", "--config", "webpack.config.vendor.js"]
 RUN ["webpack"]
 EXPOSE 5000
-ENTRYPOINT ["dotnet", "run"]
+ENTRYPOINT ["dotnet", "run", "--watch"]
