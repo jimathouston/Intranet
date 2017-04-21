@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core'
+﻿import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
 import { UniversalModule } from 'angular2-universal'
 import { HttpModule }    from '@angular/http'
@@ -24,7 +24,6 @@ import { NewsComponent } from './components/news/news.component'
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
-        HttpModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
