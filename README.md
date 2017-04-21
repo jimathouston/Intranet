@@ -6,7 +6,7 @@ Certaincy's intranet, built with .Net Core and Angular
 
 ### Client App
 
-_Note: You must be in `src/Intranet.Web` to use the npm scripts._
+_Note: You must be in `src/Intranet.Web/Intranet.Web` to use the npm scripts._
 
 #### Lint
 
@@ -31,3 +31,16 @@ Run the unit tests with:
 ```
 > npm test
 ```
+
+#### First time setup
+
+Before the Angular app runs the first time the bundles must be built with Webpack:
+
+```
+cd src/Intranet.Web/Intranet.Web
+> npm install -g webpack
+> webpack --config webpack.config.vendor.js
+> webpack
+```
+
+This is the only time the Angular app needs to be built manually.
