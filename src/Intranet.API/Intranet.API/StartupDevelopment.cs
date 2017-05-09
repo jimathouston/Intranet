@@ -51,8 +51,9 @@ namespace Intranet.API
       })
       .AddJsonOptions(opt =>
       {
-        // output in UTC with Json, source: http://stackoverflow.com/questions/41728737/iso-utc-datetime-format-as-default-json-output-format-in-mvc-6-api-response
+        // From: http://stackoverflow.com/questions/41728737/iso-utc-datetime-format-as-default-json-output-format-in-mvc-6-api-response
         opt.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+        opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
       });
 
       // Add Swagger Generator

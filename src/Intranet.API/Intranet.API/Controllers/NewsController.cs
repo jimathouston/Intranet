@@ -68,7 +68,7 @@ namespace Intranet.API.Controllers
 
         if (contextEntity == null)
         {
-          news.Id = id;
+          news.NewsId = id;
           return NotFound(news);
         }
 
@@ -129,7 +129,7 @@ namespace Intranet.API.Controllers
 
     [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
     [HttpGet("{id:int}")]
-    // GET api/news/5 returns a specific newsid
+    // GET api/v1/news/5 returns a specific newsid
     public IActionResult Get(int id)
     {
       try

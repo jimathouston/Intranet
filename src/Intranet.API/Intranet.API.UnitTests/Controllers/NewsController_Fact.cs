@@ -175,7 +175,7 @@ namespace Intranet.API.UnitTests.Controllers
       // Assign
       var id = 1;
       var news = GetFakeNews();
-      var mockSet = DbSetMock.MockSet(news, nameof(News.Id));
+      var mockSet = DbSetMock.MockSet(news, nameof(News.NewsId));
 
       var mockContext = new Mock<IntranetApiContext>();
       mockContext.Setup(m => m.News).Returns(mockSet.Object);
@@ -188,7 +188,7 @@ namespace Intranet.API.UnitTests.Controllers
 
       // Assert
       Assert.NotNull(okObjectResult);
-      Assert.Equal(id, newsContent.Id);
+      Assert.Equal(id, newsContent.NewsId);
     }
 
     [Fact]
@@ -197,7 +197,7 @@ namespace Intranet.API.UnitTests.Controllers
       // Assign
       int id = 1;
       var news = GetFakeNews();
-      var mockSet = DbSetMock.MockSet(news, nameof(News.Id));
+      var mockSet = DbSetMock.MockSet(news, nameof(News.NewsId));
 
       var mockContext = new Mock<IntranetApiContext>();
       mockContext.Setup(m => m.News).Returns(mockSet.Object);
@@ -216,7 +216,7 @@ namespace Intranet.API.UnitTests.Controllers
       // Assign
       int id = 2;
       var news = GetFakeNews();
-      var mockSet = DbSetMock.MockSet(news, nameof(News.Id));
+      var mockSet = DbSetMock.MockSet(news, nameof(News.NewsId));
 
       var mockContext = new Mock<IntranetApiContext>();
       mockContext.Setup(m => m.News).Returns(mockSet.Object);
@@ -249,7 +249,7 @@ namespace Intranet.API.UnitTests.Controllers
       var newsFromController = iEnumerable.First();
 
       // Assert
-      Assert.Equal(newsFromController.Id, newsId);
+      Assert.Equal(newsFromController.NewsId, newsId);
       Assert.Equal(newsFromController.Date, utcDate);
       Assert.Equal(newsFromController.Title, newsTitle);
       Assert.Equal(newsFromController.Text, newsText);
@@ -313,8 +313,8 @@ namespace Intranet.API.UnitTests.Controllers
         (
           newsId: 1,
           newsDate: newsDate,
-          newsTitle: "Rubrik 1",
-          newsText: "Detta är en text till nyhet 1",
+          newsTitle: "News title 1",
+          newsText: "This is a content placeholder for news title 1",
           newsAuthor: "Charlotta Utterström"
         );
     }
@@ -329,7 +329,7 @@ namespace Intranet.API.UnitTests.Controllers
       {
         new News
         {
-          Id = newsId,
+          NewsId = newsId,
           Date = newsDate,
           Title = newsTitle,
           Text = newsText,
