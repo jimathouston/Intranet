@@ -37,7 +37,7 @@ Run the unit tests with:
 Before the Angular app runs the first time the bundles must be built with Webpack:
 
 ```
-cd src/Intranet.Web/Intranet.Web
+> cd src/Intranet.Web/Intranet.Web
 > npm install -g webpack
 > webpack --config webpack.config.vendor.js
 > webpack
