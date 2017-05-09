@@ -9,13 +9,15 @@ namespace Intranet.API.Domain.Models.Entities
   {
     public int Id { get; set; }
 
+    [Required]
     public string Title { get; set; }
 
-    public DateTimeOffset Date { get; set; }
+    public DateTimeOffset Date { get; set; } = DateTimeOffset.UtcNow;
 
+    [Required]
     public string Text { get; set; }
 
+    [Required]
     public string Author { get; set; }
-    
   }
 }
