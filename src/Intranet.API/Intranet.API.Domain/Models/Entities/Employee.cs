@@ -7,7 +7,7 @@ namespace Intranet.API.Domain.Models.Entities
 {
   public class Employee
   {
-    public int EmployeeId { get; set; }     // TODO Q: Should represent AD-id or just a generated Db-id?
+    public int Id { get; set; }     // TODO Q: Should represent AD-id or just a generated Db-id?
 
     [Required]
     public string FirstName { get; set; }

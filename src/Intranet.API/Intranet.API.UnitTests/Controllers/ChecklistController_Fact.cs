@@ -46,7 +46,7 @@ namespace Intranet.API.UnitTests.Controllers
 
       // Assert
       Assert.NotNull(obj);
-      Assert.Equal(inputId == employeeContent.EmployeeId, expected);
+      Assert.Equal(inputId == employeeContent.Id, expected);
     }
 
     [Theory]
@@ -106,7 +106,7 @@ namespace Intranet.API.UnitTests.Controllers
       context.Dispose();
 
       // Assert
-      Assert.Equal(toDoTask.ChecklistId == taskId, expected);
+      Assert.Equal(toDoTask.Id == taskId, expected);
     }
 
     private IEnumerable<Checklist> GetFakeToDoTasks()
@@ -115,27 +115,27 @@ namespace Intranet.API.UnitTests.Controllers
       {
         new Checklist
         {
-          ChecklistId = 1,
+          Id = 1,
           Description = "Read document with new employee instructions."
         },
         new Checklist
         {
-          ChecklistId = 2,
+          Id = 2,
           Description = "Obtain a mobile phone."
         },
         new Checklist
         {
-          ChecklistId = 3,
+          Id = 3,
           Description = "Obtain a computer."
         },
         new Checklist
         {
-          ChecklistId = 4,
+          Id = 4,
           Description = "Obtain an email address."
         },
         new Checklist
         {
-          ChecklistId = 5,
+          Id = 5,
           Description = "Submit your bank account details for salary."
         }
       };
@@ -194,7 +194,7 @@ namespace Intranet.API.UnitTests.Controllers
       {
         new Employee
           {
-            EmployeeId = id,
+            Id = id,
             FirstName = "Martin",
             LastName = "Norén",
             Description = "Likes cars!",

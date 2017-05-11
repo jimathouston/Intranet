@@ -7,7 +7,7 @@ namespace Intranet.API.Domain.Models.Entities
 {
   public class News
   {
-    public int NewsId { get; set; }
+    public int Id { get; set; }
 
     [Required]
     public string Title { get; set; }

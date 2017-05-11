@@ -7,7 +7,7 @@ namespace Intranet.API.Domain.Models.Entities
 {
   public class Checklist
   {
-    public int ChecklistId { get; set; }
+    public int Id { get; set; }
 
     [Required]
     public string Description { get; set; }

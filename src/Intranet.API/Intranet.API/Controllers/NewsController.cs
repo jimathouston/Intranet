@@ -68,7 +68,7 @@ namespace Intranet.API.Controllers
 
         if (contextEntity == null)
         {
-          news.NewsId = id;
+          news.Id = id;
           return NotFound(news);
         }
 
