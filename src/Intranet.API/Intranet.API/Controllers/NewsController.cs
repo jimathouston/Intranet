@@ -15,7 +15,7 @@ namespace Intranet.API.Controllers
 {
   [Produces("application/json")]
   [Route("/api/v1/[controller]")]
-  public class NewsController : Controller
+  public class NewsController : Controller, IRestController<News>
   {
     private readonly IntranetApiContext _intranetApiContext;
 
