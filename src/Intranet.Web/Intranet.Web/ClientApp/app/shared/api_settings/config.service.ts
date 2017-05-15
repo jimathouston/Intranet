@@ -23,3 +23,5 @@ export class ConfigService {
         return this._apiURI.replace('api', '')
     }
 }
+
+

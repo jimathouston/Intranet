@@ -1,5 +1,19 @@
-@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css'
+@import '~https://fonts.googleapis.com/icon?family=Material+Icons';
+@import '~https://fonts.googleapis.com/icon?family=Roboto';
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
 
-.news-card {
-	margin: 60px;
+body {
+	font-family: Roboto;
 }
+.news-card {
+	margin: 20px;
+}
+.app-action {
+	  display: inline-block;
+	  position: fixed;
+	  bottom: 20px;
+	  right: 20px;
+}
+
+
+

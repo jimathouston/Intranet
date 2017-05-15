@@ -12,6 +12,7 @@ import { MaterialModule } from '@angular/material'
     styleUrls: ['./news.component.css']
 
 })
+
 export class NewsNewComponent {
     newsitems: INewsItem[]
 

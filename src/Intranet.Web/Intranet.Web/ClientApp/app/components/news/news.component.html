@@ -22,10 +22,13 @@
 
     <md-card class="news-card" *ngFor="let newsitem of newsitems">
         <a (click)="showInfo(link)" [routerLink]="['/news-detail', newsitem.id]"><h3>{{ newsitem.title }}</h3></a>
-        <span> {{ newsitem.date | date }} </span>
-        <a md-button class="btn blue-text" [routerLink]="['/news-edit', newsitem.id]"><i class="material-icons left "></i>Edit</a>
+        <span> {{ newsitem.date | date }} </span><br><br>
+        <a (click)="showInfo(link)" [routerLink]="['/news-edit', newsitem.id]"><i class="material-icons">create</i></a>
         <a (click)="removeNewsItem(newsitem); $event.stopPropagation()">
             <i class="small material-icons right red-text">delete</i>
         </a>
     </md-card>
+    <span class="app-action" [routerLink]="['/news-new']" >
+      <button md-fab><md-icon>add</md-icon></button>
+    </span>
 

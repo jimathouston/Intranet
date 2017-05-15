@@ -8,7 +8,8 @@ import { MaterialModule } from '@angular/material'
 
 @Component({
     selector: 'news-edit',
-    templateUrl: 'news-edit.component.html'
+    templateUrl: 'news-edit.component.html',
+    styleUrls: ['./news.component.css']
 })
 
 export class NewsEditComponent implements OnInit {
@@ -47,8 +48,8 @@ export class NewsEditComponent implements OnInit {
          this.dataService.updateNewsItem(this.newsItem)
          .subscribe(() => {
                 this.newsItemEdited = true
+                this.info = this.newsItem.title + ' was edited successfully!'
                 console.log('News was updated successfully. ')
-                this.info = 'News ' + this.newsItem.title + ' was edited successfully!'
             },
             error => {
                 console.log('Failed while trying to update the news. ' + error)

@@ -8,13 +8,15 @@ import { MaterialModule } from '@angular/material'
 
 @Component({
     selector: 'news-detail',
-    templateUrl: 'news-detail.component.html'
+    templateUrl: 'news-detail.component.html',
+    styleUrls: ['./news.component.css']
 })
 
 export class NewsDetailComponent implements OnInit {
     id: number
 
     title: string
+    date: Date
     text: string
     author: string
 
@@ -35,6 +37,7 @@ export class NewsDetailComponent implements OnInit {
 
         this.dataService.getNewsItem(this.id).subscribe((newsitem: INewsItem) => {
             this.title = newsitem.title
+            this.date = newsitem.date
             this.text = newsitem.text
             this.author = newsitem.author
         },

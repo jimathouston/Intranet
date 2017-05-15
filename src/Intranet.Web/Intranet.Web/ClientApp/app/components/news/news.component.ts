@@ -27,7 +27,6 @@ export class NewsComponent implements OnInit {
     }
 
     /*filterNewsItems(filter:string){
-
         console.log(filter)
         if (filter.length === 0) {
             this.newsitems = this.newsitemsFilter
@@ -50,4 +49,3 @@ export class NewsComponent implements OnInit {
             })     
     }
 }
-

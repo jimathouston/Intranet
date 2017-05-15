@@ -10,3 +10,4 @@ export interface IChecklist {
     description: string
     todos: boolean
 }
+
