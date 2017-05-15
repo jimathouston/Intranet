@@ -1,4 +1,4 @@
-<h1>Certaincy News</h1>
+﻿<h1>Certaincy News</h1>
     <a [routerLink]="['/news-new']">
         <button md-icon-button color="primary">
             <md-icon mdPrefix>Add</md-icon>
@@ -21,9 +21,9 @@
     </div>-->
 
     <md-card class="news-card" *ngFor="let newsitem of newsitems">
-        <a (click)="showInfo(link)" [routerLink]="['/news-detail', newsitem.id]"><h3>{{ newsitem.title }}</h3></a>
+        <a [routerLink]="['/news-detail', newsitem.id]"><h3>{{ newsitem.title }}</h3></a>
         <span> {{ newsitem.date | date }} </span><br><br>
-        <a (click)="showInfo(link)" [routerLink]="['/news-edit', newsitem.id]"><i class="material-icons">create</i></a>
+        <a [routerLink]="['/news-edit', newsitem.id]"><i class="material-icons">create</i></a>
         <a (click)="removeNewsItem(newsitem); $event.stopPropagation()">
             <i class="small material-icons right red-text">delete</i>
         </a>
