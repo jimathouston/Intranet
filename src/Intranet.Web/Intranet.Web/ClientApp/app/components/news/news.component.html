@@ -1,15 +1,31 @@
 <h1>Certaincy News</h1>
+    <a [routerLink]="['/news-new']">
+        <button md-icon-button color="primary">
+            <md-icon mdPrefix>Add</md-icon>
+        </button>
+    </a>
 
-<div class="row">
-        <div class="col s12 m4 " *ngFor="let newsitem of newsitems">
-                <div class="card z-depth-3">
-                        <div class="card-content">
-                                <span class="card-title">
-                                        <b>{{newsitem.title}}</b> 
-                                </span>
-                                <p> {{newsitem.text}} </p>
-                                <p><b>Författare:</b> {{newsitem.author}}</p>
-                        </div>
-                </div>
-        </div>
-</div>
+    <div>
+        <a md-button color="primary">Flat button</a>
+        <a md-raised-button color="accent">Raised button</a>
+        <a md-fab color="primary"><md-icon mdPrefix>check</md-icon></a>
+        <a md-mini-fab color="primary"><md-icon mdSuffix>check</md-icon></a>
+    </div>
+
+    <div>
+
+    <!--<div class="input-field inline">
+        <input #filterString id="filter" type="text" class="validate" (input)="filterNewsItems(filterString.value)">
+        <label for="filter" >Filter by title </label>
+      </div>
+    </div>-->
+
+    <md-card class="news-card" *ngFor="let newsitem of newsitems">
+        <a (click)="showInfo(link)" [routerLink]="['/news-detail', newsitem.id]"><h3>{{ newsitem.title }}</h3></a>
+        <span> {{ newsitem.date | date }} </span>
+        <a md-button class="btn blue-text" [routerLink]="['/news-edit', newsitem.id]"><i class="material-icons left "></i>Edit</a>
+        <a (click)="removeNewsItem(newsitem); $event.stopPropagation()">
+            <i class="small material-icons right red-text">delete</i>
+        </a>
+    </md-card>
+

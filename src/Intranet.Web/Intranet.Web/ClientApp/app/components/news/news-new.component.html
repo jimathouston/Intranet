@@ -1,0 +1,38 @@
+<md-card class="news-card news-basic">
+    <md-toolbar color="accent">Create News</md-toolbar>&nbsp;
+    <md-card-content>
+        <form #form="ngForm">
+            <table style="width: 100%" cellspacing="0">
+                <tr>
+                    <td>
+                        <md-input-container style="width: 100%">
+                            <input mdInput placeholder="Title" id="title" type="text" #title required>
+                        </md-input-container>
+                    </td>
+                </tr>
+            </table>
+            <table style="width: 100%" cellspacing="0">
+                <tr>
+                    <td>
+                        <md-input-container style="width: 100%">
+                            <textarea mdInput placeholder="Text" id="text" active type="text" #text required></textarea>
+                        </md-input-container>
+                    </td>
+                </tr>
+            </table>      
+            <table style="width: 100%" cellspacing="0">
+                <tr>
+                    <td>
+                        <md-input-container style="width: 100%">
+                            <input mdInput placeholder="Author" id="author" active type="text" #author required>
+                        </md-input-container>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </md-card-content>      
+    <div class="row">
+        <button md-raised-button color="accent" type="submit" name="action" (click)="addNewsItem(title.value,text.value,author.value)">Create News</button>
+        <a md-button class="btn right waves-effect waves-light" (click)="goBack()"><i class="material-icons left"></i>Back</a>
+    </div>   
+</md-card>

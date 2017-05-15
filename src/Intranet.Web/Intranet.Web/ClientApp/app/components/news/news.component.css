@@ -1,0 +1,5 @@
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css'
+
+.news-card {
+	margin: 60px;
+}

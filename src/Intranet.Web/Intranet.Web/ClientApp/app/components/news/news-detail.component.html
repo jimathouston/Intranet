@@ -1,0 +1,14 @@
+<h1>Certaincy News</h1> 
+
+<md-card class="news-card">
+	<h3>{{ title }}</h3>
+	<p><em>{{ date | date }}</em></p>
+	<img md-card-image>
+	<p>{{ text }}</p>
+	<p> / {{ author }}</p>
+	<div>
+		<a (click)="goBack()">Back</a>
+	</div>
+</md-card>
+
+

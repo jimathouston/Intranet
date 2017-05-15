@@ -5,4 +5,4 @@ RUN ["dotnet", "restore"]
 WORKDIR /app/Intranet.API
 RUN ["dotnet", "restore"]
 EXPOSE 3000
-ENTRYPOINT ["dotnet", "run"]
+#ENTRYPOINT ["dotnet", "run"]

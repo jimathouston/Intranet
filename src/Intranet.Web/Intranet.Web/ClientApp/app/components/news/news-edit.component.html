@@ -1,0 +1,39 @@
+<md-card class="news-card news-basic">
+    <md-toolbar color="accent">Edit {{newsItem.title}} </md-toolbar>&nbsp;
+    <md-card-content>
+        <form #form="ngForm">
+            <table style="width: 100%" cellspacing="0">
+                <tr>
+                    <td>
+                        <md-input-container style="width: 100%">
+                            <input mdInput placeholder="Title" id="title" type="text" name="title" [(ngModel)]="newsItem.title">
+                        </md-input-container>
+                    </td>
+                </tr>
+            </table>
+            <table style="width: 100%" cellspacing="0">
+                <tr>
+                    <td>
+                        <md-input-container style="width: 100%">
+                            <textarea mdInput placeholder="Text" id="text" active type="text" name="text" [(ngModel)]="newsItem.text"></textarea>
+                        </md-input-container>
+                    </td>
+                </tr>
+            </table>
+            <table style="width: 100%" cellspacing="0">
+                <tr>
+                    <td>
+                        <md-input-container style="width: 100%">
+                            <input mdInput placeholder="Author" id="author" active type="text" name="author" [(ngModel)]="newsItem.author">
+                        </md-input-container>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </md-card-content>
+    <div class="row">
+        <div class="card-panel teal lighten-2 col s6 m6 l6" *ngIf="newsItemEdited" >{{ info }}</div>
+        <button md-raised-button color="accent" type="submit" name="action" (click)="updateNewsItem()">Save Changes</button>
+        <a md-button class="btn right waves-effect waves-light" (click)="goBack()"><i class="material-icons left"></i>Back</a>
+    </div>
+</md-card>
