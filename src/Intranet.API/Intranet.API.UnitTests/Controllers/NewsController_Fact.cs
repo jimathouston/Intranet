@@ -21,7 +21,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase()
+          .UseInMemoryDatabase(databaseName: "NewsReturnBadRequestResultWhenPosting")
           .Options;
 
       News newsItem = GetFakeNews().First();
@@ -45,7 +45,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase()
+          .UseInMemoryDatabase(databaseName: "NewsReturnOkResultWhenPosting")
           .Options;
 
       var newsItem = GetFakeNews().First();
@@ -67,18 +67,20 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase()
+          .UseInMemoryDatabase(databaseName: "NewsCheckNewsItemWasCorrectlyPosted")
           .Options;
 
       var newsItem = GetFakeNews().First();
 
       var context = new IntranetApiContext(options);
       context.Database.EnsureDeleted();
+      context.SaveChanges();
       var newsController = new NewsController(context);
 
       // Act
       newsController.Post(newsItem);
       var news = context.News.First();
+      context.Dispose();
 
       // Assert
       Assert.NotNull(news);
@@ -92,7 +94,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase()
+          .UseInMemoryDatabase(databaseName: "NewsReturnBadRequestResultWhenUpdated")
           .Options;
 
       var newsItem = GetFakeNews();
@@ -120,7 +122,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase()
+          .UseInMemoryDatabase(databaseName: "NewsReturnNotFoundWhenUpdate")
           .Options;
 
       var newsItem = GetFakeNews();
@@ -146,13 +148,13 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase()
+          .UseInMemoryDatabase(databaseName: "NewsReturnOkResultWhenUpdate")
           .Options;
 
       var oldNewsItem = GetFakeNews().First();
 
       var newNewsItem = GetFakeNews().First();
-      newNewsItem.Author = "Martin Norén";
+      newNewsItem.Author = "Connie the Consultant";
 
       var context = new IntranetApiContext(options);
       context.Database.EnsureDeleted();
@@ -230,7 +232,7 @@ namespace Intranet.API.UnitTests.Controllers
     }
 
     [Theory]
-    [InlineData(1, "2017-04-03 02:00:00", "Rubrik 1", "Detta är en text till nyhet 1", "Charlotta Utterström")]
+    [InlineData(1, "2017-04-03 02:00:00", "News title 1", "This is a content placeholder for news title 1.", "Anne the Admin")]
     public void ReturnCorrectNewsInfoWhenGetAllNews(int newsId, string newsDate, string newsTitle, string newsText, string newsAuthor)
     {
       // Assign
@@ -261,7 +263,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase()
+          .UseInMemoryDatabase(databaseName: "NewsReturnNotFoundWhenGetAllNews")
           .Options;
 
       var context = new IntranetApiContext(options);
@@ -281,7 +283,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase()
+          .UseInMemoryDatabase(databaseName: "NewsReturnOkObjectResultWhenGetAllNews")
           .Options;
 
       var newsItem = GetFakeNews();
@@ -315,7 +317,7 @@ namespace Intranet.API.UnitTests.Controllers
           newsDate: newsDate,
           newsTitle: "News title 1",
           newsText: "This is a content placeholder for news title 1",
-          newsAuthor: "Charlotta Utterström"
+          newsAuthor: "Anne the Admin"
         );
     }
 

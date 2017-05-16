@@ -16,68 +16,6 @@ namespace Intranet.API.UnitTests.Controllers
   public class ChecklistController_Fact
   {
     [Theory]
-    [InlineData(1, true)]
-    [InlineData(2, false)]
-    public void CheckThatCorrectEmployeeIdIsReturned(int inputId, bool expected)
-    {
-      // Assign
-      var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase()
-          .Options;
-
-      var context = new IntranetApiContext(options);
-      context.Database.EnsureDeleted();
-
-      var employeeData = GetFakeEmployee();
-      context.Employees.AddRange(employeeData);
-
-      var checklistData = GetFakeChecklist();
-      context.ToDos.AddRange(checklistData);
-      context.SaveChanges();
-
-      var controller = new ChecklistController(context);
-
-      // Act
-      var employee = controller.GetEmployeeById(inputId);
-      var obj = employee as ObjectResult;
-      var employeeContent = obj.Value as Employee;
-
-      context.Dispose();
-
-      // Assert
-      Assert.NotNull(obj);
-      Assert.Equal(inputId == employeeContent.Id, expected);
-    }
-
-    [Theory]
-    [InlineData(1, 200)]
-    [InlineData(2, 404)]
-    public void ReturnCorrectStatusCodeGetEmployeeById(int taskId, int statusCode)
-    {
-      // Assign
-      var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase()
-          .Options;
-
-      var context = new IntranetApiContext(options);
-      context.Database.EnsureDeleted();
-      context.Employees.AddRange(GetFakeEmployee());
-      context.ToDos.AddRange(GetFakeChecklist());
-      context.SaveChanges();
-
-      var controller = new ChecklistController(context);
-
-      // Act
-      var employee = controller.GetEmployeeById(taskId);
-      var obj = employee as ObjectResult;
-
-      context.Dispose();
-
-      // Assert
-      Assert.True(obj.StatusCode == statusCode);
-    }
-
-    [Theory]
     [InlineData(0, true)]
     [InlineData(1, true)]
     [InlineData(2, true)]
@@ -88,7 +26,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase()
+          .UseInMemoryDatabase(databaseName: "ChecklistReturnChecklistTaskById")
           .Options;
 
       var context = new IntranetApiContext(options);
@@ -99,7 +37,7 @@ namespace Intranet.API.UnitTests.Controllers
       var controller = new ChecklistController(context);
 
       // Act
-      var result = controller.GetChecklistTaskById(taskId);
+      var result = controller.Get(taskId);
       var obj = result as ObjectResult;
       var toDoTask = obj.Value as Checklist;
 
@@ -195,15 +133,15 @@ namespace Intranet.API.UnitTests.Controllers
         new Employee
           {
             Id = id,
-            FirstName = "Martin",
-            LastName = "Norén",
-            Description = "Likes cars!",
-            Email = "noren.mar@gmail.com",
-            PhoneNumber = "0702-111276",
-            Mobile = "0702-111276",
-            StreetAdress = "Jan Johanssons Gata 8",
-            PostalCode = 41249,
-            City = "Göteborg"
+            FirstName = "Nils",
+            LastName = "Nilsson",
+            Description = "Consultant, new on the job and getting to grips with how things work.",
+            Email = "nils.nilsson@certaincy.com",
+            PhoneNumber = "1234-567890",
+            Mobile = "1234-567890",
+            StreetAdress = "Nils Nilssons Gata 1",
+            PostalCode = 12345,
+            City = "Gothenburg"
           }
       };
     }

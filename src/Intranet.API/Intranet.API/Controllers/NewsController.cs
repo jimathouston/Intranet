@@ -52,9 +52,9 @@ namespace Intranet.API.Controllers
       }
     }
 
-    //[AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
-    //[HttpPut]
-    [Route("{id}"), HttpPut, AllowAnonymous]
+    [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
+    [Route("{id:int}")]
+    [HttpPut]
     public IActionResult Put(int id, [FromBody] News news)
     {
       try
@@ -86,8 +86,9 @@ namespace Intranet.API.Controllers
       }
     }
 
-    [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
-    [HttpDelete("{id:int}")]
+    [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
+    [Route("{id:int}")]
+    [HttpDelete]
     public IActionResult Delete(int id)
     {
       try
@@ -128,7 +129,8 @@ namespace Intranet.API.Controllers
     }
 
     [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
-    [HttpGet("{id:int}")]
+    [Route("{id:int}")]
+    [HttpGet]
     // GET api/v1/news/5 returns a specific newsid
     public IActionResult Get(int id)
     {
