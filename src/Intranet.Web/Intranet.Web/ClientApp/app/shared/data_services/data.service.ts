@@ -73,6 +73,7 @@ export class DataService {
             .catch(this.handleError)
     }
 
+
     //delete newsitem
     deleteNewsItem(id: number): Observable<void> {
         return this.http.delete(this._baseUrl + id)
