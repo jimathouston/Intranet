@@ -1,6 +1,5 @@
 ﻿import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { UniversalModule } from 'angular2-universal'
 import { HttpModule } from '@angular/http'
 import { MaterialModule } from '@angular/material'
 import { FormsModule } from '@angular/forms'
@@ -26,7 +25,7 @@ import { ConfigService } from './shared/api_settings/config.service'
 import { TokenService } from './shared/data_services/jwt-token.service'
 
 
-@NgModule({
+export const sharedConfig: NgModule = {
     bootstrap: [ AppComponent ],
     declarations: [
         AppComponent,
@@ -44,8 +43,7 @@ import { TokenService } from './shared/data_services/jwt-token.service'
     ],
     imports: [
         FormsModule,
-        MaterialModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
-        UniversalModule,
+        MaterialModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
@@ -59,6 +57,4 @@ import { TokenService } from './shared/data_services/jwt-token.service'
             { path: '**', redirectTo: 'home' }
         ])
     ]
-})
-export class AppModule {
 }

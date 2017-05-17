@@ -40,12 +40,12 @@ export class NewsComponent implements OnInit {
         this.dataService.deleteNewsItem(this.selectedNewsitem.id)
             .subscribe(() => {
                 console.log('News was deleted successfully!')
-                this.dataService.getNewsItems().subscribe((newsitems:INewsItem[]) => {
+                this.dataService.getNewsItems().subscribe((newsitems: INewsItem[]) => {
                     this.newsitems = newsitems
                 },
                 error => {
-                   console.log('Failed to load news '+error)
+                   console.log('Failed to load news ' + error)
                 })
-            })     
+            })
     }
 }

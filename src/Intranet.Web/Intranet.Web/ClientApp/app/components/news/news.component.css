@@ -1,6 +1,6 @@
-@import '~https://fonts.googleapis.com/icon?family=Material+Icons';
+﻿@import '~https://fonts.googleapis.com/icon?family=Material+Icons';
 @import '~https://fonts.googleapis.com/icon?family=Roboto';
-@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 body {
 	font-family: Roboto;

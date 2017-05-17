@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+﻿import { Injectable } from '@angular/core'
 import { Http, Response, Headers } from '@angular/http'
 
 // Grab everything with import 'rxjs/Rx'
@@ -74,7 +74,7 @@ export class DataService {
     }
 
 
-    //delete newsitem
+    // delete newsitem
     deleteNewsItem(id: number): Observable<void> {
         return this.http.delete(this._baseUrl + id)
             .map((res: Response) => {

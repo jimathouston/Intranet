@@ -1,4 +1,6 @@
 ﻿// Load required polyfills and testing libraries
+import 'reflect-metadata'
+import 'zone.js'
 import 'angular2-universal-polyfills'
 import 'zone.js/dist/long-stack-trace-zone'
 import 'zone.js/dist/proxy.js'
