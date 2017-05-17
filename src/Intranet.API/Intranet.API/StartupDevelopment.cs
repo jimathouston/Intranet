@@ -13,11 +13,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.EntityFrameworkCore;
 using Intranet.API.Domain.Data;
 using Intranet.API.Data;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
+using Intranet.API.Domain;
 
 namespace Intranet.API
 {
@@ -35,7 +35,7 @@ namespace Intranet.API
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddDbContext<IntranetApiContext>(opt => opt.UseInMemoryDatabase());
+      services.ConfigureDb<IntranetApiContext>();
       
       var pathToDoc = ".xml";
 
