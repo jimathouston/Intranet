@@ -13,10 +13,10 @@ namespace Intranet.API.Domain.Models.Entities
     [Required]
     public string Description { get; set; }
 
-    [InverseProperty("Desired")]
+    [InverseProperty(nameof(Skill.Desired))]
     public ICollection<Skill> DesiredSkillLevels { get; set; }
 
-    [InverseProperty("Current")]
+    [InverseProperty(nameof(Skill.Current))]
     public ICollection<Skill> CurrentSkillLevels { get; set; }
 
   }

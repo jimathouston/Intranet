@@ -15,6 +15,281 @@ namespace Intranet.API.UnitTests.Controllers
 {
   public class ChecklistController_Fact
   {
+    [Fact]
+    public void ReturnBadRequestWhenUpdate()
+    {
+      // Assign
+      var options = new DbContextOptionsBuilder<IntranetApiContext>()
+          .UseInMemoryDatabase(databaseName: nameof(ReturnBadRequestWhenUpdate))
+          .Options;
+
+      var context = new IntranetApiContext(options);
+      context.Database.EnsureDeleted();
+      context.SaveChanges();
+
+      var id = 1;
+      var updateTask = GetFakeToDoTasks().First();
+      updateTask.Description = "";
+
+      var fakeChecklist = GetFakeToDoTasks();
+      context.Checklist.AddRange(fakeChecklist);
+      context.SaveChanges();
+
+      var controller = new ChecklistController(context);
+
+      // Act
+      controller.ModelState.AddModelError(nameof(Checklist.Description), "Description must be specified");
+      var result = controller.Put(id, updateTask);
+
+      context.Dispose();
+
+      // Assert
+      Assert.IsType<BadRequestObjectResult>(result);
+    }
+
+    [Fact]
+    public void ReturnNotFoundWhenUpdate()
+    {
+      // Assign
+      var options = new DbContextOptionsBuilder<IntranetApiContext>()
+          .UseInMemoryDatabase(databaseName: nameof(ReturnNotFoundWhenUpdate))
+          .Options;
+
+      var context = new IntranetApiContext(options);
+      context.Database.EnsureDeleted();
+      context.SaveChanges();
+
+      var id = 9999;
+      var fakeChecklist = GetFakeToDoTasks();
+      var updateTask = GetFakeToDoTasks().First();
+      updateTask.Description = "";
+      
+      context.Checklist.AddRange(fakeChecklist);
+      context.SaveChanges();
+
+      var controller = new ChecklistController(context);
+
+      // Act
+      var result = controller.Put(id, updateTask);
+
+      context.Dispose();
+
+      // Assert
+      Assert.IsType<NotFoundObjectResult>(result);
+    }
+
+    [Fact]
+    public void ReturnOkResultWhenUpdate()
+    {
+      // Assign
+      var options = new DbContextOptionsBuilder<IntranetApiContext>()
+          .UseInMemoryDatabase(databaseName: nameof(ReturnOkResultWhenUpdate))
+          .Options;
+
+      var context = new IntranetApiContext(options);
+      context.Database.EnsureDeleted();
+      context.SaveChanges();
+
+      var id = 1;
+      var fakeChecklist = GetFakeToDoTasks();
+      var updateTask = GetFakeToDoTasks().First();
+      updateTask.Description = "Test123456";
+
+      context.Checklist.AddRange(fakeChecklist);
+      context.SaveChanges();
+
+      var controller = new ChecklistController(context);
+
+      // Act
+      var result = controller.Put(id, updateTask);
+
+      context.Dispose();
+
+      // Assert
+      Assert.IsType<OkObjectResult>(result);
+    }
+
+    [Fact]
+    public void ReturnBadRequestWhenPost()
+    {
+      // Assign
+      var options = new DbContextOptionsBuilder<IntranetApiContext>()
+          .UseInMemoryDatabase(databaseName: nameof(ReturnBadRequestWhenPost))
+          .Options;
+
+      var context = new IntranetApiContext(options);
+      context.Database.EnsureDeleted();
+      context.SaveChanges();
+
+      var fakeToDoTask = GetFakeToDoTasks().First();
+
+      var controller = new ChecklistController(context);
+
+      // Act
+      controller.ModelState.AddModelError(nameof(Checklist.Description), "Description must be provided");
+      var result = controller.Post(fakeToDoTask);
+      context.Dispose();
+
+      // Assert
+      Assert.IsType<BadRequestObjectResult>(result);
+    }
+
+    [Fact]
+    public void ReturnOkResultWhenPost()
+    {
+      // Assign
+      var options = new DbContextOptionsBuilder<IntranetApiContext>()
+          .UseInMemoryDatabase(databaseName: nameof(ReturnOkResultWhenPost))
+          .Options;
+
+      var context = new IntranetApiContext(options);
+      context.Database.EnsureDeleted();
+      context.SaveChanges();
+
+      var fakeTask = GetFakeToDoTasks().First();
+
+      var controller = new ChecklistController(context);
+      
+      // Act
+      var result = controller.Post(fakeTask);
+      context.Dispose();
+
+      // Assert
+      Assert.IsType<OkObjectResult>(result);
+    }
+
+    [Fact]
+    public void ReturnNotFoundWhenDelete()
+    {
+      // Assign
+      var options = new DbContextOptionsBuilder<IntranetApiContext>()
+          .UseInMemoryDatabase(databaseName: nameof(ReturnNotFoundWhenDelete))
+          .Options;
+
+      var context = new IntranetApiContext(options);
+      context.Database.EnsureDeleted();
+      context.SaveChanges();
+
+      var id = 11231322;
+      
+      var fakeChecklist = GetFakeToDoTasks();
+      context.Checklist.AddRange(fakeChecklist);
+      context.SaveChanges();
+
+      var controller = new ChecklistController(context);
+
+      // Act
+      var result = controller.Delete(id);
+      context.Dispose();
+
+      // Assert
+      Assert.IsType<NotFoundObjectResult>(result);
+    }
+
+    [Fact]
+    public void ReturnBadRequestWhenDelete()
+    {
+      // Assign
+      var options = new DbContextOptionsBuilder<IntranetApiContext>()
+          .UseInMemoryDatabase(databaseName: nameof(ReturnBadRequestWhenDelete))
+          .Options;
+
+      var context = new IntranetApiContext(options);
+      context.Database.EnsureDeleted();
+      context.SaveChanges();
+
+      var id = 0;
+
+      var fakeChecklist = GetFakeToDoTasks();
+      context.Checklist.AddRange(fakeChecklist);
+      context.SaveChanges();
+
+      var controller = new ChecklistController(context);
+
+      // Act
+      var result = controller.Delete(id);
+
+      context.Dispose();
+
+      // Assert
+      Assert.IsType<BadRequestObjectResult>(result);
+    }
+
+    [Fact]
+    public void ReturnOkObjectResultWhenDelete()
+    {
+      // Assign
+      var options = new DbContextOptionsBuilder<IntranetApiContext>()
+          .UseInMemoryDatabase(databaseName: nameof(ReturnOkObjectResultWhenDelete))
+          .Options;
+
+      var context = new IntranetApiContext(options);
+      context.Database.EnsureDeleted();
+      context.SaveChanges();
+
+      var id = 1;
+      var fakeChecklist = GetFakeToDoTasks();
+      context.Checklist.AddRange(fakeChecklist);
+      context.SaveChanges();
+
+      var controller = new ChecklistController(context);
+
+      // Act
+      var result = controller.Delete(id);
+
+      context.Dispose();
+      
+      // Assert
+      Assert.IsType<OkObjectResult>(result);
+    }
+
+    [Fact]
+    public void ReturnNotFoundWhenGetTasks()
+    {
+      // Assign
+      var options = new DbContextOptionsBuilder<IntranetApiContext>()
+          .UseInMemoryDatabase(databaseName: nameof(ReturnNotFoundWhenGetTasks))
+          .Options;
+
+      var context = new IntranetApiContext(options);
+      context.Database.EnsureDeleted();
+      context.SaveChanges();
+
+      var controller = new ChecklistController(context);
+
+      // Act
+      var result = controller.Get();
+
+      context.Dispose();
+
+      // Assert
+      Assert.IsType<OkObjectResult>(result);
+    }
+
+    [Fact]
+    public void ReturnOkObjectWhenGetTasks()
+    {
+      // Assign
+      var options = new DbContextOptionsBuilder<IntranetApiContext>()
+          .UseInMemoryDatabase(databaseName: nameof(ReturnOkObjectWhenGetTasks))
+          .Options;
+
+      var context = new IntranetApiContext(options);
+      context.Database.EnsureDeleted();
+      context.Checklist.AddRange(GetFakeToDoTasks());
+      context.SaveChanges();
+
+      var controller = new ChecklistController(context);
+
+      // Act
+      var result = controller.Get();
+
+      context.Dispose();
+
+      // Assert
+      Assert.IsType<OkObjectResult>(result);
+    }
+
     [Theory]
     [InlineData(0, true)]
     [InlineData(1, true)]
@@ -26,7 +301,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "ChecklistReturnChecklistTaskById")
+          .UseInMemoryDatabase(databaseName: nameof(ReturnChecklistTaskById))
           .Options;
 
       var context = new IntranetApiContext(options);

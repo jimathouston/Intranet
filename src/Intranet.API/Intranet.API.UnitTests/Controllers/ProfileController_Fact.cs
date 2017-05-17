@@ -19,7 +19,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "ProfileReturnBadRequestWhenUpdate")
+          .UseInMemoryDatabase(databaseName: nameof(ReturnBadRequestWhenUpdate))
           .Options;
 
       var employee = GetFakeEmployee().First();
@@ -35,7 +35,7 @@ namespace Intranet.API.UnitTests.Controllers
       var employeeController = new ProfileController(context);
 
       // Act
-      employeeController.ModelState.AddModelError("FirstName", "Firstname must be specified");
+      employeeController.ModelState.AddModelError(nameof(Employee.FirstName), "Firstname must be specified");
       var result = employeeController.Put(id, employee);
 
       // Assert
@@ -48,7 +48,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "ProfileReturnNotFoundWhenUpdate")
+          .UseInMemoryDatabase(databaseName: nameof(ReturnNotFoundWhenUpdate))
           .Options;
 
       var id = 0;
@@ -73,7 +73,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "ProfileReturnOkObjectWhenUpdating")
+          .UseInMemoryDatabase(databaseName: nameof(ReturnOkObjectWhenUpdating))
           .Options;
 
       var oldEmployee = GetFakeEmployee().First();
@@ -101,7 +101,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "ProfileVerifyProfileWasPostedCorrectly")
+          .UseInMemoryDatabase(databaseName: nameof(VerifyProfileWasPostedCorrectly))
           .Options;
 
       var fakeEmployee = GetFakeEmployee().First();
@@ -132,7 +132,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "ProfileReturnOkObjectResultWhenPosting")
+          .UseInMemoryDatabase(databaseName: nameof(ReturnOkObjectResultWhenPosting))
           .Options;
 
       var fakeEmployee = GetFakeEmployee().First();
@@ -157,7 +157,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "ProfileReturnBadRequestResultWhenPosting")
+          .UseInMemoryDatabase(databaseName: nameof(ReturnBadRequestResultWhenPosting))
           .Options;
 
       var fakeEmployee = GetFakeEmployee().First();
@@ -184,7 +184,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "ProfileReturnCorrectStatusCodeDeleteById")
+          .UseInMemoryDatabase(databaseName: nameof(ReturnCorrectStatusCodeDeleteById))
           .Options;
 
       var fakeEmployee = GetFakeEmployee();
@@ -210,7 +210,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "ProfileCheckThatEmployeeProfileIsDeleted")
+          .UseInMemoryDatabase(databaseName: nameof(CheckThatEmployeeProfileIsDeleted))
           .Options;
 
       int id = 1;
@@ -241,7 +241,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "ProfileCheckThatCorrectEmployeeIdIsReturned")
+          .UseInMemoryDatabase(databaseName: nameof(CheckThatCorrectEmployeeIdIsReturned))
           .Options;
 
       var context = new IntranetApiContext(options);
@@ -276,7 +276,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "ProfileReturnCorrectStatusCodeGetEmployeeById")
+          .UseInMemoryDatabase(databaseName: nameof(ReturnCorrectStatusCodeGetEmployeeById))
           .Options;
 
       var context = new IntranetApiContext(options);
@@ -302,7 +302,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "ProfileReturnNotFoundWhenGetAllEmployees")
+          .UseInMemoryDatabase(databaseName: nameof(ReturnNotFoundWhenGetAllEmployees))
           .Options;
 
       var context = new IntranetApiContext(options);
@@ -324,7 +324,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "ProfileReturnOkObjectWhenGetAllEmployees")
+          .UseInMemoryDatabase(databaseName: nameof(ReturnOkObjectWhenGetAllEmployees))
           .Options;
 
       var employee = GetFakeEmployee();

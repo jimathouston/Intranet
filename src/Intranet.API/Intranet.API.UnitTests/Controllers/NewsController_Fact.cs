@@ -21,7 +21,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "NewsReturnBadRequestResultWhenPosting")
+          .UseInMemoryDatabase(databaseName: nameof(ReturnBadRequestResultWhenPosting))
           .Options;
 
       News newsItem = GetFakeNews().First();
@@ -31,7 +31,7 @@ namespace Intranet.API.UnitTests.Controllers
       var newsController = new NewsController(context);
 
       // Act
-      newsController.ModelState.AddModelError("Author", "Author must be specified");
+      newsController.ModelState.AddModelError(nameof(News.Author), "Author must be specified");
       var result = newsController.Post(newsItem);
       context.Dispose();
 
@@ -45,7 +45,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "NewsReturnOkResultWhenPosting")
+          .UseInMemoryDatabase(databaseName: nameof(ReturnOkResultWhenPosting))
           .Options;
 
       var newsItem = GetFakeNews().First();
@@ -67,7 +67,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "NewsCheckNewsItemWasCorrectlyPosted")
+          .UseInMemoryDatabase(databaseName: nameof(CheckNewsItemWasCorrectlyPosted))
           .Options;
 
       var newsItem = GetFakeNews().First();
@@ -94,7 +94,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "NewsReturnBadRequestResultWhenUpdated")
+          .UseInMemoryDatabase(databaseName: nameof(ReturnBadRequestResultWhenUpdate))
           .Options;
 
       var newsItem = GetFakeNews();
@@ -108,7 +108,7 @@ namespace Intranet.API.UnitTests.Controllers
       var newsController = new NewsController(context);
 
       // Act
-      newsController.ModelState.AddModelError("Title", "Title must be specified");
+      newsController.ModelState.AddModelError(nameof(News.Title), "Title must be specified");
       var result = newsController.Put(id, newsItem.First());
       context.Dispose();
 
@@ -122,7 +122,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "NewsReturnNotFoundWhenUpdate")
+          .UseInMemoryDatabase(databaseName: nameof(ReturnNotFoundWhenUpdate))
           .Options;
 
       var newsItem = GetFakeNews();
@@ -148,7 +148,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "NewsReturnOkResultWhenUpdate")
+          .UseInMemoryDatabase(databaseName: nameof(ReturnOkResultWhenUpdate))
           .Options;
 
       var oldNewsItem = GetFakeNews().First();
@@ -263,7 +263,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "NewsReturnNotFoundWhenGetAllNews")
+          .UseInMemoryDatabase(databaseName: nameof(ReturnNotFoundWhenGetAllNews))
           .Options;
 
       var context = new IntranetApiContext(options);
@@ -283,7 +283,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: "NewsReturnOkObjectResultWhenGetAllNews")
+          .UseInMemoryDatabase(databaseName: nameof(ReturnOkObjectResultWhenGetAllNews))
           .Options;
 
       var newsItem = GetFakeNews();

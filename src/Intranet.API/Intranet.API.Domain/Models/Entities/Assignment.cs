@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Intranet.API.Domain.Models.Entities
 {
-    public class Assignment
-    {
+  public class Assignment
+  {
     public int EmployeeId { get; set; }
 
-    [ForeignKey("EmployeeId")]
+    [ForeignKey(nameof(EmployeeId))]
     public Employee Employee { get; set; }
 
     public int ProjectId { get; set; }

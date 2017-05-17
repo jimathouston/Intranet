@@ -27,7 +27,29 @@ namespace Intranet.API.Controllers
     [HttpDelete]
     public IActionResult Delete(int id)
     {
-      return StatusCode(StatusCodes.Status501NotImplemented);
+      try
+      {
+        if (id == 0)
+        {
+          return BadRequest(id);
+        }
+
+        var deleteEntity = _intranetApiContext.Checklist.Find(id);
+
+        if (deleteEntity == null)
+        {
+          return NotFound(id);
+        }
+
+        _intranetApiContext.Checklist.Remove(deleteEntity);
+        _intranetApiContext.SaveChanges();
+
+        return Ok(id);
+      }
+      catch (Exception)
+      {
+        return StatusCode(StatusCodes.Status500InternalServerError);
+      }
     }
 
     [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
@@ -57,22 +79,84 @@ namespace Intranet.API.Controllers
     [HttpGet]
     public IActionResult Get()
     {
-      return StatusCode(StatusCodes.Status501NotImplemented);
+      try
+      {
+        var checklistTasks = _intranetApiContext.Checklist.ToList();
+
+        if (checklistTasks == null)
+        {
+          return NotFound(new Checklist());
+        }
+
+        return Ok(checklistTasks);
+      }
+      catch (Exception)
+      {
+        return StatusCode(StatusCodes.Status500InternalServerError, new Checklist());
+      }
     }
 
     [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
     [HttpPost]
-    public IActionResult Post([FromBody] Checklist body)
+    public IActionResult Post([FromBody] Checklist newItem)
     {
-      return StatusCode(StatusCodes.Status501NotImplemented);
+      try
+      {
+        if (!ModelState.IsValid)
+        {
+          return BadRequest(ModelState);
+        }
+
+        var newTask = new Checklist()
+        {
+          Description = newItem.Description
+        };
+
+        _intranetApiContext.Checklist.Add(newTask);
+        _intranetApiContext.SaveChanges();
+
+        return Ok(ModelState);
+      }
+      catch (Exception)
+      {
+        return StatusCode(StatusCodes.Status500InternalServerError);
+      }
     }
 
     [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
     [Route("{id:int}")]
     [HttpPut]
-    public IActionResult Put(int id, [FromBody] Checklist body)
+    public IActionResult Put(int id, [FromBody] Checklist update)
     {
-      return StatusCode(StatusCodes.Status501NotImplemented);
+      try
+      {
+        if (id == 0)
+        {
+          ModelState.AddModelError(nameof(Checklist.Id), "");
+        }
+
+        if (!ModelState.IsValid)
+        {
+          return BadRequest(ModelState);
+        }
+
+        var entityToUpdate = _intranetApiContext.Checklist.Find(id);
+
+        if (entityToUpdate == null)
+        {
+          return NotFound(ModelState);
+        }
+
+        entityToUpdate.Description = update.Description;
+
+        _intranetApiContext.SaveChanges();
+
+        return Ok(ModelState);
+      }
+      catch (Exception)
+      {
+        return StatusCode(StatusCodes.Status500InternalServerError);
+      }
     }
   }
 }
