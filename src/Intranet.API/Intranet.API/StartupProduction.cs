@@ -13,11 +13,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.EntityFrameworkCore;
 using Intranet.API.Domain.Data;
 using Intranet.API.Data;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
+using Intranet.API.Domain;
 
 namespace Intranet.API
 {
@@ -36,13 +36,8 @@ namespace Intranet.API
     public void ConfigureServices(IServiceCollection services)
     {
       var sqlConnectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION");
-      
-      services.AddDbContext<IntranetApiContext>(options =>
-        options.UseNpgsql(
-          sqlConnectionString,
-          b => b.MigrationsAssembly("Intranet.API")   
-        )
-      );
+
+      services.ConfigureDbForProduction<IntranetApiContext>(sqlConnectionString);
       
       // Add framework services.
       services.AddMvc(config =>

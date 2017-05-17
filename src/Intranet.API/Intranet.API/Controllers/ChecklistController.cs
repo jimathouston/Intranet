@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using Intranet.API.Domain.Data;
 using Intranet.API.Domain.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
 
 namespace Intranet.API.Controllers
 {
