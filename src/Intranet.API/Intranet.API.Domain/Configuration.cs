@@ -19,12 +19,7 @@ namespace Intranet.API.Domain
     public static void ConfigureDbForProduction<TContext>(this IServiceCollection services, string sqlConnectionString)
       where TContext : DbContext
     {
-      services.AddDbContext<IntranetApiContext>(options =>
-        options.UseNpgsql(
-          sqlConnectionString,
-          b => b.MigrationsAssembly("Intranet.API")
-        )
-      );
+      // Configure EF Core for production
     }
   }
 }
