@@ -9,11 +9,6 @@ namespace Intranet.API.Domain.Data
 {
   public class IntranetApiContext : DbContext
   {
-    public IntranetApiContext()
-    {
-      // Empty
-    }
-
     public IntranetApiContext(DbContextOptions<IntranetApiContext> options)
       : base(options)
     {
@@ -22,6 +17,11 @@ namespace Intranet.API.Domain.Data
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+      foreach (var entity in modelBuilder.Model.GetEntityTypes())
+      {
+        entity.Relational().TableName = entity.ClrType.Name;
+      }
+
       modelBuilder.Entity<ToDo>()
         .HasKey(t => new { t.ChecklistId, t.EmployeeId});
 
@@ -30,6 +30,8 @@ namespace Intranet.API.Domain.Data
 
       modelBuilder.Entity<Assignment>()
         .HasKey(a => new { a.EmployeeId });
+
+      base.OnModelCreating(modelBuilder);
     }
 
     public virtual DbSet<News> News { get; set; }

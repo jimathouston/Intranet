@@ -1,12 +1,13 @@
 ﻿using Intranet.API.Controllers;
 using Intranet.API.Domain.Data;
 using Intranet.API.Domain.Models.Entities;
-using Intranet.API.UnitTests.Mocks;
+using Intranet.API.UnitTests.Fakes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,14 +21,10 @@ namespace Intranet.API.UnitTests.Controllers
     public void ReturnBadRequestResultWhenPosting()
     {
       // Assign
-      var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: nameof(ReturnBadRequestResultWhenPosting))
-          .Options;
-
       News newsItem = GetFakeNews().First();
 
-      var context = new IntranetApiContext(options);
-      context.Database.EnsureDeleted();
+      var context = DbContextFake.GetDbContext<IntranetApiContext>();
+
       var newsController = new NewsController(context);
 
       // Act
@@ -44,14 +41,10 @@ namespace Intranet.API.UnitTests.Controllers
     public void ReturnOkResultWhenPosting()
     {
       // Assign
-      var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: nameof(ReturnOkResultWhenPosting))
-          .Options;
-
       var newsItem = GetFakeNews().First();
 
-      var context = new IntranetApiContext(options);
-      context.Database.EnsureDeleted();
+      var context = DbContextFake.GetDbContext<IntranetApiContext>();
+
       var newsController = new NewsController(context);
 
       // Act
@@ -66,15 +59,10 @@ namespace Intranet.API.UnitTests.Controllers
     public void CheckNewsItemWasCorrectlyPosted()
     {
       // Assign
-      var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: nameof(CheckNewsItemWasCorrectlyPosted))
-          .Options;
-
       var newsItem = GetFakeNews().First();
 
-      var context = new IntranetApiContext(options);
-      context.Database.EnsureDeleted();
-      context.SaveChanges();
+      var context = DbContextFake.GetDbContext<IntranetApiContext>();
+
       var newsController = new NewsController(context);
 
       // Act
@@ -93,23 +81,20 @@ namespace Intranet.API.UnitTests.Controllers
     public void ReturnBadRequestResultWhenUpdate()
     {
       // Assign
-      var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: nameof(ReturnBadRequestResultWhenUpdate))
-          .Options;
-
-      var newsItem = GetFakeNews();
+      var news = GetFakeNews();
       int id = 1;
 
-      var context = new IntranetApiContext(options);
-      context.Database.EnsureDeleted();
-      context.News.AddRange(newsItem);
-      context.SaveChanges();
+      var context = DbContextFake.GetDbContext<IntranetApiContext>
+      (
+        property: nameof(IntranetApiContext.News),
+        obj: news
+      );
 
       var newsController = new NewsController(context);
 
       // Act
       newsController.ModelState.AddModelError(nameof(News.Title), "Title must be specified");
-      var result = newsController.Put(id, newsItem.First());
+      var result = newsController.Put(id, news.First());
       context.Dispose();
 
       // Assert
@@ -121,22 +106,19 @@ namespace Intranet.API.UnitTests.Controllers
     public void ReturnNotFoundWhenUpdate()
     {
       // Assign
-      var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: nameof(ReturnNotFoundWhenUpdate))
-          .Options;
-
-      var newsItem = GetFakeNews();
+      var news = GetFakeNews();
       int id = 5;
 
-      var context = new IntranetApiContext(options);
-      context.Database.EnsureDeleted();
-      context.News.AddRange(newsItem);
-      context.SaveChanges();
+      var context = DbContextFake.GetDbContext<IntranetApiContext>
+      (
+        property: nameof(IntranetApiContext.News),
+        obj: news
+      );
 
       var newsController = new NewsController(context);
 
       // Act
-      var result = newsController.Put(id, newsItem.First());
+      var result = newsController.Put(id, news.First());
       context.Dispose();
 
       // Assert
@@ -147,19 +129,16 @@ namespace Intranet.API.UnitTests.Controllers
     public void ReturnOkResultWhenUpdate()
     {
       // Assign
-      var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: nameof(ReturnOkResultWhenUpdate))
-          .Options;
-
       var oldNewsItem = GetFakeNews().First();
-
       var newNewsItem = GetFakeNews().First();
+
       newNewsItem.Author = "Connie the Consultant";
 
-      var context = new IntranetApiContext(options);
-      context.Database.EnsureDeleted();
-      context.Add(oldNewsItem);
-      context.SaveChanges();
+      var context = DbContextFake.GetDbContext<IntranetApiContext>
+      (
+        property: nameof(IntranetApiContext.News),
+        obj: oldNewsItem
+      );
 
       var newsController = new NewsController(context);
 
@@ -177,11 +156,14 @@ namespace Intranet.API.UnitTests.Controllers
       // Assign
       var id = 1;
       var news = GetFakeNews();
-      var mockSet = DbSetMock.MockSet(news, nameof(News.Id));
 
-      var mockContext = new Mock<IntranetApiContext>();
-      mockContext.Setup(m => m.News).Returns(mockSet.Object);
-      var newsController = new NewsController(mockContext.Object);
+      var context = DbContextFake.GetDbContext<IntranetApiContext>
+      (
+        property: nameof(IntranetApiContext.News),
+        obj: news
+      );
+
+      var newsController = new NewsController(context);
 
       // Act
       var result = newsController.Get(id);
@@ -199,11 +181,13 @@ namespace Intranet.API.UnitTests.Controllers
       // Assign
       int id = 1;
       var news = GetFakeNews();
-      var mockSet = DbSetMock.MockSet(news, nameof(News.Id));
+      var context = DbContextFake.GetDbContext<IntranetApiContext>
+      (
+        property: nameof(IntranetApiContext.News),
+        obj: news
+      );
 
-      var mockContext = new Mock<IntranetApiContext>();
-      mockContext.Setup(m => m.News).Returns(mockSet.Object);
-      var newsController = new NewsController(mockContext.Object);
+      var newsController = new NewsController(context);
 
       // Act
       var result = newsController.Get(id);
@@ -218,11 +202,13 @@ namespace Intranet.API.UnitTests.Controllers
       // Assign
       int id = 2;
       var news = GetFakeNews();
-      var mockSet = DbSetMock.MockSet(news, nameof(News.Id));
+      var context = DbContextFake.GetDbContext<IntranetApiContext>
+      (
+        property: nameof(IntranetApiContext.News),
+        obj: news
+      );
 
-      var mockContext = new Mock<IntranetApiContext>();
-      mockContext.Setup(m => m.News).Returns(mockSet.Object);
-      var newsController = new NewsController(mockContext.Object);
+      var newsController = new NewsController(context);
 
       // Act
       var result = newsController.Get(id);
@@ -238,11 +224,14 @@ namespace Intranet.API.UnitTests.Controllers
       // Assign
       var utcDate = new DateTimeOffset(Convert.ToDateTime(newsDate));
       var news = GetFakeNews(newsId, utcDate, newsTitle, newsText, newsAuthor);
-      var mockSet = DbSetMock.MockSet(news);
 
-      var mockContext = new Mock<IntranetApiContext>();
-      mockContext.Setup(m => m.News).Returns(mockSet.Object);
-      var newsController = new NewsController(mockContext.Object);
+      var context = DbContextFake.GetDbContext<IntranetApiContext>
+      (
+        property: nameof(IntranetApiContext.News),
+        obj: news
+      );
+
+      var newsController = new NewsController(context);
 
       // Act
       var fetchNews = newsController.Get();
@@ -262,12 +251,12 @@ namespace Intranet.API.UnitTests.Controllers
     public void ReturnNotFoundWhenGetAllNews()
     {
       // Assign
-      var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: nameof(ReturnNotFoundWhenGetAllNews))
-          .Options;
+      var context = DbContextFake.GetDbContext<IntranetApiContext>
+      (
+        property: nameof(IntranetApiContext.News),
+        obj: new List<News>()
+      );
 
-      var context = new IntranetApiContext(options);
-      context.Database.EnsureDeleted();
       var newsController = new NewsController(context);
 
       // Act
@@ -282,17 +271,13 @@ namespace Intranet.API.UnitTests.Controllers
     public void ReturnOkObjectResultWhenGetAllNews()
     {
       // Assign
-      var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: nameof(ReturnOkObjectResultWhenGetAllNews))
-          .Options;
-
-      var newsItem = GetFakeNews();
-
-      var context = new IntranetApiContext(options);
-      context.Database.EnsureDeleted();
-
-      context.News.Add(newsItem.First());
-      context.SaveChanges();
+      var news = GetFakeNews();
+      
+      var context = DbContextFake.GetDbContext<IntranetApiContext>
+      (
+        property: nameof(IntranetApiContext.News),
+        obj: news
+      );
 
       var newsController = new NewsController(context);
 
