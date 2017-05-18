@@ -23,18 +23,18 @@ namespace Intranet.API.UnitTests.Controllers
       // Assign
       News newsItem = GetFakeNews().First();
 
-      var context = DbContextFake.GetDbContext<IntranetApiContext>();
+      using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+      {
+        var newsController = new NewsController(context);
 
-      var newsController = new NewsController(context);
-
-      // Act
-      newsController.ModelState.AddModelError(nameof(News.Author), "Author must be specified");
-      var result = newsController.Post(newsItem);
-      context.Dispose();
-
-      // Assert
-      var badReqResult = Assert.IsType<BadRequestObjectResult>(result);
-      Assert.IsType<SerializableError>(badReqResult.Value);
+        // Act
+        newsController.ModelState.AddModelError(nameof(News.Author), "Author must be specified");
+        var result = newsController.Post(newsItem);
+        
+        // Assert
+        var badReqResult = Assert.IsType<BadRequestObjectResult>(result);
+        Assert.IsType<SerializableError>(badReqResult.Value);
+      };
     }
 
     [Fact]
@@ -43,16 +43,16 @@ namespace Intranet.API.UnitTests.Controllers
       // Assign
       var newsItem = GetFakeNews().First();
 
-      var context = DbContextFake.GetDbContext<IntranetApiContext>();
+      using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+      {
+        var newsController = new NewsController(context);
 
-      var newsController = new NewsController(context);
+        // Act
+        var result = newsController.Post(newsItem);
 
-      // Act
-      var result = newsController.Post(newsItem);
-      context.Dispose();
-
-      // Assert
-      Assert.IsType<OkObjectResult>(result);
+        // Assert
+        Assert.IsType<OkObjectResult>(result);
+      }
     }
 
     [Fact]
@@ -61,20 +61,20 @@ namespace Intranet.API.UnitTests.Controllers
       // Assign
       var newsItem = GetFakeNews().First();
 
-      var context = DbContextFake.GetDbContext<IntranetApiContext>();
+      using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+      {
+        var newsController = new NewsController(context);
 
-      var newsController = new NewsController(context);
+        // Act
+        newsController.Post(newsItem);
+        var news = context.News.First();
 
-      // Act
-      newsController.Post(newsItem);
-      var news = context.News.First();
-      context.Dispose();
-
-      // Assert
-      Assert.NotNull(news);
-      Assert.True(news.Text == newsItem.Text);
-      Assert.True(news.Title == newsItem.Title);
-      Assert.True(news.Author == newsItem.Author);
+        // Assert
+        Assert.NotNull(news);
+        Assert.True(news.Text == newsItem.Text);
+        Assert.True(news.Title == newsItem.Title);
+        Assert.True(news.Author == newsItem.Author);
+      }
     }
 
     [Fact]
@@ -84,22 +84,20 @@ namespace Intranet.API.UnitTests.Controllers
       var news = GetFakeNews();
       int id = 1;
 
-      var context = DbContextFake.GetDbContext<IntranetApiContext>
-      (
-        property: nameof(IntranetApiContext.News),
-        obj: news
-      );
+      DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
 
-      var newsController = new NewsController(context);
+      using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+      {
+        var newsController = new NewsController(context);
 
-      // Act
-      newsController.ModelState.AddModelError(nameof(News.Title), "Title must be specified");
-      var result = newsController.Put(id, news.First());
-      context.Dispose();
+        // Act
+        newsController.ModelState.AddModelError(nameof(News.Title), "Title must be specified");
+        var result = newsController.Put(id, news.First());
 
-      // Assert
-      var badReqResult = Assert.IsType<BadRequestObjectResult>(result);
-      Assert.IsType<SerializableError>(badReqResult.Value);
+        // Assert
+        var badReqResult = Assert.IsType<BadRequestObjectResult>(result);
+        Assert.IsType<SerializableError>(badReqResult.Value);
+      }
     }
 
     [Fact]
@@ -109,20 +107,18 @@ namespace Intranet.API.UnitTests.Controllers
       var news = GetFakeNews();
       int id = 5;
 
-      var context = DbContextFake.GetDbContext<IntranetApiContext>
-      (
-        property: nameof(IntranetApiContext.News),
-        obj: news
-      );
+      DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
 
-      var newsController = new NewsController(context);
+      using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+      {
+        var newsController = new NewsController(context);
 
-      // Act
-      var result = newsController.Put(id, news.First());
-      context.Dispose();
+        // Act
+        var result = newsController.Put(id, news.First());
 
-      // Assert
-      Assert.IsType<NotFoundObjectResult>(result);
+        // Assert
+        Assert.IsType<NotFoundObjectResult>(result);
+      }
     }
 
     [Fact]
@@ -134,20 +130,18 @@ namespace Intranet.API.UnitTests.Controllers
 
       newNewsItem.Author = "Connie the Consultant";
 
-      var context = DbContextFake.GetDbContext<IntranetApiContext>
-      (
-        property: nameof(IntranetApiContext.News),
-        obj: oldNewsItem
-      );
+      DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(oldNewsItem), ensureDeleted: true);
 
-      var newsController = new NewsController(context);
+      using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+      {
+        var newsController = new NewsController(context);
 
-      // Act
-      var result = newsController.Put(1, newNewsItem);
-      context.Dispose();
-
-      // Assert
-      Assert.IsType<OkObjectResult>(result);
+        // Act
+        var result = newsController.Put(1, newNewsItem);
+      
+        // Assert
+        Assert.IsType<OkObjectResult>(result);
+      }
     }
 
     [Fact]
@@ -157,22 +151,21 @@ namespace Intranet.API.UnitTests.Controllers
       var id = 1;
       var news = GetFakeNews();
 
-      var context = DbContextFake.GetDbContext<IntranetApiContext>
-      (
-        property: nameof(IntranetApiContext.News),
-        obj: news
-      );
+      DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
 
-      var newsController = new NewsController(context);
+      using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+      {
+        var newsController = new NewsController(context);
 
-      // Act
-      var result = newsController.Get(id);
-      var okObjectResult = result as OkObjectResult;
-      var newsContent = okObjectResult.Value as News;
+        // Act
+        var result = newsController.Get(id);
+        var okObjectResult = result as OkObjectResult;
+        var newsContent = okObjectResult.Value as News;
 
-      // Assert
-      Assert.NotNull(okObjectResult);
-      Assert.Equal(id, newsContent.Id);
+        // Assert
+        Assert.NotNull(okObjectResult);
+        Assert.Equal(id, newsContent.Id);
+      }
     }
 
     [Fact]
@@ -181,19 +174,19 @@ namespace Intranet.API.UnitTests.Controllers
       // Assign
       int id = 1;
       var news = GetFakeNews();
-      var context = DbContextFake.GetDbContext<IntranetApiContext>
-      (
-        property: nameof(IntranetApiContext.News),
-        obj: news
-      );
 
-      var newsController = new NewsController(context);
+      DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
 
-      // Act
-      var result = newsController.Get(id);
+      using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+      {
+        var newsController = new NewsController(context);
 
-      // Assert
-      Assert.IsType<OkObjectResult>(result);
+        // Act
+        var result = newsController.Get(id);
+
+        // Assert
+        Assert.IsType<OkObjectResult>(result);
+      }
     }
 
     [Fact]
@@ -202,19 +195,19 @@ namespace Intranet.API.UnitTests.Controllers
       // Assign
       int id = 2;
       var news = GetFakeNews();
-      var context = DbContextFake.GetDbContext<IntranetApiContext>
-      (
-        property: nameof(IntranetApiContext.News),
-        obj: news
-      );
 
-      var newsController = new NewsController(context);
+      DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
 
-      // Act
-      var result = newsController.Get(id);
+      using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+      {
+        var newsController = new NewsController(context);
 
-      // Assert
-      Assert.IsType<NotFoundResult>(result);
+        // Act
+        var result = newsController.Get(id);
+
+        // Assert
+        Assert.IsType<NotFoundResult>(result);
+      }
     }
 
     [Theory]
@@ -225,46 +218,42 @@ namespace Intranet.API.UnitTests.Controllers
       var utcDate = new DateTimeOffset(Convert.ToDateTime(newsDate));
       var news = GetFakeNews(newsId, utcDate, newsTitle, newsText, newsAuthor);
 
-      var context = DbContextFake.GetDbContext<IntranetApiContext>
-      (
-        property: nameof(IntranetApiContext.News),
-        obj: news
-      );
+      DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
 
-      var newsController = new NewsController(context);
+      using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+      {
+        var newsController = new NewsController(context);
 
-      // Act
-      var fetchNews = newsController.Get();
-      var okObjectResult = fetchNews as OkObjectResult;
-      var iEnumerable = okObjectResult.Value as IEnumerable<News>;
-      var newsFromController = iEnumerable.First();
+        // Act
+        var fetchNews = newsController.Get();
+        var okObjectResult = fetchNews as OkObjectResult;
+        var iEnumerable = okObjectResult.Value as IEnumerable<News>;
+        var newsFromController = iEnumerable.First();
 
-      // Assert
-      Assert.Equal(newsFromController.Id, newsId);
-      Assert.Equal(newsFromController.Date, utcDate);
-      Assert.Equal(newsFromController.Title, newsTitle);
-      Assert.Equal(newsFromController.Text, newsText);
-      Assert.Equal(newsFromController.Author, newsAuthor);
+        // Assert
+        Assert.Equal(newsFromController.Id, newsId);
+        Assert.Equal(newsFromController.Date, utcDate);
+        Assert.Equal(newsFromController.Title, newsTitle);
+        Assert.Equal(newsFromController.Text, newsText);
+        Assert.Equal(newsFromController.Author, newsAuthor);
+      }
     }
 
     [Fact]
     public void ReturnNotFoundWhenGetAllNews()
     {
       // Assign
-      var context = DbContextFake.GetDbContext<IntranetApiContext>
-      (
-        property: nameof(IntranetApiContext.News),
-        obj: new List<News>()
-      );
+      using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+      {
+        var newsController = new NewsController(context);
 
-      var newsController = new NewsController(context);
+        // Act
+        var newsFromController = newsController.Get();
+      
 
-      // Act
-      var newsFromController = newsController.Get();
-      context.Dispose();
-
-      // Assert
-      Assert.IsType<NotFoundObjectResult>(newsFromController);
+        // Assert
+        Assert.IsType<NotFoundObjectResult>(newsFromController);
+      }
     }
 
     [Fact]
@@ -272,21 +261,19 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var news = GetFakeNews();
+
+      DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
+
+      using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+      {
+        var newsController = new NewsController(context);
+
+        // Act
+        var newsFromController = newsController.Get();
       
-      var context = DbContextFake.GetDbContext<IntranetApiContext>
-      (
-        property: nameof(IntranetApiContext.News),
-        obj: news
-      );
-
-      var newsController = new NewsController(context);
-
-      // Act
-      var newsFromController = newsController.Get();
-      context.Dispose();
-
-      // Assert
-      Assert.IsType<OkObjectResult>(newsFromController);
+        // Assert
+        Assert.IsType<OkObjectResult>(newsFromController);
+      }
     }
 
     private IEnumerable<News> GetFakeNews()
