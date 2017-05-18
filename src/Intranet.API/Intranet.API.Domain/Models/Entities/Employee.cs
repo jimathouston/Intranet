@@ -30,10 +30,10 @@ namespace Intranet.API.Domain.Models.Entities
 
     public string City { get; set; }
 
-    public ICollection<ToDo> ToDos { get; set; }
+    public ICollection<EmployeeToDo> EmployeeToDos { get; set; }
 
     public ICollection<Skill> Skills { get; set; }
 
-    public ICollection<Assignment> Assignments { get; set; }
+    public ICollection<ProjectEmployee> ProjectEmployees { get; set; }
   }
 }

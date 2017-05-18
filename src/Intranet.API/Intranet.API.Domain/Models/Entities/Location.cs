@@ -14,6 +14,6 @@ namespace Intranet.API.Domain.Models.Entities
 
     public int Coordinate { get; set; }
 
-    public ICollection<Assignment> Assignments { get; set; }
+    public ICollection<ProjectEmployee> ProjectEmployees { get; set; }
   }
 }

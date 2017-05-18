@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Intranet.API.Domain.Models.Entities
 {
-  public class Assignment
+  public class ProjectEmployee
   {
     public int EmployeeId { get; set; }
 

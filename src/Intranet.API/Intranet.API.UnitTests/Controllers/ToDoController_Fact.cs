@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Intranet.API.UnitTests.Controllers
 {
-  public class ChecklistController_Fact
+  public class ToDoController_Fact
   {
     [Fact]
     public void ReturnBadRequestWhenUpdate()
@@ -28,18 +28,18 @@ namespace Intranet.API.UnitTests.Controllers
       context.SaveChanges();
 
       var id = 1;
-      var updateTask = GetFakeToDoTasks().First();
-      updateTask.Description = "";
+      var updatedToDo = GetFakeToDos().First();
+      updatedToDo.Description = "";
 
-      var fakeChecklist = GetFakeToDoTasks();
-      context.Checklist.AddRange(fakeChecklist);
+      var fakeToDos = GetFakeToDos();
+      context.ToDos.AddRange(fakeToDos);
       context.SaveChanges();
 
-      var controller = new ChecklistController(context);
+      var controller = new ToDoController(context);
 
       // Act
-      controller.ModelState.AddModelError(nameof(Checklist.Description), "Description must be specified");
-      var result = controller.Put(id, updateTask);
+      controller.ModelState.AddModelError(nameof(ToDo.Description), "Description must be specified");
+      var result = controller.Put(id, updatedToDo);
 
       context.Dispose();
 
@@ -60,17 +60,17 @@ namespace Intranet.API.UnitTests.Controllers
       context.SaveChanges();
 
       var id = 9999;
-      var fakeChecklist = GetFakeToDoTasks();
-      var updateTask = GetFakeToDoTasks().First();
-      updateTask.Description = "";
+      var fakeToDos = GetFakeToDos();
+      var updatedToDo = GetFakeToDos().First();
+      updatedToDo.Description = "";
       
-      context.Checklist.AddRange(fakeChecklist);
+      context.ToDos.AddRange(fakeToDos);
       context.SaveChanges();
 
-      var controller = new ChecklistController(context);
+      var controller = new ToDoController(context);
 
       // Act
-      var result = controller.Put(id, updateTask);
+      var result = controller.Put(id, updatedToDo);
 
       context.Dispose();
 
@@ -91,17 +91,17 @@ namespace Intranet.API.UnitTests.Controllers
       context.SaveChanges();
 
       var id = 1;
-      var fakeChecklist = GetFakeToDoTasks();
-      var updateTask = GetFakeToDoTasks().First();
-      updateTask.Description = "Test123456";
+      var fakeToDos = GetFakeToDos();
+      var updatedToDo = GetFakeToDos().First();
+      updatedToDo.Description = "Test123456";
 
-      context.Checklist.AddRange(fakeChecklist);
+      context.ToDos.AddRange(fakeToDos);
       context.SaveChanges();
 
-      var controller = new ChecklistController(context);
+      var controller = new ToDoController(context);
 
       // Act
-      var result = controller.Put(id, updateTask);
+      var result = controller.Put(id, updatedToDo);
 
       context.Dispose();
 
@@ -121,13 +121,13 @@ namespace Intranet.API.UnitTests.Controllers
       context.Database.EnsureDeleted();
       context.SaveChanges();
 
-      var fakeToDoTask = GetFakeToDoTasks().First();
+      var fakeToDo = GetFakeToDos().First();
 
-      var controller = new ChecklistController(context);
+      var controller = new ToDoController(context);
 
       // Act
-      controller.ModelState.AddModelError(nameof(Checklist.Description), "Description must be provided");
-      var result = controller.Post(fakeToDoTask);
+      controller.ModelState.AddModelError(nameof(ToDo.Description), "Description must be provided");
+      var result = controller.Post(fakeToDo);
       context.Dispose();
 
       // Assert
@@ -146,12 +146,12 @@ namespace Intranet.API.UnitTests.Controllers
       context.Database.EnsureDeleted();
       context.SaveChanges();
 
-      var fakeTask = GetFakeToDoTasks().First();
+      var fakeToDo = GetFakeToDos().First();
 
-      var controller = new ChecklistController(context);
+      var controller = new ToDoController(context);
       
       // Act
-      var result = controller.Post(fakeTask);
+      var result = controller.Post(fakeToDo);
       context.Dispose();
 
       // Assert
@@ -172,11 +172,11 @@ namespace Intranet.API.UnitTests.Controllers
 
       var id = 11231322;
       
-      var fakeChecklist = GetFakeToDoTasks();
-      context.Checklist.AddRange(fakeChecklist);
+      var fakeToDos = GetFakeToDos();
+      context.ToDos.AddRange(fakeToDos);
       context.SaveChanges();
 
-      var controller = new ChecklistController(context);
+      var controller = new ToDoController(context);
 
       // Act
       var result = controller.Delete(id);
@@ -200,11 +200,11 @@ namespace Intranet.API.UnitTests.Controllers
 
       var id = 0;
 
-      var fakeChecklist = GetFakeToDoTasks();
-      context.Checklist.AddRange(fakeChecklist);
+      var fakeToDos = GetFakeToDos();
+      context.ToDos.AddRange(fakeToDos);
       context.SaveChanges();
 
-      var controller = new ChecklistController(context);
+      var controller = new ToDoController(context);
 
       // Act
       var result = controller.Delete(id);
@@ -228,11 +228,11 @@ namespace Intranet.API.UnitTests.Controllers
       context.SaveChanges();
 
       var id = 1;
-      var fakeChecklist = GetFakeToDoTasks();
-      context.Checklist.AddRange(fakeChecklist);
+      var fakeToDos = GetFakeToDos();
+      context.ToDos.AddRange(fakeToDos);
       context.SaveChanges();
 
-      var controller = new ChecklistController(context);
+      var controller = new ToDoController(context);
 
       // Act
       var result = controller.Delete(id);
@@ -255,7 +255,7 @@ namespace Intranet.API.UnitTests.Controllers
       context.Database.EnsureDeleted();
       context.SaveChanges();
 
-      var controller = new ChecklistController(context);
+      var controller = new ToDoController(context);
 
       // Act
       var result = controller.Get();
@@ -276,10 +276,10 @@ namespace Intranet.API.UnitTests.Controllers
 
       var context = new IntranetApiContext(options);
       context.Database.EnsureDeleted();
-      context.Checklist.AddRange(GetFakeToDoTasks());
+      context.ToDos.AddRange(GetFakeToDos());
       context.SaveChanges();
 
-      var controller = new ChecklistController(context);
+      var controller = new ToDoController(context);
 
       // Act
       var result = controller.Get();
@@ -306,47 +306,47 @@ namespace Intranet.API.UnitTests.Controllers
 
       var context = new IntranetApiContext(options);
       context.Database.EnsureDeleted();
-      context.Checklist.AddRange(GetFakeToDoTasks());
+      context.ToDos.AddRange(GetFakeToDos());
       context.SaveChanges();
 
-      var controller = new ChecklistController(context);
+      var controller = new ToDoController(context);
 
       // Act
       var result = controller.Get(taskId);
       var obj = result as ObjectResult;
-      var toDoTask = obj.Value as Checklist;
+      var toDo = obj.Value as ToDo;
 
       context.Dispose();
 
       // Assert
-      Assert.Equal(toDoTask.Id == taskId, expected);
+      Assert.Equal(toDo.Id == taskId, expected);
     }
 
-    private IEnumerable<Checklist> GetFakeToDoTasks()
+    private IEnumerable<ToDo> GetFakeToDos()
     {
-      return new Checklist[]
+      return new ToDo[]
       {
-        new Checklist
+        new ToDo
         {
           Id = 1,
           Description = "Read document with new employee instructions."
         },
-        new Checklist
+        new ToDo
         {
           Id = 2,
           Description = "Obtain a mobile phone."
         },
-        new Checklist
+        new ToDo
         {
           Id = 3,
           Description = "Obtain a computer."
         },
-        new Checklist
+        new ToDo
         {
           Id = 4,
           Description = "Obtain an email address."
         },
-        new Checklist
+        new ToDo
         {
           Id = 5,
           Description = "Submit your bank account details for salary."
@@ -354,43 +354,43 @@ namespace Intranet.API.UnitTests.Controllers
       };
     }
 
-    private IEnumerable<ToDo> GetFakeChecklist()
+    private IEnumerable<EmployeeToDo> GetFakeEmployeeToDoList()
     {
-      return GetFakeChecklist(employeeId: 1);
+      return GetFakeEmployeeToDoList(employeeId: 1);
     }
 
-    private IEnumerable<ToDo> GetFakeChecklist(int employeeId)
+    private IEnumerable<EmployeeToDo> GetFakeEmployeeToDoList(int employeeId)
     {
-      return new ToDo[]
+      return new EmployeeToDo[]
       {
-        new ToDo
+        new EmployeeToDo
         {
           EmployeeId = employeeId,
-          ChecklistId = 1,
+          ToDoId = 1,
           Done = false
         },
-        new ToDo
+        new EmployeeToDo
         {
           EmployeeId = employeeId,
-          ChecklistId = 2,
+          ToDoId = 2,
           Done = true
         },
-        new ToDo
+        new EmployeeToDo
         {
           EmployeeId = employeeId,
-          ChecklistId = 3,
+          ToDoId = 3,
           Done = false
         },
-        new ToDo
+        new EmployeeToDo
         {
           EmployeeId = employeeId,
-          ChecklistId = 4,
+          ToDoId = 4,
           Done = false
         },
-        new ToDo
+        new EmployeeToDo
         {
           EmployeeId = employeeId,
-          ChecklistId = 5,
+          ToDoId = 5,
           Done = false
         }
       };

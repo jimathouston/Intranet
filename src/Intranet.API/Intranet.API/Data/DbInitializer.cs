@@ -59,31 +59,31 @@ namespace Intranet.API.Data
       context.News.AddRange(news);
       context.SaveChanges();
 
-      var checklist = new Checklist[]
+      var toDoList = new ToDo[]
       {
-        new Checklist
+        new ToDo
         {
           Description = "Read document with new employee instructions."
         },
-        new Checklist
+        new ToDo
         {
           Description = "Obtain a mobile phone."
         },
-        new Checklist
+        new ToDo
         {
           Description = "Obtain a computer."
         },
-        new Checklist
+        new ToDo
         {
           Description = "Obtain an email address."
         },
-        new Checklist
+        new ToDo
         {
           Description = "Submit your bank account details for salary."
         }
       };
 
-      context.Checklist.AddRange(checklist);
+      context.ToDos.AddRange(toDoList);
       context.SaveChanges();
 
       var employees = new Employee[]
@@ -117,71 +117,71 @@ namespace Intranet.API.Data
       context.Employees.AddRange(employees);
       context.SaveChanges();
 
-      var toDoList = new ToDo[]
+      var employeeToDoList = new EmployeeToDo[]
       {
-          new ToDo
+          new EmployeeToDo
           {
             EmployeeId = 1,
-            ChecklistId = 1,
+            ToDoId = 1,
             Done = false
           },
-          new ToDo
+          new EmployeeToDo
           {
             EmployeeId = 1,
-            ChecklistId = 2,
+            ToDoId = 2,
             Done = true
           },
-          new ToDo
+          new EmployeeToDo
           {
             EmployeeId = 1,
-            ChecklistId = 3,
+            ToDoId = 3,
             Done = false
           },
-          new ToDo
+          new EmployeeToDo
           {
             EmployeeId = 1,
-            ChecklistId = 4,
+            ToDoId = 4,
             Done = false
           },
-          new ToDo
+          new EmployeeToDo
           {
             EmployeeId = 1,
-            ChecklistId = 5,
+            ToDoId = 5,
             Done = false
           },
-          new ToDo
+          new EmployeeToDo
           {
             EmployeeId = 2,
-            ChecklistId = 1,
+            ToDoId = 1,
             Done = true
           },
-          new ToDo
+          new EmployeeToDo
           {
             EmployeeId = 2,
-            ChecklistId = 2,
+            ToDoId = 2,
             Done = true
           },
-          new ToDo
+          new EmployeeToDo
           {
             EmployeeId = 2,
-            ChecklistId = 3,
+            ToDoId = 3,
             Done = true
           },
-          new ToDo
+          new EmployeeToDo
           {
             EmployeeId = 2,
-            ChecklistId = 4,
+            ToDoId = 4,
             Done = true
           },
-          new ToDo
+          new EmployeeToDo
           {
             EmployeeId = 2,
-            ChecklistId = 5,
+            ToDoId = 5,
             Done = true
           }
       };
 
-      context.ToDos.AddRange(toDoList);
+      context.EmployeeToDos.AddRange(employeeToDoList);
       context.SaveChanges();
 
       var skillTypes = new SkillType[]
@@ -352,9 +352,9 @@ namespace Intranet.API.Data
       context.Roles.AddRange(roles);
       context.SaveChanges();
 
-      var assignments = new Assignment[]
+      var assignments = new ProjectEmployee[]
       {
-        new Assignment
+        new ProjectEmployee
         {
           EmployeeId = 1,
           ProjectId = 1,
@@ -363,7 +363,7 @@ namespace Intranet.API.Data
           StartDate = DateTimeOffset.UtcNow,
           InformalDescription = "Component owner for HMIIOM ECU. X-functional responsibility between project, manufacturing and after market level to ensure successful deliveries and long term sustainability."
         },
-        new Assignment
+        new ProjectEmployee
         {
           EmployeeId = 2,
           ProjectId = 2,
@@ -374,7 +374,7 @@ namespace Intranet.API.Data
         }
       };
 
-      context.Assignments.AddRange(assignments);
+      context.ProjectEmployees.AddRange(assignments);
       context.SaveChanges();
     }
   }

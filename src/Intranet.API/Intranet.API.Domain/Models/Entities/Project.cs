@@ -14,7 +14,7 @@ namespace Intranet.API.Domain.Models.Entities
 
     public string Description { get; set; }
 
-    public ICollection<Assignment> Assignments { get; set; }
+    public ICollection<ProjectEmployee> ProjectEmployees { get; set; }
 
     public int ClientId { get; set; }
 

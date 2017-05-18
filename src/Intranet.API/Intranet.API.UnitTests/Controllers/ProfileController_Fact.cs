@@ -250,8 +250,8 @@ namespace Intranet.API.UnitTests.Controllers
       var employeeData = GetFakeEmployee();
       context.Employees.AddRange(employeeData);
 
-      var checklistData = GetFakeChecklist();
-      context.ToDos.AddRange(checklistData);
+      var toDoList = GetFakeEmployeeToDoList();
+      context.EmployeeToDos.AddRange(toDoList);
       context.SaveChanges();
 
       var controller = new ProfileController(context);
@@ -282,7 +282,7 @@ namespace Intranet.API.UnitTests.Controllers
       var context = new IntranetApiContext(options);
       context.Database.EnsureDeleted();
       context.Employees.AddRange(GetFakeEmployee());
-      context.ToDos.AddRange(GetFakeChecklist());
+      context.EmployeeToDos.AddRange(GetFakeEmployeeToDoList());
       context.SaveChanges();
 
       var controller = new ProfileController(context);
@@ -344,43 +344,43 @@ namespace Intranet.API.UnitTests.Controllers
       Assert.IsType<OkObjectResult>(result);
     }
 
-    private IEnumerable<ToDo> GetFakeChecklist()
+    private IEnumerable<EmployeeToDo> GetFakeEmployeeToDoList()
     {
-      return GetFakeChecklist(employeeId: 1);
+      return GetFakeEmployeeToDoList(employeeId: 1);
     }
 
-    private IEnumerable<ToDo> GetFakeChecklist(int employeeId)
+    private IEnumerable<EmployeeToDo> GetFakeEmployeeToDoList(int employeeId)
     {
-      return new ToDo[]
+      return new EmployeeToDo[]
       {
-        new ToDo
+        new EmployeeToDo
         {
           EmployeeId = employeeId,
-          ChecklistId = 1,
+          ToDoId = 1,
           Done = false
         },
-        new ToDo
+        new EmployeeToDo
         {
           EmployeeId = employeeId,
-          ChecklistId = 2,
+          ToDoId = 2,
           Done = true
         },
-        new ToDo
+        new EmployeeToDo
         {
           EmployeeId = employeeId,
-          ChecklistId = 3,
+          ToDoId = 3,
           Done = false
         },
-        new ToDo
+        new EmployeeToDo
         {
           EmployeeId = employeeId,
-          ChecklistId = 4,
+          ToDoId = 4,
           Done = false
         },
-        new ToDo
+        new EmployeeToDo
         {
           EmployeeId = employeeId,
-          ChecklistId = 5,
+          ToDoId = 5,
           Done = false
         }
       };

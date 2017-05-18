@@ -22,26 +22,26 @@ namespace Intranet.API.Domain.Data
         entity.Relational().TableName = entity.ClrType.Name;
       }
 
-      modelBuilder.Entity<ToDo>()
-        .HasKey(t => new { t.ChecklistId, t.EmployeeId});
+      modelBuilder.Entity<EmployeeToDo>()
+        .HasKey(t => new { t.ToDoId, t.EmployeeId});
 
       modelBuilder.Entity<Skill>()
         .HasKey(s => new { s.EmployeeId, s.SkillTypeId});
 
-      modelBuilder.Entity<Assignment>()
-        .HasKey(a => new { a.EmployeeId });
+      modelBuilder.Entity<ProjectEmployee>()
+        .HasKey(p => new { p.EmployeeId, p.ProjectId });
 
       base.OnModelCreating(modelBuilder);
     }
 
     public virtual DbSet<News> News { get; set; }
     public virtual DbSet<Employee> Employees { get; set; }
-    public virtual DbSet<Checklist> Checklist { get; set; }
     public virtual DbSet<ToDo> ToDos { get; set; }
+    public virtual DbSet<EmployeeToDo> EmployeeToDos { get; set; }
     public virtual DbSet<Skill> Skills { get; set; }
     public virtual DbSet<SkillType> SkillTypes { get; set; }
     public virtual DbSet<SkillLevel> SkillLevels { get; set; }
-    public virtual DbSet<Assignment> Assignments { get; set; }
+    public virtual DbSet<ProjectEmployee> ProjectEmployees { get; set; }
     public virtual DbSet<Client> Clients { get; set; }
     public virtual DbSet<Project> Projects { get; set; }
     public virtual DbSet<Location> Locations { get; set; }

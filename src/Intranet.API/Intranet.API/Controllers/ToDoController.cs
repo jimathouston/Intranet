@@ -12,11 +12,11 @@ namespace Intranet.API.Controllers
 {
   [Produces("application/json")]
   [Route("/api/v1/[controller]")]
-  public class ChecklistController : Controller, IRestController<Checklist>
+  public class ToDoController : Controller, IRestController<ToDo>
   {
     private readonly IntranetApiContext _intranetApiContext;
 
-    public ChecklistController(IntranetApiContext intranetApiContext)
+    public ToDoController(IntranetApiContext intranetApiContext)
     {
       _intranetApiContext = intranetApiContext;
     }
@@ -33,14 +33,14 @@ namespace Intranet.API.Controllers
           return BadRequest(id);
         }
 
-        var deleteEntity = _intranetApiContext.Checklist.Find(id);
+        var removeToDo = _intranetApiContext.ToDos.Find(id);
 
-        if (deleteEntity == null)
+        if (removeToDo == null)
         {
           return NotFound(id);
         }
 
-        _intranetApiContext.Checklist.Remove(deleteEntity);
+        _intranetApiContext.ToDos.Remove(removeToDo);
         _intranetApiContext.SaveChanges();
 
         return Ok(id);
@@ -54,23 +54,22 @@ namespace Intranet.API.Controllers
     [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
     [Route("{id:int}")]
     [HttpGet]
-    // GET api/v1/checklist/1 return a checklist task by id and description 
     public IActionResult Get(int id)
     {
       try
       {
-        var checklistTask = _intranetApiContext.Checklist.Find(id);
+        var checklistTask = _intranetApiContext.ToDos.Find(id);
 
         if (checklistTask == null)
         {
-          return NotFound(new Checklist());
+          return NotFound(new ToDo());
         }
 
         return Ok(checklistTask);
       }
       catch (Exception)
       {
-        return StatusCode(StatusCodes.Status500InternalServerError, new Checklist());
+        return StatusCode(StatusCodes.Status500InternalServerError, new ToDo());
       }
     }
 
@@ -80,24 +79,24 @@ namespace Intranet.API.Controllers
     {
       try
       {
-        var checklistTasks = _intranetApiContext.Checklist.ToList();
+        var toDoList = _intranetApiContext.ToDos.ToList();
 
-        if (checklistTasks == null)
+        if (toDoList == null)
         {
-          return NotFound(new Checklist());
+          return NotFound(new ToDo());
         }
 
-        return Ok(checklistTasks);
+        return Ok(toDoList);
       }
       catch (Exception)
       {
-        return StatusCode(StatusCodes.Status500InternalServerError, new Checklist());
+        return StatusCode(StatusCodes.Status500InternalServerError, new ToDo());
       }
     }
 
     [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
     [HttpPost]
-    public IActionResult Post([FromBody] Checklist newItem)
+    public IActionResult Post([FromBody] ToDo newItem)
     {
       try
       {
@@ -106,12 +105,12 @@ namespace Intranet.API.Controllers
           return BadRequest(ModelState);
         }
 
-        var newTask = new Checklist()
+        var newToDo = new ToDo()
         {
           Description = newItem.Description
         };
 
-        _intranetApiContext.Checklist.Add(newTask);
+        _intranetApiContext.ToDos.Add(newToDo);
         _intranetApiContext.SaveChanges();
 
         return Ok(ModelState);
@@ -125,13 +124,13 @@ namespace Intranet.API.Controllers
     [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
     [Route("{id:int}")]
     [HttpPut]
-    public IActionResult Put(int id, [FromBody] Checklist update)
+    public IActionResult Put(int id, [FromBody] ToDo update)
     {
       try
       {
         if (id == 0)
         {
-          ModelState.AddModelError(nameof(Checklist.Id), "");
+          ModelState.AddModelError(nameof(ToDo.Id), "");
         }
 
         if (!ModelState.IsValid)
@@ -139,14 +138,14 @@ namespace Intranet.API.Controllers
           return BadRequest(ModelState);
         }
 
-        var entityToUpdate = _intranetApiContext.Checklist.Find(id);
+        var updateToDo = _intranetApiContext.ToDos.Find(id);
 
-        if (entityToUpdate == null)
+        if (updateToDo == null)
         {
           return NotFound(ModelState);
         }
 
-        entityToUpdate.Description = update.Description;
+        updateToDo.Description = update.Description;
 
         _intranetApiContext.SaveChanges();
 

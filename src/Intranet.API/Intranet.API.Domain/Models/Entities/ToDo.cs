@@ -7,14 +7,11 @@ namespace Intranet.API.Domain.Models.Entities
 {
   public class ToDo
   {
-    public int ChecklistId { get; set; }          
+    public int Id { get; set; }
 
-    public Checklist Checklist { get; set; }          
+    [Required]
+    public string Description { get; set; }
 
-    public int EmployeeId { get; set; }      
-
-    public Employee Employee { get; set; }   
-
-    public bool Done { get; set; }
+    public ICollection<EmployeeToDo> EmployeeToDos { get; set; }
   }
 }

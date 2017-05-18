@@ -56,9 +56,9 @@ namespace Intranet.API.Controllers
         if (!_intranetApiContext.Employees.Any()) return NotFound(new Employee());
 
         var employees = _intranetApiContext.Employees
-          .Include(e => e.ToDos)
+          .Include(e => e.EmployeeToDos)
           .Include(e => e.Skills)
-          .Include(e => e.Assignments)
+          .Include(e => e.ProjectEmployees)
           .ToList();
 
         return Ok(employees);
@@ -72,7 +72,6 @@ namespace Intranet.API.Controllers
     [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
     [Route("{id:int}")]
     [HttpGet]
-    // GET api/v1/profile/5 return an employee by id 5 and all related checklist ids 
     public IActionResult Get(int id)
     {
       try
@@ -89,9 +88,9 @@ namespace Intranet.API.Controllers
           return NotFound(new Employee());
         }
 
-        _intranetApiContext.Entry(employee).Collection(e => e.ToDos).Load();
+        _intranetApiContext.Entry(employee).Collection(e => e.EmployeeToDos).Load();
         _intranetApiContext.Entry(employee).Collection(e => e.Skills).Load();
-        _intranetApiContext.Entry(employee).Collection(e => e.Assignments).Load();
+        _intranetApiContext.Entry(employee).Collection(e => e.ProjectEmployees).Load();
 
         return Ok(employee);
       }

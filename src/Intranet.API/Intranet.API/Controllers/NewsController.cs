@@ -112,7 +112,6 @@ namespace Intranet.API.Controllers
 
     [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
     [HttpGet]
-    // GET api/news/ returns all available news
     public IActionResult Get()
     {
       try
@@ -131,7 +130,6 @@ namespace Intranet.API.Controllers
     [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
     [Route("{id:int}")]
     [HttpGet]
-    // GET api/v1/news/5 returns a specific newsid
     public IActionResult Get(int id)
     {
       try
