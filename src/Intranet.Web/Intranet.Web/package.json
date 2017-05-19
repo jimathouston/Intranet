@@ -2,6 +2,9 @@
   "name": "Intranet_Web",
   "version": "0.0.0",
   "scripts": {
+    "prebuild": "webpack --config webpack.config.vendor.js",
+    "build": "webpack",
+    "postinstall": "npm run build",
     "lint": "tslint \"./ClientApp/**/*.ts?(x)\" --exclude \"./**/node_modules/**/*.ts?(x)\"",
     "lint:fix": "tslint --fix \"./ClientApp/**/*.ts?(x)\" --exclude \"./**/node_modules/**/*.ts?(x)\"",
     "pretest": "npm run lint",

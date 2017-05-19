@@ -34,13 +34,8 @@ Run the unit tests with:
 
 #### First time setup
 
-Before the Angular app runs the first time the bundles must be built with Webpack:
+Before the Angular app runs the first time the bundles must be built with Webpack. After installing all dependencies the app will be built automatically:
 
 ```
-> cd src/Intranet.Web/Intranet.Web
-> npm install -g webpack
-> webpack --config webpack.config.vendor.js
-> webpack
+> npm install
 ```
-
-This is the only time the Angular app needs to be built manually.
