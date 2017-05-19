@@ -67,6 +67,10 @@ namespace Intranet.API.UnitTests.Controllers
 
         // Act
         newsController.Post(newsItem);
+      }
+
+      using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+      {
         var news = context.News.First();
 
         // Assert
