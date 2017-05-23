@@ -3,13 +3,17 @@ dist: trusty
 dotnet: 1.0.4
 
 before_script:
-  - chmod a+x ./src/build.sh
+- chmod a+x ./src/build.sh
 
 script:
-  - cd src
-  - ./build.sh
+- cd src
+- ./build.sh
 
 cache:
   directories:
-    - ./src/packages
-    - ./src/tools
+  - ./src/packages
+  - ./src/tools
+
+notifications:
+  slack:
+    secure: rfz5xnbX43Cj17PtEdeDeiV34HrwE8db6Yjz9EhYf/LwBAFkc3MqU+KddBrAT6wel7x8/+tJ/Sph86cm1pDpa6j9idNjFwbV00CbS8U9SMKWckZTkxUCWsQRABsDfiGCw2svgqFHQY0bqBLoywjWu4Yvet7ISfIytdFjWmN7W/XZIAQJc6Jv6BacwjyCzzl+iNrqSv0I05JnrSd7Mz6LR9aNgDSEUTjFFzufWJ1U9crt4ys1d1PFn/mGgOv8nScn9Q2dqsjOeZ8XXMxnJsEpYozc8I+y1UGSenwvZNT3KpnhfouKwaEUsUYf8PAqCLxk6jmdJvey9F8FXekRVMXSZoPROiuAhQHKEGL2SKQCNhE5vfkstXnYNZogYW7PC1Dz+yqv5gg5fpFwn1RnUNZoLrtdXwPmwtQ8IPrs8rqJ9agDlI8ubqcDmpWEkdn/wcCI9cMCSBGzHT3OuZfpNk/C3IsH0ZTlW4MIsFum4+MrjZeUOsmqk9OBKIzVj4Ak7FysAjRhOvZ7WxCquV0T5aj3DQ9+f/QACDfrN5B6LZz3CMG0RRUjGzroKGLCbJsaPVxIDJWDF2K86dI4IDdXvfl1d7/ul8N2nMO42LmwEfrRGb4UhQ6c5BvL4ZtJCB8KZc+mlp/8ZJDfhXTcySDQp4awdIrwcyAUfr/aUcP0+WMXF/Q=
