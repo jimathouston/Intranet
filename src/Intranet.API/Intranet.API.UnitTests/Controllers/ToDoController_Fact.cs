@@ -83,7 +83,7 @@ namespace Intranet.API.UnitTests.Controllers
     {
       // Assign
       var options = new DbContextOptionsBuilder<IntranetApiContext>()
-          .UseInMemoryDatabase(databaseName: nameof(ReturnOkResultWhenUpdate))
+          .UseInMemoryDatabase(databaseName: "ReturnOkResultWhenUpdate2")
           .Options;
 
       var context = new IntranetApiContext(options);

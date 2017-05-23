@@ -1,0 +1,15 @@
+language: csharp
+dist: trusty
+dotnet: 1.0.4
+
+before_script:
+  - chmod a+x ./src/build.sh
+
+script:
+  - cd src
+  - ./build.sh
+
+cache:
+  directories:
+    - ./src/packages
+    - ./src/tools

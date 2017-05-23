@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{4BA39C02-8943-4ED6-B37E-637A0BAEB4D8}"
 EndProject
@@ -14,6 +14,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.API", "Intranet.API\Intranet.API\Intranet.API.csproj", "{D22CA285-59EF-4EA3-9C26-8FABCFB33B93}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.API.UnitTests", "Intranet.API\Intranet.API.UnitTests\Intranet.API.UnitTests.csproj", "{3E9F10BB-8940-47D8-9BAD-056E08A34179}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{6A0A2A42-1C46-4EA3-9163-773E9163501B}"
+	ProjectSection(SolutionItems) = preProject
+		..\.travis.yml = ..\.travis.yml
+		build.cake = build.cake
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
