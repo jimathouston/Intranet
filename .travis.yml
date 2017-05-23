@@ -13,6 +13,7 @@ cache:
   directories:
   - ./src/packages
   - ./src/tools
+  - $HOME/.nuget/packages
 
 notifications:
   slack:
