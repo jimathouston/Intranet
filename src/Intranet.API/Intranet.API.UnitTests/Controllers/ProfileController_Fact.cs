@@ -9,6 +9,7 @@ using Intranet.API.Domain.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Reflection;
+using Intranet.API.ViewModels;
 
 namespace Intranet.API.UnitTests.Controllers
 {
@@ -259,7 +260,7 @@ namespace Intranet.API.UnitTests.Controllers
       // Act
       var employee = controller.Get(id);
       var obj = employee as ObjectResult;
-      var employeeContent = obj.Value as Employee;
+      var employeeContent = obj.Value as ProfileViewModel;
 
       context.Dispose();
 

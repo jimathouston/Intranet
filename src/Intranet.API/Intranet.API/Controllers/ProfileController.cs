@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using Intranet.API.Domain.Data;
 using Intranet.API.Domain.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
+using Intranet.API.ViewModels;
 
 namespace Intranet.API.Controllers
 {
@@ -53,15 +53,31 @@ namespace Intranet.API.Controllers
     {
       try
       {
-        if (!_intranetApiContext.Employees.Any()) return NotFound(new Employee());
+        if (!_intranetApiContext.Employees.Any()) return NotFound(new ProfileViewModel());
 
-        var employees = _intranetApiContext.Employees
-          .Include(e => e.EmployeeToDos)
-          .Include(e => e.Skills)
-          .Include(e => e.ProjectEmployees)
-          .ToList();
+        var employees = _intranetApiContext.Employees.ToList();
 
-        return Ok(employees);
+        IList<ProfileViewModel> profiles = new List<ProfileViewModel>();
+        foreach (var employee in employees)
+        {
+          var profile = new ProfileViewModel()
+          {
+            Id = employee.Id,
+            FirstName = employee.FirstName,
+            LastName = employee.LastName,
+            Description = employee.Description,
+            Email = employee.Email,
+            PhoneNumber = employee.PhoneNumber,
+            Mobile = employee.Mobile,
+            StreetAdress = employee.StreetAdress,
+            PostalCode = employee.PostalCode,
+            City = employee.City
+          };
+
+          profiles.Add(profile);
+        }
+
+        return Ok(profiles);
       }
       catch (Exception)
       {
@@ -78,25 +94,35 @@ namespace Intranet.API.Controllers
       {
         if (id == 0)
         {
-          return BadRequest(new Employee());
+          return BadRequest(new ProfileViewModel());
         }
 
         var employee = _intranetApiContext.Employees.Find(id);
 
         if (employee == null)
         {
-          return NotFound(new Employee());
+          return NotFound(new ProfileViewModel());
         }
 
-        _intranetApiContext.Entry(employee).Collection(e => e.EmployeeToDos).Load();
-        _intranetApiContext.Entry(employee).Collection(e => e.Skills).Load();
-        _intranetApiContext.Entry(employee).Collection(e => e.ProjectEmployees).Load();
+        var profile = new ProfileViewModel()
+        {
+          Id = employee.Id,
+          FirstName = employee.FirstName,
+          LastName = employee.LastName,
+          Description = employee.Description,
+          Email = employee.Email,
+          PhoneNumber = employee.PhoneNumber,
+          Mobile = employee.Mobile,
+          StreetAdress = employee.StreetAdress,
+          PostalCode = employee.PostalCode,
+          City = employee.City
+        };
 
-        return Ok(employee);
+        return Ok(profile);
       }
       catch (Exception)
       {
-        return StatusCode(StatusCodes.Status500InternalServerError, new Employee());
+        return StatusCode(StatusCodes.Status500InternalServerError, new ProfileViewModel());
       }
     }
 
