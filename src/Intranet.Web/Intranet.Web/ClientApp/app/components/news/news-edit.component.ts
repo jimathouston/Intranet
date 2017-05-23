@@ -3,8 +3,8 @@ import { RouterModule, Router, ActivatedRoute, Params } from '@angular/router'
 import { Location } from '@angular/common'
 import { DataService } from '../../shared/data_services/data.service'
 import { INewsItem } from '../../shared/interfaces'
-import { MaterialModule } from '@angular/material'
 
+import NewsItem from '../../models/newsitem'
 
 @Component({
     selector: 'news-edit',
@@ -13,20 +13,14 @@ import { MaterialModule } from '@angular/material'
 })
 
 export class NewsEditComponent implements OnInit {
-    newsItem: INewsItem
+    newsitem: INewsItem
     info: string = ''
     newsItemEdited: boolean = false
 
     constructor(private dataService: DataService,
                 private route: ActivatedRoute,
                 private location: Location) {
-                  this.newsItem = {
-                        id: null,
-                        title: null,
-                        text: null,
-                        author: null,
-                        date: null,
-                  }
+                  this.newsitem = new NewsItem()
                 }
 
     goBack(): void {
@@ -34,10 +28,10 @@ export class NewsEditComponent implements OnInit {
     }
 
     ngOnInit() {
-        const id = +this.route.snapshot.params['newsId']
+        const id = +this.route.snapshot.params['id']
 
         this.dataService.getNewsItem(id).subscribe((newsitem: INewsItem) => {
-            this.newsItem = newsitem
+            this.newsitem = newsitem
         },
         error => {
             console.log('Failed while trying to load specific newsitem of news' + error)
@@ -45,10 +39,10 @@ export class NewsEditComponent implements OnInit {
     }
 
     updateNewsItem() {
-         this.dataService.updateNewsItem(this.newsItem)
+         this.dataService.updateNewsItem(this.newsitem)
          .subscribe(() => {
                 this.newsItemEdited = true
-                this.info = this.newsItem.title + ' was edited successfully!'
+                this.info = this.newsitem.title + ' was edited successfully!'
                 console.log('News was updated successfully. ')
             },
             error => {

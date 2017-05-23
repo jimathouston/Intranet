@@ -1,20 +1,17 @@
-﻿<h1>Certaincy News</h1>
-
-    <!--<div class="input-field inline">
-        <input #filterString id="filter" type="text" class="validate" (input)="filterNewsItems(filterString.value)">
-        <label for="filter" >Filter by title </label>
-      </div>
-    </div>-->
-
-    <md-card class="news-card" *ngFor="let newsitem of newsitems">
-        <a [routerLink]="['/news-detail', newsitem.id]">
-        <h3>{{ newsitem.title }}</h3></a>
-        <span> {{ newsitem.date | date }} </span><br><br>
-        <a [routerLink]="['/news-edit', newsitem.id]"><i class="material-icons">create</i></a>
-        <a (click)="removeNewsItem(newsitem); $event.stopPropagation()"><i class="small material-icons right red-text">delete</i>
-        </a>
-    </md-card>
-    <span class="app-action" [routerLink]="['/news-new']" >
-      <button md-fab><md-icon>add</md-icon></button>
-    </span>
-
+﻿<div class="container-fluid">
+<h3>Certaincy News</h3>
+  <div class="fixed-action-btn">
+    <a [routerLink]="['/news-new']" class="btn btn-warning pull-right">
+      <span class="glyphicon glyphicon-plus"></span> Add 
+    </a>
+  </div>
+    <div class="card" *ngFor="let newsitem of newsitems">
+      <img class="card-img-top">
+    <div class="card-block">
+      <a [routerLink]="['/news-detail', newsitem.id]">
+        <h4 class="card-title">{{ newsitem.title }}</h4>
+      </a>
+      <p class="card-text">{{ newsitem.date | date }}</p>
+    </div>
+  </div>
+</div>

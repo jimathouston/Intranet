@@ -7,7 +7,7 @@ export class ConfigService {
     _mockURI: string
 
     constructor() {
-        this._apiURI = 'http://localhost:3000/api/v1/news/'
+        this._apiURI = 'http://localhost:3000/api/v1/'
         this._mockURI = 'http://localhost:3001/'
     }
 

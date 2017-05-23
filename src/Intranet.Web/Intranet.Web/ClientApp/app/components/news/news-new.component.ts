@@ -3,8 +3,8 @@ import { RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { INewsItem } from '../../shared/interfaces'
 import { DataService } from '../../shared/data_services/data.service'
 import { Location } from '@angular/common'
-import { MaterialModule } from '@angular/material'
 
+import NewsItem from '../../models/newsitem'
 
 @Component({
     selector: 'news-new',
@@ -14,19 +14,27 @@ import { MaterialModule } from '@angular/material'
 })
 
 export class NewsNewComponent {
+    newsitem: INewsItem
+    info: string = ''
     newsitems: INewsItem[]
+    newsItemCreated: boolean = false
 
     constructor(private dataService: DataService,
                 private route: ActivatedRoute,
-                private location: Location) { }
+                private location: Location) {
+                  this.newsitem = new NewsItem()
+                }
 
     goBack(): void {
         this.location.back()
     }
 
     addNewsItem(title: string, text: string, author: string) {
-        this.dataService.createNewsItem(title, text, author).then(
-            (news) => (news)
-        )
+        this.dataService.createNewsItem(title, text, author).then((newsitem) => {
+            this.newsItemCreated = true
+            console.log(newsitem)
+             this.info = 'News was created successfully!'
+          },
+          (error) => console.log(error))
     }
 }

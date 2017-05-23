@@ -1,0 +1,69 @@
+<div class="container-fluid">
+  <h3>Create Profile</h3>&nbsp;   
+    <form #form="ngForm" class="form-horizontal">
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="firstName">First name</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" #firstName required>  
+        </div>
+      </div>
+      <div class="form-group"> 
+          <label class="col-sm-2 control-label" for="lastName">Last name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" #lastName required>
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="description">Description</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" #description required>  
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="email">Email</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" #email required>  
+        </div>
+      </div> 
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="phoneNumber">Phone number</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" #phoneNumber required>  
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="mobile">Mobile</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" #mobile required>  
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="streetAdress">Street adress</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" #streetAdress required>  
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="postalCode">Postal code</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" #postalCode required>  
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-2 control-label" for="city">City</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" #city required>  
+        </div>
+      </div>            
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10" *ngIf="profileCreated" >{{ info }}</div>
+          <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-lg btn-primary btn-sm" type="submit" name="action"(click)="newProfile(firstName.value,lastName.value,description.value,email.value,phoneNumber.value,mobile.value,streetAdress.value,postalCode.value,city.value)">Create Profile
+            </button>
+            <a (click)="goBack()" class="btn btn-secondary btn-sm">
+              <span class="glyphicon glyphicon-arrow-left"></span> Back
+            </a>  
+          </div>
+      </div>
+    </form>
+</div>

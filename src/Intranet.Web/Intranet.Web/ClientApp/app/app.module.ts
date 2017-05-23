@@ -1,7 +1,6 @@
 ﻿import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { HttpModule } from '@angular/http'
-import { MaterialModule } from '@angular/material'
 import { FormsModule } from '@angular/forms'
 
 
@@ -12,12 +11,17 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component'
 import { HomeComponent } from './components/home/home.component'
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component'
 import { CounterComponent } from './components/counter/counter.component'
+
 import { NewsComponent } from './components/news/news.component'
 import { NewsNewComponent } from './components/news/news-new.component'
 import { NewsDetailComponent } from './components/news/news-detail.component'
 import { NewsEditComponent } from './components/news/news-edit.component'
-import { ChecklistComponent } from './components/checklist/checklist.component'
 
+import { ProfilesComponent } from './components/profile/profiles.component'
+import { ProfileDetailComponent } from './components/profile/profile-detail.component'
+import { ProfileChecklistComponent } from './components/profile/profile-checklist.component'
+import { ProfileNewComponent } from './components/profile/profile-new.component'
+import { ProfileEditComponent } from './components/profile/profile-edit.component'
 
 // Services
 import { DataService } from './shared/data_services/data.service'
@@ -34,7 +38,8 @@ export const sharedConfig: NgModule = {
         FetchDataComponent,
         HomeComponent,
         NewsComponent, NewsNewComponent, NewsDetailComponent, NewsEditComponent,
-        ChecklistComponent
+        ProfilesComponent, ProfileDetailComponent, ProfileNewComponent, ProfileEditComponent,
+        ProfileChecklistComponent
     ],
     providers: [
         DataService,
@@ -43,7 +48,7 @@ export const sharedConfig: NgModule = {
     ],
     imports: [
         FormsModule,
-        MaterialModule,
+        UniversalModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
@@ -51,9 +56,13 @@ export const sharedConfig: NgModule = {
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'news', component: NewsComponent },
             { path: 'news-new', component: NewsNewComponent },
-            { path: 'news-detail/:newsId', component: NewsDetailComponent },
-            { path: 'news-edit/:newsId', component: NewsEditComponent },
-            { path: 'checklist', component: ChecklistComponent},
+            { path: 'news-detail/:id', component: NewsDetailComponent },
+            { path: 'news-edit/:id', component: NewsEditComponent },
+            { path: 'checklist', component: ProfileChecklistComponent },
+            { path: 'profiles', component: ProfilesComponent },
+            { path: 'profile-new', component: ProfileNewComponent },
+            { path: 'profile-detail/:id', component: ProfileDetailComponent },
+            { path: 'profile-edit/:id', component: ProfileEditComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ]

@@ -1,0 +1,36 @@
+<div class="container-fluid">
+	<h3>Consults at Certaincy</h3>
+    <div class="fixed-action-btn">
+      <a [routerLink]="['/profile-new']" class="btn btn-warning pull-right">
+          <span class="glyphicon glyphicon-plus"></span> Add 
+      </a>
+    </div>
+	<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let profile of profiles" [routerLink]="['/profile-detail', profile.id]">
+      <td>{{profile.firstName}} {{profile.lastName}}<br />
+      Developer<br />
+      Company</td>
+      <td></td>
+      <td>
+        <a href="#">
+      	 <span class="glyphicon glyphicon-envelope pull-right"></span>
+        </a>
+      </td>
+      <td>
+        <a href="#">
+          <span class="glyphicon glyphicon-earphone pull-right"></span>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>

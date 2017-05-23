@@ -1,14 +1,22 @@
-<h1>Certaincy News</h1> 
-
-<md-card class="news-card">
-	<h3>{{ title }}</h3>
-	<p><em>{{ date | date }}</em></p>
-	<img md-card-image>
-	<p>{{ text }}</p>
-	<p> / {{ author }}</p>
-	<div>
-		<a md-button class="btn right waves-effect waves-light" (click)="goBack()"><i class="material-icons left">keyboard_return</i>Back</a>
-	</div>
-</md-card>
-
-
+<div class="container-fluid">
+<h3>Certaincy News</h3> 
+  <div class="card">
+    <img class="card-img-top">
+    <div class="card-block">
+      <h4 class="card-title">{{title}}&nbsp;
+        <a [routerLink]="['/news-edit', newsitem.id]">
+          <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+      </h4>
+      <p><em>{{ date | date }}</em></p>
+      <p class="card-text">{{ text }}</p>
+      <p class="card-text"><strong>Författare:</strong> {{ author }}</p>
+    </div>
+    <div class="card-block">
+      <a (click)="removeNewsItem(newsitem); $event.stopPropagation()" class="btn btn-danger btn-sm">
+        <span class="glyphicon glyphicon-remove"></span> Delete
+      </a>&nbsp;
+      <a (click)="goBack()" class="btn btn-secondary btn-sm"><span class="glyphicon glyphicon-arrow-left">&nbsp;</span>Back</a>  
+    </div>    
+  </div>
+</div>
