@@ -48,7 +48,6 @@ export const sharedConfig: NgModule = {
     ],
     imports: [
         FormsModule,
-        UniversalModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
