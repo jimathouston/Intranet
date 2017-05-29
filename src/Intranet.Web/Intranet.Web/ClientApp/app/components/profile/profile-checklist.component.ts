@@ -11,6 +11,7 @@ import { Location } from '@angular/common'
 
 export class ProfileChecklistComponent implements OnInit {
 	todos: IChecklist[]
+  id: number
 
   constructor(private dataService: DataService,
               private route: ActivatedRoute,
@@ -21,7 +22,8 @@ export class ProfileChecklistComponent implements OnInit {
   }
 
   ngOnInit() {
-  	this.dataService. getChecklist().subscribe((todos: IChecklist[]) => {
+    this.id =  1 //+ this.route.snapshot.params['id']
+  	this.dataService.getProfileChecklist(this.id).subscribe((todos: IChecklist[]) => {
     this.todos = todos
       console.log('Checklist loaded')
         error => {

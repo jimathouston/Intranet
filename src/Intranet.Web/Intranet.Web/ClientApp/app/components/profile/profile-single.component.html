@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="card">
+    <img class="card-img-top">
+    <div class="card-block">
+      <h4 class="card-title" class="text-uppercase">{{firstName}} {{lastName}}&nbsp;
+        <a [routerLink]="['/profile-edit', profile.id]">
+          <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+      </h4>
+      <p class="card-text"><em>{{description}}</em></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><b>Email:</b> {{email}} </li>
+      <li class="list-group-item"><b>Telephone:</b> {{mobile}} </li>
+      <li class="list-group-item"><b>Titel:</b></li>
+      <li class="list-group-item"><b>Department:</b></li>
+      <li class="list-group-item"><b>Current assignment:</b></li>
+      <li class="list-group-item"><b>Company:</b></li>
+    </ul>
+    <div class="card-block">
+      <a (click)="removeProfile(profile); $event.stopPropagation()" class="btn btn-danger btn-sm">
+        <span class="glyphicon glyphicon-remove"></span> Delete
+      </a>&nbsp;
+      <a (click)="goBack()" class="btn btn-secondary btn-sm"><span class="glyphicon glyphicon-arrow-left">&nbsp;</span>Back</a>  
+    </div>    
+  </div>
+</div>

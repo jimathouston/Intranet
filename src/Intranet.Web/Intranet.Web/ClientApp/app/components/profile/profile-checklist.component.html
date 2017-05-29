@@ -1,18 +1,11 @@
-<div *ngFor="let todo of todos">
-	<ul>
-		<li>{{todo.description}}</li>
-	</ul>
-</div>
-
 <div class="container-fluid">
-  <h3>New at Certaincy</h3>
-    <div class="row">
-      <div class="list-group">
-        <a href="#" class="list-group-item disabled">TODOS<input title="toggle all" type="checkbox" class="all pull-right"></a>
-        <a href="#" class="list-group-item">Second item <input type="checkbox" class="pull-right"></a>
-        <a href="#" class="list-group-item">Third item <input type="checkbox" class="pull-right"></a>
-        <a href="#" class="list-group-item">More item <input type="checkbox" class="pull-right"></a>
-        <a href="#" class="list-group-item">Another <input type="checkbox" class="pull-right"></a>
+  <h3>New at Certaincy</h3>&nbsp;
+    <div class="row" *ngFor="let todo of todos">
+      <div class="list-group checked-list-box">
+        <a href="#" class="list-group-item" data-style="button" data-color="sucess">{{todo.description}}<input type="checkbox" class="pull-right"></a>
       </div>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary">Done!</button> 
     </div>
 </div>

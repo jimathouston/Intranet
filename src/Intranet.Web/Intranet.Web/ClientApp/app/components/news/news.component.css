@@ -1,6 +1,8 @@
-﻿.fixed-action-btn {
-  display: inline-block;
-  position: fixed;
-  top: 20px;
-  right: 40px;
+.fixed-action-btn {
+	display: inline-block;
+	position: fixed;
+	top: 20px;
+	right: 40px;
 }
+
+

@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router'
 import { HttpModule } from '@angular/http'
 import { FormsModule } from '@angular/forms'
 
-
 // Imports for loading & configuring the in-memory web api
 
 import { AppComponent } from './components/app/app.component'
@@ -22,6 +21,7 @@ import { ProfileDetailComponent } from './components/profile/profile-detail.comp
 import { ProfileChecklistComponent } from './components/profile/profile-checklist.component'
 import { ProfileNewComponent } from './components/profile/profile-new.component'
 import { ProfileEditComponent } from './components/profile/profile-edit.component'
+import { ProfileSingleComponent } from './components/profile/profile-single.component'
 
 // Services
 import { DataService } from './shared/data_services/data.service'
@@ -39,7 +39,7 @@ export const sharedConfig: NgModule = {
         HomeComponent,
         NewsComponent, NewsNewComponent, NewsDetailComponent, NewsEditComponent,
         ProfilesComponent, ProfileDetailComponent, ProfileNewComponent, ProfileEditComponent,
-        ProfileChecklistComponent
+        ProfileChecklistComponent, ProfileSingleComponent
     ],
     providers: [
         DataService,
@@ -59,6 +59,7 @@ export const sharedConfig: NgModule = {
             { path: 'news-edit/:id', component: NewsEditComponent },
             { path: 'checklist', component: ProfileChecklistComponent },
             { path: 'profiles', component: ProfilesComponent },
+            { path: 'profile-single', component: ProfileSingleComponent },
             { path: 'profile-new', component: ProfileNewComponent },
             { path: 'profile-detail/:id', component: ProfileDetailComponent },
             { path: 'profile-edit/:id', component: ProfileEditComponent },

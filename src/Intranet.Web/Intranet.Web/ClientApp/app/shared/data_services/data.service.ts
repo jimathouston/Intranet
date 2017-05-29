@@ -100,6 +100,16 @@ export class DataService {
         .catch(this.handleError)
     }
 
+    // get profiles checklist
+    getProfileChecklist(id: number): Observable<IChecklist[]> {
+        return this.http.get(this._baseUrl + 'profile/' + id + '/checklist')
+            .map((res: Response) => {
+                console.log(res)
+                return res.json()
+            })
+            .catch(this.handleError)
+    }
+
      // create new Profile
     createProfile(firstName: string, lastName: string, description: string, email: string, phoneNumber: number, mobile: number, streetAdress: string, postalCode: number, city: string): Promise< IProfile> {
       const body = JSON.stringify({firstName: firstName, lastName: lastName, description: description, email: email, phoneNumber: phoneNumber, mobile: mobile, streetAdress: streetAdress, postalCode: postalCode, city: city})
@@ -132,17 +142,7 @@ export class DataService {
             .catch(this.handleError)
     }
 
-// CHECKLIST SERVICE ************************************************  /
 
-    // get checklist
-    getChecklist(): Observable<IChecklist[]> {
-        return this.http.get(this._baseUrl + 'checklist')
-            .map((res: Response) => {
-                console.log(res)
-                return res.json()
-            })
-            .catch(this.handleError)
-    }
     private handleError (error: Response | any) {
         const applicationError = error.headers.get('constlication-Error')
         const serverError = error.json()
