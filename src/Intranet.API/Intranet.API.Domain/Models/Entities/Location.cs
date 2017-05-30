@@ -5,15 +5,15 @@ using System.Text;
 
 namespace Intranet.API.Domain.Models.Entities
 {
-  public class Location
-  {
-    public int Id { get; set; }
+    public class Location
+    {
+        public int Id { get; set; }
 
-    [Required]
-    public string Description { get; set; }
+        [Required]
+        public string Description { get; set; }
 
-    public int Coordinate { get; set; }
+        public int Coordinate { get; set; }
 
-    public ICollection<ProjectEmployee> ProjectEmployees { get; set; }
-  }
+        public ICollection<ProjectEmployee> ProjectEmployees { get; set; }
+    }
 }

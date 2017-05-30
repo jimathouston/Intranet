@@ -13,140 +13,140 @@ using System.Reflection;
 
 namespace Intranet.API.Controllers
 {
-  [Produces("application/json")]
-  [Route("/api/v1/[controller]")]
-  public class NewsController : Controller, IRestController<News>
-  {
-    private readonly IntranetApiContext _intranetApiContext;
-
-    public NewsController(IntranetApiContext intranetApiContext)
+    [Produces("application/json")]
+    [Route("/api/v1/[controller]")]
+    public class NewsController : Controller, IRestController<News>
     {
-      _intranetApiContext = intranetApiContext;
-    }
+        private readonly IntranetApiContext _intranetApiContext;
 
-    [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
-    [HttpPost]
-    public IActionResult Post([FromBody] News news)
-    {
-      try
-      {
-        if (!ModelState.IsValid)
+        public NewsController(IntranetApiContext intranetApiContext)
         {
-          return BadRequest(ModelState);
+            _intranetApiContext = intranetApiContext;
         }
 
-        var newNews = new News
+        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
+        [HttpPost]
+        public IActionResult Post([FromBody] News news)
         {
-          Title = news.Title,
-          Text = news.Text,
-          Author = news.Author
-        };
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
 
-        _intranetApiContext.News.Add(newNews);
-        _intranetApiContext.SaveChanges();
-        return Ok(ModelState);
-      }
-      catch (Exception)
-      {
-        return StatusCode(StatusCodes.Status500InternalServerError);
-      }
-    }
+                var newNews = new News
+                {
+                    Title = news.Title,
+                    Text = news.Text,
+                    Author = news.Author
+                };
 
-    [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
-    [Route("{id:int}")]
-    [HttpPut]
-    public IActionResult Put(int id, [FromBody] News news)
-    {
-      try
-      {
-        if (!ModelState.IsValid)
-        {
-          return BadRequest(ModelState);
+                _intranetApiContext.News.Add(newNews);
+                _intranetApiContext.SaveChanges();
+                return Ok(ModelState);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
-        var contextEntity = _intranetApiContext.News.Find(id);
-
-        if (contextEntity == null)
+        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
+        [Route("{id:int}")]
+        [HttpPut]
+        public IActionResult Put(int id, [FromBody] News news)
         {
-          news.Id = id;
-          return NotFound(news);
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var contextEntity = _intranetApiContext.News.Find(id);
+
+                if (contextEntity == null)
+                {
+                    news.Id = id;
+                    return NotFound(news);
+                }
+
+                contextEntity.Title = news.Title;
+                contextEntity.Text = news.Text;
+                contextEntity.Date = DateTimeOffset.UtcNow;
+                contextEntity.Author = news.Author;
+
+                _intranetApiContext.SaveChanges();
+                return Ok(ModelState);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
-        contextEntity.Title = news.Title;
-        contextEntity.Text = news.Text;
-        contextEntity.Date = DateTimeOffset.UtcNow;
-        contextEntity.Author = news.Author;
-
-        _intranetApiContext.SaveChanges();
-        return Ok(ModelState);
-      }
-      catch (Exception)
-      {
-        return StatusCode(StatusCodes.Status500InternalServerError);
-      }
-    }
-
-    [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
-    [Route("{id:int}")]
-    [HttpDelete]
-    public IActionResult Delete(int id)
-    {
-      try
-      {
-        var contextEntity = _intranetApiContext.News.Find(id);
-
-        if (contextEntity == null)
+        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
+        [Route("{id:int}")]
+        [HttpDelete]
+        public IActionResult Delete(int id)
         {
-          return NotFound();
+            try
+            {
+                var contextEntity = _intranetApiContext.News.Find(id);
+
+                if (contextEntity == null)
+                {
+                    return NotFound();
+                }
+
+                _intranetApiContext.Remove(contextEntity);
+                _intranetApiContext.SaveChanges();
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
-        _intranetApiContext.Remove(contextEntity);
-        _intranetApiContext.SaveChanges();
-        return Ok();
-      }
-      catch (Exception)
-      {
-        return StatusCode(StatusCodes.Status500InternalServerError);
-      }
-    }
-
-    [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
-    [HttpGet]
-    public IActionResult Get()
-    {
-      try
-      {
-        if (!_intranetApiContext.News.Any()) return NotFound(new List<News>());
-
-        var searchResult = _intranetApiContext.News.ToList();
-        return new OkObjectResult(searchResult);
-      }
-      catch (Exception)
-      {
-        return StatusCode(StatusCodes.Status500InternalServerError);
-      }
-    }
-
-    [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
-    [Route("{id:int}")]
-    [HttpGet]
-    public IActionResult Get(int id)
-    {
-      try
-      {
-        var fetchNewsById = _intranetApiContext.News.Find(id);
-
-        if (fetchNewsById == null)
+        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
+        [HttpGet]
+        public IActionResult Get()
         {
-          return NotFound();
+            try
+            {
+                if (!_intranetApiContext.News.Any()) return NotFound(new List<News>());
+
+                var searchResult = _intranetApiContext.News.ToList();
+                return new OkObjectResult(searchResult);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
-        return new OkObjectResult(fetchNewsById);
-      }
-      catch (Exception)
-      {
-        return StatusCode(StatusCodes.Status500InternalServerError, new News());
-      }
+        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
+        [Route("{id:int}")]
+        [HttpGet]
+        public IActionResult Get(int id)
+        {
+            try
+            {
+                var fetchNewsById = _intranetApiContext.News.Find(id);
+
+                if (fetchNewsById == null)
+                {
+                    return NotFound();
+                }
+
+                return new OkObjectResult(fetchNewsById);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new News());
+            }
+        }
     }
-  }
 }

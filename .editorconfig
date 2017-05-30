@@ -1,4 +1,4 @@
-# This file is for unifying the coding style for different editors and IDEs
+﻿# This file is for unifying the coding style for different editors and IDEs
 # editorconfig.org
 root = true
 
@@ -10,6 +10,6 @@ insert_final_newline = true
 indent_style = space
 indent_size = 2
 
-[{*.yml,*.json}]
+[*.{cs,cshtml}]
 indent_style = space
-indent_size = 2
+indent_size = 4

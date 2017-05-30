@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Intranet.Web.Factories
 {
-  public interface IDateTimeFactory
-  {
-    DateTime GetCurrentDateTime();
-    DateTimeOffset GetCurrentDateTimeOffset();
-  }
+    public interface IDateTimeFactory
+    {
+        DateTime GetCurrentDateTime();
+        DateTimeOffset GetCurrentDateTimeOffset();
+    }
 }

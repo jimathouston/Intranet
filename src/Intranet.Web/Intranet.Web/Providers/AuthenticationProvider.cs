@@ -8,24 +8,24 @@ using Intranet.Web.Providers.Contracts;
 
 namespace Intranet.Web.Providers
 {
-  public class AuthenticationProvider : IAuthenticationProvider
-  {
-    public ClaimsPrincipal GetClaimsPrincipal(IUser user)
+    public class AuthenticationProvider : IAuthenticationProvider
     {
-      if (!user.IsVerified)
-      {
-        return null;
-      }
+        public ClaimsPrincipal GetClaimsPrincipal(IUser user)
+        {
+            if (!user.IsVerified)
+            {
+                return null;
+            }
 
-      var claims = new List<Claim>
-      {
-          new Claim("Read", user.IsVerified.ToString().ToLower()),
-          new Claim(ClaimTypes.Surname, user.FirstName),
-          new Claim(ClaimTypes.Sid, user.Sid),
-      };
+            var claims = new List<Claim>
+            {
+                    new Claim("Read", user.IsVerified.ToString().ToLower()),
+                    new Claim(ClaimTypes.Surname, user.FirstName),
+                    new Claim(ClaimTypes.Sid, user.Sid),
+            };
 
-      var claimsIdentity = new ClaimsIdentity(claims, user.AuthenticationType);
-      return new ClaimsPrincipal(claimsIdentity);
+            var claimsIdentity = new ClaimsIdentity(claims, user.AuthenticationType);
+            return new ClaimsPrincipal(claimsIdentity);
+        }
     }
-  }
 }

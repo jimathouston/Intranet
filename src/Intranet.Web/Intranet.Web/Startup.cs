@@ -21,101 +21,101 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Intranet_Web
 {
-  public class Startup
-  {
-    public Startup(IHostingEnvironment env)
+    public class Startup
     {
-      var builder = new ConfigurationBuilder()
-          .SetBasePath(env.ContentRootPath)
-          .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-          .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-          .AddEnvironmentVariables();
-      Configuration = builder.Build();
-    }
-
-    public IConfigurationRoot Configuration { get; }
-
-    // This method gets called by the runtime. Use this method to add services to the container.
-    public void ConfigureServices(IServiceCollection services)
-    {
-      // Dependency injection
-      services.AddTransient<IAuthenticationProvider, AuthenticationProvider>();
-      services.AddTransient<IAuthenticationService, AuthenticationService>();
-      services.AddTransient<ITokenProvider, JwtTokenProvider>();
-      services.AddTransient<IDateTimeFactory, DateTimeFactory>();
-
-      // Required to use the Options<T> pattern
-      services.AddOptions();
-
-      // Add settings from configuration
-      services.Configure<TokenProviderOptions>(options =>
-      {
-        var secretKey = Configuration["INTRANET_JWT"];
-        var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
-
-        options.Audience = "ExampleAudience";
-        options.Issuer = "ExampleIssuer";
-        options.SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
-      });
-
-      // Add framework services.
-      services.AddMvc(config =>
-      {
-        // Add authentication everywhere
-        var policy = new AuthorizationPolicyBuilder()
-          .RequireAuthenticatedUser()
-          .Build();
-
-        config.Filters.Add(new AuthorizeFilter(policy));
-      });
-    }
-
-    // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-    {
-      // Add Authentication
-      // TODO: Added validation of user and expiration: https://docs.microsoft.com/en-us/aspnet/core/security/authentication/cookie#reacting-to-back-end-changes
-      app.UseCookieAuthentication(new CookieAuthenticationOptions
-      {
-        AuthenticationScheme = "Cookies",
-        LoginPath = new PathString("/Login"),
-        AutomaticAuthenticate = true,
-        AutomaticChallenge = true,
-      });
-
-      loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-      loggerFactory.AddDebug();
-
-      if (env.IsDevelopment())
-      {
-        app.UseDeveloperExceptionPage();
-        app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+        public Startup(IHostingEnvironment env)
         {
-          HotModuleReplacement = true
-        });
-      }
-      else
-      {
-        app.UseExceptionHandler("/Home/Error");
-      }
+            var builder = new ConfigurationBuilder()
+                    .SetBasePath(env.ContentRootPath)
+                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                    .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                    .AddEnvironmentVariables();
+            Configuration = builder.Build();
+        }
 
-      app.UseStaticFiles();
+        public IConfigurationRoot Configuration { get; }
 
-      app.UseMvc(routes =>
-      {
-        routes.MapRoute(
-            name: "default",
-            template: "{controller=Home}/{action=Index}/{id?}");
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            // Dependency injection
+            services.AddTransient<IAuthenticationProvider, AuthenticationProvider>();
+            services.AddTransient<IAuthenticationService, AuthenticationService>();
+            services.AddTransient<ITokenProvider, JwtTokenProvider>();
+            services.AddTransient<IDateTimeFactory, DateTimeFactory>();
 
-        routes.MapRoute(
-          name: "auth",
-          template: "{action=Index}",
-          defaults: new { controller = "Authentication" });
+            // Required to use the Options<T> pattern
+            services.AddOptions();
 
-        routes.MapSpaFallbackRoute(
-            name: "spa-fallback",
-            defaults: new { controller = "Home", action = "Index" });
-      });
+            // Add settings from configuration
+            services.Configure<TokenProviderOptions>(options =>
+            {
+                var secretKey = Configuration["INTRANET_JWT"];
+                var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
+
+                options.Audience = "ExampleAudience";
+                options.Issuer = "ExampleIssuer";
+                options.SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
+            });
+
+            // Add framework services.
+            services.AddMvc(config =>
+            {
+                // Add authentication everywhere
+                var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        {
+            // Add Authentication
+            // TODO: Added validation of user and expiration: https://docs.microsoft.com/en-us/aspnet/core/security/authentication/cookie#reacting-to-back-end-changes
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationScheme = "Cookies",
+                LoginPath = new PathString("/Login"),
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+            });
+
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+                {
+                    HotModuleReplacement = true
+                });
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
+
+            app.UseStaticFiles();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                        name: "default",
+                        template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "auth",
+                    template: "{action=Index}",
+                    defaults: new { controller = "Authentication" });
+
+                routes.MapSpaFallbackRoute(
+                        name: "spa-fallback",
+                        defaults: new { controller = "Home", action = "Index" });
+            });
+        }
     }
-  }
 }

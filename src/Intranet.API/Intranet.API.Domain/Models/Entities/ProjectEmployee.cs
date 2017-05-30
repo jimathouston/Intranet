@@ -5,31 +5,31 @@ using System.Text;
 
 namespace Intranet.API.Domain.Models.Entities
 {
-  public class ProjectEmployee
-  {
-    public int EmployeeId { get; set; }
+    public class ProjectEmployee
+    {
+        public int EmployeeId { get; set; }
 
-    [ForeignKey(nameof(EmployeeId))]
-    public Employee Employee { get; set; }
+        [ForeignKey(nameof(EmployeeId))]
+        public Employee Employee { get; set; }
 
-    public int ProjectId { get; set; }
+        public int ProjectId { get; set; }
 
-    public Project Project { get; set; }
+        public Project Project { get; set; }
 
-    public int LocationId { get; set; }
+        public int LocationId { get; set; }
 
-    public Location Location { get; set; }
+        public Location Location { get; set; }
 
-    public int RoleId { get; set; }
+        public int RoleId { get; set; }
 
-    public Role Role { get; set; }
+        public Role Role { get; set; }
 
-    public string InformalDescription { get; set; }
+        public string InformalDescription { get; set; }
 
-    public bool Active { get; set; }
+        public bool Active { get; set; }
 
-    public DateTimeOffset StartDate { get; set; }
+        public DateTimeOffset StartDate { get; set; }
 
-    public DateTimeOffset EndDate { get; set; }
-  }
+        public DateTimeOffset EndDate { get; set; }
+    }
 }

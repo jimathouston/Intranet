@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Intranet.Web.Providers.Contracts
 {
-  public interface ITokenProvider
-  {
-    (string accessToken, int expiresIn) GenerateToken(ClaimsPrincipal user);
-  }
+    public interface ITokenProvider
+    {
+        (string accessToken, int expiresIn) GenerateToken(ClaimsPrincipal user);
+    }
 }

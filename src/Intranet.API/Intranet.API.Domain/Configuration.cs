@@ -8,18 +8,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Intranet.API.Domain
 {
-  public static class Configuration
-  {
-    public static void ConfigureDbForDevelopment<TContext>(this IServiceCollection services)
-      where TContext : DbContext
+    public static class Configuration
     {
-      services.AddDbContext<TContext>(opt => opt.UseInMemoryDatabase());
-    }
+        public static void ConfigureDbForDevelopment<TContext>(this IServiceCollection services)
+            where TContext : DbContext
+        {
+            services.AddDbContext<TContext>(opt => opt.UseInMemoryDatabase());
+        }
 
-    public static void ConfigureDbForProduction<TContext>(this IServiceCollection services, string sqlConnectionString)
-      where TContext : DbContext
-    {
-      // Configure EF Core for production
+        public static void ConfigureDbForProduction<TContext>(this IServiceCollection services, string sqlConnectionString)
+            where TContext : DbContext
+        {
+            // Configure EF Core for production
+        }
     }
-  }
 }

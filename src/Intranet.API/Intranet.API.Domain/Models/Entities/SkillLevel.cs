@@ -6,18 +6,18 @@ using System.Text;
 
 namespace Intranet.API.Domain.Models.Entities
 {
-  public class SkillLevel
-  {
-    public int Id { get; set; }
+    public class SkillLevel
+    {
+        public int Id { get; set; }
 
-    [Required]
-    public string Description { get; set; }
+        [Required]
+        public string Description { get; set; }
 
-    [InverseProperty(nameof(Skill.Desired))]
-    public ICollection<Skill> DesiredSkillLevels { get; set; }
+        [InverseProperty(nameof(Skill.Desired))]
+        public ICollection<Skill> DesiredSkillLevels { get; set; }
 
-    [InverseProperty(nameof(Skill.Current))]
-    public ICollection<Skill> CurrentSkillLevels { get; set; }
+        [InverseProperty(nameof(Skill.Current))]
+        public ICollection<Skill> CurrentSkillLevels { get; set; }
 
-  }
+    }
 }

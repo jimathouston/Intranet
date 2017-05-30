@@ -13,12 +13,12 @@ namespace Intranet.API
         public static void Main(string[] args)
         {
             var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup("Intranet.API")
-                .UseApplicationInsights()
-                .Build();
+                    .UseKestrel()
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .UseIISIntegration()
+                    .UseStartup("Intranet.API")
+                    .UseApplicationInsights()
+                    .Build();
 
             host.Run();
         }

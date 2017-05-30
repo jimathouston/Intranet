@@ -6,8 +6,8 @@ using Intranet.Web.Contracts;
 
 namespace Intranet.Web.Services
 {
-  public interface IAuthenticationService
-  {
-    IUser VerifyUser(string username, string password);
-  }
+    public interface IAuthenticationService
+    {
+        IUser VerifyUser(string username, string password);
+    }
 }

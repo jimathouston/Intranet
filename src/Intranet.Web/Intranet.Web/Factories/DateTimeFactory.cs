@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 
 namespace Intranet.Web.Factories
 {
-  public class DateTimeFactory : IDateTimeFactory
-  {
-    public DateTime GetCurrentDateTime()
+    public class DateTimeFactory : IDateTimeFactory
     {
-      return DateTime.Now;
-    }
+        public DateTime GetCurrentDateTime()
+        {
+            return DateTime.Now;
+        }
 
-    public DateTimeOffset GetCurrentDateTimeOffset()
-    {
-      return DateTimeOffset.Now;
+        public DateTimeOffset GetCurrentDateTimeOffset()
+        {
+            return DateTimeOffset.Now;
+        }
     }
-  }
 }

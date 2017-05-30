@@ -7,23 +7,23 @@ using Intranet.Web.Models;
 
 namespace Intranet.Web.Services
 {
-  public class AuthenticationService : IAuthenticationService
-  {
-    public IUser VerifyUser(string username, string password)
+    public class AuthenticationService : IAuthenticationService
     {
-      // TODO: Verify against an external service
-      if (username != password)
-      {
-        return null;
-      }
+        public IUser VerifyUser(string username, string password)
+        {
+            // TODO: Verify against an external service
+            if (username != password)
+            {
+                return null;
+            }
 
-      return new User
-      {
-        FirstName = "Oskar",
-        IsVerified = true,
-        AuthenticationType = "password",
-        Sid = "12345",
-      };
+            return new User
+            {
+                FirstName = "Oskar",
+                IsVerified = true,
+                AuthenticationType = "password",
+                Sid = "12345",
+            };
+        }
     }
-  }
 }

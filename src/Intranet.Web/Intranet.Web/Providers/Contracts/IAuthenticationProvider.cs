@@ -7,8 +7,8 @@ using Intranet.Web.Contracts;
 
 namespace Intranet.Web.Providers.Contracts
 {
-  public interface IAuthenticationProvider
-  {
-    ClaimsPrincipal GetClaimsPrincipal(IUser user);
-  }
+    public interface IAuthenticationProvider
+    {
+        ClaimsPrincipal GetClaimsPrincipal(IUser user);
+    }
 }
