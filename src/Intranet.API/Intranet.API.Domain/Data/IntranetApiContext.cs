@@ -25,8 +25,8 @@ namespace Intranet.API.Domain.Data
             modelBuilder.Entity<EmployeeToDo>()
                 .HasKey(t => new { t.ToDoId, t.EmployeeId });
 
-            modelBuilder.Entity<Skill>()
-                .HasKey(s => new { s.EmployeeId, s.SkillTypeId });
+            modelBuilder.Entity<EmployeeSkill>()
+                .HasKey(s => new { s.EmployeeId, s.SkillId });
 
             modelBuilder.Entity<ProjectEmployee>()
                 .HasKey(p => new { p.EmployeeId, p.ProjectId });
@@ -38,8 +38,8 @@ namespace Intranet.API.Domain.Data
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<ToDo> ToDos { get; set; }
         public virtual DbSet<EmployeeToDo> EmployeeToDos { get; set; }
+        public virtual DbSet<EmployeeSkill> EmployeeSkills { get; set; }
         public virtual DbSet<Skill> Skills { get; set; }
-        public virtual DbSet<SkillType> SkillTypes { get; set; }
         public virtual DbSet<SkillLevel> SkillLevels { get; set; }
         public virtual DbSet<ProjectEmployee> ProjectEmployees { get; set; }
         public virtual DbSet<Client> Clients { get; set; }

@@ -47,7 +47,7 @@ namespace Intranet.API.Controllers
                 {
                     var taskWithDesc = new ChecklistViewModel()
                     {
-                        EmployeeId = toDo.EmployeeId,
+                        EmployeeId = profileId,
                         ToDoId = toDo.ToDoId,
                         Done = toDo.Done,
                         Description = toDoDescriptions.Single(t => t.Id == toDo.ToDoId).Description
@@ -86,8 +86,8 @@ namespace Intranet.API.Controllers
 
                 var taskWithDesc = new ChecklistViewModel()
                 {
-                    EmployeeId = employeeTodo.EmployeeId,
-                    ToDoId = employeeTodo.ToDoId,
+                    EmployeeId = profileId,
+                    ToDoId = toDoId,
                     Done = employeeTodo.Done,
                     Description = toDo.Description
                 };
@@ -152,7 +152,7 @@ namespace Intranet.API.Controllers
                     return BadRequest(ModelState);
                 }
 
-                var checkThatToDoExist = _intranetApiContext.ToDos.SingleOrDefault(t => t.Id == employeeToDo.ToDoId);
+                var checkThatToDoExist = _intranetApiContext.ToDos.SingleOrDefault(t => t.Id == toDoId);
                 var objectToChange = _intranetApiContext.EmployeeToDos.SingleOrDefault(e => e.EmployeeId == profileId && e.ToDoId == toDoId);
 
                 if (checkThatToDoExist == null || objectToChange == null)
@@ -160,24 +160,15 @@ namespace Intranet.API.Controllers
                     return NotFound(ModelState);
                 }
 
-                var checkIfDesiredChangeAlreadyExist = _intranetApiContext.EmployeeToDos.SingleOrDefault(e => e.EmployeeId == profileId && e.ToDoId == employeeToDo.ToDoId);
+                var checkIfDesiredChangeAlreadyExist = _intranetApiContext.EmployeeToDos.SingleOrDefault(e => e.EmployeeId == profileId && e.ToDoId == toDoId);
 
                 if (checkIfDesiredChangeAlreadyExist != null)
                 {
                     return BadRequest(ModelState);
                 }
 
-                _intranetApiContext.EmployeeToDos.Remove(objectToChange);
-
-                var newObject = new EmployeeToDo()
-                {
-                    EmployeeId = employeeToDo.EmployeeId,
-                    ToDoId = employeeToDo.ToDoId,
-                    Done = employeeToDo.Done
-                };
-
-                _intranetApiContext.EmployeeToDos.Add(newObject);
-                _intranetApiContext.SaveChanges();
+            objectToChange.Done = employeeToDo.Done;
+            _intranetApiContext.SaveChanges();
 
                 return Ok(ModelState);
             }

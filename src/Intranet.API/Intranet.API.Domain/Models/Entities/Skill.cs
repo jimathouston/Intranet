@@ -1,26 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Intranet.API.Domain.Models.Entities
 {
     public class Skill
     {
-        public int EmployeeId { get; set; }
+        public int Id { get; set; }
 
-        public Employee Employee { get; set; }
+        [Required]
+        public string Description { get; set; }
 
-        public int SkillTypeId { get; set; }
-
-        public SkillType SkillType { get; set; }
-
-        public int CurrentSkillLevelId { get; set; }
-
-        public SkillLevel Current { get; set; }
-
-        public int DesiredSkillLevelId { get; set; }
-
-        public SkillLevel Desired { get; set; }
-
+        public ICollection<EmployeeSkill> EmployeeSkills { get; set; }
     }
 }

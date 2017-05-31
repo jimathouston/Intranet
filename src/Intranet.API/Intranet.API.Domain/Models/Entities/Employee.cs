@@ -32,7 +32,7 @@ namespace Intranet.API.Domain.Models.Entities
 
         public ICollection<EmployeeToDo> EmployeeToDos { get; set; }
 
-        public ICollection<Skill> Skills { get; set; }
+        public ICollection<EmployeeSkill> EmployeeSkills { get; set; }
 
         public ICollection<ProjectEmployee> ProjectEmployees { get; set; }
     }

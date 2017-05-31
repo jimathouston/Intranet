@@ -184,39 +184,39 @@ namespace Intranet.API.Data
             context.EmployeeToDos.AddRange(employeeToDoList);
             context.SaveChanges();
 
-            var skillTypes = new SkillType[]
+            var skills = new Skill[]
             {
-                new SkillType
+                new Skill
                 {
                     Description = "C#"
                 },
-                new SkillType
+                new Skill
                 {
                     Description = "C++"
                 },
-                new SkillType
+                new Skill
                 {
                     Description = "JavaScript"
                 },
-                new SkillType
+                new Skill
                 {
                     Description = "Java"
                 },
-                new SkillType
+                new Skill
                 {
                     Description = "Python"
                 },
-                new SkillType
+                new Skill
                 {
                     Description = "Linux"
                 },
-                new SkillType
+                new Skill
                 {
                     Description = "Unix"
                 }
             };
 
-            context.SkillTypes.AddRange(skillTypes);
+            context.Skills.AddRange(skills);
             context.SaveChanges();
 
             var skillLevels = new SkillLevel[]
@@ -242,43 +242,46 @@ namespace Intranet.API.Data
             context.SkillLevels.AddRange(skillLevels);
             context.SaveChanges();
 
-            var skills = new Skill[]
+            var employeeSkills = new EmployeeSkill[]
             {
-                new Skill
+                new EmployeeSkill
                 {
-                    EmployeeId = 1,                  // Employee: Connie
-                    SkillTypeId = 1,                 // Skill: C#
-                    CurrentSkillLevelId = 5, // Current level: Expert
+                    EmployeeId = 1,                 // Employee: Connie
+                    SkillId = 1,                    // Skill: C#
+                    CurrentLevel = 4,               // Current level: Expert
+                    DesiredLevel = 4
                 },
-                new Skill
+                new EmployeeSkill
                 {
                     EmployeeId = 1,
-                    SkillTypeId = 4,                 // Skill: Java
-                    CurrentSkillLevelId = 3, // Current level: Advanced
-                    DesiredSkillLevelId = 4  // Desired level: Expert
+                    SkillId = 4,                    // Skill: Java
+                    CurrentLevel = 3,               // Current level: Advanced
+                    DesiredLevel = 4                // Desired level: Expert
                 },
-                new Skill
+                new EmployeeSkill
                 {
-                    EmployeeId = 2,                  // Employee: Nils
-                    SkillTypeId = 1,                 // Skill: C#
-                    CurrentSkillLevelId = 1, // Current level: Beginner
-                    DesiredSkillLevelId = 3  // Desired level: Advanced
+                    EmployeeId = 2,                 // Employee: Nils
+                    SkillId = 1,                    // Skill: C#
+                    CurrentLevel = 1,               // Current level: Beginner
+                    DesiredLevel = 3                // Desired level: Advanced
                 },
-                new Skill
-                {
-                    EmployeeId = 2,
-                    SkillTypeId = 3,                 // Skill: JavaScript
-                    CurrentSkillLevelId = 2  // Current level: Intermediate
-                },
-                new Skill
+                new EmployeeSkill
                 {
                     EmployeeId = 2,
-                    SkillTypeId = 5,                 // Skill: Python
-                    CurrentSkillLevelId = 1
+                    SkillId = 3,                    // Skill: JavaScript
+                    CurrentLevel = 2,               // Current level: Intermediate
+                    DesiredLevel = 4
+                },
+                new EmployeeSkill
+                {
+                    EmployeeId = 2,
+                    SkillId = 5,                    // Skill: Python
+                    CurrentLevel = 1,
+                    DesiredLevel = 2
                 }
             };
 
-            context.Skills.AddRange(skills);
+            context.EmployeeSkills.AddRange(employeeSkills);
             context.SaveChanges();
 
             var clients = new Client[]
