@@ -7,7 +7,6 @@ using Intranet.Web.Factories;
 using Intranet.Web.Models.Options;
 using Intranet.Web.Providers;
 using Intranet.Web.Providers.Contracts;
-using Intranet.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,6 +17,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Intranet.Web.Authentication.Models;
+using Intranet.Web.Authentication.Services;
+using Intranet.Web.Authentication.Providers;
 
 namespace Intranet_Web
 {
@@ -40,7 +42,7 @@ namespace Intranet_Web
         {
             // Dependency injection
             services.AddTransient<IAuthenticationProvider, AuthenticationProvider>();
-            services.AddTransient<IAuthenticationService, AuthenticationService>();
+            services.AddTransient<IAuthenticationService, LdapAuthenticationService>();
             services.AddTransient<ITokenProvider, JwtTokenProvider>();
             services.AddTransient<IDateTimeFactory, DateTimeFactory>();
 
@@ -48,6 +50,15 @@ namespace Intranet_Web
             services.AddOptions();
 
             // Add settings from configuration
+            services.Configure<LdapConfig>(options =>
+            {
+                options.AdminCn = Configuration["LDAP.ADMIN_CN"];
+                options.BindCredentials = Configuration["LDAP.BIND_CREDENTIALS"];
+                options.BindDn = Configuration["LDAP.BIND_DN"];
+                options.SearchBase = Configuration["LDAP.SEARCH_BASE"];
+                options.SearchFilter = Configuration["LDAP.SEARCH_FILTER"];
+                options.Url = Configuration["LDAP.URL"];
+            });
             services.Configure<TokenProviderOptions>(options =>
             {
                 var secretKey = Configuration["INTRANET_JWT"];

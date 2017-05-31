@@ -14,22 +14,12 @@ var configuration =
 
 // Define directories.
 var apiDir = Directory("./Intranet.API/Intranet.API");
-var apiDomainDir = Directory("./Intranet.API/Intranet.API.Domain");
 var apiTestsDir = Directory("./Intranet.API/Intranet.API.UnitTests");
+
 var webDir = Directory("./Intranet.Web/Intranet.Web");
 var webTestsDir = Directory("./Intranet.Web/Intranet.Web.UnitTests");
 
-var apiBuildDir = Directory(apiDir) + Directory("bin") + Directory(configuration);
-var apiDomainBuildDir = Directory(apiDomainDir) + Directory("bin") + Directory(configuration);
-var apiTestsBuildDir = Directory(apiTestsDir) + Directory("bin") + Directory(configuration);
-var webBuildDir = Directory(webDir) + Directory("bin") + Directory(configuration);
-var webTestsBuildDir = Directory(webTestsDir) + Directory("bin") + Directory(configuration);
-
-var apiBuildDirs = new [] { apiBuildDir, apiDomainBuildDir, apiTestsBuildDir };
-var apiSrcDirs = new [] { apiDir, apiDomainDir, apiTestsDir };
-var webBuildDirs = new [] { webBuildDir, webTestsBuildDir };
-var webSrcDirs = new [] { webDir, webTestsDir };
-
+Func<String, String> GetBuildDirectory = (dir) => Directory(dir) + Directory("bin") + Directory(configuration);
 
 // Define settings.
 var buildSettings = new DotNetCoreBuildSettings
@@ -50,59 +40,47 @@ var testSettings = new DotNetCoreTestSettings
 Task("API:Clean")
     .Does(() =>
 {
-    foreach (var dir in apiBuildDirs)
-    {
-        CleanDirectory(dir);
-    };
+    CleanDirectory(GetBuildDirectory(apiDir));
+    CleanDirectory(GetBuildDirectory(apiTestsDir));
 });
 
 Task("Web:Clean")
     .Does(() =>
 {
-    foreach (var dir in webBuildDirs)
-    {
-        CleanDirectory(dir);
-    };
+    CleanDirectory(GetBuildDirectory(webDir));
+    CleanDirectory(GetBuildDirectory(webTestsDir));
 });
 
 Task("API:Restore-NuGet-Packages")
     .IsDependentOn("API:Clean")
     .Does(() =>
 {
-    foreach (var dir in apiSrcDirs)
-    {
-        DotNetCoreRestore(dir);
-    };
+      DotNetCoreRestore(apiDir);
+      DotNetCoreRestore(apiTestsDir);
 });
 
 Task("Web:Restore-NuGet-Packages")
     .IsDependentOn("Web:Clean")
     .Does(() =>
 {
-    foreach (var dir in webSrcDirs)
-    {
-        DotNetCoreRestore(dir);
-    };
+    DotNetCoreRestore(webDir);
+    DotNetCoreRestore(webTestsDir);
 });
 
 Task("API:Build")
     .IsDependentOn("API:Restore-NuGet-Packages")
     .Does(() =>
 {
-    foreach (var dir in apiSrcDirs)
-    {
-        DotNetCoreBuild(dir, buildSettings);
-    };
+    DotNetCoreBuild(apiDir, buildSettings);
+    DotNetCoreBuild(apiTestsDir, buildSettings);
 });
 
 Task("Web:Build")
     .IsDependentOn("Web:Restore-NuGet-Packages")
     .Does(() =>
 {
-    foreach (var dir in webSrcDirs)
-    {
-        DotNetCoreBuild(dir, buildSettings);
-    };
+    DotNetCoreBuild(webDir, buildSettings);
+    DotNetCoreBuild(webTestsDir, buildSettings);
 });
 
 Task("API:Run-Unit-Tests")

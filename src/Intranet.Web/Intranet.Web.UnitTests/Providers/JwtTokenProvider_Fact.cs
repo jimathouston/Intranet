@@ -14,6 +14,9 @@ using Moq;
 using Newtonsoft;
 using Newtonsoft.Json;
 using Xunit;
+using Intranet.Web.Authentication.Models;
+using Intranet.Web.Authentication.Providers;
+using Intranet.Web.Authentication.Services;
 
 namespace Intranet.Web.UnitTests
 {
@@ -34,13 +37,13 @@ namespace Intranet.Web.UnitTests
 
             IOptions<TokenProviderOptions> tokenProviderOptions = Options.Create
             (
-                new TokenProviderOptions
-                {
-                    Audience = audience,
-                    Expiration = expiration,
-                    Issuer = issuer,
-                    SigningCredentials = signingCredentials,
-                }
+              new TokenProviderOptions
+              {
+                  Audience = audience,
+                  Expiration = expiration,
+                  Issuer = issuer,
+                  SigningCredentials = signingCredentials,
+              }
             );
             #endregion
             #region DateTimeFactoryMock
@@ -52,12 +55,14 @@ namespace Intranet.Web.UnitTests
             // TODO: To mock or not to mock?
             var user = new User
             {
-                AuthenticationType = "password",
-                FirstName = "Oskar",
-                IsVerified = true,
-                Sid = "123456",
+                DisplayName = "Oskar",
+                IsAdmin = true,
+                Username = "oskar",
             };
-            var authProvider = new AuthenticationProvider();
+
+            var authOptions = Options.Create(new LdapConfig());
+            var authService = new LdapAuthenticationService(authOptions);
+            var authProvider = new AuthenticationProvider(authService);
             var userClaimsPrincipal = authProvider.GetClaimsPrincipal(user);
             #endregion
             #region JwtSecurityTokenHandler
@@ -71,7 +76,7 @@ namespace Intranet.Web.UnitTests
             var jwt = handler.ReadJwtToken(encodedToken.accessToken);
 
             // Assert
-            Assert.True(jwt.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Surname).Value == "Oskar");
+            Assert.True(jwt.Claims.SingleOrDefault(c => c.Type == "displayName").Value == "Oskar");
             Assert.True(jwt.Claims.SingleOrDefault(c => c.Type == JwtRegisteredClaimNames.Iat).Value == dateTimeOffset.ToUnixTimeSeconds().ToString());
         }
     }

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Intranet.Web.Providers.Contracts;
-using Intranet.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Intranet.Web.Authentication.Providers;
+using Intranet.Web.Authentication.Services;
 
 namespace Intranet.Web.Controllers
 {

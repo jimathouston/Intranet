@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{4BA39C02-8943-4ED6-B37E-637A0BAEB4D8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.Web", "Intranet.Web\Intranet.Web\Intranet.Web.csproj", "{30AEF3E4-2824-4040-9C76-95B559A13D90}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD} = {D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.Web.UnitTests", "Intranet.Web\Intranet.Web.UnitTests\Intranet.Web.UnitTests.csproj", "{E7BB55C2-8774-4BBF-BA17-86378DC4D55E}"
 EndProject
@@ -14,6 +17,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.API", "Intranet.API\Intranet.API\Intranet.API.csproj", "{D22CA285-59EF-4EA3-9C26-8FABCFB33B93}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.API.UnitTests", "Intranet.API\Intranet.API.UnitTests\Intranet.API.UnitTests.csproj", "{3E9F10BB-8940-47D8-9BAD-056E08A34179}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.Web.Authentication", "Intranet.Web\Intranet.Web.Authentication\Intranet.Web.Authentication.csproj", "{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{6A0A2A42-1C46-4EA3-9163-773E9163501B}"
 	ProjectSection(SolutionItems) = preProject
@@ -24,6 +29,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{2203A5F0-AFF7-4316-95B6-18FEF96BCC7F}"
 	ProjectSection(SolutionItems) = preProject
 		..\.editorconfig = ..\.editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{823AD07B-5E14-4A35-B70B-C05F758A5193}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Global
@@ -96,6 +106,18 @@ Global
 		{3E9F10BB-8940-47D8-9BAD-056E08A34179}.Release|x64.Build.0 = Release|Any CPU
 		{3E9F10BB-8940-47D8-9BAD-056E08A34179}.Release|x86.ActiveCfg = Release|Any CPU
 		{3E9F10BB-8940-47D8-9BAD-056E08A34179}.Release|x86.Build.0 = Release|Any CPU
+		{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}.Debug|x64.Build.0 = Debug|Any CPU
+		{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}.Debug|x86.Build.0 = Debug|Any CPU
+		{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}.Release|x64.ActiveCfg = Release|Any CPU
+		{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}.Release|x64.Build.0 = Release|Any CPU
+		{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}.Release|x86.ActiveCfg = Release|Any CPU
+		{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

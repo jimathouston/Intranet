@@ -36,7 +36,7 @@ namespace Intranet.Web.Providers
                 new Claim(JwtRegisteredClaimNames.Iat, now.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64)
             };
 
-            if (user.HasClaim(c => c.Type == ClaimTypes.Surname)) claims.Add(user.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Surname));
+            if (user.HasClaim(c => c.Type == "displayName")) claims.Add(user.Claims.SingleOrDefault(c => c.Type == "displayName"));
 
             // Create the JWT
             var jwt = new JwtSecurityToken(

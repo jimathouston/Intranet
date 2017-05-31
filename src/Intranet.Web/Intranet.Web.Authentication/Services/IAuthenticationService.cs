@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Intranet.Web.Authentication.Contracts;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Intranet.Web.Contracts;
+using System.Text;
 
-namespace Intranet.Web.Services
+namespace Intranet.Web.Authentication.Services
 {
     public interface IAuthenticationService
     {

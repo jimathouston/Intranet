@@ -1,6 +1,19 @@
-# Intranet
+﻿# Intranet
 
 Certaincy's intranet, built with .Net Core and Angular
+
+## Environment variables
+
+| Key                    | Value                          |
+|------------------------|--------------------------------|
+| LDAP.ADMIN_CN          |                                |
+| LDAP.BIND_CREDENTIALS  |                                |
+| LDAP.BIND_DN           |                                |
+| LDAP.SEARCH_BASE       |                                |
+| LDAP.SEARCH_FILTER     |                                |
+| LDAP.URL               |                                |
+| INTRANET_JWT           |                                |
+| ASPNETCORE_ENVIRONMENT | Development\|Staging\|Production |
 
 ## Development
 

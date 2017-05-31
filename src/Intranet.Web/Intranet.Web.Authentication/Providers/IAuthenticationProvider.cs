@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Intranet.Web.Authentication.Contracts;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
-using Intranet.Web.Contracts;
+using System.Text;
 
-namespace Intranet.Web.Providers.Contracts
+namespace Intranet.Web.Authentication.Providers
 {
     public interface IAuthenticationProvider
     {
