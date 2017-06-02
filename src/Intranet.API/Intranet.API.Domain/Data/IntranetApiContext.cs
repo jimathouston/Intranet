@@ -38,6 +38,19 @@ namespace Intranet.API.Domain.Data
             modelBuilder.Entity<ProjectEmployee>()
                 .HasKey(p => new { p.EmployeeId, p.ProjectId });
 
+            modelBuilder.Entity<NewsTag>()
+                .HasKey(t => new { t.NewsId, t.TagId });
+
+            modelBuilder.Entity<NewsTag>()
+                .HasOne(pt => pt.News)
+                .WithMany(p => p.NewsTags)
+                .HasForeignKey(pt => pt.NewsId);
+
+            modelBuilder.Entity<NewsTag>()
+                .HasOne(pt => pt.Tag)
+                .WithMany(t => t.NewsTags)
+                .HasForeignKey(pt => pt.TagId);
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -53,5 +66,7 @@ namespace Intranet.API.Domain.Data
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<NewsTag> NewsTags { get; set; }
+        public virtual DbSet<Tag> Tags { get; set; }
     }
 }

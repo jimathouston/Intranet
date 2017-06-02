@@ -385,6 +385,57 @@ namespace Intranet.API.Data
 
             context.ProjectEmployees.AddRange(assignments);
             context.SaveChanges();
+
+            var tags = new Tag[]
+            {
+                new Tag
+                {
+                    Description = "Internal news"
+                },
+                new Tag
+                {
+                    Description = "External news"
+                },
+                new Tag
+                {
+                    Description = "Updated intranet"
+                },
+                new Tag
+                {
+                    Description = "New hire"
+                }
+            };
+
+            context.Tags.AddRange(tags);
+            context.SaveChanges();
+
+            var taggedNews = new NewsTag[]
+{
+                new NewsTag
+                {
+                    NewsId = 1,
+                    TagId = 1
+                },
+                new NewsTag
+                {
+                    NewsId = 1,
+                    TagId = 2
+                },
+                new NewsTag
+                {
+                    NewsId = 2,
+                    TagId = 3
+                },
+                new NewsTag
+                {
+                    NewsId = 3,
+                    TagId = 4
+                }
+};
+
+            context.NewsTags.AddRange(taggedNews);
+            context.SaveChanges();
+
         }
     }
 }

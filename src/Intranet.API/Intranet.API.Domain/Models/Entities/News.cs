@@ -19,5 +19,7 @@ namespace Intranet.API.Domain.Models.Entities
 
         [Required]
         public string Author { get; set; }
+
+        public ICollection<NewsTag> NewsTags { get; set; }
     }
 }

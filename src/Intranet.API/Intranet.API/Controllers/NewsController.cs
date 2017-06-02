@@ -13,6 +13,9 @@ using System.Reflection;
 
 namespace Intranet.API.Controllers
 {
+    /// <summary>
+    /// Manage news items.
+    /// </summary>
     [Produces("application/json")]
     [Route("/api/v1/[controller]")]
     public class NewsController : Controller, IRestController<News>
@@ -24,6 +27,11 @@ namespace Intranet.API.Controllers
             _intranetApiContext = intranetApiContext;
         }
 
+        /// <summary>
+        /// Add a new news item.
+        /// </summary>
+        /// <param name="news"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [HttpPost]
         public IActionResult Post([FromBody] News news)
@@ -52,6 +60,12 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Change content of a news item.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="news"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpPut]
@@ -86,6 +100,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Remove a news item.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpDelete]
@@ -110,6 +129,10 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieve a list of all news items.
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [HttpGet]
         public IActionResult Get()
@@ -127,6 +150,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieve a specific news item.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpGet]
