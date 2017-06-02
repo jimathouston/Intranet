@@ -18,6 +18,7 @@ using Intranet.API.Data;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 using Intranet.API.Domain;
+using Intranet.API.Filters;
 
 namespace Intranet.API
 {
@@ -48,6 +49,7 @@ namespace Intranet.API
                     .Build();
 
                 config.Filters.Add(new AuthorizeFilter(policy));
+                config.Filters.Add(new ModelValidationFilterAttribute());
             })
             .AddJsonOptions(opt =>
             {
