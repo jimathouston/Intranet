@@ -312,13 +312,15 @@ namespace Intranet.API.Data
                 {
                     Name = "HMMIOM digital dashboard / GTT",
                     Description = "Migration from mechanical to fully digital driver dashboard.",
-                    ClientId = 1
+                    ClientId = 1,
+                    LocationId = 1
                 },
                 new Project
                 {
                     Name = "Web page development",
                     Description = "Development of new customer portal.",
-                    ClientId = 3
+                    ClientId = 3, 
+                    LocationId = 2
                 }
             };
 
@@ -329,11 +331,13 @@ namespace Intranet.API.Data
             {
                 new Location
                 {
-                    Description = "GTT"
+                    Description = "GTT",
+                    Coordinate = "40.714224,-73.961452"
                 },
                 new Location
                 {
-                    Description = "Certaincy"
+                    Description = "Certaincy",
+                    Coordinate = "37.423825,-122.082900"
                 }
             };
 
@@ -361,18 +365,20 @@ namespace Intranet.API.Data
                 {
                     EmployeeId = 1,
                     ProjectId = 1,
-                    LocationId = 1,
+                    RoleId = 1,
                     Active = true,
                     StartDate = DateTimeOffset.UtcNow,
+                    EndDate = DateTimeOffset.UtcNow,
                     InformalDescription = "Component owner for HMIIOM ECU. X-functional responsibility between project, manufacturing and after market level to ensure successful deliveries and long term sustainability."
                 },
                 new ProjectEmployee
                 {
                     EmployeeId = 2,
                     ProjectId = 2,
-                    LocationId = 2,
-                    Active = true,
+                    RoleId = 2,
+                    Active = false,
                     StartDate = DateTimeOffset.UtcNow,
+                    EndDate = DateTimeOffset.UtcNow.AddMonths(4),
                     InformalDescription = "Test developer for SCA web portal."
                 }
             };

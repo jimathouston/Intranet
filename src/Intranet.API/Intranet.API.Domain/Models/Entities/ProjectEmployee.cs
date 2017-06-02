@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
@@ -16,10 +17,7 @@ namespace Intranet.API.Domain.Models.Entities
 
         public Project Project { get; set; }
 
-        public int LocationId { get; set; }
-
-        public Location Location { get; set; }
-
+        [Required]
         public int RoleId { get; set; }
 
         public Role Role { get; set; }

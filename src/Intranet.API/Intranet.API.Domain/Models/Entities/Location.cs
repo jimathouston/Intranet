@@ -12,8 +12,8 @@ namespace Intranet.API.Domain.Models.Entities
         [Required]
         public string Description { get; set; }
 
-        public int Coordinate { get; set; }
+        public string Coordinate { get; set; }
 
-        public ICollection<ProjectEmployee> ProjectEmployees { get; set; }
+        public ICollection<Project> Projects { get; set; }
     }
 }

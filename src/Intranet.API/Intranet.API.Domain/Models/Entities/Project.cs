@@ -19,5 +19,9 @@ namespace Intranet.API.Domain.Models.Entities
         public int ClientId { get; set; }
 
         public Client Client { get; set; }
+
+        public int LocationId { get; set; }
+
+        public Location Location { get; set; }
     }
 }
