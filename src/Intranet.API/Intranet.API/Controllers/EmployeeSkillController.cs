@@ -12,6 +12,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Intranet.API.Controllers
 {
+    /// <summary>
+    /// Manage the skills of all employees.
+    /// </summary>
     [Produces("application/json")]
     [Route("/api/v1/profile/{profileId:int}/[controller]")]
     public class EmployeeSkillController : Controller, IEditProfileController<EmployeeSkill>
@@ -23,6 +26,11 @@ namespace Intranet.API.Controllers
             _intranetApiContext = intranetApiContext;
         }
 
+        /// <summary>
+        /// Retrieve a list of all skills for a specific employee.
+        /// </summary>
+        /// <param name="profileId"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [HttpGet]
         public IActionResult Get(int profileId)
@@ -68,6 +76,12 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieve a specific skill of an employee.
+        /// </summary>
+        /// <param name="profileId"></param>
+        /// <param name="skillId"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{skillId:int}")]
         [HttpGet]
@@ -106,6 +120,12 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Add new skill to an employee. Assign the current and desired level of skill.
+        /// </summary>
+        /// <param name="profileId"></param>
+        /// <param name="skill"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [HttpPost]
         public IActionResult Post(int profileId, [FromBody] EmployeeSkill skill)
@@ -144,6 +164,13 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Change the current and desired level of skill for an employee.
+        /// </summary>
+        /// <param name="profileId"></param>
+        /// <param name="skillId"></param>
+        /// <param name="skill">Form data containing the changed skill level provided by client</param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{skillId:int}")]
         [HttpPut]
@@ -183,6 +210,12 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Remove a specific skill from an employee.
+        /// </summary>
+        /// <param name="profileId"></param>
+        /// <param name="skillId"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{skillId:int}")]
         [HttpDelete]

@@ -11,6 +11,9 @@ using Intranet.API.ViewModels;
 
 namespace Intranet.API.Controllers
 {
+    /// <summary>
+    /// Manage clients.
+    /// </summary>
     [Produces("application/json")]
     [Route("/api/v1/[controller]")]
     public class ClientController : Controller, IRestController<Client>  
@@ -22,6 +25,10 @@ namespace Intranet.API.Controllers
             _intranetApiContext = intranetApiContext;
         }
 
+        /// <summary>
+        /// Retrieve a list of all clients.
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [HttpGet]
         public IActionResult Get()
@@ -44,6 +51,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieve a specific client.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpGet]
@@ -67,6 +79,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Remove a specific client.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpDelete]
@@ -93,6 +110,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Add new client.
+        /// </summary>
+        /// <param name="body"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [HttpPost]
         public IActionResult Post([FromBody] Client body)
@@ -121,6 +143,12 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Change name or description of a client.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpPut]

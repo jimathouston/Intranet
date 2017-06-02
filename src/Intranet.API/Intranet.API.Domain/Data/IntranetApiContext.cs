@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace Intranet.API.Domain.Data
 {
+    /// <summary>
+    /// Configuration of database
+    /// </summary>
     public class IntranetApiContext : DbContext
     {
         public IntranetApiContext(DbContextOptions<IntranetApiContext> options)
@@ -15,6 +18,10 @@ namespace Intranet.API.Domain.Data
             // Empty
         }
 
+        /// <summary>
+        /// Setup of entities
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             foreach (var entity in modelBuilder.Model.GetEntityTypes())

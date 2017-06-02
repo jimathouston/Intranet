@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Intranet.API.Controllers
 {
+    /// <summary>
+    /// Manage tasks that'll be available for adding to the checklist for each employee.
+    /// </summary>
     [Produces("application/json")]
     [Route("/api/v1/[controller]")]
     public class ToDoController : Controller, IRestController<ToDo>
@@ -21,6 +24,11 @@ namespace Intranet.API.Controllers
             _intranetApiContext = intranetApiContext;
         }
 
+        /// <summary>
+        /// Remove task.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpDelete]
@@ -51,6 +59,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieve a specific task.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpGet]
@@ -73,6 +86,10 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieve a list of all tasks and their content.
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [HttpGet]
         public IActionResult Get()
@@ -94,6 +111,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Add new task.
+        /// </summary>
+        /// <param name="newItem"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [HttpPost]
         public IActionResult Post([FromBody] ToDo newItem)
@@ -121,6 +143,13 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Change contents of a specific task.
+        /// Can be changed: Description.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="update"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpPut]

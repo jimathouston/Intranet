@@ -11,6 +11,9 @@ using Intranet.API.ViewModels;
 
 namespace Intranet.API.Controllers
 {
+    /// <summary>
+    /// Manage what projects an employee is assigned to. Referred to below as assignment.
+    /// </summary>
     [Produces("application/json")]
     [Route("/api/v1/profile/{profileId:int}/[controller]")]
     public class ProjectEmployeeController : Controller, IEditProfileController<ProjectEmployee>    
@@ -22,6 +25,11 @@ namespace Intranet.API.Controllers
             _intranetApiContext = intranetApiContext;
         }
 
+        /// <summary>
+        /// Retrieve all assignments for a specific employee.
+        /// </summary>
+        /// <param name="profileId"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [HttpGet]
         public IActionResult Get(int profileId)
@@ -71,6 +79,12 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieve a specific assignment for an employee.
+        /// </summary>
+        /// <param name="profileId"></param>
+        /// <param name="projectId"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{projectId:int}")]
         [HttpGet]
@@ -113,6 +127,12 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Add a new assignment for an employee.
+        /// </summary>
+        /// <param name="profileId"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [HttpPost]
         public IActionResult Post(int profileId, [FromBody] ProjectEmployee body)
@@ -154,6 +174,15 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Change contents of an assignment.
+        /// Can be changed: Project, role, informal assignment description, 
+        /// assignment status active or not and start/end date.
+        /// </summary>
+        /// <param name="profileId"></param>
+        /// <param name="projectId"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{projectId:int}")]
         [HttpPut]
@@ -199,6 +228,12 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Remove an assignment from an employee.
+        /// </summary>
+        /// <param name="profileId"></param>
+        /// <param name="projectId"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{projectId:int}")]
         [HttpDelete]

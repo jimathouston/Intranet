@@ -12,6 +12,9 @@ using Intranet.API.ViewModels;
 
 namespace Intranet.API.Controllers
 {
+    /// <summary>
+    /// Manage employee profiles. A profile contains general data about an employee.
+    /// </summary>
     [Produces("application/json")]
     [Route("/api/v1/[controller]")]
     public class ProfileController : Controller, IRestController<Employee>
@@ -23,6 +26,11 @@ namespace Intranet.API.Controllers
             _intranetApiContext = intranetApiContext;
         }
 
+        /// <summary>
+        /// Remove an employee profile.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpDelete]
@@ -47,6 +55,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieve a list of all employee profiles
+        /// together with their general information.
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [HttpGet]
         public IActionResult Get()
@@ -85,6 +98,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieve a specific employee profile and its general information.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpGet]
@@ -126,6 +144,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Add a new employee profile.
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [HttpPost]
         public IActionResult Post([FromBody] Employee employee)
@@ -160,6 +183,13 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Change content of an employee profile. Can be changed: First/lastname
+        /// description, email, phone number, mobile, street address, postal code and city.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="update"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpPut]

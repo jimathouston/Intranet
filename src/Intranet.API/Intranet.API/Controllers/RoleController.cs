@@ -11,6 +11,10 @@ using Intranet.API.ViewModels;
 
 namespace Intranet.API.Controllers
 {
+    /// <summary>
+    /// Manage the type of worker roles that can be added to an assignment.
+    /// An assignment is a project that an employee is assigned to.
+    /// </summary>
     [Produces("application/json")]
     [Route("/api/v1/[controller]")]
     public class RoleController : Controller, IRestController<Role> 
@@ -22,6 +26,10 @@ namespace Intranet.API.Controllers
             _intranetApiContext = intranetApiContext;
         }
         
+        /// <summary>
+        /// Retrieve a list of all roles.
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [HttpGet]
         public IActionResult Get()
@@ -44,6 +52,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieve a specific role.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpGet]
@@ -67,6 +80,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Remove a specific role.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpDelete]
@@ -93,6 +111,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Add a new role.
+        /// </summary>
+        /// <param name="body"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [HttpPost]
         public IActionResult Post([FromBody] Role body)
@@ -120,6 +143,13 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Change contents of a specific role.
+        /// Can be changed: Description.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpPut]

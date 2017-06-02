@@ -11,6 +11,9 @@ using Intranet.API.ViewModels;
 
 namespace Intranet.API.Controllers
 {
+    /// <summary>
+    /// Manage locations, which in turn are connected to where an employee has an assignment.
+    /// </summary>
     [Produces("application/json")]
     [Route("/api/v1/[controller]")]
     public class LocationController : Controller, IRestController<Location> 
@@ -22,6 +25,10 @@ namespace Intranet.API.Controllers
             _intranetApiContext = intranetApiContext;
         }
 
+        /// <summary>
+        /// Retrieve a list of all locations.
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [HttpGet]
         public IActionResult Get()
@@ -44,6 +51,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieve a specific location.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpGet]
@@ -67,6 +79,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Remove a location.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpDelete]
@@ -93,6 +110,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Add new location.
+        /// </summary>
+        /// <param name="body"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [HttpPost]
         public IActionResult Post([FromBody] Location body)
@@ -121,6 +143,13 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Change content of a location.
+        /// Description and coordinates can be changed.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpPut]

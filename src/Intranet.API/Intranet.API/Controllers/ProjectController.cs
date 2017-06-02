@@ -12,6 +12,9 @@ using Intranet.API.ViewModels;
 
 namespace Intranet.API.Controllers
 {
+    /// <summary>
+    /// Manage what projects are available and their content.
+    /// </summary>
     [Produces("application/json")]
     [Route("/api/v1/[controller]")]
     public class ProjectController : Controller, IRestController<Project>   
@@ -23,6 +26,10 @@ namespace Intranet.API.Controllers
             _intranetApiContext = intranetApiContext;
         }
 
+        /// <summary>
+        /// Retrieve a list of all projects and their content.
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [HttpGet]
         public IActionResult Get()
@@ -45,6 +52,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieve a specific project and its content.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpGet]
@@ -68,6 +80,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Remove a specific project.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpDelete]
@@ -94,6 +111,11 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Add a new project.
+        /// </summary>
+        /// <param name="body"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [HttpPost]
         public IActionResult Post([FromBody] Project body)
@@ -133,6 +155,13 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Change content of a specific project.
+        /// Name, description, client and location can be changed.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
         [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpPut]

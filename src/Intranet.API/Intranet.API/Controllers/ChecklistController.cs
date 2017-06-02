@@ -11,6 +11,11 @@ using Intranet.API.ViewModels;
 
 namespace Intranet.API.Controllers
 {
+    /// <summary>
+    /// Manage an employee checklist. A checklist
+    /// conform to do steps that need to be performed 
+    /// by new hire staff.
+    /// </summary>
     [Produces("application/json")]
     [Route("/api/v1/profile/{profileId:int}/[controller]")]
     public class ChecklistController : Controller, IEditProfileController<EmployeeToDo>
@@ -22,6 +27,11 @@ namespace Intranet.API.Controllers
             _intranetApiContext = intranetApiContext;
         }
 
+        /// <summary>
+        /// Retrieve a list of checklist tasks for an employee.
+        /// </summary>
+        /// <param name="profileId"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [HttpGet]
         public IActionResult Get(int profileId)
@@ -64,6 +74,12 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Retrieve a specific checklist task for an employee.
+        /// </summary>
+        /// <param name="profileId"></param>
+        /// <param name="toDoId"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{toDoId:int}")]
         [HttpGet]
@@ -100,6 +116,12 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Add a checklist task to an employee.
+        /// </summary>
+        /// <param name="profileId"></param>
+        /// <param name="employeeToDo">This is the id of a task in the ToDo class</param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [HttpPost]
         public IActionResult Post(int profileId, [FromBody] EmployeeToDo employeeToDo)
@@ -135,6 +157,13 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Toggle boolean "done" status of a checklist task for an employee.
+        /// </summary>
+        /// <param name="profileId"></param>
+        /// <param name="toDoId"></param>
+        /// <param name="employeeToDo">This represents a task, bool value of the "done" property to be toggled here</param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{toDoId:int}")]
         [HttpPut]
@@ -178,6 +207,12 @@ namespace Intranet.API.Controllers
             }
         }
 
+        /// <summary>
+        /// Remove a checklist task from an employee.
+        /// </summary>
+        /// <param name="profileId"></param>
+        /// <param name="toDoId"></param>
+        /// <returns></returns>
         [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{toDoId:int}")]
         [HttpDelete]
