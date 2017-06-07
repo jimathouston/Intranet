@@ -23,11 +23,12 @@ import { ProfileNewComponent } from './components/profile/profile-new.component'
 import { ProfileEditComponent } from './components/profile/profile-edit.component'
 import { ProfileSingleComponent } from './components/profile/profile-single.component'
 
+import { TextEditorComponent } from './components/texteditor/texteditor.component'
+
 // Services
 import { DataService } from './shared/data_services/data.service'
 import { ConfigService } from './shared/api_settings/config.service'
 import { TokenService } from './shared/data_services/jwt-token.service'
-
 
 export const sharedConfig: NgModule = {
     bootstrap: [ AppComponent ],
@@ -39,7 +40,8 @@ export const sharedConfig: NgModule = {
         HomeComponent,
         NewsComponent, NewsNewComponent, NewsDetailComponent, NewsEditComponent,
         ProfilesComponent, ProfileDetailComponent, ProfileNewComponent, ProfileEditComponent,
-        ProfileChecklistComponent, ProfileSingleComponent
+        ProfileChecklistComponent, ProfileSingleComponent,
+        TextEditorComponent
     ],
     providers: [
         DataService,

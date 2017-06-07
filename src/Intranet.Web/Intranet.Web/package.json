@@ -45,6 +45,7 @@
     "reflect-metadata": "^0.1.10",
     "rxjs": "^5.0.1",
     "style-loader": "^0.13.1",
+    "tinymce": "^4.6.3",
     "to-string-loader": "^1.1.5",
     "typescript": "^2.2.1",
     "url-loader": "^0.5.7",

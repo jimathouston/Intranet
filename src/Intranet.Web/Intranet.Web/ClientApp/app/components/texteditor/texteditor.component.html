@@ -1,0 +1,21 @@
+﻿<div *ngIf="ClientSide; then client else server"></div>
+
+<ng-template #client>
+  <div *ngIf="!TinyMCELoaded">
+    <p>Loading...</p>
+  </div>
+  <div [attr.hidden]="TinyMCELoaded ? null : ''">
+    <form (ngSubmit)="handleSubmit()">
+      <textarea id="{{elementId}}">{{text}}</textarea>
+    </form>
+    <div *ngIf="!Saved">
+      <p>Don't forget to save!</p>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #server>
+  <div>
+    <p>Loading...</p>
+  </div>
+</ng-template>

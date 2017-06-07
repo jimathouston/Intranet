@@ -1,4 +1,4 @@
-<div class="container-fluid">
+﻿<div class="container-fluid">
 <h3>Certaincy News</h3> 
   <div class="card">
     <img class="card-img-top">
@@ -9,7 +9,7 @@
         </a>
       </h4>
       <p><em>{{ date | date }}</em></p>
-      <p class="card-text">{{ text }}</p>
+      <p class="card-text" [innerHTML]="text"></p>
       <p class="card-text"><strong>Författare:</strong> {{ author }}</p>
     </div>
     <div class="card-block">
