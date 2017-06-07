@@ -7,7 +7,7 @@ export interface INewsItem {
 }
 
 export interface IChecklist {
-  id?: number
+  toDoId?: number
   description: string
   todos: boolean
 }

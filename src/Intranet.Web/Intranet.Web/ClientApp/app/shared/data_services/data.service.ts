@@ -80,7 +80,7 @@ export class DataService {
             .catch(this.handleError)
     }
 
-// NEW AT CERTAINCY SERVICE ************************************************  /
+// PROFILE SERVICE ************************************************  /
 
      // get all Profiles
     getAllProfiles(): Observable<IProfile[]> {
@@ -142,6 +142,31 @@ export class DataService {
             .catch(this.handleError)
     }
 
+    // CHECKLIST SERVICE ************************************************  /
+
+    // get profiles checklist
+    getProfileChecklist(id: number): Observable<IChecklist[]> {
+        return this.http.get(this._baseUrl + 'profile/' + id + '/checklist')
+            .map((res: Response) => {
+                console.log(res)
+                return res.json()
+            })
+            .catch(this.handleError)
+    }
+
+    // update checklist
+    updateProfileChecklist(profileId: number, todo: IChecklist): Observable<void> {
+        const headers = new Headers()
+        headers.append('Content-Type', 'application/json')
+        headers.append('Access-Control-Allow-Origin', '*')
+        return this.http.put(this._baseUrl + 'profile/' + profileId + '/checklist/' + todo.toDoId, JSON.stringify(todo), {
+            headers: headers
+        })
+            .map((res: Response) => {
+                return
+            })
+            .catch(this.handleError)
+    }
 
     private handleError (error: Response | any) {
         const applicationError = error.headers.get('constlication-Error')

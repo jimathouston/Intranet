@@ -5,12 +5,14 @@ import { IChecklist, IProfile } from '../../shared/interfaces'
 import { Location } from '@angular/common'
 
 @Component({
-	selector: 'profile-checklist',
-	templateUrl: 'profile-checklist.component.html'
+  selector: 'profile-checklist',
+  templateUrl: 'profile-checklist.component.html'
 })
 
 export class ProfileChecklistComponent implements OnInit {
-	todos: IChecklist[]
+  todos: IChecklist[]
+  checklistEdited: boolean = false
+
   id: number
 
   constructor(private dataService: DataService,
@@ -22,13 +24,22 @@ export class ProfileChecklistComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.id =  1 //+ this.route.snapshot.params['id']
-  	this.dataService.getProfileChecklist(this.id).subscribe((todos: IChecklist[]) => {
+    this.id =  1 // + this.route.snapshot.params['id']
+    this.dataService.getProfileChecklist(this.id).subscribe((todos: IChecklist[]) => {
+
     this.todos = todos
-      console.log('Checklist loaded')
         error => {
       console.log('Faild to load checklist ' + error)
         }
     })
+  }
+
+  updateProfileChecklist() {
+    this.todos.forEach(todo =>
+      this.dataService.updateProfileChecklist(this.id, todo)
+      .subscribe(() => {
+          this.checklistEdited = true
+      })
+    )
   }
 }

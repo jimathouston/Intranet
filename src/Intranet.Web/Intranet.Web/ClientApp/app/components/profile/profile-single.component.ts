@@ -39,8 +39,7 @@ export class ProfileSingleComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.id = 1 //+this.route.snapshot.params['id']
-
+        this.id = 1 // +this.route.snapshot.params['id']
         this.dataService.getProfile(this.id).subscribe((profile: IProfile) => {
             this.firstName = profile.firstName
             this.lastName = profile.lastName
