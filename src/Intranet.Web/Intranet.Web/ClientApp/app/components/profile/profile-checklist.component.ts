@@ -6,7 +6,8 @@ import { Location } from '@angular/common'
 
 @Component({
   selector: 'profile-checklist',
-  templateUrl: 'profile-checklist.component.html'
+  templateUrl: 'profile-checklist.component.html',
+  styleUrls: ['./profile.component.css']
 })
 
 export class ProfileChecklistComponent implements OnInit {

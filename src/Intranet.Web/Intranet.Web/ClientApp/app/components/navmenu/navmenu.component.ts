@@ -6,4 +6,10 @@ import { Component } from '@angular/core'
     styleUrls: ['./navmenu.component.css']
 })
 export class NavMenuComponent {
+    isIn = false
+
+    toggleState() {
+        const bool = this.isIn
+        this.isIn = bool === false ? true : false
+    }
 }

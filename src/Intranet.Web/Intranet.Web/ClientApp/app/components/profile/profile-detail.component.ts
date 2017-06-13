@@ -8,7 +8,8 @@ import Profile from '../../models/profile'
 
 @Component({
     selector: 'profile-detail',
-    templateUrl: 'profile-detail.component.html'
+    templateUrl: 'profile-detail.component.html',
+    styleUrls: ['./profile.component.css']
 })
 
 export class ProfileDetailComponent implements OnInit {

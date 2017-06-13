@@ -22,6 +22,8 @@ export class NewsDetailComponent implements OnInit {
     newsitem: INewsItem
     newsitems: INewsItem[]
     selectedNewsItem: INewsItem
+    info: string = ''
+    newsItemDeleted: boolean = false
 
     constructor(private dataService: DataService,
                 private route: ActivatedRoute,
@@ -56,6 +58,8 @@ export class NewsDetailComponent implements OnInit {
         this.selectedNewsItem = newsitem
         this.dataService.deleteNewsItem(this.selectedNewsItem.id)
             .subscribe(() => {
+                this.newsItemDeleted = true
+                this.info = this.newsitem.title + ' was deleted successfully!'
                 console.log('News was deleted successfully!')
                 this.dataService.getNewsItems().subscribe((newsitems: INewsItem[]) => {
                     this.newsitems = newsitems

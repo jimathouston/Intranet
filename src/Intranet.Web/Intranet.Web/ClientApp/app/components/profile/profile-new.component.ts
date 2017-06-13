@@ -8,7 +8,8 @@ import Profile from '../../models/profile'
 
 @Component({
     selector: 'profile-new',
-    templateUrl: 'profile-new.component.html'
+    templateUrl: 'profile-new.component.html',
+    styleUrls: ['./profile.component.css']
 })
 
 export class ProfileNewComponent {

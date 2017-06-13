@@ -1,16 +1,18 @@
 <div class='main-nav'>
     <div class='navbar navbar-inverse'>
         <div class='navbar-header'>
-            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
+            <button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='.navbar-collapse.in' (click)="toggleState()">
                 <span class='sr-only'>Toggle navigation</span>
                 <span class='icon-bar'></span>
                 <span class='icon-bar'></span>
                 <span class='icon-bar'></span>
             </button>
-            <a class='navbar-brand' [routerLink]="['/home']">Certaincy</a>
+            <!--<a class='navbar-brand' [routerLink]="['/home']">Certaincy</a>-->
+            <a class='navbar-brand' [routerLink]="['/home']"><img src="../../../dist/logo_desktop.png" class="desktop"></a>
+            <a class='navbar-brand' [routerLink]="['/home']"><img src="../../../dist/logo_desktop.png" class="mobile"></a>
         </div>
         <div class='clearfix'></div>
-        <div class='navbar-collapse collapse'>
+        <div class='navbar-collapse collapse' [ngClass]="{ 'in': isIn }" menu>
             <ul class='nav navbar-nav'>
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/home']">

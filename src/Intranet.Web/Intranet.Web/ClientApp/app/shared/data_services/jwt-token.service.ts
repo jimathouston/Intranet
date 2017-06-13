@@ -8,7 +8,7 @@ export class TokenService {
     public token: string
 
     constructor(private http: Http) {
-		// set token if saved in local storage
+        // set token if saved in local storage
         const tokenFromStorage = JSON.parse(localStorage.getItem('Token'))
         if (tokenFromStorage  && tokenFromStorage.Exp < Date.now)
         return tokenFromStorage

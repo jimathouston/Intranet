@@ -1,7 +1,73 @@
-.fixed-action-btn {
-	display: inline-block;
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+h3, a, p, label, input {
+	font-family: 'Roboto';
+}
+
+.card {
+	margin-bottom: 20px;
+}
+
+.text-uppercase {
+	margin-top: 10px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.card-img-caps {
+	margin-top: 30px;
+}
+
+.card-text {
+	max-width:600px;
+  word-wrap:break-word;
+}
+
+.btn-new {
 	position: fixed;
-	top: 20px;
-	right: 40px;
+	bottom: 20px;
+	right: 50px;
+	width: 49px;
+  height: 49px;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 20px;
+  line-height: 2.00;
+  border-radius: 30px;
+}
+
+.btn-detail {
+	position: fixed;
+	width: 49px;
+  height: 49px;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 20px;
+  line-height: 2.00;
+  border-radius: 30px;
+}
+
+.form-horizontal {
+  margin-top: 20px;
+	background-color: #F5F5F5;
+	padding: 40px;
+	border-radius: 8px;
+}
+
+.alert {
+  margin-top: 10px;
+  width: 95%;
+  padding: 10px;
+}
+
+.alert-form {
+  margin: 10px;
+  width: 80%;
+  padding: 10px;
+  border-radius: 5px;
+  float: right;
 }
 

@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h3>Edit {{profile.firstName}} {{profile.lastName}} profile</h3>
+  <h3>{{profile.firstName}} {{profile.lastName}} profile</h3>
     <form #form="ngForm" class="form-horizontal">
       <div class="form-group">
         <label class="col-sm-2 control-label" for="firstName">First Name</label>
@@ -58,9 +58,9 @@
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10" *ngIf="profileEdited" >{{ info }}</div>
           <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-lg btn-primary btn-sm" type="submit" name="action" (click)="updateProfile()">Save Changes
+            <button class="btn btn-info btn-default" type="submit" name="action" (click)="updateProfile()">Save Changes
             </button>
-            <a (click)="goBack()" class="btn btn-secondary btn-sm"><span class="glyphicon glyphicon-arrow-left">&nbsp;</span>Back</a>   
+            <a (click)="goBack()" class="btn btn-secondary btn-default"><span class="glyphicon glyphicon-arrow-left">&nbsp;</span>Back</a>   
           </div>
       </div>
     </form>

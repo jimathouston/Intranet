@@ -1,7 +1,69 @@
-.fixed-action-btn {
-	display: inline-block;
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+h3, h4, a, p, th, td, label, input, li {
+	font-family: 'Roboto';
+}
+
+table {
+	margin-top: 40px;
+}
+
+ul {
+	margin-top: 50px;
+}
+
+.btn-new {
 	position: fixed;
-	top: 20px;
-	right: 40px;
+	bottom: 20px;
+	right: 50px;
+	width: 49px;
+	height: 49px;
+	text-align: center;
+	padding: 5px 0;
+	font-size: 20px;
+	line-height: 2.00;
+	border-radius: 30px;
+}
+
+.btn-detail {
+	top: 100px;
+	right: 190px;
+	width: 49px;
+  height: 49px;
+  text-align: center;
+  padding: 5px 0;
+  font-size: 20px;
+  line-height: 2.00;
+  border-radius: 30px;
+}
+
+.form-horizontal {
+	background-color: #F5F5F5;
+	padding: 40px;
+	border-radius: 8px;
+	margin-top: 20px;
+}
+
+.card {
+	margin-top: 20px;
+	text-align: center;
+}
+
+ul {
+	text-align: left;
+}
+
+img {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.hide {
+	display: none;
 }
 

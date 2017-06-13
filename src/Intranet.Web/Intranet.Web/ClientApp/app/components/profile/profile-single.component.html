@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="card">
-    <img class="card-img-top">
+    <a href="http://placeholder.com"><img class="card-img-top" src="http://via.placeholder.com/150x150" class="card-img-caps"></a>
     <div class="card-block">
       <h4 class="card-title" class="text-uppercase">{{firstName}} {{lastName}}&nbsp;
         <a [routerLink]="['/profile-edit', profile.id]">
@@ -17,11 +17,48 @@
       <li class="list-group-item"><b>Current assignment:</b></li>
       <li class="list-group-item"><b>Company:</b></li>
     </ul>
+    <div class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-target="#collapse1" (click)="toggleState(collapse1)">Experts skills & goals</a>
+          </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse" [ngClass]="{ 'in': isIn }">
+          <div class="panel-body">Experts skills & goals Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-target="#collapse2" (click)="toggleState(collapse2)">Personals skills & goals</a>
+          </h4>
+        </div>
+        <div id="collapse2" class="panel-collapse collapse">
+          <div class="panel-body">Personals skills & goals Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" data-target=".collapse3">Healty skills & goals</a>
+          </h4>
+        </div>
+        <div id="collapse3" class="panel-collapse collapse">
+          <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+        </div>
+      </div>
+    </div> 
     <div class="card-block">
-      <a (click)="removeProfile(profile); $event.stopPropagation()" class="btn btn-danger btn-sm">
+      <a (click)="removeProfile(profile); $event.stopPropagation()" class="btn btn-danger btn-default">
         <span class="glyphicon glyphicon-remove"></span> Delete
       </a>&nbsp;
-      <a (click)="goBack()" class="btn btn-secondary btn-sm"><span class="glyphicon glyphicon-arrow-left">&nbsp;</span>Back</a>  
+      <a (click)="goBack()" class="btn btn-secondary btn-default"><span class="glyphicon glyphicon-arrow-left">&nbsp;</span>Back</a>  
     </div>    
   </div>
 </div>

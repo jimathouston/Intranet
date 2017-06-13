@@ -3,6 +3,10 @@ import { RouterModule, Routes } from '@angular/router'
 import { HttpModule } from '@angular/http'
 import { FormsModule } from '@angular/forms'
 
+
+import { TruncatePipe }   from './shared/pipes/truncate'
+import { SafeHtmlPipe } from './shared/pipes/safehtml'
+
 // Imports for loading & configuring the in-memory web api
 
 import { AppComponent } from './components/app/app.component'
@@ -41,7 +45,9 @@ export const sharedConfig: NgModule = {
         NewsComponent, NewsNewComponent, NewsDetailComponent, NewsEditComponent,
         ProfilesComponent, ProfileDetailComponent, ProfileNewComponent, ProfileEditComponent,
         ProfileChecklistComponent, ProfileSingleComponent,
-        TextEditorComponent
+        TruncatePipe,
+        TextEditorComponent,
+        SafeHtmlPipe,
     ],
     providers: [
         DataService,

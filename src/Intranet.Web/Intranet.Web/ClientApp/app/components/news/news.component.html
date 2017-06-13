@@ -1,17 +1,17 @@
 ﻿<div class="container-fluid">
 <h3>Certaincy News</h3>
-  <div class="fixed-action-btn">
-    <a [routerLink]="['/news-new']" class="btn btn-warning pull-right">
-      <span class="glyphicon glyphicon-plus"></span> Add 
-    </a>
+  <div class="col-xs-3">
+  <a [routerLink]="['/news-new']" class="btn btn-success btn-circle btn-new">
+    <span class="glyphicon glyphicon-plus"></span>
+  </a>
   </div>
-    <div class="card" *ngFor="let newsitem of newsitems">
-      <img class="card-img-top">
+  <div class="card" *ngFor="let newsitem of newsitems">
+    <a href="http://placeholder.com"><img src="http://via.placeholder.com/600x250" class="card-img-caps"></a>
+    <p class="text-uppercase"><strong>BY {{newsitem.author}}</strong> | {{ newsitem.date | date }}</p> 
     <div class="card-block">
-      <a [routerLink]="['/news-detail', newsitem.id]">
-        <h4 class="card-title">{{ newsitem.title }}</h4>
-      </a>
-      <p class="card-text">{{ newsitem.date | date }}</p>
+      <h4 class="card-title">{{ newsitem.title }}</h4>
+      <p class="card-text" [innerHTML]="newsitem.text | limitTo : 185"></p>
+      <a [routerLink]="['/news-detail', newsitem.id]" class="btn btn-info">Read more!</a>  
     </div>
   </div>
 </div>

@@ -8,7 +8,8 @@ import Profile from '../../models/profile'
 
 @Component({
     selector: 'profile-edit',
-    templateUrl: 'profile-edit.component.html'
+    templateUrl: 'profile-edit.component.html',
+    styleUrls: ['./profile.component.css']
 })
 
 export class ProfileEditComponent implements OnInit {
