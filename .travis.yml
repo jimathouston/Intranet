@@ -1,4 +1,4 @@
-language: csharp
+﻿language: csharp
 dist: trusty
 dotnet: 1.0.4
 
