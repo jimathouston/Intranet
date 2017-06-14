@@ -10,7 +10,7 @@
     <p class="text-uppercase"><strong>BY {{newsitem.author}}</strong> | {{ newsitem.date | date }}</p> 
     <div class="card-block">
       <h4 class="card-title">{{ newsitem.title }}</h4>
-      <p class="card-text" [innerHTML]="newsitem.text | limitTo : 185"></p>
+      <p class="card-text" [innerHTML]="newsitem.text | limitTo : 185 | safeHtml"></p>
       <a [routerLink]="['/news-detail', newsitem.id]" class="btn btn-info">Read more!</a>  
     </div>
   </div>
