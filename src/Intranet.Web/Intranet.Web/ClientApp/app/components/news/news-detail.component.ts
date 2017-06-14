@@ -16,7 +16,7 @@ export class NewsDetailComponent implements OnInit {
     id: number
     title: string
     date: Date
-    text: string
+    text: string = ''
     author: string
 
     newsitem: INewsItem
@@ -28,8 +28,8 @@ export class NewsDetailComponent implements OnInit {
     constructor(private dataService: DataService,
                 private route: ActivatedRoute,
                 private location: Location) {
-                  this.newsitem = new NewsItem()
-                }
+      this.newsitem = new NewsItem()
+    }
 
     goBack(): void {
         this.location.back()
