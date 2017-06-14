@@ -1,4 +1,7 @@
-﻿//////////////////////////////////////////////////////////////////////
+﻿#addin "NuGet.Core"
+#addin "Cake.ExtendedNuGet"
+
+//////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 //////////////////////////////////////////////////////////////////////
 #addin "Cake.Npm"
@@ -56,8 +59,31 @@ Task("API:Restore-NuGet-Packages")
     .IsDependentOn("API:Clean")
     .Does(() =>
 {
+      // TODO: This should live in it's own NuGet.config but that won't work at the moment:
+      //       See https://github.com/NuGet/Home/issues/4907
+      var imageSharpSource = "https://www.myget.org/F/imagesharp/api/v3/index.json";
+      var tempCachePath = MakeAbsolute(Directory("temp-nuget-cache"));
+
+      if (!NuGetHasSource(imageSharpSource))
+      {
+        NuGetAddSource(
+            name: "ImageSharp Nightly",
+            source: imageSharpSource
+        );
+      }
+
+      NuGetInstall("ImageSharp", new NuGetInstallSettings {
+        OutputDirectory = tempCachePath,
+        // Prerelease = true,
+        Version = "1.0.0-alpha9-00139",
+        Source = new string[] { imageSharpSource, "https://api.nuget.org/v3/index.json" }
+      });
+
       DotNetCoreRestore(apiDir);
       DotNetCoreRestore(apiTestsDir);
+
+      CleanDirectory(tempCachePath);
+      DeleteDirectory(tempCachePath);
 });
 
 Task("Web:Restore-NuGet-Packages")

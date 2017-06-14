@@ -19,6 +19,7 @@ using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 using Intranet.API.Domain;
 using Intranet.API.Filters;
+using Intranet.API.Services;
 
 namespace Intranet.API
 {
@@ -36,6 +37,8 @@ namespace Intranet.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IImageService, ImageService>();
+
             services.ConfigureDbForDevelopment<IntranetApiContext>();
 
             var pathToDoc = ".xml";
