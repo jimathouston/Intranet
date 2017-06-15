@@ -89,3 +89,10 @@ If ($command -eq "run" -and $target -eq "web") {
 If ($command -eq "build" -and $target -eq "nginx") {
   docker build -t nginx -f nginx/Dockerfile .
 }
+
+# Docker - ECS
+If ($command -eq "build" -and $target -eq "ecs") {
+  docker build -t ecs -f Dockerfile-ecs .
+} ElseIf ($command -eq "run" -and $target -eq "ecs") {
+  docker run -it ecs /bin/bash
+}
