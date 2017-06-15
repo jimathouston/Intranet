@@ -25,12 +25,12 @@ If ($command -eq "help")
   Write-Host ""
   # Docker
   Write-Host "API and Web separately in docker:"
-  Write-Host "./intranet.ps1 run api        : build and start api in docker"
-  Write-Host "./intranet.ps1 test api       : build and test api in docker"
-  Write-Host "./intranet.ps1 bash api       : build api and open interactive shell in docker"
-  Write-Host "./intranet.ps1 run web        : build and start web in docker"
-  Write-Host "./intranet.ps1 test web       : build and test web in docker"
-  Write-Host "./intranet.ps1 bash web       : build web and open interactive shell in docker"
+  Write-Host "./intranet.ps1 run api        : build and start dev image of api in docker"
+  Write-Host "./intranet.ps1 build api      : build production image from binaries compiled in dev image"
+  Write-Host "./intranet.ps1 bash api       : open interactive shell in already running dev image"
+  Write-Host "./intranet.ps1 run web        : build and start dev image of web in docker"
+  Write-Host "./intranet.ps1 build web      : build production image from binaries compiled in dev image"
+  Write-Host "./intranet.ps1 bash web       : open interactive shell in already running dev image"
   Write-Host ""
   # Utilities
   Write-Host "Utilities:"
@@ -63,24 +63,31 @@ If ($command -eq "run" -and $target -eq "all") {
 
 # Docker - API
 If ($command -eq "run" -and $target -eq "api") {
-  docker build -t api -f Dockerfile-api .
-  docker run -v ${pwd}:/app -p 3000:80 api run
-} Elseif ($command -eq "test" -and $target -eq "api") {
-  docker build -t api -f Dockerfile-api .
-  docker run -v ${pwd}:/app -p 3000:80 api test
+  docker build -t apidev -f Dockerfile-api .
+  docker run -v ${pwd}:/app -p 3000:80 apidev run
+} Elseif ($command -eq "build" -and $target -eq "api") {
+  docker build -t apidev -f Dockerfile-api .
+  docker run -v ${pwd}:/app -p 3000:80 apidev
+  docker build -t api -f Dockerfile-api-prod .
+  # TODO: tag and push
 } Elseif ($command -eq "bash" -and $target -eq "api") {
-  docker build -t api -f Dockerfile-api .
-  docker run -v ${pwd}:/app -p 3000:80 -it api /bin/bash
+  docker exec -it apidev /bin/bash
 }
 
 # Docker - Web
 If ($command -eq "run" -and $target -eq "web") {
-  docker build -t web -f Dockerfile-web .
-  docker run -v ${pwd}:/app -p 5000:80 web run
+  docker build -t webdev -f Dockerfile-web .
+  docker run -v ${pwd}:/app -p 5000:80 webdev run
 } Elseif ($command -eq "test" -and $target -eq "web") {
-  docker build -t web -f Dockerfile-web .
-  docker run -v ${pwd}:/app -p 5000:80 web test
+  docker build -t webdev -f Dockerfile-web .
+  docker run -v ${pwd}:/app -p 5000:80 webdev
+  docker build -t api -f Dockerfile-api-prod .
+  # TODO: tag and push
 } Elseif ($command -eq "bash" -and $target -eq "web") {
-  docker build -t web -f Dockerfile-web .
-  docker run -v ${pwd}:/app -p 5000:80 -it web /bin/bash
+  docker exec -it web /bin/bash
+}
+
+# Docker - nginx
+If ($command -eq "build" -and $target -eq "nginx") {
+  docker build -t nginx -f nginx/Dockerfile .
 }
