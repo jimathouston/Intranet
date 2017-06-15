@@ -52,12 +52,12 @@ namespace Intranet_Web
             // Add settings from configuration
             services.Configure<LdapConfig>(options =>
             {
-                options.AdminCn = Configuration["LDAP.ADMIN_CN"];
-                options.BindCredentials = Configuration["LDAP.BIND_CREDENTIALS"];
-                options.BindDn = Configuration["LDAP.BIND_DN"];
-                options.SearchBase = Configuration["LDAP.SEARCH_BASE"];
-                options.SearchFilter = Configuration["LDAP.SEARCH_FILTER"];
-                options.Url = Configuration["LDAP.URL"];
+                options.AdminCn = Configuration["LDAP_ADMIN_CN"];
+                options.BindCredentials = Configuration["LDAP_BIND_CREDENTIALS"];
+                options.BindDn = Configuration["LDAP_BIND_DN"];
+                options.SearchBase = Configuration["LDAP_SEARCH_BASE"];
+                options.SearchFilter = Configuration["LDAP_SEARCH_FILTER"];
+                options.Url = Configuration["LDAP_URL"];
             });
             services.Configure<TokenProviderOptions>(options =>
             {

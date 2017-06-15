@@ -257,3 +257,6 @@ paket-files/
 
 # Database
 db/
+
+# Environment vars and secrets
+*.env

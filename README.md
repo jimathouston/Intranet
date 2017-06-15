@@ -6,12 +6,12 @@ Certaincy's intranet, built with .Net Core and Angular
 
 | Key                    | Value                          |
 |------------------------|--------------------------------|
-| LDAP.ADMIN_CN          |                                |
-| LDAP.BIND_CREDENTIALS  |                                |
-| LDAP.BIND_DN           |                                |
-| LDAP.SEARCH_BASE       |                                |
-| LDAP.SEARCH_FILTER     |                                |
-| LDAP.URL               |                                |
+| LDAP_ADMIN_CN          |                                |
+| LDAP_BIND_CREDENTIALS  |                                |
+| LDAP_BIND_DN           |                                |
+| LDAP_SEARCH_BASE       |                                |
+| LDAP_SEARCH_FILTER     |                                |
+| LDAP_URL               |                                |
 | INTRANET_JWT           |                                |
 | ASPNETCORE_ENVIRONMENT | Development\|Staging\|Production |
 

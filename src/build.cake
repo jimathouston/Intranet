@@ -126,6 +126,20 @@ Task("Web:Run-Unit-Tests")
     NpmRunScript("test", settings => settings.FromPath("./Intranet.Web/Intranet.Web"));
 });
 
+Task("API:Publish")
+    .IsDependentOn("API:Run-Unit-Tests")
+    .Does(() =>
+{
+    DotNetCorePublish("./Intranet.API/Intranet.API");
+});
+
+Task("Web:Publish")
+    .IsDependentOn("Web:Run-Unit-Tests")
+    .Does(() =>
+{
+    DotNetCorePublish("./Intranet.Web/Intranet.Web");
+});
+
 //////////////////////////////////////////////////////////////////////
 // TASK TARGETS
 //////////////////////////////////////////////////////////////////////

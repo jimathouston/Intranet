@@ -1,0 +1,14 @@
+FROM microsoft/aspnetcore
+WORKDIR /app
+EXPOSE 5000
+# Copy binaries
+# TODO: change from debug to release
+# TODO: double-check all files exist - node modules and such
+COPY ./Intranet.Web/Intranet.Web/bin/Debug/netcoreapp1.1/publish /app
+# TODO: set env vars from AWS dashboard instead?
+# Copy environment variables
+COPY ./staging.env /app
+# Entrypoint
+COPY ./web-init-prod-env.sh /app
+RUN chmod +x ./web-init-prod-env.sh
+ENTRYPOINT ["./web-init-prod-env.sh"]

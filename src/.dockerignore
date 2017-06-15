@@ -1,0 +1,9 @@
+node_modules
+var
+bin
+obj
+public/assets
+vendor
+.settings
+.project
+*.log
