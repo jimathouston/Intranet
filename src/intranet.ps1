@@ -17,10 +17,9 @@ If ($command -eq "help")
   Write-Host "Available commands:"
   Write-Host ""
   # Docker-Compose
-  # TODO: when tests from compose implemented, don't forget to update help
   Write-Host "Full application in docker-compose:"
-  Write-Host "./intranet.ps1 test all       : build and test intranet in docker-compose (NOT IMPLEMENTED YET)"
-  Write-Host "./intranet.ps1 run all        : build and start intranet in docker-compose"
+  Write-Host "./intranet.ps1 debug all      : build and test intranet with local images in docker-compose (NOT IMPLEMENTED YET)"
+  Write-Host "./intranet.ps1 run all        : build and start intranet with production images in docker-compose"
   Write-Host "./intranet.ps1 stop all       : stops intranet and removes containers. (docker-compose down)"
   Write-Host ""
   # Docker
@@ -49,12 +48,11 @@ If ($command -eq "kill") {
 }
 
 # Docker-Compose - Entire Intranet
-If ($command -eq "run" -and $target -eq "all") {
+If ($command -eq "debug" -and $target -eq "all") {
   docker-compose build
   docker-compose up
-} Elseif ($command -eq "test" -and $target -eq "all") {
-  # TODO: when test via docker-compose is implemented, add command here
-  Write-Host "Not implemented yet"
+} Elseif ($command -eq "run" -and $target -eq "all") {
+  docker-compose -f docker-compose.prod.yml up
 } Elseif ($command -eq "stop" -and $target -eq "all") {
   docker-compose down
   # Return to shell
@@ -78,13 +76,13 @@ If ($command -eq "run" -and $target -eq "api") {
 If ($command -eq "run" -and $target -eq "web") {
   docker build -t webdev -f Dockerfile-web .
   docker run -v ${pwd}:/app -p 5000:80 webdev run
-} Elseif ($command -eq "test" -and $target -eq "web") {
+} Elseif ($command -eq "build" -and $target -eq "web") {
   docker build -t webdev -f Dockerfile-web .
   docker run -v ${pwd}:/app -p 5000:80 webdev
-  docker build -t api -f Dockerfile-api-prod .
+  docker build -t web -f Dockerfile-api-prod .
   # TODO: tag and push
 } Elseif ($command -eq "bash" -and $target -eq "web") {
-  docker exec -it web /bin/bash
+  docker exec -it webdev /bin/bash
 }
 
 # Docker - nginx
