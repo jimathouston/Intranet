@@ -1,4 +1,5 @@
-﻿const _sum = require('./sum');
+﻿import 'jest'
+const _sum = require('./sum');
 
 describe('stupid frigging addition scheisse', () => {
     it('adds 1 and 2 to equal 3', () => {

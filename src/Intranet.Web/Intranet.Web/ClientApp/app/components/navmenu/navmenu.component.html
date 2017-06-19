@@ -1,4 +1,4 @@
-<div class='main-nav'>
+﻿<div class='main-nav'>
     <div class='navbar navbar-inverse'>
         <div class='navbar-header'>
             <button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='.navbar-collapse.in' (click)="toggleState()">
@@ -7,46 +7,39 @@
                 <span class='icon-bar'></span>
                 <span class='icon-bar'></span>
             </button>
-            <!--<a class='navbar-brand' [routerLink]="['/home']">Certaincy</a>-->
-            <a class='navbar-brand' [routerLink]="['/home']"><img src="" class="desktop"></a>
-            <a class='navbar-brand' [routerLink]="['/home']"><img src="" class="mobile"></a>
+            <a class='navbar-brand' [routerLink]="['/news']"><img src="https://s3-eu-west-1.amazonaws.com/certaincy-intranet-static-images/logos/logo.png"></a>
         </div>
         <div class='clearfix'></div>
-        <div class='navbar-collapse collapse' [ngClass]="{ 'in': isIn }" menu>
+        <div class='collapse navbar-collapse' [ngClass]="{ 'in': isIn }">
             <ul class='nav navbar-nav'>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/home']">
-                        <span class='glyphicon glyphicon-home'></span> Home
-                    </a>
-                </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/counter']">
-                        <span class='glyphicon glyphicon-education'></span> Counter
-                    </a>
-                </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/fetch-data']">
-                        <span class='glyphicon glyphicon-th-list'></span> Fetch data
-                    </a>
-                </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/news']">
+                    <a [routerLink]="['/news']" data-toggle="collapse">
                         <span class='glyphicon glyphicon-list-alt'></span> News
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/checklist']">
+                    <a [routerLink]="['/checklist']" data-toggle="collapse">
                         <span class='glyphicon glyphicon-ok'></span> New at Certaincy
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/profile-single']">
+                    <a [routerLink]="['/profile-single']" data-toggle="collapse">
                         <span class='glyphicon glyphicon-user'></span> My Certaincy
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/profiles']">
+                <li [routerLinkActive]="['link-active']" >
+                    <a [routerLink]="['/profiles']" data-toggle="collapse">
                         <span class='glyphicon glyphicon-grain'></span> Our Consults
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a class="nav-link" href="https://certaincy-time-report.herokuapp.com/" data-toggle="collapse">
+                        <span class='glyphicon glyphicon-time'></span> TIME
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a class="nav-link" href="https://outlook.office.com/owa/" data-toggle="collapse">
+                        <span class='glyphicon glyphicon-envelope'></span> Webmail
                     </a>
                 </li>
             </ul>

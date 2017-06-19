@@ -1,17 +1,27 @@
 ﻿<div class="container-fluid">
-<h3>Certaincy News</h3>
-  <div class="col-xs-3">
-  <a [routerLink]="['/news-new']" class="btn btn-success btn-circle btn-new">
-    <span class="glyphicon glyphicon-plus"></span>
-  </a>
-  </div>
-  <div class="card" *ngFor="let newsitem of newsitems">
-    <a href="http://placeholder.com"><img src="http://via.placeholder.com/600x250" class="card-img-caps"></a>
-    <p class="text-uppercase"><strong>BY {{newsitem.author}}</strong> | {{ newsitem.date | date }}</p> 
+  <h3>Certaincy News</h3>&nbsp;
+    <div class="col-xs-3">
+      <a [routerLink]="['/news-new']" class="btn btn-success btn-circle btn-new">
+        <span class="glyphicon glyphicon-plus"></span>
+      </a>
+    </div>
+    <div class="col-xs-3">
+      <a href="https://remote.certaincy.com/owa/" class="btn btn-warning btn-circle btn-mail">
+        <span class="glyphicon glyphicon-envelope"></span>
+      </a>
+    </div>
+    <div class="col-xs-3">
+      <a href="https://certaincy-time-report.herokuapp.com/" class="btn btn-primary btn-circle btn-time">
+        <span class="glyphicon glyphicon-time"></span>
+      </a>
+    </div>
+    <div class="card" *ngFor="let newsitem of newsitems">
+      <a [routerLink]="['/news-detail', newsitem.id]"><img src="http://via.placeholder.com/600x250" class="card-img-caps"></a>
+      <p class="text-uppercase"><strong>BY {{newsitem.author}}</strong> | {{ newsitem.date | date }}</p> 
     <div class="card-block">
       <h4 class="card-title">{{ newsitem.title }}</h4>
       <p class="card-text" [innerHTML]="newsitem.text | limitTo : 185 | safeHtml"></p>
       <a [routerLink]="['/news-detail', newsitem.id]" class="btn btn-info">Read more!</a>  
     </div>
-  </div>
+    </div>
 </div>

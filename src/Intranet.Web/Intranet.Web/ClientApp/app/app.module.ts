@@ -2,7 +2,7 @@
 import { RouterModule, Routes } from '@angular/router'
 import { HttpModule } from '@angular/http'
 import { FormsModule } from '@angular/forms'
-
+import { APP_BASE_HREF } from '@angular/common'
 
 import { TruncatePipe }   from './shared/pipes/truncate'
 import { SafeHtmlPipe } from './shared/pipes/safehtml'
@@ -11,9 +11,6 @@ import { SafeHtmlPipe } from './shared/pipes/safehtml'
 
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component'
-import { HomeComponent } from './components/home/home.component'
-import { FetchDataComponent } from './components/fetchdata/fetchdata.component'
-import { CounterComponent } from './components/counter/counter.component'
 
 import { NewsComponent } from './components/news/news.component'
 import { NewsNewComponent } from './components/news/news-new.component'
@@ -39,9 +36,6 @@ export const sharedConfig: NgModule = {
     declarations: [
         AppComponent,
         NavMenuComponent,
-        CounterComponent,
-        FetchDataComponent,
-        HomeComponent,
         NewsComponent, NewsNewComponent, NewsDetailComponent, NewsEditComponent,
         ProfilesComponent, ProfileDetailComponent, ProfileNewComponent, ProfileEditComponent,
         ProfileChecklistComponent, ProfileSingleComponent,
@@ -53,14 +47,12 @@ export const sharedConfig: NgModule = {
         DataService,
         ConfigService,
         TokenService,
+        {provide: APP_BASE_HREF, useValue : '/' },
     ],
     imports: [
         FormsModule,
         RouterModule.forRoot([
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'home', component: HomeComponent },
-            { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
+            { path: '', redirectTo: 'news', pathMatch: 'full' },
             { path: 'news', component: NewsComponent },
             { path: 'news-new', component: NewsNewComponent },
             { path: 'news-detail/:id', component: NewsDetailComponent },

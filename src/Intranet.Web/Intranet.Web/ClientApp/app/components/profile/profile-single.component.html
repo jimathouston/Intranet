@@ -1,8 +1,8 @@
-<div class="container-fluid">
+﻿<div class="container-fluid">
   <div class="card">
-    <a href="http://placeholder.com"><img class="card-img-top" src="http://via.placeholder.com/150x150" class="card-img-caps"></a>
+    <img class="card-img-top card-img-caps" src="http://via.placeholder.com/150x150">
     <div class="card-block">
-      <h4 class="card-title" class="text-uppercase">{{firstName}} {{lastName}}&nbsp;
+      <h4 class="card-title text-uppercase" >{{firstName}} {{lastName}}&nbsp;
         <a [routerLink]="['/profile-edit', profile.id]">
           <span class="glyphicon glyphicon-pencil"></span>
         </a>
@@ -21,7 +21,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class="panel-title">
-            <a data-toggle="collapse" data-target="#collapse1" (click)="toggleState(collapse1)">Experts skills & goals</a>
+            <a data-toggle="collapse" data-target="#collapse1" (click)="toggleState()">Experts skills & goals</a>
           </h4>
         </div>
         <div id="collapse1" class="panel-collapse collapse" [ngClass]="{ 'in': isIn }">
@@ -33,10 +33,10 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h4 class="panel-title">
-            <a data-toggle="collapse" data-target="#collapse2" (click)="toggleState(collapse2)">Personals skills & goals</a>
+            <a data-toggle="collapse" data-target="#collapse2" (click)="toggleState()">Personals skills & goals</a>
           </h4>
         </div>
-        <div id="collapse2" class="panel-collapse collapse">
+        <div id="collapse2" class="panel-collapse collapse" [ngClass]="{ 'in': isIn }">
           <div class="panel-body">Personals skills & goals Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
         </div>

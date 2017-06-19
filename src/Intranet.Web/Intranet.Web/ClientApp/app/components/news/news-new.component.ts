@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { INewsItem } from '../../shared/interfaces'
 import { DataService } from '../../shared/data_services/data.service'
