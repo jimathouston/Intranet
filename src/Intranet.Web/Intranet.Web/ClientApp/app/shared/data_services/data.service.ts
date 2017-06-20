@@ -33,6 +33,9 @@ export class DataService {
             .map((res: Response) => {
                 return res.json()
             })
+            .map((res: INewsItem[]) => {
+                return res.sort((a, b) => a.date < b.date ? 1 : -1)
+            })
             .catch(this.handleError)
     }
 
