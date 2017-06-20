@@ -3,24 +3,20 @@
 @Injectable()
 export class ConfigService {
 
-    _apiURI: string
-    _mockURI: string
+    _apiUrl: string
+    _apiBaseUrl: string
 
     constructor() {
-        this._apiURI = 'http://localhost:3000/api/v1/'
-        this._mockURI = 'http://localhost:3001/'
+        this._apiUrl = '/api/v1/'
+        this._apiBaseUrl = 'http://localhost:3000'
     }
 
-    getApiURI() {
-        return this._apiURI
+    getApiUrl() {
+        return this._apiBaseUrl + this._apiUrl
     }
 
-    getMockURI() {
-        return this._mockURI
-    }
-
-    getApiHost() {
-        return this._apiURI.replace('api', '')
+    getApiBaseUrl() {
+        return this._apiBaseUrl
     }
 }
 

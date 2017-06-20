@@ -22,7 +22,7 @@ export class DataService {
 
     constructor(private http: Http,
                 private configService: ConfigService) {
-                this._baseUrl = configService.getApiURI()
+                this._baseUrl = configService.getApiUrl()
     }
 
 // NEWS SERVICES ************************************************************  /
