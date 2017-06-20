@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+﻿import { Component, Input } from '@angular/core'
 import { RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { INewsItem } from '../../shared/interfaces'
 import { DataService } from '../../shared/data_services/data.service'
@@ -29,8 +29,15 @@ export class NewsNewComponent {
         this.location.back()
     }
 
-    addNewsItem(title: string, text: string, author: string) {
-        this.dataService.createNewsItem(title, text, author).then((newsitem) => {
+    handleEditorContentChange(content: string) {
+        this.newsitem.text = content
+    }
+
+    addNewsItem(title: string, author: string) {
+        this.newsitem.title = title
+        this.newsitem.author = author
+
+        this.dataService.createNewsItem(this.newsitem).then((newsitem) => {
             this.newsItemCreated = true
             console.log(newsitem)
              this.info = 'News was created successfully!'

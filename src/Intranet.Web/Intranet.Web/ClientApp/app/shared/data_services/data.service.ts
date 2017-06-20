@@ -49,8 +49,8 @@ export class DataService {
     }
 
     // create a new NewsItem
-    createNewsItem(title: string, text: string, author: string): Promise< INewsItem> {
-      const body = JSON.stringify({title: title, text: text, author: author})
+    createNewsItem(newsitem: INewsItem): Promise<INewsItem> {
+        const body = JSON.stringify({ title: newsitem.title, text: newsitem.text, author: newsitem.author})
 
         return this.http.post(this._baseUrl + 'news/', body, { headers: this.headers })
                 .toPromise()
