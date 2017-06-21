@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core'
+﻿import { Component, OnInit } from '@angular/core'
 import { RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { DataService } from '../../shared/data_services/data.service'
-import { IChecklist, IProfile } from '../../shared/interfaces'
 import { Location } from '@angular/common'
+
+import Checklist from '../../models/checklist.model'
+import Profile from '../../models/profile.model'
 
 @Component({
   selector: 'profile-checklist',
@@ -11,7 +13,7 @@ import { Location } from '@angular/common'
 })
 
 export class ProfileChecklistComponent implements OnInit {
-  todos: IChecklist[]
+  todos: Checklist[]
   checklistEdited: boolean = false
 
   id: number
@@ -26,7 +28,7 @@ export class ProfileChecklistComponent implements OnInit {
 
   ngOnInit() {
     this.id =  1 // + this.route.snapshot.params['id']
-    this.dataService.getProfileChecklist(this.id).subscribe((todos: IChecklist[]) => {
+    this.dataService.getProfileChecklist(this.id).subscribe((todos: Checklist[]) => {
 
     this.todos = todos
         error => {

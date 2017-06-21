@@ -11,11 +11,11 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.FileProviders;
-using Intranet.API.Models.Enums;
 using System.Collections;
 using Intranet.API.Services;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.StaticFiles;
+using Intranet.API.Common.Enums;
 
 namespace Intranet.API.Controllers
 {
@@ -24,13 +24,13 @@ namespace Intranet.API.Controllers
     [Route("/api/v1")]
     public class FileController : Controller
     {
-        private readonly string _webRootPath;
         private readonly IImageService _imageService;
+        private readonly IFileStorageService _fileStorageService;
 
-        public FileController(IHostingEnvironment env,
-                               IImageService imageService)
+        public FileController(IFileStorageService fileStorageService,
+                              IImageService imageService)
         {
-            _webRootPath = env.WebRootPath;
+            _fileStorageService = fileStorageService;
             _imageService = imageService;
         }
 
@@ -43,11 +43,12 @@ namespace Intranet.API.Controllers
 
         [HttpGet]
         [Route("blob/{filename}")]
-        public IActionResult Get(string filename)
+        public IActionResult GetFile(string filename)
         {
             try
             {
-                return PhysicalFileFromFilename(filename);
+                var file = _fileStorageService.GetFile(filename);
+                return PhysicalFile(file.path, file.mime); // TODO: Will (probably) not work with S3
             }
             catch (Exception)
             {
@@ -57,11 +58,12 @@ namespace Intranet.API.Controllers
 
         [HttpGet]
         [Route("image/{filename}")]
-        public IActionResult Get(string filename, bool image = true)
+        public IActionResult GetImage(string filename)
         {
             try
             {
-                return PhysicalFileFromFilename(filename, image);
+                var image = _fileStorageService.GetImage(filename);
+                return PhysicalFile(image.path, image.mime); // TODO: Will (probably) not work with S3
             }
             catch (Exception)
             {
@@ -71,13 +73,14 @@ namespace Intranet.API.Controllers
 
         [HttpGet]
         [Route("image/{width:int}/{height:int}/{filename}")]
-        public IActionResult Get(int width, int height, string filename)
+        public IActionResult GetImage(int width, int height, string filename)
         {
             try
             {
                 var type = _imageService.GetImageVariantType(width, height);
 
-                return PhysicalFileFromFilename(filename, image: true, imageVariantType: type);
+                var image = _fileStorageService.GetImage(filename, type);
+                return PhysicalFile(image.path, image.mime); // TODO: Will (probably) not work with S3
             }
             catch (Exception)
             {
@@ -93,6 +96,7 @@ namespace Intranet.API.Controllers
             try
             {
                 var urls = new List<string>();
+                var fileNames = new List<string>();
                 var filePath = Path.GetTempPath();
                 var uploads = Request.Form.Files.GroupBy(f => f.ContentType.Contains("image")).ToDictionary(x => x.Key, x => x.ToList());
 
@@ -101,25 +105,28 @@ namespace Intranet.API.Controllers
 
                 foreach (var image in images)
                 {
-                    var imageUrls = SaveImageToDisc(filePath, image);
+                    var imageUrls = _fileStorageService.SaveImage(filePath, image);
+                    fileNames.Add(image.FileName);
                     urls.Add(imageUrls);
                 }
 
                 foreach (var file in files)
                 {
-                    var blobUrl = SaveBlobToDisc(filePath, file);
+                    var blobUrl = _fileStorageService.SaveBlob(filePath, file);
+                    fileNames.Add(file.FileName);
                     urls.Add(blobUrl);
                 }
 
                 urls = urls.Select(url => $"/api/v1{url}").ToList();
 
+                // The first case is to be able to upload images from TinyMCE
                 if (urls.Count == 1)
                 {
-                    return Json(new { location = urls.SingleOrDefault() });
+                    return Json(new { location = urls.SingleOrDefault(), fileName = fileNames.SingleOrDefault() });
                 }
                 else if (urls.Any())
                 {
-                    return Json(new { location = urls });
+                    return Json(new { locations = urls, fileNames = fileNames });
                 }
                 else
                 {
@@ -139,85 +146,5 @@ namespace Intranet.API.Controllers
         {
             throw new NotImplementedException();
         }
-
-        #region Private Helper Methods
-
-        private string SaveBlobToDisc(string filePath, IFormFile file)
-        {
-            var imageVariantTypes = (ImageVariantType[])Enum.GetValues(typeof(ImageVariantType));
-
-            var blobPath = GetBlobPath(filePath, file.FileName);
-
-            // Create the destination folder tree if it doesn't already exist
-            Directory.CreateDirectory(Path.GetDirectoryName(blobPath));
-
-            using (var outputStream = new FileStream(blobPath, FileMode.Create))
-            using (var sourceFile = file.OpenReadStream())
-            {
-                sourceFile.CopyTo(outputStream);
-            }
-
-            return $"/blob/{Uri.EscapeDataString(file.FileName)}".ToLower();
-        }
-
-        private string SaveImageToDisc(string filePath, IFormFile image)
-        {
-            var imageVariantTypes = (ImageVariantType[])Enum.GetValues(typeof(ImageVariantType));
-
-            foreach (var imageVariantType in imageVariantTypes)
-            {
-                var resizedImagePath = GetImagePath(filePath, image.FileName, imageVariantType);
-
-                // Create the destination folder tree if it doesn't already exist
-                Directory.CreateDirectory(Path.GetDirectoryName(resizedImagePath));
-
-                // Resize the image and save it to the output stream
-                using (var outputStream = new FileStream(resizedImagePath, FileMode.Create))
-                using (var sourceImage = Image.Load(image.OpenReadStream()))
-                {
-                    _imageService.CropAndResizeImage(sourceImage, imageVariantType).Save(outputStream);
-                }
-            }
-
-            return $"/image/{Uri.EscapeDataString(image.FileName)}".ToLower();
-        }
-
-        private static string GetBlobPath(string filePath, string filename)
-        {
-            return Path.Combine(filePath, "intranet", "blobs", filename);
-        }
-
-        private static string GetImagePath(string filePath, string filename, ImageVariantType imageVariantType)
-        {
-            return Path.Combine(filePath,
-                                "intranet",
-                                "images",
-                                Path.GetFileNameWithoutExtension(filename),
-                                imageVariantType.ToString(),
-                                filename);
-        }
-
-        private IActionResult PhysicalFileFromFilename(string filename, bool image = false, ImageVariantType imageVariantType = ImageVariantType.Original)
-        {
-            string contentType;
-            string returnPath;
-
-            var filePath = Path.GetTempPath();
-
-            if (image)
-            {
-                returnPath = GetImagePath(filePath, filename, imageVariantType);
-            }
-            else
-            {
-                returnPath = GetBlobPath(filePath, filename);
-            }
-
-            new FileExtensionContentTypeProvider().TryGetContentType(returnPath, out contentType);
-
-            return PhysicalFile(returnPath, contentType ?? "application/octet-stream");
-        }
-
-        #endregion
     }
 }

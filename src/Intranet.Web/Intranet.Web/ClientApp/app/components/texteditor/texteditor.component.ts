@@ -61,6 +61,7 @@ export class TextEditorComponent implements AfterViewInit, OnDestroy {
 
                 tinymce.init({
                     selector: '#' + this.elementId,
+                    height: 250,
                     plugins: [ 'link', 'table', 'lists', 'image', 'imagetools', 'save', 'wordcount' ],
                     toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | save media | codesample help',
                     menubar: false,

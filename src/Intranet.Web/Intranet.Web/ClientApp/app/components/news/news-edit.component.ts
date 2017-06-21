@@ -2,9 +2,8 @@
 import { RouterModule, Router, ActivatedRoute, Params } from '@angular/router'
 import { Location } from '@angular/common'
 import { DataService } from '../../shared/data_services/data.service'
-import { INewsItem } from '../../shared/interfaces'
 
-import NewsItem from '../../models/newsitem'
+import NewsItem from '../../models/newsItem.model'
 
 @Component({
     selector: 'news-edit',
@@ -13,7 +12,7 @@ import NewsItem from '../../models/newsitem'
 })
 
 export class NewsEditComponent implements OnInit {
-    newsitem: INewsItem
+    newsitem: NewsItem
     info: string = ''
     newsItemEdited: boolean = false
     loadedNewsItem: boolean
@@ -35,7 +34,7 @@ export class NewsEditComponent implements OnInit {
     ngOnInit() {
         const id = +this.route.snapshot.params['id']
 
-        this.dataService.getNewsItem(id).subscribe((newsitem: INewsItem) => {
+        this.dataService.getNewsItem(id).subscribe((newsitem: NewsItem) => {
             this.newsitem = newsitem
             this.loadedNewsItem = true
         },

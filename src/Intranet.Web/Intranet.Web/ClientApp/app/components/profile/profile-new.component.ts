@@ -1,10 +1,9 @@
-import { Component } from '@angular/core'
+﻿import { Component } from '@angular/core'
 import { RouterModule, Router, ActivatedRoute } from '@angular/router'
-import { IProfile } from '../../shared/interfaces'
 import { DataService } from '../../shared/data_services/data.service'
 import { Location } from '@angular/common'
 
-import Profile from '../../models/profile'
+import Profile from '../../models/profile.model'
 
 @Component({
     selector: 'profile-new',
@@ -13,7 +12,7 @@ import Profile from '../../models/profile'
 })
 
 export class ProfileNewComponent {
-    profile: IProfile
+    profile: Profile
     info: string = ''
     profileCreated: boolean = false
 

@@ -38,6 +38,7 @@ namespace Intranet.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IImageService, ImageService>();
+            services.AddTransient<IFileStorageService, LocalFileStorageService>();
 
             services.ConfigureDbForDevelopment<IntranetApiContext>();
 

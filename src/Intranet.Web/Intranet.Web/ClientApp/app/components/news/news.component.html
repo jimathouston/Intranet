@@ -16,7 +16,9 @@
       </a>
     </div>
     <div class="card" *ngFor="let newsitem of newsitems">
-      <a [routerLink]="['/news-detail', newsitem.id]"><img src="http://via.placeholder.com/600x250" class="card-img-caps"></a>
+      <div *ngIf="newsitem.headerImage">
+        <a [routerLink]="['/news-detail', newsitem.id]"><img src="{{ getUrlToImage(newsitem.headerImage.urls) }}" class="card-img-caps"></a>
+      </div>
       <p class="text-uppercase"><strong>BY {{newsitem.author}}</strong> | {{ newsitem.date | date }}</p> 
     <div class="card-block">
       <h4 class="card-title">{{ newsitem.title }}</h4>

@@ -8,7 +8,7 @@ export class ConfigService {
 
     constructor() {
         this._apiUrl = '/api/v1/'
-        this._apiBaseUrl = 'http://localhost:3000'
+        this._apiBaseUrl = 'http://localhost:50590'
     }
 
     getApiUrl() {

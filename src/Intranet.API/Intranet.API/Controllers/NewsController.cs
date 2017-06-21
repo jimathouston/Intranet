@@ -10,6 +10,7 @@ using Intranet.API.Domain.Models.Entities;
 using Intranet.API.Data;
 using Microsoft.AspNetCore.Authorization;
 using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 
 namespace Intranet.API.Controllers
 {
@@ -38,17 +39,20 @@ namespace Intranet.API.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
                 var newNews = new News
                 {
                     Title = news.Title,
                     Text = news.Text,
-                    Author = news.Author
+                    Author = news.Author,
                 };
+
+                if (!String.IsNullOrWhiteSpace(news.HeaderImage?.FileName))
+                {
+                    newNews.HeaderImage = new Image
+                    {
+                        FileName = news.HeaderImage.FileName
+                    };
+                }
 
                 _intranetApiContext.News.Add(newNews);
                 _intranetApiContext.SaveChanges();
@@ -73,11 +77,6 @@ namespace Intranet.API.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
                 var contextEntity = _intranetApiContext.News.Find(id);
 
                 if (contextEntity == null)
@@ -90,6 +89,7 @@ namespace Intranet.API.Controllers
                 contextEntity.Text = news.Text;
                 contextEntity.Date = DateTimeOffset.UtcNow;
                 contextEntity.Author = news.Author;
+                if (contextEntity.HeaderImage != null) contextEntity.HeaderImage.FileName = news.HeaderImage?.FileName;
 
                 _intranetApiContext.SaveChanges();
                 return Ok(ModelState);
@@ -141,8 +141,11 @@ namespace Intranet.API.Controllers
             {
                 if (!_intranetApiContext.News.Any()) return NotFound(new List<News>());
 
-                var searchResult = _intranetApiContext.News.ToList();
-                return new OkObjectResult(searchResult);
+                var news = _intranetApiContext.News
+                    .Include(n => n.HeaderImage)
+                    .ToList();
+
+                return new OkObjectResult(news);
             }
             catch (Exception)
             {
@@ -162,14 +165,18 @@ namespace Intranet.API.Controllers
         {
             try
             {
-                var fetchNewsById = _intranetApiContext.News.Find(id);
+                var news = _intranetApiContext.News.Find(id);
 
-                if (fetchNewsById == null)
+                if (news == null)
                 {
                     return NotFound();
                 }
 
-                return new OkObjectResult(fetchNewsById);
+                _intranetApiContext.Entry(news)
+                    .Reference(n => n.HeaderImage)
+                    .Load();
+
+                return new OkObjectResult(news);
             }
             catch (Exception)
             {

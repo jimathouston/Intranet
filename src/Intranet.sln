@@ -15,8 +15,15 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.API.Domain", "Intranet.API\Intranet.API.Domain\Intranet.API.Domain.csproj", "{B89283DA-B3F1-4632-9590-E592E9DD74BF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.API", "Intranet.API\Intranet.API\Intranet.API.csproj", "{D22CA285-59EF-4EA3-9C26-8FABCFB33B93}"
+	ProjectSection(ProjectDependencies) = postProject
+		{710848E0-12EC-4B54-A898-7890D971186C} = {710848E0-12EC-4B54-A898-7890D971186C}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.API.UnitTests", "Intranet.API\Intranet.API.UnitTests\Intranet.API.UnitTests.csproj", "{3E9F10BB-8940-47D8-9BAD-056E08A34179}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B89283DA-B3F1-4632-9590-E592E9DD74BF} = {B89283DA-B3F1-4632-9590-E592E9DD74BF}
+		{710848E0-12EC-4B54-A898-7890D971186C} = {710848E0-12EC-4B54-A898-7890D971186C}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.Web.Authentication", "Intranet.Web\Intranet.Web.Authentication\Intranet.Web.Authentication.csproj", "{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}"
 EndProject
@@ -35,6 +42,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 	ProjectSection(SolutionItems) = preProject
 		..\README.md = ..\README.md
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.API.Common", "Intranet.API\Intranet.API.Common\Intranet.API.Common.csproj", "{710848E0-12EC-4B54-A898-7890D971186C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -118,6 +127,18 @@ Global
 		{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}.Release|x64.Build.0 = Release|Any CPU
 		{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}.Release|x86.ActiveCfg = Release|Any CPU
 		{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}.Release|x86.Build.0 = Release|Any CPU
+		{710848E0-12EC-4B54-A898-7890D971186C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{710848E0-12EC-4B54-A898-7890D971186C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{710848E0-12EC-4B54-A898-7890D971186C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{710848E0-12EC-4B54-A898-7890D971186C}.Debug|x64.Build.0 = Debug|Any CPU
+		{710848E0-12EC-4B54-A898-7890D971186C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{710848E0-12EC-4B54-A898-7890D971186C}.Debug|x86.Build.0 = Debug|Any CPU
+		{710848E0-12EC-4B54-A898-7890D971186C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{710848E0-12EC-4B54-A898-7890D971186C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{710848E0-12EC-4B54-A898-7890D971186C}.Release|x64.ActiveCfg = Release|Any CPU
+		{710848E0-12EC-4B54-A898-7890D971186C}.Release|x64.Build.0 = Release|Any CPU
+		{710848E0-12EC-4B54-A898-7890D971186C}.Release|x86.ActiveCfg = Release|Any CPU
+		{710848E0-12EC-4B54-A898-7890D971186C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

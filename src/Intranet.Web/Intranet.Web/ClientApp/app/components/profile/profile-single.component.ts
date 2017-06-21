@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core'
+﻿import { Component, OnInit } from '@angular/core'
 import { RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { Location } from '@angular/common'
 import { DataService } from '../../shared/data_services/data.service'
-import { IProfile } from '../../shared/interfaces'
 
-import Profile from '../../models/profile'
+import Profile from '../../models/profile.model'
 
 @Component({
     selector: 'profile-single',
@@ -24,9 +23,9 @@ export class ProfileSingleComponent implements OnInit {
     postalCode: number
     city: string
 
-    profile: IProfile
-    profiles: IProfile[]
-    selectedProfile: IProfile
+    profile: Profile
+    profiles: Profile[]
+    selectedProfile: Profile
 
     isIn = false
 
@@ -47,7 +46,7 @@ export class ProfileSingleComponent implements OnInit {
 
     ngOnInit() {
         this.id = 1 // +this.route.snapshot.params['id']
-        this.dataService.getProfile(this.id).subscribe((profile: IProfile) => {
+        this.dataService.getProfile(this.id).subscribe((profile: Profile) => {
             this.firstName = profile.firstName
             this.lastName = profile.lastName
             this.description = profile.description

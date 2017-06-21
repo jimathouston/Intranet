@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core'
+﻿import { Component, OnInit } from '@angular/core'
 import { RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { DataService } from '../../shared/data_services/data.service'
-import { IProfile } from '../../shared/interfaces'
+
+import Profile from '../../models/profile.model'
 
 @Component({
     selector: 'profiles',
@@ -10,24 +11,24 @@ import { IProfile } from '../../shared/interfaces'
 })
 
 export class ProfilesComponent implements OnInit {
-    profiles: IProfile[]
-    selectedProfile: IProfile
+    profiles: Profile[]
+    selectedProfile: Profile
 
     constructor(private dataService: DataService,
                 private route: ActivatedRoute) { }
 
     ngOnInit() {
-      this.dataService.getAllProfiles().subscribe((profiles: IProfile[]) => {
+      this.dataService.getAllProfiles().subscribe((profiles: Profile[]) => {
         this.profiles = profiles
       })
     }
 
-    removeProfile(profile: IProfile): void {
+    removeProfile(profile: Profile): void {
         this.selectedProfile = profile
         this.dataService.deleteProfile(this.selectedProfile.id)
             .subscribe(() => {
                 console.log('Profile was deleted successfully!')
-                this.dataService.getAllProfiles().subscribe((profiles: IProfile[]) => {
+                this.dataService.getAllProfiles().subscribe((profiles: Profile[]) => {
                     this.profiles = profiles
                 },
                 error => {

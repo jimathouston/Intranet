@@ -1,10 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core'
+﻿import { Component, OnInit, Input } from '@angular/core'
 import { RouterModule, Router, ActivatedRoute, Params } from '@angular/router'
 import { Location } from '@angular/common'
 import { DataService } from '../../shared/data_services/data.service'
-import { IProfile } from '../../shared/interfaces'
 
-import Profile from '../../models/profile'
+import Profile from '../../models/profile.model'
 
 @Component({
     selector: 'profile-edit',
@@ -13,7 +12,7 @@ import Profile from '../../models/profile'
 })
 
 export class ProfileEditComponent implements OnInit {
-    profile: IProfile
+    profile: Profile
     info: string = ''
     profileEdited: boolean = false
 
@@ -30,7 +29,7 @@ export class ProfileEditComponent implements OnInit {
     ngOnInit() {
         const id = +this.route.snapshot.params['id']
 
-        this.dataService.getProfile(id).subscribe((profile: IProfile) => {
+        this.dataService.getProfile(id).subscribe((profile: Profile) => {
             this.profile = profile
         },
         error => {

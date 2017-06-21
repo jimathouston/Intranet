@@ -1,5 +1,5 @@
 ﻿using ImageSharp;
-using Intranet.API.Models.Enums;
+using Intranet.API.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -18,26 +18,6 @@ namespace Intranet.API.UnitTests.Controllers
     public class NewsController_Fact
     {
         [Fact]
-        public void ReturnBadRequestResultWhenPosting()
-        {
-            // Assign
-            News newsItem = GetFakeNews().First();
-
-            using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
-            {
-                var newsController = new NewsController(context);
-
-                // Act
-                newsController.ModelState.AddModelError(nameof(News.Author), "Author must be specified");
-                var result = newsController.Post(newsItem);
-
-                // Assert
-                var badReqResult = Assert.IsType<BadRequestObjectResult>(result);
-                Assert.IsType<SerializableError>(badReqResult.Value);
-            };
-        }
-
-        [Fact]
         public void ReturnOkResultWhenPosting()
         {
             // Assign
@@ -78,29 +58,6 @@ namespace Intranet.API.UnitTests.Controllers
                 Assert.True(news.Text == newsItem.Text);
                 Assert.True(news.Title == newsItem.Title);
                 Assert.True(news.Author == newsItem.Author);
-            }
-        }
-
-        [Fact]
-        public void ReturnBadRequestResultWhenUpdate()
-        {
-            // Assign
-            var news = GetFakeNews();
-            int id = 1;
-
-            DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
-
-            using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
-            {
-                var newsController = new NewsController(context);
-
-                // Act
-                newsController.ModelState.AddModelError(nameof(News.Title), "Title must be specified");
-                var result = newsController.Put(id, news.First());
-
-                // Assert
-                var badReqResult = Assert.IsType<BadRequestObjectResult>(result);
-                Assert.IsType<SerializableError>(badReqResult.Value);
             }
         }
 

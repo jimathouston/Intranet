@@ -6,10 +6,12 @@
       </a>
     </div>
     <div class="card">
-      <img class="img-responsive" src="http://via.placeholder.com/600x250" class="card-img-caps">
-      <p class="text-uppercase"><strong>BY {{newsitem.author}}</strong> | {{ newsitem.date | date }}</p>
+      <div *ngIf="newsitem.headerImage">
+        <img class="img-responsive card-img-caps" src="{{ getUrlToImage(newsitem.headerImage.urls) }}">
+      </div>
+      <p class="text-uppercase"><strong>BY {{ newsitem.author }}</strong> | {{ newsitem.date | date }}</p>
       <div class="card-block">
-        <h4 class="card-title">{{title}}</h4>
+        <h4 class="card-title">{{ title }}</h4>
         <p class="card-text" [innerHTML]="text | safeHtml"></p>
       </div>
       <div class="card-block">

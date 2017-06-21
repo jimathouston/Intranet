@@ -9,9 +9,12 @@ import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 import 'rxjs/add/operator/toPromise'
 
-import { INewsItem, IChecklist, IProfile } from '../interfaces'
 import { ConfigService } from '../api_settings/config.service'
 import { TokenService } from '../data_services/jwt-token.service'
+
+import NewsItem from '../../models/newsItem.model'
+import Checklist from '../../models/checklist.model'
+import Profile from '../../models/profile.model'
 
 @Injectable()
 export class DataService {
@@ -28,19 +31,19 @@ export class DataService {
 // NEWS SERVICES ************************************************************  /
 
     // get all News
-    getNewsItems(): Observable<INewsItem[]> {
+    getNewsItems(): Observable<NewsItem[]> {
         return this.http.get(this._baseUrl + 'news')
             .map((res: Response) => {
                 return res.json()
             })
-            .map((res: INewsItem[]) => {
+            .map((res: NewsItem[]) => {
                 return res.sort((a, b) => a.date < b.date ? 1 : -1)
             })
             .catch(this.handleError)
     }
 
     // get a specific news by Id
-    getNewsItem(id: number): Observable<INewsItem> {
+    getNewsItem(id: number): Observable<NewsItem> {
         return this.http.get(this._baseUrl + 'news/' + id)
             .map((res: Response) => {
                 return res.json()
@@ -49,17 +52,16 @@ export class DataService {
     }
 
     // create a new NewsItem
-    createNewsItem(newsitem: INewsItem): Promise<INewsItem> {
-        const body = JSON.stringify({ title: newsitem.title, text: newsitem.text, author: newsitem.author})
+    createNewsItem(newsitem: NewsItem): Promise<NewsItem> {
+        const body = JSON.stringify(newsitem)
 
         return this.http.post(this._baseUrl + 'news/', body, { headers: this.headers })
                 .toPromise()
-                .then(res => res.json().data as INewsItem)
-                .catch(this.handleError)
+                .then(res => res.json().data as NewsItem)
     }
 
     // updates a NewsItem
-    updateNewsItem(newsitem: INewsItem): Observable<void> {
+    updateNewsItem(newsitem: NewsItem): Observable<void> {
         const headers = new Headers()
         headers.append('Content-Type', 'application/json')
         headers.append('Access-Control-Allow-Origin', '*')
@@ -70,7 +72,6 @@ export class DataService {
             .map((res: Response) => {
                 return
             })
-            .catch(this.handleError)
     }
 
 
@@ -86,7 +87,7 @@ export class DataService {
 // PROFILE SERVICE ************************************************  /
 
      // get all Profiles
-    getAllProfiles(): Observable<IProfile[]> {
+    getAllProfiles(): Observable<Profile[]> {
         return this.http.get(this._baseUrl + 'profile')
             .map((res: Response) => {
                 return res.json()
@@ -95,7 +96,7 @@ export class DataService {
     }
 
     // get a specific profile by Id
-    getProfile(id: number): Observable<IProfile> {
+    getProfile(id: number): Observable<Profile> {
         return this.http.get(this._baseUrl + 'profile/' + id)
             .map((res: Response) => {
                 return res.json()
@@ -104,16 +105,16 @@ export class DataService {
     }
 
      // create new Profile
-    createProfile(firstName: string, lastName: string, description: string, email: string, phoneNumber: number, mobile: number, streetAdress: string, postalCode: number, city: string): Promise< IProfile> {
+    createProfile(firstName: string, lastName: string, description: string, email: string, phoneNumber: number, mobile: number, streetAdress: string, postalCode: number, city: string): Promise< Profile> {
       const body = JSON.stringify({firstName: firstName, lastName: lastName, description: description, email: email, phoneNumber: phoneNumber, mobile: mobile, streetAdress: streetAdress, postalCode: postalCode, city: city})
         return this.http.post(this._baseUrl + 'profile/', body, { headers: this.headers })
                 .toPromise()
-                .then(res => res.json().data as IProfile)
+                .then(res => res.json().data as Profile)
                 .catch(this.handleError)
     }
 
     // update a Profile
-    updateProfile(profile: IProfile): Observable<void> {
+    updateProfile(profile: Profile): Observable<void> {
         const headers = new Headers()
         headers.append('Content-Type', 'application/json')
         headers.append('Access-Control-Allow-Origin', '*')
@@ -138,7 +139,7 @@ export class DataService {
     // CHECKLIST SERVICE ************************************************  /
 
     // get profiles checklist
-    getProfileChecklist(id: number): Observable<IChecklist[]> {
+    getProfileChecklist(id: number): Observable<Checklist[]> {
         return this.http.get(this._baseUrl + 'profile/' + id + '/checklist')
             .map((res: Response) => {
                 console.log(res)
@@ -148,7 +149,7 @@ export class DataService {
     }
 
     // update checklist
-    updateProfileChecklist(profileId: number, todo: IChecklist): Observable<void> {
+    updateProfileChecklist(profileId: number, todo: Checklist): Observable<void> {
         const headers = new Headers()
         headers.append('Content-Type', 'application/json')
         headers.append('Access-Control-Allow-Origin', '*')
