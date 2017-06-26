@@ -194,6 +194,7 @@ namespace Intranet.API.Controllers
         }
 
         // TODO: Add unit tests
+        [HttpPut]
         public IActionResult Put(int firstId, int secondId, [FromBody] NewsTag body)
         {
             // TODO: Unsure how to handle PUT when the only changeable data are primary keys. 
