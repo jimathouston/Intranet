@@ -27,11 +27,11 @@ export class ProfileNewComponent {
     }
 
     newProfile(firstName: string, lastName: string, description: string, email: string, phoneNumber: number, mobile: number, streetAdress: string, postalCode: number, city: string) {
-        this.dataService.createProfile(firstName, lastName, description, email, phoneNumber, mobile, streetAdress, postalCode, city).then((profile) => {
-            this.profileCreated = true
-            console.log(profile)
-             this.info = 'Profile was created successfully!'
-          },
-          (error) => console.log(error))
+        //  this.dataService.createProfile(firstName, lastName, description, email, phoneNumber, mobile, streetAdress, postalCode, city).then((profile) => {
+        //    this.profileCreated = true
+        //    console.log(profile)
+        //     this.info = 'Profile was created successfully!'
+        //  },
+        //  (error) => console.log(error))
     }
 }

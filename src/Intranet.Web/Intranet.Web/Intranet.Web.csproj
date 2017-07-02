@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.1.3" />
     <PackageReference Include="System.ValueTuple" Version="4.3.0" />
+    <PackageReference Include="ImageSharp" Version="1.0.0-alpha9-00139" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
@@ -28,6 +29,7 @@
     <Content Remove="ClientApp\**" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Intranet.Shared\Intranet.Shared.Common\Intranet.Shared.Common.csproj" />
     <ProjectReference Include="..\Intranet.Web.Authentication\Intranet.Web.Authentication.csproj" />
   </ItemGroup>
   <ItemGroup>

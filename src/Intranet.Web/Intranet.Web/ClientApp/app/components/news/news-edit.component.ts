@@ -12,19 +12,21 @@ import NewsItem from '../../models/newsItem.model'
 })
 
 export class NewsEditComponent implements OnInit {
-    newsitem: NewsItem
+    newsItem: NewsItem
     info: string = ''
     newsItemEdited: boolean = false
     loadedNewsItem: boolean
 
-    constructor(private dataService: DataService,
-                private route: ActivatedRoute,
-                private location: Location) {
-                  this.newsitem = new NewsItem()
+    constructor(
+      private dataService: DataService,
+      private route: ActivatedRoute,
+      private location: Location
+    ) {
+        this.newsItem = new NewsItem()
     }
 
     onEditorContentChange(content: string) {
-        this.newsitem.text = content
+        this.newsItem.text = content
     }
 
     goBack(): void {
@@ -34,25 +36,27 @@ export class NewsEditComponent implements OnInit {
     ngOnInit() {
         const id = +this.route.snapshot.params['id']
 
-        this.dataService.getNewsItem(id).subscribe((newsitem: NewsItem) => {
-            this.newsitem = newsitem
-            this.loadedNewsItem = true
-        },
-        error => {
-            console.log('Failed while trying to load specific newsitem of news' + error)
-        })
+        this.dataService.getNewsItem(id).subscribe(
+            (newsitem: NewsItem) => {
+                this.newsItem = newsitem
+                this.loadedNewsItem = true
+            },
+            error => {
+                console.log('Failed while trying to load specific newsitem of news' + error)
+            }
+        )
     }
 
     updateNewsItem() {
-         this.dataService.updateNewsItem(this.newsitem)
-         .subscribe(() => {
+        this.dataService.updateNewsItem(this.newsItem).subscribe(
+            () => {
                 this.newsItemEdited = true
-                this.info = this.newsitem.title + ' was edited successfully!'
+                this.info = this.newsItem.title + ' was edited successfully!'
                 console.log('News was updated successfully. ')
             },
             error => {
                 console.log('Failed while trying to update the news. ' + error)
-            })
-
-     }
+            }
+        )
+    }
 }

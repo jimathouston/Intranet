@@ -21,14 +21,8 @@
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-2 control-label" id="author" for="author">Author</label>
-        <div class="col-sm-10">
-          <input id="author" active type="text" class="form-control" #author required> 
-        </div>
-      </div>
-      <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button class="btn btn-info btn-default" type="submit" name="action" (click)="addNewsItem(title.value,author.value)">Create News
+          <button class="btn btn-info btn-default" type="submit" name="action" (click)="addNewsItem(title.value)">Create News
           </button>
           <a (click)="goBack()" class="btn btn-secondary btn-default">
             <span class="glyphicon glyphicon-arrow-left"></span> Back

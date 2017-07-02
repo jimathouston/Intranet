@@ -57,7 +57,8 @@ namespace Intranet.Web.Authentication.Services
                         {
                             DisplayName = user.getAttribute(DisplayNameAttribute)?.StringValue ?? String.Empty,
                             Username = user.getAttribute(SAMAccountNameAttribute).StringValue,
-                            IsAdmin = user.getAttribute(MemberOfAttribute)?.StringValueArray.Contains(_config.AdminCn) == true
+                            IsAdmin = user.getAttribute(MemberOfAttribute)?.StringValueArray.Contains(_config.AdminCn) == true,
+                            IsDeveloper = user.getAttribute(MemberOfAttribute)?.StringValueArray.Contains(_config.DeveloperCn) == true,
                         };
                     }
                 }

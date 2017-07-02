@@ -8,10 +8,18 @@ import { AppModule } from './app/app.module.server'
 
 enableProdMode()
 
+/* START - Hack to enable to set cookie header */
+import * as xhr2 from 'xhr2'
+xhr2.prototype._restrictedHeaders.cookie = false
+/* END - Hack to enable to set cookie header */
+
 export default createServerRenderer(params => {
+    const cookies: string = params.data.cookies.map(c => `${c.key}=${c.value}; `).toString().trim()
+
     const providers = [
         { provide: INITIAL_CONFIG, useValue: { document: '<app></app>', url: params.url } },
-        { provide: 'ORIGIN_URL', useValue: params.origin }
+        { provide: 'ORIGIN_URL', useValue: params.origin },
+        { provide: 'COOKIES', useValue: cookies }
     ]
 
     return platformDynamicServer(providers).bootstrapModule(AppModule).then(moduleRef => {

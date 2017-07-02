@@ -10,7 +10,8 @@ import { sharedConfig } from './app.module'
         ...sharedConfig.imports
     ],
     providers: [
-        ...sharedConfig.providers
+        { provide: 'ServerSide', useValue: true },
+        ...sharedConfig.providers,
     ],
 })
 export class AppModule {

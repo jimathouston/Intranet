@@ -12,5 +12,6 @@ namespace Intranet.Web.Authentication.Models
         public string SearchBase { get; set; }
         public string SearchFilter { get; set; }
         public string AdminCn { get; set; }
+        public string DeveloperCn { get; set; }
     }
 }

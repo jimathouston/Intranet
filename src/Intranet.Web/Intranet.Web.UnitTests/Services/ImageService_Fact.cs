@@ -1,13 +1,13 @@
 ﻿using ImageSharp;
-using Intranet.API.Common.Enums;
-using Intranet.API.Services;
+using Intranet.Shared.Common.Enums;
+using Intranet.Web.Services;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace Intranet.API.UnitTests.Services
+namespace Intranet.Web.UnitTests.Services
 {
     public class ImageService_Fact
     {

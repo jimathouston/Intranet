@@ -15,15 +15,15 @@
         <span class="glyphicon glyphicon-time"></span>
       </a>
     </div>
-    <div class="card" *ngFor="let newsitem of newsitems">
-      <div *ngIf="newsitem.headerImage">
-        <a [routerLink]="['/news-detail', newsitem.id]"><img src="{{ getUrlToImage(newsitem.headerImage.urls) }}" class="card-img-caps"></a>
+    <div class="card" *ngFor="let newsItem of newsItems">
+      <div *ngIf="newsItem.headerImage">
+        <a [routerLink]="['/news-detail', newsItem.id]"><img src="{{ getUrlToImage(newsItem.headerImage.urls) }}" class="card-img-caps"></a>
       </div>
-      <p class="text-uppercase"><strong>BY {{newsitem.author}}</strong> | {{ newsitem.date | date }}</p> 
+      <p class="text-uppercase"><strong>BY {{newsItem.author}}</strong> | {{ newsItem.date | date }}</p> 
     <div class="card-block">
-      <h4 class="card-title">{{ newsitem.title }}</h4>
-      <p class="card-text" [innerHTML]="newsitem.text | limitTo : 185 | safeHtml"></p>
-      <a [routerLink]="['/news-detail', newsitem.id]" class="btn btn-info">Read more!</a>  
+      <h4 class="card-title">{{ newsItem.title }}</h4>
+      <p class="card-text" [innerHTML]="newsItem.text | limitTo : 185 | safeHtml"></p>
+      <a [routerLink]="['/news-detail', newsItem.id]" class="btn btn-info">Read more!</a>  
     </div>
     </div>
 </div>

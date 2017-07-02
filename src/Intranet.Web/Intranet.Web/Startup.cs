@@ -20,6 +20,7 @@ using Microsoft.IdentityModel.Tokens;
 using Intranet.Web.Authentication.Models;
 using Intranet.Web.Authentication.Services;
 using Intranet.Web.Authentication.Providers;
+using Intranet.Web.Services;
 
 namespace Intranet_Web
 {
@@ -45,6 +46,8 @@ namespace Intranet_Web
             services.AddTransient<IAuthenticationService, LdapAuthenticationService>();
             services.AddTransient<ITokenProvider, JwtTokenProvider>();
             services.AddTransient<IDateTimeFactory, DateTimeFactory>();
+            services.AddTransient<IImageService, ImageService>();
+            services.AddTransient<IFileStorageService, LocalFileStorageService>();
 
             // Required to use the Options<T> pattern
             services.AddOptions();
@@ -53,6 +56,7 @@ namespace Intranet_Web
             services.Configure<LdapConfig>(options =>
             {
                 options.AdminCn = Configuration["LDAP_ADMIN_CN"];
+                options.DeveloperCn = Configuration["LDAP_DEVELOPER_CN"];
                 options.BindCredentials = Configuration["LDAP_BIND_CREDENTIALS"];
                 options.BindDn = Configuration["LDAP_BIND_DN"];
                 options.SearchBase = Configuration["LDAP_SEARCH_BASE"];

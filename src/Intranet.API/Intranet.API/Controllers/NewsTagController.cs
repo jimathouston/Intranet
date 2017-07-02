@@ -33,7 +33,6 @@ namespace Intranet.API.Controllers
         /// <param name="newsId"></param>
         /// <param name="tagId"></param>
         /// <returns></returns>
-        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{newsId:int}/{tagId:int}")]
         [HttpDelete]
         public IActionResult Delete(int newsId, int tagId)
@@ -64,7 +63,6 @@ namespace Intranet.API.Controllers
         /// Retrieve a list of all tagged news
         /// </summary>
         /// <returns></returns>
-        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [HttpGet]
         public IActionResult Get()
         {
@@ -88,12 +86,11 @@ namespace Intranet.API.Controllers
 
         // TODO: Add unit tests
         /// <summary>
-        /// Retrieve a list of tagged news 
+        /// Retrieve a list of tagged news
         /// filtered by tag id
         /// </summary>
         /// <param name="tagId"></param>
         /// <returns></returns>
-        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("tag/{tagId:int}")]
         [HttpGet]
         public IActionResult Get(int tagId)
@@ -123,7 +120,6 @@ namespace Intranet.API.Controllers
         /// <param name="newsId"></param>
         /// <param name="tagId"></param>
         /// <returns></returns>
-        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{newsId:int}/{tagId:int}")]
         [HttpGet]
         public IActionResult Get(int newsId, int tagId)
@@ -136,7 +132,7 @@ namespace Intranet.API.Controllers
                 }
 
                 var newsTag = _intranetApiContext.NewsTags.SingleOrDefault(e => e.NewsId == newsId && e.TagId == tagId);
-                
+
                 if (newsTag == null)
                 {
                     return NotFound();
@@ -157,7 +153,6 @@ namespace Intranet.API.Controllers
         /// <param name="newsId"></param>
         /// <param name="tagId"></param>
         /// <returns></returns>
-        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{newsId:int}/{tagId:int}")]
         [HttpPost]
         public IActionResult Post(int newsId, int tagId)
@@ -197,7 +192,7 @@ namespace Intranet.API.Controllers
         [HttpPut]
         public IActionResult Put(int firstId, int secondId, [FromBody] NewsTag body)
         {
-            // TODO: Unsure how to handle PUT when the only changeable data are primary keys. 
+            // TODO: Unsure how to handle PUT when the only changeable data are primary keys.
             throw new NotImplementedException();
         }
     }

@@ -21,8 +21,6 @@ export class TextEditorComponent implements AfterViewInit, OnDestroy {
     TinyMCELoaded: boolean
     Editor: any
     Saved: boolean
-    ApiUrl: string
-    BaseUrl: string
 
     @Input() elementId: string
     @Input() text: string
@@ -30,8 +28,6 @@ export class TextEditorComponent implements AfterViewInit, OnDestroy {
     @Output() onEditorContentChange = new EventEmitter<string>()
 
     constructor(private configService: ConfigService) {
-        this.ApiUrl = configService.getApiUrl()
-        this.BaseUrl = configService.getApiBaseUrl()
         this.ClientSide = typeof window !== 'undefined'
         this.Saved = true
     }
@@ -65,8 +61,7 @@ export class TextEditorComponent implements AfterViewInit, OnDestroy {
                     plugins: [ 'link', 'table', 'lists', 'image', 'imagetools', 'save', 'wordcount' ],
                     toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | save media | codesample help',
                     menubar: false,
-                    images_upload_url: this.ApiUrl + '/upload',
-                    images_upload_base_path: this.BaseUrl,
+                    images_upload_url: '/upload',
                     automatic_uploads: true,
                     file_browser_callback_types: 'image',
                     file_picker_types: 'image',

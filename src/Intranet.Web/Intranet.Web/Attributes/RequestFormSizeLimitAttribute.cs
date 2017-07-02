@@ -1,8 +1,11 @@
-﻿using System;
-using Microsoft.AspNetCore.Http.Features;
+﻿using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Intranet.API.Attributes
+namespace Intranet.Web.Attributes
 {
     /// <summary>
     /// Filter to set size limits for request form data

@@ -1,7 +1,7 @@
-﻿using Intranet.API.Common.Enums;
+﻿using Intranet.Shared.Common.Enums;
 using Microsoft.AspNetCore.Http;
 
-namespace Intranet.API.Services
+namespace Intranet.Web.Services
 {
     public interface IFileStorageService
     {

@@ -7,6 +7,7 @@ import NewsItem from '../../models/newsItem.model'
 import Image from '../../models/image.model'
 import { DataService } from '../../shared/data_services/data.service'
 import { ConfigService } from '../../shared/api_settings/config.service'
+import { AuthenticationService } from '../../_services'
 
 @Component({
     selector: 'news-new',
@@ -16,19 +17,21 @@ import { ConfigService } from '../../shared/api_settings/config.service'
 })
 
 export class NewsNewComponent {
-    newsitem: NewsItem
+    newsItem: NewsItem
     success: string
     error: string
     newsitems: NewsItem[]
     file: File
     apiUrl: string
 
-    constructor(private dataService: DataService,
+    constructor(
+        private dataService: DataService,
+        private authenticationService: AuthenticationService,
         private configService: ConfigService,
         private route: ActivatedRoute,
         private location: Location,
         private http: Http) {
-        this.newsitem = new NewsItem()
+        this.newsItem = new NewsItem()
         this.apiUrl = this.configService.getApiUrl()
     }
 
@@ -37,21 +40,22 @@ export class NewsNewComponent {
     }
 
     handleEditorContentChange(content: string) {
-        this.newsitem.text = content
+        this.newsItem.text = content
     }
 
-    async addNewsItem(title: string, author: string) {
-        const fileName = await this.uploadImage()
+    async addNewsItem(title: string) {
+        const fileName = await this.dataService.uploadFile(this.file)
+        const jwt = await this.authenticationService.getJwtDecoded()
 
         if (fileName) {
-            this.newsitem.headerImage = new Image()
-            this.newsitem.headerImage.fileName = fileName
+            this.newsItem.headerImage = new Image()
+            this.newsItem.headerImage.fileName = fileName
         }
 
-        this.newsitem.title = title
-        this.newsitem.author = author
+        this.newsItem.title = title
+        this.newsItem.author = jwt['displayName']
 
-        this.dataService.createNewsItem(this.newsitem).then(
+        this.dataService.createNewsItem(this.newsItem).then(
             newsitem => {
                 this.success = 'News was created successfully!'
                 this.error = null
@@ -66,27 +70,5 @@ export class NewsNewComponent {
 
     fileChange(event) {
         this.file = event.target.files[0]
-    }
-
-    async uploadImage(): Promise<string> {
-            if (typeof this.file !== 'undefined') {
-
-                const formData: FormData = new FormData()
-                const headers = new Headers()
-
-                formData.append(this.file.name, this.file)
-
-                headers.append('Accept', 'application/json')
-                // headers.append('Content-Type', 'multipart/form-data')
-                // DON'T SET THE Content-Type to multipart/form-data
-                // You'll get the Missing content-type boundary error
-                const options = new RequestOptions({ headers: headers })
-
-                const response = await this.http.post(this.apiUrl + '/upload', formData, options).toPromise()
-
-                return response.json().fileName
-            }
-
-            return null
     }
 }

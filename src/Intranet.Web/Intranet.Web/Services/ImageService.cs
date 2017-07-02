@@ -1,11 +1,11 @@
 ﻿using ImageSharp;
-using Intranet.API.Common.Enums;
+using Intranet.Shared.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Intranet.API.Services
+namespace Intranet.Web.Services
 {
     public class ImageService : IImageService
     {

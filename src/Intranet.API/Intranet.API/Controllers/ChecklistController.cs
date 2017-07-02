@@ -32,7 +32,6 @@ namespace Intranet.API.Controllers
         /// </summary>
         /// <param name="profileId"></param>
         /// <returns></returns>
-        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [HttpGet]
         public IActionResult Get(int profileId)
         {
@@ -80,7 +79,6 @@ namespace Intranet.API.Controllers
         /// <param name="profileId"></param>
         /// <param name="toDoId"></param>
         /// <returns></returns>
-        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{toDoId:int}")]
         [HttpGet]
         public IActionResult Get(int profileId, int toDoId)
@@ -122,7 +120,6 @@ namespace Intranet.API.Controllers
         /// <param name="profileId"></param>
         /// <param name="employeeToDo">This is the id of a task in the ToDo class</param>
         /// <returns></returns>
-        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [HttpPost]
         public IActionResult Post(int profileId, [FromBody] EmployeeToDo employeeToDo)
         {
@@ -164,7 +161,6 @@ namespace Intranet.API.Controllers
         /// <param name="toDoId"></param>
         /// <param name="employeeToDo">This represents a task, bool value of the "done" property to be toggled here</param>
         /// <returns></returns>
-        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{toDoId:int}")]
         [HttpPut]
         public IActionResult Put(int profileId, int toDoId, [FromBody] EmployeeToDo employeeToDo)
@@ -213,7 +209,6 @@ namespace Intranet.API.Controllers
         /// <param name="profileId"></param>
         /// <param name="toDoId"></param>
         /// <returns></returns>
-        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{toDoId:int}")]
         [HttpDelete]
         public IActionResult Delete(int profileId, int toDoId)

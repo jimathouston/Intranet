@@ -1,5 +1,5 @@
-﻿using Intranet.API.Common.Enums;
-using Intranet.API.Domain.Models.Entities;
+﻿using Intranet.API.Domain.Models.Entities;
+using Intranet.Shared.Common.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,8 +29,8 @@ namespace Intranet.API.UnitTests.Models.Entities
 
             // Assert
             Assert.Equal(urls.Count(), count);
-            Assert.Equal(urls.First(), $"/api/v1/image/{image.FileName}");
-            Assert.Equal(urls.Last(), $"/api/v1/image/{width}/{height}/{image.FileName}");
+            Assert.Equal(urls.First(), $"/image/{image.FileName}");
+            Assert.Equal(urls.Last(), $"/image/{width}/{height}/{image.FileName}");
         }
 
         [Fact]

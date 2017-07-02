@@ -1,27 +1,16 @@
-﻿using ImageSharp;
-using ImageSharp.Formats;
-using Intranet.API.Attributes;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Extensions.FileProviders;
-using System.Collections;
-using Intranet.API.Services;
-using System.Text.Encodings.Web;
-using Microsoft.AspNetCore.StaticFiles;
-using Intranet.API.Common.Enums;
+using Microsoft.AspNetCore.Mvc;
+using Intranet.Web.Attributes;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using Intranet.Web.Services;
 
-namespace Intranet.API.Controllers
+namespace Intranet.Web.Controllers
 {
-    [AllowAnonymous] // TODO: Remove
     [Produces("application/json")]
-    [Route("/api/v1")]
     public class FileController : Controller
     {
         private readonly IImageService _imageService;
@@ -117,7 +106,7 @@ namespace Intranet.API.Controllers
                     urls.Add(blobUrl);
                 }
 
-                urls = urls.Select(url => $"/api/v1{url}").ToList();
+                urls = urls.ToList();
 
                 // The first case is to be able to upload images from TinyMCE
                 if (urls.Count == 1)

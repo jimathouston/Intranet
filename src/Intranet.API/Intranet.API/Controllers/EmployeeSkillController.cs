@@ -31,7 +31,6 @@ namespace Intranet.API.Controllers
         /// </summary>
         /// <param name="profileId"></param>
         /// <returns></returns>
-        [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [HttpGet]
         public IActionResult Get(int profileId)
         {
@@ -82,7 +81,6 @@ namespace Intranet.API.Controllers
         /// <param name="profileId"></param>
         /// <param name="skillId"></param>
         /// <returns></returns>
-        [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{skillId:int}")]
         [HttpGet]
         public IActionResult Get(int profileId, int skillId)
@@ -126,7 +124,6 @@ namespace Intranet.API.Controllers
         /// <param name="profileId"></param>
         /// <param name="skill"></param>
         /// <returns></returns>
-        [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [HttpPost]
         public IActionResult Post(int profileId, [FromBody] EmployeeSkill skill)
         {
@@ -171,7 +168,6 @@ namespace Intranet.API.Controllers
         /// <param name="skillId"></param>
         /// <param name="skill">Form data containing the changed skill level provided by client</param>
         /// <returns></returns>
-        [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{skillId:int}")]
         [HttpPut]
         public IActionResult Put(int profileId, int skillId, [FromBody] EmployeeSkill skill)
@@ -216,7 +212,6 @@ namespace Intranet.API.Controllers
         /// <param name="profileId"></param>
         /// <param name="skillId"></param>
         /// <returns></returns>
-        [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{skillId:int}")]
         [HttpDelete]
         public IActionResult Delete(int profileId, int skillId)

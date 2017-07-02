@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Intranet.API.Common\Intranet.API.Common.csproj" />
+    <ProjectReference Include="..\..\Intranet.Shared\Intranet.Shared.Common\Intranet.Shared.Common.csproj" />
   </ItemGroup>
 
 </Project>

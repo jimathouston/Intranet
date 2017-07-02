@@ -31,12 +31,20 @@ namespace Intranet.Web.Providers
             // You can add other claims here, if you want:
             var claims = new List<Claim>
             {
-                new Claim("Read", true.ToString().ToLower()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, now.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64)
             };
 
-            if (user.HasClaim(c => c.Type == "displayName")) claims.Add(user.Claims.SingleOrDefault(c => c.Type == "displayName"));
+            if (user.HasClaim(c => c.Type == "displayName"))
+            {
+                claims.Add(user.Claims.SingleOrDefault(c => c.Type == "displayName"));
+            }
+
+            if (user.HasClaim(c => c.Type == ClaimTypes.Role))
+            {
+                var roleClaim = new Claim("role", user.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Role).Value);
+                claims.Add(roleClaim);
+            }
 
             // Create the JWT
             var jwt = new JwtSecurityToken(

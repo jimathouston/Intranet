@@ -60,6 +60,7 @@ namespace Intranet.Web.Controllers
         }
 
         [HttpGet]
+        [Produces("application/json")]
         public IActionResult GenerateToken()
         {
             var user = HttpContext.User;

@@ -16,7 +16,7 @@ namespace Intranet.API.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("/api/v1/profile/{profileId:int}/[controller]")]
-    public class ProjectEmployeeController : Controller, IEditProfileController<ProjectEmployee>    
+    public class ProjectEmployeeController : Controller, IEditProfileController<ProjectEmployee>
     {
         private readonly IntranetApiContext _intranetApiContext;
 
@@ -30,7 +30,6 @@ namespace Intranet.API.Controllers
         /// </summary>
         /// <param name="profileId"></param>
         /// <returns></returns>
-        [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [HttpGet]
         public IActionResult Get(int profileId)
         {
@@ -85,7 +84,6 @@ namespace Intranet.API.Controllers
         /// <param name="profileId"></param>
         /// <param name="projectId"></param>
         /// <returns></returns>
-        [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{projectId:int}")]
         [HttpGet]
         public IActionResult Get(int profileId, int projectId)
@@ -133,7 +131,6 @@ namespace Intranet.API.Controllers
         /// <param name="profileId"></param>
         /// <param name="body"></param>
         /// <returns></returns>
-        [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [HttpPost]
         public IActionResult Post(int profileId, [FromBody] ProjectEmployee body)
         {
@@ -176,14 +173,13 @@ namespace Intranet.API.Controllers
 
         /// <summary>
         /// Change contents of an assignment.
-        /// Can be changed: Project, role, informal assignment description, 
+        /// Can be changed: Project, role, informal assignment description,
         /// assignment status active or not and start/end date.
         /// </summary>
         /// <param name="profileId"></param>
         /// <param name="projectId"></param>
         /// <param name="body"></param>
         /// <returns></returns>
-        [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{projectId:int}")]
         [HttpPut]
         public IActionResult Put(int profileId, int projectId, [FromBody] ProjectEmployee body)
@@ -234,7 +230,6 @@ namespace Intranet.API.Controllers
         /// <param name="profileId"></param>
         /// <param name="projectId"></param>
         /// <returns></returns>
-        [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{projectId:int}")]
         [HttpDelete]
         public IActionResult Delete(int profileId, int projectId)

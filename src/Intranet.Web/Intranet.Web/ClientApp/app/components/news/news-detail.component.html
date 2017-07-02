@@ -1,21 +1,21 @@
 ﻿<div class="container-fluid">
   <h3>Certaincy News</h3>&nbsp;
     <div class="col-xs-3">
-      <a [routerLink]="['/news-edit', newsitem.id]" class="btn btn-warning btn-circle btn-detail">
+      <a [routerLink]="['/news-edit', newsItem.id]" class="btn btn-warning btn-circle btn-detail">
         <span class="glyphicon glyphicon-pencil"></span>
       </a>
     </div>
     <div class="card">
-      <div *ngIf="newsitem.headerImage">
-        <img class="img-responsive card-img-caps" src="{{ getUrlToImage(newsitem.headerImage.urls) }}">
+      <div *ngIf="newsItem.headerImage">
+        <img class="img-responsive card-img-caps" src="{{ getUrlToImage(newsItem.headerImage.urls) }}">
       </div>
-      <p class="text-uppercase"><strong>BY {{ newsitem.author }}</strong> | {{ newsitem.date | date }}</p>
+      <p class="text-uppercase"><strong>BY {{ newsItem.author }}</strong> | {{ newsItem.date | date }}</p>
       <div class="card-block">
         <h4 class="card-title">{{ title }}</h4>
         <p class="card-text" [innerHTML]="text | safeHtml"></p>
       </div>
       <div class="card-block">
-        <a (click)="removeNewsItem(newsitem); $event.stopPropagation()" class="btn btn-danger btn-default">
+        <a (click)="removeNewsItem(newsItem); $event.stopPropagation()" class="btn btn-danger btn-default">
           <span class="glyphicon glyphicon-remove"></span> Delete
         </a>&nbsp;
         <a (click)="goBack()" class="btn btn-secondary btn-default"><span class="glyphicon glyphicon-arrow-left">&nbsp;</span>Back</a>  

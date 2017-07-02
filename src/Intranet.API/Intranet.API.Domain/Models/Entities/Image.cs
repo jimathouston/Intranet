@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Intranet.API.Common.Enums;
+using Intranet.Shared.Common.Enums;
 
 namespace Intranet.API.Domain.Models.Entities
 {
@@ -33,11 +33,11 @@ namespace Intranet.API.Domain.Models.Entities
 
                         if (int.TryParse(width, out int w) && int.TryParse(height, out int h))
                         {
-                            yield return $"/api/v1/image/{w}/{h}/{FileName.ToLower()}";
+                            yield return $"/image/{w}/{h}/{FileName.ToLower()}";
                         }
                         else
                         {
-                            yield return $"/api/v1/image/{FileName.ToLower()}";
+                            yield return $"/image/{FileName.ToLower()}";
                         }
                     }
                 }

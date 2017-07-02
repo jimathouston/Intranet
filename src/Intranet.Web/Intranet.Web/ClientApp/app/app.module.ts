@@ -1,6 +1,6 @@
 ﻿import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { HttpModule } from '@angular/http'
+import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http'
 import { FormsModule } from '@angular/forms'
 import { APP_BASE_HREF } from '@angular/common'
 
@@ -29,7 +29,8 @@ import { TextEditorComponent } from './components/texteditor/texteditor.componen
 // Services
 import { DataService } from './shared/data_services/data.service'
 import { ConfigService } from './shared/api_settings/config.service'
-import { TokenService } from './shared/data_services/jwt-token.service'
+import { AuthenticationService, SecureHttpService } from './_services'
+import { SecureHttpFactory } from './_factories'
 
 export const sharedConfig: NgModule = {
     bootstrap: [ AppComponent ],
@@ -46,8 +47,9 @@ export const sharedConfig: NgModule = {
     providers: [
         DataService,
         ConfigService,
-        TokenService,
-        {provide: APP_BASE_HREF, useValue : '/' },
+        AuthenticationService,
+        { provide: APP_BASE_HREF, useValue: '/' },
+        { provide: SecureHttpService, useFactory: SecureHttpFactory, deps: [XHRBackend, RequestOptions, ConfigService, AuthenticationService] },
     ],
     imports: [
         FormsModule,

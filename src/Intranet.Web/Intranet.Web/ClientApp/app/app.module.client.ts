@@ -14,8 +14,10 @@ import { sharedConfig } from './app.module'
         ...sharedConfig.imports
     ],
     providers: [
+        { provide: 'ServerSide', useValue: false },
         { provide: 'ORIGIN_URL', useValue: location.origin },
-        ...sharedConfig.providers
+        { provide: 'COOKIES', useValue: null },
+        ...sharedConfig.providers,
     ],
 })
 export class AppModule {

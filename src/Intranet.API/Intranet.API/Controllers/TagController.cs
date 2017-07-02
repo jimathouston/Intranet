@@ -12,7 +12,7 @@ using Intranet.API.ViewModels;
 namespace Intranet.API.Controllers
 {
     /// <summary>
-    /// Manage a list of available tags 
+    /// Manage a list of available tags
     /// that can be used to categorize news.
     /// </summary>
     [Produces("application/json")]
@@ -32,7 +32,6 @@ namespace Intranet.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpGet]
         public IActionResult Get(int id)
@@ -60,7 +59,6 @@ namespace Intranet.API.Controllers
         /// Retrieve a list of all available tags.
         /// </summary>
         /// <returns></returns>
-        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [HttpGet]
         public IActionResult Get()
         {
@@ -88,7 +86,6 @@ namespace Intranet.API.Controllers
         /// </summary>
         /// <param name="tag"></param>
         /// <returns></returns>
-        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [HttpPost]
         public IActionResult Post([FromBody] Tag tag)
         {
@@ -122,7 +119,6 @@ namespace Intranet.API.Controllers
         /// <param name="id"></param>
         /// <param name="body"></param>
         /// <returns></returns>
-        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpPut]
         public IActionResult Put(int id, [FromBody] Tag body)
@@ -164,7 +160,6 @@ namespace Intranet.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpDelete]
         public IActionResult Delete(int id)

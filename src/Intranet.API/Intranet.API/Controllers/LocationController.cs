@@ -29,7 +29,6 @@ namespace Intranet.API.Controllers
         /// Retrieve a list of all locations.
         /// </summary>
         /// <returns></returns>
-        [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [HttpGet]
         public IActionResult Get()
         {
@@ -56,7 +55,6 @@ namespace Intranet.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpGet]
         public IActionResult Get(int id)
@@ -84,7 +82,6 @@ namespace Intranet.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpDelete]
         public IActionResult Delete(int id)
@@ -115,7 +112,6 @@ namespace Intranet.API.Controllers
         /// </summary>
         /// <param name="body"></param>
         /// <returns></returns>
-        [AllowAnonymous] // TODO this line is temporary for local testing without authentication, to be removed
         [HttpPost]
         public IActionResult Post([FromBody] Location body)
         {
@@ -150,7 +146,6 @@ namespace Intranet.API.Controllers
         /// <param name="id"></param>
         /// <param name="body"></param>
         /// <returns></returns>
-        [AllowAnonymous]      // TODO this line is temporary for local testing without authentication, to be removed
         [Route("{id:int}")]
         [HttpPut]
         public IActionResult Put(int id, [FromBody] Location body)

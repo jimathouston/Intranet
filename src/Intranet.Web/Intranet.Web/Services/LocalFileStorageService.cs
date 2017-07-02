@@ -1,5 +1,5 @@
 ﻿using ImageSharp;
-using Intranet.API.Common.Enums;
+using Intranet.Shared.Common.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.StaticFiles;
 using System;
@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Intranet.API.Services
+namespace Intranet.Web.Services
 {
     public class LocalFileStorageService : IFileStorageService
     {
