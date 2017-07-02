@@ -33,6 +33,7 @@ namespace Intranet_Web
                     .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                     .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                     .AddEnvironmentVariables();
+
             Configuration = builder.Build();
         }
 
@@ -41,6 +42,7 @@ namespace Intranet_Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region Dependency Injection
             // Dependency injection
             services.AddTransient<IAuthenticationProvider, AuthenticationProvider>();
             services.AddTransient<IAuthenticationService, LdapAuthenticationService>();
@@ -48,10 +50,12 @@ namespace Intranet_Web
             services.AddTransient<IDateTimeFactory, DateTimeFactory>();
             services.AddTransient<IImageService, ImageService>();
             services.AddTransient<IFileStorageService, LocalFileStorageService>();
+            #endregion
 
+            #region Options
             // Required to use the Options<T> pattern
             services.AddOptions();
-
+            
             // Add settings from configuration
             services.Configure<LdapConfig>(options =>
             {
@@ -72,7 +76,9 @@ namespace Intranet_Web
                 options.Issuer = "ExampleIssuer";
                 options.SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
             });
+            #endregion
 
+            #region Mvc
             // Add framework services.
             services.AddMvc(config =>
             {
@@ -83,11 +89,13 @@ namespace Intranet_Web
 
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            #region Cookie Authentication
             // Add Authentication
             // TODO: Added validation of user and expiration: https://docs.microsoft.com/en-us/aspnet/core/security/authentication/cookie#reacting-to-back-end-changes
             app.UseCookieAuthentication(new CookieAuthenticationOptions
@@ -97,10 +105,14 @@ namespace Intranet_Web
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
             });
+            #endregion
 
+            #region Logging
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            #endregion
 
+            #region Webpack
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -113,9 +125,13 @@ namespace Intranet_Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            #endregion
 
+            #region wwwroot
             app.UseStaticFiles();
+            #endregion
 
+            #region Mvc
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -131,6 +147,7 @@ namespace Intranet_Web
                         name: "spa-fallback",
                         defaults: new { controller = "Home", action = "Index" });
             });
+            #endregion
         }
     }
 }

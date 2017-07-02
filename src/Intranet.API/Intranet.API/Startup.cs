@@ -22,24 +22,36 @@ using Intranet.API.Filters;
 
 namespace Intranet.API
 {
-    public class StartupDevelopment
+    public class Startup
     {
-        public StartupDevelopment(IHostingEnvironment env)
+        public Startup(IHostingEnvironment env)
         {
             var builder = CommonStartupConfigurations.BuildConfig(env);
 
             Configuration = builder.Build();
+            CurrentEnvironment = env;
         }
 
         public IConfigurationRoot Configuration { get; }
+        public IHostingEnvironment CurrentEnvironment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.ConfigureDbForDevelopment<IntranetApiContext>();
+            #region Database
+            if (CurrentEnvironment.IsProduction() || CurrentEnvironment.IsStaging())
+            {
+                var sqlConnectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION");
 
-            var pathToDoc = ".xml";
+                services.ConfigureDbForProduction<IntranetApiContext>(sqlConnectionString);
+            }
+            else if (CurrentEnvironment.IsDevelopment())
+            {
+                services.ConfigureDbForDevelopment<IntranetApiContext>();
+            }
+            #endregion
 
+            #region Mvc
             // Add framework services.
             services.AddMvc(config =>
             {
@@ -57,8 +69,12 @@ namespace Intranet.API
                 opt.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
                 opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
+            #endregion
 
+            #region Swagger
             // Add Swagger Generator
+            var pathToDoc = ".xml";
+
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1",
@@ -81,23 +97,32 @@ namespace Intranet.API
                     Type = "apiKey",
                 });
             });
+            #endregion
 
-            services.AddCors(options =>
+            #region CORS
+            if (CurrentEnvironment.IsDevelopment())
             {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials());
-            });
+                services.AddCors(options =>
+                {
+                    options.AddPolicy("CorsPolicy",
+                        builder => builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .AllowCredentials());
+                });
+            }
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            #region Logger
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            #endregion
 
+            #region Authentication
             var secretKey = Configuration["INTRANET_JWT"];
             var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
 
@@ -105,7 +130,9 @@ namespace Intranet.API
             var jwtBearerOptions = CommonStartupConfigurations.GetJwtBearerOptions(tokenValidationParameters);
 
             app.UseJwtBearerAuthentication(jwtBearerOptions);
+            #endregion
 
+            #region Swagger
             app.UseSwagger(c =>
             {
                 c.RouteTemplate = "api-docs/swagger/{documentName}/swagger.json";
@@ -116,13 +143,26 @@ namespace Intranet.API
                 c.RoutePrefix = "api-docs";
                 c.SwaggerEndpoint("/api-docs/swagger/v1/swagger.json", "v1 docs");
             });
+            #endregion
 
-            app.UseCors("CorsPolicy");
+            #region CORS
+            if (env.IsDevelopment())
+            {
+                app.UseCors("CorsPolicy");
+            }
+            #endregion
 
+            #region Mvc
             app.UseMvc();
+            #endregion
 
-            var context = app.ApplicationServices.GetService<IntranetApiContext>();
-            DbInitializer.SeedDb(context);
+            #region Seed database
+            if (env.IsDevelopment())
+            {
+                var context = app.ApplicationServices.GetService<IntranetApiContext>();
+                DbInitializer.SeedDb(context);
+            }
+            #endregion
         }
     }
 }
