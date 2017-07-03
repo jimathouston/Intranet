@@ -22,11 +22,12 @@ namespace Intranet.API.Domain.Models.Entities
         [ForeignKey(nameof(CurrentLevel))]
         public SkillLevel Current { get; set; }
 
-        [Required]
-        public int DesiredLevel { get; set; }
+        //[Required]
+        //public int DesiredLevel { get; set; }
 
-        [ForeignKey(nameof(DesiredLevel))]
-        public SkillLevel Desired { get; set; }
+        //[ForeignKey(nameof(DesiredLevel))]
+        //public SkillLevel Desired { get; set; }
+       
 
     }
 }

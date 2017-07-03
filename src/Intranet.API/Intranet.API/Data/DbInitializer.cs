@@ -249,35 +249,35 @@ namespace Intranet.API.Data
                     EmployeeId = 1,                 // Employee: Connie
                     SkillId = 1,                    // Skill: C#
                     CurrentLevel = 4,               // Current level: Expert
-                    DesiredLevel = 4
+                    //DesiredLevel = 4
                 },
                 new EmployeeSkill
                 {
                     EmployeeId = 1,
                     SkillId = 4,                    // Skill: Java
                     CurrentLevel = 3,               // Current level: Advanced
-                    DesiredLevel = 4                // Desired level: Expert
+                    //DesiredLevel = 4                // Desired level: Expert
                 },
                 new EmployeeSkill
                 {
                     EmployeeId = 2,                 // Employee: Nils
                     SkillId = 1,                    // Skill: C#
                     CurrentLevel = 1,               // Current level: Beginner
-                    DesiredLevel = 3                // Desired level: Advanced
+                    //DesiredLevel = 3                // Desired level: Advanced
                 },
                 new EmployeeSkill
                 {
                     EmployeeId = 2,
                     SkillId = 3,                    // Skill: JavaScript
                     CurrentLevel = 2,               // Current level: Intermediate
-                    DesiredLevel = 4
+                    //DesiredLevel = 4
                 },
                 new EmployeeSkill
                 {
                     EmployeeId = 2,
                     SkillId = 5,                    // Skill: Python
                     CurrentLevel = 1,
-                    DesiredLevel = 2
+                    //DesiredLevel = 2
                 }
             };
 

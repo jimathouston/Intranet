@@ -18,6 +18,20 @@ Certaincy's intranet, built with .Net Core and Angular
 
 ## Development
 
+### Migrations
+
+Go to `src\Intranet.API\Intranet.API.Domain` and run `dotnet ef` with `Intranet.API` as the startup project to generate new migrations:
+
+```
+> dotnet ef --startup-project ..\Intranet.API\ migrations add {Name Of Migration}
+```
+
+Running the web api automatically applies the migration. To apply it manually run the following:
+
+```
+> dotnet ef --startup-project ..\Intranet.API\ database update
+```
+
 ### Client App
 
 _Note: You must be in `src/Intranet.Web/Intranet.Web` to use the npm scripts._

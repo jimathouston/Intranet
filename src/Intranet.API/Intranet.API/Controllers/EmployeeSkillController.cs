@@ -56,11 +56,11 @@ namespace Intranet.API.Controllers
                     skillWithDescription.EmployeeId = profileId;
                     skillWithDescription.SkillId = skill.SkillId;
                     skillWithDescription.CurrentId = skill.CurrentLevel;
-                    skillWithDescription.DesiredId = skill.DesiredLevel;
+                    //skillWithDescription.DesiredId = skill.DesiredLevel;
 
                     skillWithDescription.SkillDescription = skillType.Find(s => s.Id == skill.SkillId).Description;
                     skillWithDescription.CurrentDescription = skillLevel.Find(l => l.Id == skill.CurrentLevel).Description;
-                    skillWithDescription.DesiredDescription = skillLevel.Find(d => d.Id == skill.DesiredLevel).Description;
+                    //skillWithDescription.DesiredDescription = skillLevel.Find(d => d.Id == skill.DesiredLevel).Description;
 
                     skillList.Add(skillWithDescription);
                 }
@@ -103,11 +103,11 @@ namespace Intranet.API.Controllers
                     EmployeeId = profileId,
                     SkillId = skillId,
                     CurrentId = employeeSkill.CurrentLevel,
-                    DesiredId = employeeSkill.DesiredLevel,
+                    //DesiredId = employeeSkill.DesiredLevel,
 
                     SkillDescription = skillType.Find(s => s.Id == skillId).Description,
                     CurrentDescription = skillLevel.Find(c => c.Id == employeeSkill.CurrentLevel).Description,
-                    DesiredDescription = skillLevel.Find(d => d.Id == employeeSkill.DesiredLevel).Description
+                    //DesiredDescription = skillLevel.Find(d => d.Id == employeeSkill.DesiredLevel).Description
                 };
 
                 return Ok(skillWithDescription);
@@ -137,8 +137,8 @@ namespace Intranet.API.Controllers
 
                 var skillExist = _intranetApiContext.Skills.SingleOrDefault(s => s.Id == skill.SkillId) != null;
                 var skillLevelCurrExist = _intranetApiContext.SkillLevels.SingleOrDefault(l => l.Id == skill.CurrentLevel) != null;
-                var skillLevelDesiExist = _intranetApiContext.SkillLevels.SingleOrDefault(l => l.Id == skill.DesiredLevel) != null;
-                if (!skillExist || !skillLevelCurrExist || !skillLevelDesiExist)
+                //var skillLevelDesiExist = _intranetApiContext.SkillLevels.SingleOrDefault(l => l.Id == skill.DesiredLevel) != null;
+                if (!skillExist || !skillLevelCurrExist) //|| !skillLevelDesiExist)
                 {
                     ModelState.AddModelError("", "Invalid input");
                 }
@@ -176,8 +176,8 @@ namespace Intranet.API.Controllers
             {
                 var skillExist = _intranetApiContext.Skills.SingleOrDefault(s => s.Id == skillId) != null;
                 var skillLevelCurrExist = _intranetApiContext.SkillLevels.SingleOrDefault(l => l.Id == skill.CurrentLevel) != null;
-                var skillLevelDesiExist = _intranetApiContext.SkillLevels.SingleOrDefault(l => l.Id == skill.DesiredLevel) != null;
-                if (!skillExist || !skillLevelCurrExist || !skillLevelDesiExist)
+                //var skillLevelDesiExist = _intranetApiContext.SkillLevels.SingleOrDefault(l => l.Id == skill.DesiredLevel) != null;
+                if (!skillExist || !skillLevelCurrExist)// || !skillLevelDesiExist)
                 {
                     ModelState.AddModelError("", "Invalid input");
                 }
@@ -195,7 +195,7 @@ namespace Intranet.API.Controllers
                 }
 
                 skillToUpdate.CurrentLevel = skill.CurrentLevel;
-                skillToUpdate.DesiredLevel = skill.DesiredLevel;
+                //skillToUpdate.DesiredLevel = skill.DesiredLevel;
                 _intranetApiContext.SaveChanges();
 
                 return Ok(ModelState);

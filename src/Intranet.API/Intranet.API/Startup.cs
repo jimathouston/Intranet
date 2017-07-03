@@ -19,6 +19,7 @@ using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 using Intranet.API.Domain;
 using Intranet.API.Filters;
+using Microsoft.EntityFrameworkCore;
 
 namespace Intranet.API
 {
@@ -26,7 +27,11 @@ namespace Intranet.API
     {
         public Startup(IHostingEnvironment env)
         {
-            var builder = CommonStartupConfigurations.BuildConfig(env);
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
 
             Configuration = builder.Build();
             CurrentEnvironment = env;
@@ -39,16 +44,9 @@ namespace Intranet.API
         public void ConfigureServices(IServiceCollection services)
         {
             #region Database
-            if (CurrentEnvironment.IsProduction() || CurrentEnvironment.IsStaging())
-            {
-                var sqlConnectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION");
+            var sqlConnectionString = Configuration["AWS_RDS_CONNECTION_STRING"];
 
-                services.ConfigureDbForProduction<IntranetApiContext>(sqlConnectionString);
-            }
-            else if (CurrentEnvironment.IsDevelopment())
-            {
-                services.ConfigureDbForDevelopment<IntranetApiContext>();
-            }
+            services.AddDbContext<IntranetApiContext>(opt => opt.UseSqlServer(sqlConnectionString));
             #endregion
 
             #region Mvc
@@ -115,19 +113,56 @@ namespace Intranet.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IntranetApiContext dbContext)
         {
             #region Logger
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
             #endregion
 
+            #region Migrate Database
+            try
+            {
+                dbContext.Database.Migrate();
+            }
+            catch (Exception)
+            {
+                // TODO: Add logging, notification etc.
+                Environment.Exit(1);
+            }
+            #endregion
+
             #region Authentication
             var secretKey = Configuration["INTRANET_JWT"];
             var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
 
-            var tokenValidationParameters = CommonStartupConfigurations.GetTokenValidationParameters(signingKey);
-            var jwtBearerOptions = CommonStartupConfigurations.GetJwtBearerOptions(tokenValidationParameters);
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                // The signing key must match!
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = signingKey,
+
+                // Validate the JWT Issuer (iss) claim
+                ValidateIssuer = true,
+                ValidIssuer = "ExampleIssuer",
+
+                // Validate the JWT Audience (aud) claim
+                ValidateAudience = true,
+                ValidAudience = "ExampleAudience",
+
+                // Validate the token expiry
+                ValidateLifetime = true,
+
+                // If you want to allow a certain amount of clock drift, set that here:
+                ClockSkew = TimeSpan.Zero,
+            };
+
+            var jwtBearerOptions = new JwtBearerOptions
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                TokenValidationParameters = tokenValidationParameters
+            };
 
             app.UseJwtBearerAuthentication(jwtBearerOptions);
             #endregion

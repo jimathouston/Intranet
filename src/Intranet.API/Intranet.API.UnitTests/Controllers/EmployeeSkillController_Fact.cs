@@ -172,7 +172,7 @@ namespace Intranet.API.UnitTests.Controllers
             var skillLevels = GetStubSkillLevels();
             var oldEmployeeSkill = GetStubEmployeeSkills().First();
             var newEmployeeSkill = GetStubEmployeeSkills().First();
-            newEmployeeSkill.DesiredLevel = 4;
+            //newEmployeeSkill.DesiredLevel = 4;
 
             DbContextFake.SeedDb<IntranetApiContext>(c => c.Employees.Add(employee), ensureDeleted: true);
             DbContextFake.SeedDb<IntranetApiContext>(c => c.Skills.AddRange(skills), ensureDeleted: false);
@@ -200,7 +200,7 @@ namespace Intranet.API.UnitTests.Controllers
             var skills = GetStubSkills();
             var skillLevels = GetStubSkillLevels();
             var newEmployeeSkill = GetStubEmployeeSkills().First();
-            newEmployeeSkill.DesiredLevel = 4;
+            //newEmployeeSkill.DesiredLevel = 4;
 
             DbContextFake.SeedDb<IntranetApiContext>(c => c.Skills.AddRange(skills), ensureDeleted: true);
             DbContextFake.SeedDb<IntranetApiContext>(c => c.SkillLevels.AddRange(skillLevels), ensureDeleted: false);
@@ -229,7 +229,7 @@ namespace Intranet.API.UnitTests.Controllers
             var skillLevels = GetStubSkillLevels();
             var oldEmployeeSkill = GetStubEmployeeSkills().First();
             var newEmployeeSkill = GetStubEmployeeSkills().First();
-            newEmployeeSkill.DesiredLevel = 4;
+            //newEmployeeSkill.DesiredLevel = 4;
 
             DbContextFake.SeedDb<IntranetApiContext>(c => c.Employees.Add(employee), ensureDeleted: true);
             DbContextFake.SeedDb<IntranetApiContext>(c => c.Skills.AddRange(skills), ensureDeleted: false);
@@ -387,21 +387,21 @@ namespace Intranet.API.UnitTests.Controllers
           EmployeeId = 1,
           SkillId = 1,
           CurrentLevel = 1,
-          DesiredLevel = 2
+          //DesiredLevel = 2
         },
         new EmployeeSkill
         {
           EmployeeId = 1,
           SkillId = 2,
           CurrentLevel = 2,
-          DesiredLevel = 4
+          //DesiredLevel = 4
         },
         new EmployeeSkill
         {
           EmployeeId = 1,
           SkillId = 3,
           CurrentLevel = 1,
-          DesiredLevel = 2
+          //DesiredLevel = 2
         }
             };
         }

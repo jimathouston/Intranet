@@ -48,7 +48,7 @@ namespace Intranet.API.Controllers
 
                 return Ok(id);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
