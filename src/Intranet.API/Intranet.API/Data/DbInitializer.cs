@@ -17,6 +17,15 @@ namespace Intranet.API.Data
         {
             context.Database.EnsureCreated();
 
+            var user = new User
+            {
+                Username = "anne.annesson",
+                DisplayName = "Anne Annesson",
+            };
+
+            context.Users.Add(user);
+            context.SaveChanges();
+
             var news = new News[]
             {
                 new News
@@ -24,35 +33,35 @@ namespace Intranet.API.Data
                     Date = new DateTimeOffset(new DateTime(2017, 04, 03)),
                     Title = "News title 1",
                     Text = "This is a content placeholder for news title 1.",
-                    Author = "Anne Annesson"
+                    UserId = "anne.annesson"
                 },
                 new News
                 {
                     Date = new DateTimeOffset(new DateTime(2017, 04, 02)),
                     Title = "News title    2",
                     Text = "This is a content placeholder for news title 2",
-                    Author = "Anne Annesson"
+                    UserId = "anne.annesson"
                 },
                 new News
                 {
                     Date = new DateTimeOffset(new DateTime(2017, 03, 31)),
                     Title = "News title    3",
                     Text = "This is a content placeholder for news title 3",
-                    Author = "Anne Annesson"
+                    UserId = "anne.annesson"
                 },
                 new News
                 {
                     Date = new DateTimeOffset(new DateTime(2017, 03, 30)),
                     Title = "News title    4",
                     Text = "This is a content placeholder for news title 4",
-                    Author = "Anne Annesson"
+                    UserId = "anne.annesson"
                 },
                 new News
                 {
                     Date = new DateTimeOffset(new DateTime(2017, 03, 29)),
                     Title = "News title    5",
                     Text = "This is a content placeholder for news title 5",
-                    Author = "Anne Annesson"
+                    UserId = "anne.annesson"
                 }
             };
 

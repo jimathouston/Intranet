@@ -18,7 +18,9 @@ namespace Intranet.API.Domain.Models.Entities
         public string Text { get; set; }
 
         [Required]
-        public string Author { get; set; }
+        public string UserId { get; set; }
+
+        public User User { get; set; }
 
         public Image HeaderImage { get; set; }
 

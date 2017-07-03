@@ -69,5 +69,6 @@ namespace Intranet.API.Domain.Data
         public virtual DbSet<NewsTag> NewsTags { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<Image> Images { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

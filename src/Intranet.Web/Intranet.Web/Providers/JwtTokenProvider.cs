@@ -40,6 +40,11 @@ namespace Intranet.Web.Providers
                 claims.Add(user.Claims.SingleOrDefault(c => c.Type == "displayName"));
             }
 
+            if (user.HasClaim(c => c.Type == "username"))
+            {
+                claims.Add(user.Claims.SingleOrDefault(c => c.Type == "username"));
+            }
+
             if (user.HasClaim(c => c.Type == ClaimTypes.Role))
             {
                 var roleClaim = new Claim("role", user.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Role).Value);

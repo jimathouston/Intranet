@@ -9,10 +9,10 @@
       <div *ngIf="newsItem.headerImage">
         <img class="img-responsive card-img-caps" src="{{ getUrlToImage(newsItem.headerImage.urls) }}">
       </div>
-      <p class="text-uppercase"><strong>BY {{ newsItem.author }}</strong> | {{ newsItem.date | date }}</p>
+      <p class="text-uppercase"><strong>BY {{ newsItem.user.displayName }}</strong> | {{ newsItem.date | date }}</p>
       <div class="card-block">
-        <h4 class="card-title">{{ title }}</h4>
-        <p class="card-text" [innerHTML]="text | safeHtml"></p>
+        <h4 class="card-title">{{ newsItem.title }}</h4>
+        <p class="card-text" [innerHTML]="newsItem.text | safeHtml"></p>
       </div>
       <div class="card-block">
         <a (click)="removeNewsItem(newsItem); $event.stopPropagation()" class="btn btn-danger btn-default">

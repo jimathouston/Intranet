@@ -13,13 +13,7 @@ import NewsItem from '../../models/newsItem.model'
 
 export class NewsDetailComponent implements OnInit {
     id: number
-    title: string
-    date: Date
-    text: string = ''
-    author: string
-
     newsItem: NewsItem
-    newsItems: NewsItem[]
     selectedNewsItem: NewsItem
     info: string = ''
     newsItemDeleted: boolean = false
@@ -41,10 +35,6 @@ export class NewsDetailComponent implements OnInit {
 
         this.dataService.getNewsItem(this.id).subscribe(
             (newsitem: NewsItem) => {
-                this.title = newsitem.title
-                this.date = newsitem.date
-                this.text = newsitem.text
-                this.author = newsitem.author
                 this.newsItem = newsitem
             },
             error => {
@@ -64,14 +54,6 @@ export class NewsDetailComponent implements OnInit {
                 this.newsItemDeleted = true
                 this.info = this.newsItem.title + ' was deleted successfully!'
                 console.log('News was deleted successfully!')
-                this.dataService.getNewsItems().subscribe(
-                        (newsitems: NewsItem[]) => {
-                            this.newsItems = newsitems
-                        },
-                        error => {
-                            console.log('Failed to load news ' + error)
-                        }
-                    )
             })
     }
 

@@ -11,6 +11,7 @@ using Intranet.API.Data;
 using Microsoft.AspNetCore.Authorization;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Intranet.API.Extensions;
 
 namespace Intranet.API.Controllers
 {
@@ -38,11 +39,25 @@ namespace Intranet.API.Controllers
         {
             try
             {
+                var username = HttpContext.User.GetUsername();
+                var displayName = HttpContext.User.GetDisplayName();
+
+                if (_intranetApiContext.Users.Find(username) == null)
+                {
+                    var user = new User
+                    {
+                        Username = username,
+                        DisplayName = displayName,
+                    };
+
+                    _intranetApiContext.Users.Add(user);
+                }
+
                 var newNews = new News
                 {
                     Title = news.Title,
                     Text = news.Text,
-                    Author = news.Author,
+                    UserId = username,
                 };
 
                 if (!String.IsNullOrWhiteSpace(news.HeaderImage?.FileName))
@@ -55,6 +70,7 @@ namespace Intranet.API.Controllers
 
                 _intranetApiContext.News.Add(newNews);
                 _intranetApiContext.SaveChanges();
+
                 return Ok(ModelState);
             }
             catch (Exception)
@@ -75,7 +91,12 @@ namespace Intranet.API.Controllers
         {
             try
             {
-                var contextEntity = _intranetApiContext.News.Find(id);
+                var username = HttpContext.User.GetUsername();
+                var isAdmin = HttpContext.User.IsAdmin();
+
+                var contextEntity = _intranetApiContext.News
+                    .Include(n => n.User)
+                    .SingleOrDefault(n => n.Id == id);
 
                 if (contextEntity == null)
                 {
@@ -83,11 +104,19 @@ namespace Intranet.API.Controllers
                     return NotFound(news);
                 }
 
+                if (contextEntity.UserId?.Equals(username) != true && !isAdmin)
+                {
+                    return Forbid();
+                }
+
                 contextEntity.Title = news.Title;
                 contextEntity.Text = news.Text;
                 contextEntity.Date = DateTimeOffset.UtcNow;
-                contextEntity.Author = news.Author;
-                if (contextEntity.HeaderImage != null) contextEntity.HeaderImage.FileName = news.HeaderImage?.FileName;
+
+                if (contextEntity.HeaderImage != null)
+                {
+                    contextEntity.HeaderImage.FileName = news.HeaderImage?.FileName;
+                }
 
                 _intranetApiContext.SaveChanges();
                 return Ok(ModelState);
@@ -109,6 +138,9 @@ namespace Intranet.API.Controllers
         {
             try
             {
+                var username = HttpContext.User.GetUsername();
+                var isAdmin = HttpContext.User.IsAdmin();
+
                 var contextEntity = _intranetApiContext.News.Find(id);
 
                 if (contextEntity == null)
@@ -116,8 +148,14 @@ namespace Intranet.API.Controllers
                     return NotFound();
                 }
 
+                if (contextEntity.UserId?.Equals(username) != true && !isAdmin)
+                {
+                    return Forbid();
+                }
+
                 _intranetApiContext.Remove(contextEntity);
                 _intranetApiContext.SaveChanges();
+
                 return Ok();
             }
             catch (Exception)
@@ -139,6 +177,7 @@ namespace Intranet.API.Controllers
 
                 var news = _intranetApiContext.News
                     .Include(n => n.HeaderImage)
+                    .Include(n => n.User)
                     .ToList();
 
                 return new OkObjectResult(news);
@@ -169,6 +208,10 @@ namespace Intranet.API.Controllers
 
                 _intranetApiContext.Entry(news)
                     .Reference(n => n.HeaderImage)
+                    .Load();
+
+                _intranetApiContext.Entry(news)
+                    .Reference(n => n.User)
                     .Load();
 
                 return new OkObjectResult(news);

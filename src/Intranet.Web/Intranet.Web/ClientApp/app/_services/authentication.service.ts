@@ -1,6 +1,7 @@
 ﻿import { Injectable, Inject } from '@angular/core'
 import { Http, Headers, Response, RequestOptions } from '@angular/http'
 import * as jwtDecode from 'jwt-decode'
+import Jwt from '../models/jwt.model'
 
 @Injectable()
 export class AuthenticationService {
@@ -31,9 +32,9 @@ export class AuthenticationService {
         return newJwt
     }
 
-    async getJwtDecoded(): Promise<object> {
+    async getJwtDecoded(): Promise<Jwt> {
         const jwt = await this.getJwt()
-        return jwtDecode(jwt)
+        return jwtDecode(jwt) as Jwt
     }
 
     private getJwtFromLocalStorage() {

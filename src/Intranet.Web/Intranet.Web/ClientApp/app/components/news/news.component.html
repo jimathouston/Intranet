@@ -19,7 +19,7 @@
       <div *ngIf="newsItem.headerImage">
         <a [routerLink]="['/news-detail', newsItem.id]"><img src="{{ getUrlToImage(newsItem.headerImage.urls) }}" class="card-img-caps"></a>
       </div>
-      <p class="text-uppercase"><strong>BY {{newsItem.author}}</strong> | {{ newsItem.date | date }}</p> 
+      <p class="text-uppercase"><strong>BY {{newsItem.user.displayName}}</strong> | {{ newsItem.date | date }}</p> 
     <div class="card-block">
       <h4 class="card-title">{{ newsItem.title }}</h4>
       <p class="card-text" [innerHTML]="newsItem.text | limitTo : 185 | safeHtml"></p>

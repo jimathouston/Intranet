@@ -53,7 +53,7 @@ export class NewsNewComponent {
         }
 
         this.newsItem.title = title
-        this.newsItem.author = jwt['displayName']
+        this.newsItem['userId'] = jwt.displayName
 
         this.dataService.createNewsItem(this.newsItem).then(
             newsitem => {
