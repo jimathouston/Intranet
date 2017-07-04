@@ -14,7 +14,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.IdentityModel.Tokens;
 using Intranet.API.Domain.Data;
-using Intranet.API.Data;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 using Intranet.API.Domain;
@@ -44,7 +43,7 @@ namespace Intranet.API
         public void ConfigureServices(IServiceCollection services)
         {
             #region Database
-            var sqlConnectionString = Configuration["AWS_RDS_CONNECTION_STRING"];
+            var sqlConnectionString = Configuration["CONNECTION_STRING"];
 
             services.AddDbContext<IntranetApiContext>(opt => opt.UseSqlServer(sqlConnectionString));
             #endregion
@@ -189,14 +188,6 @@ namespace Intranet.API
 
             #region Mvc
             app.UseMvc();
-            #endregion
-
-            #region Seed database
-            if (env.IsDevelopment())
-            {
-                var context = app.ApplicationServices.GetService<IntranetApiContext>();
-                DbInitializer.SeedDb(context);
-            }
             #endregion
         }
     }

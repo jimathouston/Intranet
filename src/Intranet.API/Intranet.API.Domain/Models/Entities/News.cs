@@ -24,6 +24,6 @@ namespace Intranet.API.Domain.Models.Entities
 
         public Image HeaderImage { get; set; }
 
-        public ICollection<NewsTag> NewsTags { get; set; }
+        //public ICollection<NewsTag> NewsTags { get; set; }
     }
 }

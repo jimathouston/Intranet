@@ -15,8 +15,4 @@
     <ProjectReference Include="..\..\Intranet.Shared\Intranet.Shared.Common\Intranet.Shared.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>
