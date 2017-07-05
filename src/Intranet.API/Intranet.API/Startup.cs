@@ -124,9 +124,10 @@ namespace Intranet.API
             {
                 dbContext.Database.Migrate();
             }
-            catch (Exception)
+            catch (Exception exception)
             {
                 // TODO: Add logging, notification etc.
+                Console.WriteLine(exception.Message);
                 Environment.Exit(1);
             }
             #endregion
