@@ -33,10 +33,6 @@ namespace Intranet.Web.Authentication.Providers
             {
                 userClaims.Add(new Claim(ClaimTypes.Role, "Admin"));
             }
-            else if (user.IsDeveloper)
-            {
-                userClaims.Add(new Claim(ClaimTypes.Role, "Developer"));
-            }
 
             var claimsIdentity = new ClaimsIdentity(userClaims, _authenticationService.GetType().Name);
             return new ClaimsPrincipal(claimsIdentity);

@@ -26,6 +26,8 @@ namespace Intranet_Web
 {
     public class Startup
     {
+        private readonly IHostingEnvironment CurrentEnvironment;
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -35,6 +37,7 @@ namespace Intranet_Web
                     .AddEnvironmentVariables();
 
             Configuration = builder.Build();
+            CurrentEnvironment = env;
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -44,7 +47,15 @@ namespace Intranet_Web
         {
             #region Dependency Injection
             // Dependency injection
-            services.AddTransient<IAuthenticationProvider, AuthenticationProvider>();
+            if (CurrentEnvironment.IsProduction())
+            {
+                services.AddTransient<IAuthenticationProvider, AuthenticationProvider>();
+            }
+            else
+            {
+                services.AddTransient<IAuthenticationProvider, DevelopmentAuthenticationProvider>();
+            }
+
             services.AddTransient<IAuthenticationService, LdapAuthenticationService>();
             services.AddTransient<ITokenProvider, JwtTokenProvider>();
             services.AddTransient<IDateTimeFactory, DateTimeFactory>();

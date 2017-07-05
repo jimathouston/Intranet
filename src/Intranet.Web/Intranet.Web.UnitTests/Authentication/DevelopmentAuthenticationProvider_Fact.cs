@@ -12,7 +12,7 @@ using Intranet.Web.Authentication.Services;
 
 namespace Intranet.Web.UnitTests.Authentication
 {
-    public class AuthenticationProvider_Fact
+    public class DevelopmentAuthenticationProvider_Fact
     {
         [Fact]
         public void When_Given_User_Return_ClaimsPrincipal()
@@ -24,7 +24,36 @@ namespace Intranet.Web.UnitTests.Authentication
             #region Service
             var authService = new LdapAuthenticationService(ldapOptions);
             #endregion
-            var authenticationProvider = new AuthenticationProvider(authService);
+            var authenticationProvider = new DevelopmentAuthenticationProvider(authService);
+            var user = new User
+            {
+                DisplayName = "Calle Carlsson",
+                Username = "calle.carlsson",
+                IsDeveloper = true,
+            };
+
+            // Act
+            var claimsPrincipal = authenticationProvider.GetClaimsPrincipal(user);
+
+            // Assert
+            Assert.True(claimsPrincipal.Identity.IsAuthenticated);
+            Assert.True(claimsPrincipal.Identity.AuthenticationType == authService.GetType().Name);
+            Assert.True(claimsPrincipal.HasClaim(c => c.Type == "displayName" && c.Value == user.DisplayName));
+            Assert.True(claimsPrincipal.HasClaim(c => c.Type == "username" && c.Value == user.Username));
+            Assert.True(claimsPrincipal.HasClaim(c => c.Type == ClaimTypes.Role && c.Value == "Admin"));
+        }
+
+        [Fact]
+        public void When_Given_Non_Developer_Ignore_Role_Return_ClaimsPrincipal()
+        {
+            // Assign
+            #region Options
+            IOptions<LdapConfig> ldapOptions = Options.Create(new LdapConfig());
+            #endregion
+            #region Service
+            var authService = new LdapAuthenticationService(ldapOptions);
+            #endregion
+            var authenticationProvider = new DevelopmentAuthenticationProvider(authService);
             var user = new User
             {
                 DisplayName = "Calle Carlsson",
@@ -33,14 +62,9 @@ namespace Intranet.Web.UnitTests.Authentication
 
             // Act
             var claimsPrincipal = authenticationProvider.GetClaimsPrincipal(user);
-            var identity = claimsPrincipal.Identities.SingleOrDefault();
-            var actClaims = claimsPrincipal.Claims.ToList();
 
             // Assert
-            Assert.True(identity.IsAuthenticated);
-            Assert.True(identity.AuthenticationType == authService.GetType().Name);
-            Assert.True(actClaims.SingleOrDefault(m => m.Type == "displayName").Value == user.DisplayName);
-            Assert.True(actClaims.SingleOrDefault(m => m.Type == "username").Value == user.Username);
+            Assert.False(claimsPrincipal.HasClaim(c => c.Type == ClaimTypes.Role));
         }
 
         [Fact]
@@ -53,7 +77,7 @@ namespace Intranet.Web.UnitTests.Authentication
             #region Service
             var authService = new LdapAuthenticationService(ldapOptions);
             #endregion
-            var authenticationProvider = new AuthenticationProvider(authService);
+            var authenticationProvider = new DevelopmentAuthenticationProvider(authService);
             var user = new User
             {
                 DisplayName = "Calle Carlsson",
@@ -69,7 +93,7 @@ namespace Intranet.Web.UnitTests.Authentication
         }
 
         [Fact]
-        public void When_Given_Developer_Ignore_Role_And_Return_ClaimsPrincipal()
+        public void When_Given_Admin_And_Dev_Return_Admin_ClaimsPrincipal()
         {
             // Assign
             #region Options
@@ -78,11 +102,12 @@ namespace Intranet.Web.UnitTests.Authentication
             #region Service
             var authService = new LdapAuthenticationService(ldapOptions);
             #endregion
-            var authenticationProvider = new AuthenticationProvider(authService);
+            var authenticationProvider = new DevelopmentAuthenticationProvider(authService);
             var user = new User
             {
                 DisplayName = "Calle Carlsson",
                 Username = "calle.carlsson",
+                IsAdmin = true,
                 IsDeveloper = true,
             };
 
@@ -90,7 +115,7 @@ namespace Intranet.Web.UnitTests.Authentication
             var claimsPrincipal = authenticationProvider.GetClaimsPrincipal(user);
 
             // Assert
-            Assert.False(claimsPrincipal.HasClaim(c => c.Type == ClaimTypes.Role));
+            Assert.True(claimsPrincipal.HasClaim(c => c.Type == ClaimTypes.Role && c.Value == "Admin"));
         }
     }
 }
