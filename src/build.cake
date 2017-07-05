@@ -59,6 +59,14 @@ Task("API:Restore-NuGet-Packages")
     .IsDependentOn("API:Clean")
     .Does(() =>
 {
+      DotNetCoreRestore(apiDir);
+      DotNetCoreRestore(apiTestsDir);
+});
+
+Task("Web:Restore-NuGet-Packages")
+    .IsDependentOn("Web:Clean")
+    .Does(() =>
+{
       // TODO: This should live in it's own NuGet.config but that won't work at the moment:
       //       See https://github.com/NuGet/Home/issues/4907
       var imageSharpSource = "https://www.myget.org/F/imagesharp/api/v3/index.json";
@@ -79,19 +87,11 @@ Task("API:Restore-NuGet-Packages")
         Source = new string[] { imageSharpSource, "https://api.nuget.org/v3/index.json" }
       });
 
-      DotNetCoreRestore(apiDir);
-      DotNetCoreRestore(apiTestsDir);
+      DotNetCoreRestore(webDir);
+      DotNetCoreRestore(webTestsDir);
 
       CleanDirectory(tempCachePath);
       DeleteDirectory(tempCachePath);
-});
-
-Task("Web:Restore-NuGet-Packages")
-    .IsDependentOn("Web:Clean")
-    .Does(() =>
-{
-    DotNetCoreRestore(webDir);
-    DotNetCoreRestore(webTestsDir);
 });
 
 Task("API:Build")
