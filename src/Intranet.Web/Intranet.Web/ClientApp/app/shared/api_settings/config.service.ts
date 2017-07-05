@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core'
+﻿import { Injectable, Inject } from '@angular/core'
 
 @Injectable()
 export class ConfigService {
@@ -6,9 +6,9 @@ export class ConfigService {
     _apiUrl: string
     _apiBaseUrl: string
 
-    constructor() {
+    constructor(@Inject('ORIGIN_URL') private originUrl: string) {
         this._apiUrl = '/api/v1/'
-        this._apiBaseUrl = 'http://localhost:50590'
+        this._apiBaseUrl = originUrl
     }
 
     getApiUrl() {
