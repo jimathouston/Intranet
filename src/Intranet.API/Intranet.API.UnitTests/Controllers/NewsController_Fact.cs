@@ -11,6 +11,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using Xunit;
@@ -357,7 +358,7 @@ namespace Intranet.API.UnitTests.Controllers
         }
 
         [Fact]
-        public void ReturnNotFoundWhenGetAllNews()
+        public void ReturnOkWhenGetAllNewsIsEmpty()
         {
             // Assign
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
@@ -366,10 +367,11 @@ namespace Intranet.API.UnitTests.Controllers
 
                 // Act
                 var newsFromController = newsController.Get();
-
+                var count = GetCountOfValueProperty(newsFromController);
 
                 // Assert
-                Assert.IsType<NotFoundObjectResult>(newsFromController);
+                Assert.IsType<OkObjectResult>(newsFromController);
+                Assert.Equal(count, 0);
             }
         }
 
@@ -387,14 +389,23 @@ namespace Intranet.API.UnitTests.Controllers
 
                 // Act
                 var newsFromController = newsController.Get();
+                var count = GetCountOfValueProperty(newsFromController);
 
                 // Assert
                 Assert.IsType<OkObjectResult>(newsFromController);
+                Assert.Equal(count, 1);
             }
         }
         #endregion
 
         #region Private Helpers
+        private static int GetCountOfValueProperty(IActionResult newsFromController)
+        {
+            var ValuePropValue = newsFromController.GetType().GetProperty("Value").GetValue(newsFromController);
+            var CountPropValue = (int)ValuePropValue.GetType().GetProperty("Count").GetValue(ValuePropValue);
+            return CountPropValue;
+        }
+
         private IEnumerable<News> GetFakeNews()
         {
             return GetFakeNews(newsDate: DateTimeOffset.Now);

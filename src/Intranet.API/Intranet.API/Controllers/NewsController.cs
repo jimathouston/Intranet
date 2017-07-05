@@ -172,7 +172,7 @@ namespace Intranet.API.Controllers
         {
             try
             {
-                if (!_intranetApiContext.News.Any()) return NotFound(new List<News>());
+                if (!_intranetApiContext.News.Any()) return new OkObjectResult(new List<News>());
 
                 var news = _intranetApiContext.News
                     .Include(n => n.HeaderImage)
