@@ -6,6 +6,11 @@ RUN echo "deb http://download.mono-project.com/repo/debian jessie main" | tee /e
 RUN apt-get update
 RUN apt install mono-complete -y
 
+# NPM Behave
+RUN node --max_old_space_size=256 $(which npm) install
+RUN npm config set jobs 1
+RUN npm install --max-old-space-size=300
+
 WORKDIR /app
 EXPOSE 5000
 COPY ./web-init-dev-env.sh /app
