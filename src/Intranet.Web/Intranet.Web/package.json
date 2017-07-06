@@ -1,5 +1,5 @@
 {
-  "name": "Intranet_Web",
+  "name": "intranet",
   "version": "0.0.0",
   "scripts": {
     "prebuild": "webpack --config webpack.config.vendor.js",
@@ -23,8 +23,6 @@
     "@angular/platform-server": "^4.0.0",
     "@angular/router": "^4.0.0",
     "@types/node": "^6.0.42",
-    "angular2-fullcalendar": "^1.0.19",
-    "angular2-platform-node": "~2.0.11",
     "angular2-template-loader": "^0.6.2",
     "aspnet-prerendering": "^2.0.0",
     "aspnet-webpack": "^1.0.17",
