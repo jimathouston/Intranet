@@ -97,7 +97,7 @@ namespace Intranet.API
             #endregion
 
             #region CORS
-            if (CurrentEnvironment.IsDevelopment())
+            if (!CurrentEnvironment.IsProduction())
             {
                 services.AddCors(options =>
                 {
@@ -181,7 +181,7 @@ namespace Intranet.API
             #endregion
 
             #region CORS
-            if (env.IsDevelopment())
+            if (!env.IsProduction())
             {
                 app.UseCors("CorsPolicy");
             }

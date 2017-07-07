@@ -39,8 +39,10 @@ namespace Intranet.Web.Controllers
                 var file = _fileStorageService.GetFile(filename);
                 return PhysicalFile(file.path, file.mime); // TODO: Will (probably) not work with S3
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
                 return BadRequest();
             }
         }
@@ -54,8 +56,10 @@ namespace Intranet.Web.Controllers
                 var image = _fileStorageService.GetImage(filename);
                 return PhysicalFile(image.path, image.mime); // TODO: Will (probably) not work with S3
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
                 return BadRequest();
             }
         }
@@ -71,8 +75,10 @@ namespace Intranet.Web.Controllers
                 var image = _fileStorageService.GetImage(filename, type);
                 return PhysicalFile(image.path, image.mime); // TODO: Will (probably) not work with S3
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
                 return BadRequest();
             }
         }
@@ -122,8 +128,10 @@ namespace Intranet.Web.Controllers
                     return BadRequest();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
                 return BadRequest();
             }
         }

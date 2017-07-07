@@ -49,10 +49,9 @@ namespace Intranet.Web.Services
                 Directory.CreateDirectory(Path.GetDirectoryName(resizedImagePath));
 
                 // Resize the image and save it to the output stream
-                using (var outputStream = new FileStream(resizedImagePath, FileMode.Create))
                 using (var sourceImage = Image.Load(image.OpenReadStream()))
                 {
-                    _imageService.CropAndResizeImage(sourceImage, imageVariantType).Save(outputStream);
+                    _imageService.CropAndResizeImage(sourceImage, imageVariantType).Save(resizedImagePath);
                 }
             }
 

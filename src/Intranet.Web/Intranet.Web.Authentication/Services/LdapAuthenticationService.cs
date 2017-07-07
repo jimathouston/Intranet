@@ -31,6 +31,13 @@ namespace Intranet.Web.Authentication.Services
         {
             try
             {
+                username = username.ToLower();
+
+                if (username.Contains('@'))
+                {
+                    username = username.Remove(username.IndexOf('@'));
+                }
+
                 _connection.Connect(_config.Url, this.Port);
                 _connection.Bind(CN, _config.BindCredentials);
 

@@ -82,8 +82,7 @@ Task("Web:Restore-NuGet-Packages")
 
       NuGetInstall("ImageSharp", new NuGetInstallSettings {
         OutputDirectory = tempCachePath,
-        // Prerelease = true,
-        Version = "1.0.0-alpha9-00139",
+        Version = "1.0.0-alpha9-00171",
         Source = new string[] { imageSharpSource, "https://api.nuget.org/v3/index.json" }
       });
 

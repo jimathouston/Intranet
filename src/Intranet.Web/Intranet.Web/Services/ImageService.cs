@@ -1,5 +1,6 @@
 ﻿using ImageSharp;
 using Intranet.Shared.Common.Enums;
+using SixLabors.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
