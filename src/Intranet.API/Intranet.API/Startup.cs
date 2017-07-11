@@ -69,31 +69,34 @@ namespace Intranet.API
             #endregion
 
             #region Swagger
-            // Add Swagger Generator
-            var pathToDoc = ".xml";
-
-            services.AddSwaggerGen(options =>
+            if (CurrentEnvironment.IsDevelopment())
             {
-                options.SwaggerDoc("v1",
-                    new Info
-                    {
-                        Title = "Certaincy Intranet",
-                        Version = "v1",
-                        Description = "Documentation for Certaincy Intranet API. Only available on the development enviroment.",
-                    });
+                // Add Swagger Generator
+                var pathToDoc = ".xml";
 
-                var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, pathToDoc);
-                options.IncludeXmlComments(filePath);
-                options.DescribeAllEnumsAsStrings();
-
-                options.AddSecurityDefinition("Bearer", new ApiKeyScheme()
+                services.AddSwaggerGen(options =>
                 {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                    Name = "Authorization",
-                    In = "header",
-                    Type = "apiKey",
+                    options.SwaggerDoc("v1",
+                        new Info
+                        {
+                            Title = "Certaincy Intranet",
+                            Version = "v1",
+                            Description = "Documentation for Certaincy Intranet API. Only available on the development enviroment.",
+                        });
+
+                    var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, pathToDoc);
+                    options.IncludeXmlComments(filePath);
+                    options.DescribeAllEnumsAsStrings();
+
+                    options.AddSecurityDefinition("Bearer", new ApiKeyScheme()
+                    {
+                        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                        Name = "Authorization",
+                        In = "header",
+                        Type = "apiKey",
+                    });
                 });
-            });
+            }
             #endregion
 
             #region CORS
@@ -168,16 +171,13 @@ namespace Intranet.API
             #endregion
 
             #region Swagger
-            app.UseSwagger(c =>
+            if (env.IsDevelopment())
             {
-                c.RouteTemplate = "api-docs/swagger/{documentName}/swagger.json";
-            });
-
-            app.UseSwaggerUI(c =>
-            {
-                c.RoutePrefix = "api-docs";
-                c.SwaggerEndpoint("/api-docs/swagger/v1/swagger.json", "v1 docs");
-            });
+                app.UseSwagger(c =>
+                {
+                    c.RouteTemplate = "api-docs/swagger/{documentName}/swagger.json";
+                });
+            }
             #endregion
 
             #region CORS

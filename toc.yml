@@ -1,0 +1,12 @@
+﻿- name: Home
+  href: index.md
+- name: Technical Details
+  href: src/docs/technical-details/
+  topicHref: src/docs/technical-details/architecture.md
+- name: Use Cases
+  href: src/docs/use-cases/
+  topicHref: src/docs/use-cases/news.md
+- name: API Documentation
+  href: src/docs/obj/api/
+- name: REST API
+  href: src/docs/restapi/

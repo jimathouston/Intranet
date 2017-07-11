@@ -1,0 +1,1 @@
+﻿# [Intranet API](intranet.swagger.json)
