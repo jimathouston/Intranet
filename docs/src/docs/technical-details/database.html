@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Database | Certaincy Intranet &#8211; Documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Database | Certaincy Intranet &#8211; Documentation ">
+    <meta name="generator" content="docfx 2.20.0.0">
+    
+    <link rel="shortcut icon" href="../../../favicon.ico">
+    <link rel="stylesheet" href="../../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../../styles/docfx.css">
+    <link rel="stylesheet" href="../../../styles/main.css">
+    <meta property="docfx:navrel" content="../../../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    <meta property="docfx:rel" content="../../../">
+    <meta property="docfx:newtab" content="true">
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items"></div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="database">Database</h1>
+
+<h2 id="migrations">Migrations</h2>
+<p>Go to <code>src\Intranet.API\Intranet.API.Domain</code> and run <code>dotnet ef</code> with <code>Intranet.API</code> as the startup project to generate new migrations:</p>
+<pre><code>&gt; dotnet ef --startup-project ..\Intranet.API\ migrations add &lt;NameOfMigration&gt;
+</code></pre><p>Running the web api automatically applies the migration. To apply it manually run the following:</p>
+<pre><code>&gt; dotnet ef --startup-project ..\Intranet.API\ database update
+</code></pre><h2 id="aws-rds">AWS RDS</h2>
+<p>Create Snapshot (Example: Of Production) </p>
+<pre><code>&gt; aws rds create-db-snapshot --db-instance-identifier &lt;mydbinstance&gt; --db-snapshot-identifier &lt;mydbsnapshot&gt; 
+</code></pre><p>Delete Snapshot (Example: Of Production) </p>
+<pre><code>&gt; aws rds delete-db-snapshot --db-snapshot-identifier &lt;name&gt; 
+</code></pre><p>Restore Instance from snapshot(Create a new instance from snapshot, Example: Staging Database)  </p>
+<pre><code>&gt; aws rds restore-db-instance-from-db-snapshot --db-instance-identifier &lt;mynewdbinstance&gt; --db-snapshot-identifier &lt;mydbsnapshot&gt; 
+</code></pre><p>Delete Instance (Example: Staging) without: final Snapshot </p>
+<pre><code>&gt; aws rds delete-db-instance --db-instance-identifier &lt;mydbinstance&gt; --skip-final-snapshot 
+</code></pre><p>Delete Instance with final Snapshot </p>
+<pre><code>&gt; aws rds delete-db-instance --db-instance-identifier &lt;mydbinstance&gt; --final-snapshot-identifier &lt;myfinaldbsnapshot&gt; 
+</code></pre><h2 id="db-for-developement">DB for developement</h2>
+<p><em>Note: A local DB must already exist.</em></p>
+<p>From SQL Server Managment:</p>
+<ul>
+<li>Right-Click the DB you want to copy</li>
+<li>Select Tasks</li>
+<li>Click Export Data</li>
+<li>Follow Wizard to copy data from cloud sever to local</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Certaincy/Intranet/blob/feature/docfx/src/docs/technical-details/database.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Copyright © 2017 Certaincy<br>Generated by <strong>DocFX</strong>
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>
