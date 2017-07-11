@@ -2,4 +2,4 @@
 
 Certaincy's intranet, built with .Net Core and Angular
 
-The documentation lives at http://certaincy.github.io/intranet/
+The documentation lives at https://certaincy.github.io/Intranet/
