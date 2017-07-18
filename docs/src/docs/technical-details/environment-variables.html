@@ -85,6 +85,22 @@
 </thead>
 <tbody>
 <tr>
+<td>AWS_ACCESS_KEY_ID</td>
+<td></td>
+</tr>
+<tr>
+<td>AWS_BUCKET_NAME</td>
+<td></td>
+</tr>
+<tr>
+<td>AWS_SECRET_ACCESS_KEY</td>
+<td></td>
+</tr>
+<tr>
+<td>AWS_REGION</td>
+<td></td>
+</tr>
+<tr>
 <td>LDAP_ADMIN_CN</td>
 <td></td>
 </tr>
@@ -126,7 +142,13 @@
 </tr>
 </tbody>
 </table>
-</article>
+<h2 id="dotnet-user-secrets">dotnet user-secrets</h2>
+<p>It&#39;s possible to use <code>dotnet user-secrets</code> to add enviroment variables to single projects (instead of having them global on the machine). For example:</p>
+<pre><code>&gt; cd .\src\Intranet.API\Intranet.API\
+&gt; dotnet user-secrets set CONNECTION_STRING &quot;Server=(localdb)\mssqllocaldb;Database=EFProviders.InMemory;Trusted_Connection=True;&quot;
+</code></pre><p>Quotation marks is not necessary for &quot;simple&quot; strings:</p>
+<pre><code>&gt; dotnet user-secrets set AWS_REGION eu-central-1
+</code></pre></article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
@@ -134,7 +156,7 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Certaincy/Intranet/blob/feature/docfx/src/docs/technical-details/environment-variables.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Certaincy/Intranet/blob/develop/src/docs/technical-details/environment-variables.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>

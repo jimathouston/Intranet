@@ -1,5 +1,5 @@
 ﻿using ImageSharp;
-using Intranet.Shared.Common.Enums;
+using Intranet.Web.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.StaticFiles;
 using System;
@@ -19,11 +19,9 @@ namespace Intranet.Web.Services
             _imageService = imageService;
         }
 
-        public string SaveBlob(string filePath, IFormFile file)
+        public async Task<string> SetBlobAsync(IFormFile file)
         {
-            var imageVariantTypes = (ImageVariantType[])Enum.GetValues(typeof(ImageVariantType));
-
-            var blobPath = GetBlobPath(filePath, file.FileName);
+            var blobPath = GetBlobPath(file.FileName);
 
             // Create the destination folder tree if it doesn't already exist
             Directory.CreateDirectory(Path.GetDirectoryName(blobPath));
@@ -31,73 +29,118 @@ namespace Intranet.Web.Services
             using (var outputStream = new FileStream(blobPath, FileMode.Create))
             using (var sourceFile = file.OpenReadStream())
             {
-                sourceFile.CopyTo(outputStream);
+                await sourceFile.CopyToAsync(outputStream);
             }
 
-            return $"/blob/{Uri.EscapeDataString(file.FileName)}".ToLower();
+            return file.FileName;
         }
 
-        public string SaveImage(string filePath, IFormFile image)
+        public async Task<string> SetImageAsync(IFormFile image)
         {
-            var imageVariantTypes = (ImageVariantType[])Enum.GetValues(typeof(ImageVariantType));
+            var imagePath = GetImagePath(image.FileName);
 
-            foreach (var imageVariantType in imageVariantTypes)
+            // Create the destination folder tree if it doesn't already exist
+            Directory.CreateDirectory(Path.GetDirectoryName(imagePath));
+
+            using (var outputStream = new FileStream(imagePath, FileMode.Create))
+            using (var sourceFile = image.OpenReadStream())
             {
-                var resizedImagePath = GetImagePath(filePath, image.FileName, imageVariantType);
-
-                // Create the destination folder tree if it doesn't already exist
-                Directory.CreateDirectory(Path.GetDirectoryName(resizedImagePath));
-
-                // Resize the image and save it to the output stream
-                using (var sourceImage = Image.Load(image.OpenReadStream()))
-                {
-                    _imageService.CropAndResizeImage(sourceImage, imageVariantType).Save(resizedImagePath);
-                }
+                await sourceFile.CopyToAsync(outputStream);
             }
 
-            return $"/image/{Uri.EscapeDataString(image.FileName)}".ToLower();
+            return image.FileName;
         }
 
-        public (string path, string mime) GetFile(string filename)
+        public async Task<string> SetImageAsync(IFormFile image, int width, int height)
         {
-            string contentType;
+            var imagePath = GetImagePath(image.FileName, width, height);
 
-            var filePath = Path.GetTempPath();
-            var returnPath = GetBlobPath(filePath, filename);
+            // Create the destination folder tree if it doesn't already exist
+            Directory.CreateDirectory(Path.GetDirectoryName(imagePath));
 
-            new FileExtensionContentTypeProvider().TryGetContentType(returnPath, out contentType);
+            using (var outputStream = new FileStream(imagePath, FileMode.Create))
+            using (var sourceFile = image.OpenReadStream())
+            {
+                await sourceFile.CopyToAsync(outputStream);
+            }
 
-            //return PhysicalFile(returnPath, contentType ?? "application/octet-stream");
-            return (returnPath, contentType ?? "application/octet-stream");
+            return image.FileName;
         }
 
-        public (string path, string mime) GetImage(string filename, ImageVariantType imageVariantType = ImageVariantType.Original)
+        // TODO: Broken, image stream seems to be empty?
+        public async Task<string> SetImageAsync(Stream image, string filename, int width, int height)
         {
-            string contentType;
+            var imagePath = GetImagePath(filename, width, height);
 
-            var filePath = Path.GetTempPath();
+            // Create the destination folder tree if it doesn't already exist
+            Directory.CreateDirectory(Path.GetDirectoryName(imagePath));
 
-            var returnPath = GetImagePath(filePath, filename, imageVariantType);
+            using (var outputStream = new FileStream(imagePath, FileMode.Create))
+            using (image)
+            {
+                await image.CopyToAsync(outputStream);
+            }
 
-            new FileExtensionContentTypeProvider().TryGetContentType(returnPath, out contentType);
-
-            //return PhysicalFile(returnPath, contentType ?? "application/octet-stream");
-            return (returnPath, contentType ?? "application/octet-stream");
+            return filename;
         }
 
-        private static string GetBlobPath(string filePath, string filename)
+        public async Task<StreamWithMetadata> GetBlobAsync(string filename)
         {
-            return Path.Combine(filePath, "intranet", "blobs", filename);
+            var filePath = GetBlobPath(filename);
+            return StreamWithContentTypeInternal(filePath);
         }
 
-        private static string GetImagePath(string filePath, string filename, ImageVariantType imageVariantType)
+        public async Task<StreamWithMetadata> GetImageAsync(string filename)
         {
-            return Path.Combine(filePath,
+            var filePath = GetImagePath(filename);
+            return StreamWithContentTypeInternal(filePath);
+        }
+
+        public async Task<StreamWithMetadata> GetImageAsync(string filename, int width, int height)
+        {
+            var filePath = GetImagePath(filename, width, height);
+            return StreamWithContentTypeInternal(filePath);
+        }
+
+        #region Private Helpers
+        private static StreamWithMetadata StreamWithContentTypeInternal(string filePath)
+        {
+            if (!File.Exists(filePath))
+            {
+                return null;
+            }
+
+            var stream = File.OpenRead(filePath);
+
+            new FileExtensionContentTypeProvider().TryGetContentType(filePath, out string contentType);
+
+            return new StreamWithMetadata(stream, contentType ?? "application/octet-stream", null);
+        }
+
+        private static string GetBlobPath(string filename)
+        {
+            return Path.Combine(Path.GetTempPath(), "intranet", "blobs", filename);
+        }
+
+        private string GetImagePath(string filename)
+        {
+            return Path.Combine(Path.GetTempPath(),
                                 "intranet",
                                 "images",
                                 Path.GetFileNameWithoutExtension(filename),
-                                imageVariantType.ToString(),
+                                "original",
                                 filename);
         }
+
+        private string GetImagePath(string filename, int width, int height)
+        {
+            return Path.Combine(Path.GetTempPath(),
+                    "intranet",
+                    "images",
+                    Path.GetFileNameWithoutExtension(filename),
+                    $"w_{width}-h_{height}",
+                    filename);
+        }
+        #endregion
     }
 }

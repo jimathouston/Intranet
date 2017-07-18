@@ -28,10 +28,4 @@ export class NewsComponent implements OnInit {
     onSelect(newsitem: NewsItem) {
         this.selectedNewsitem = newsitem
     }
-
-    getUrlToImage(urls: string[]) {
-        return urls.find(value => {
-            return value.includes('600/300')
-        })
-    }
 }

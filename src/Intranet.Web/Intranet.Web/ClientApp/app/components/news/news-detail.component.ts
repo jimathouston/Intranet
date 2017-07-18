@@ -56,10 +56,4 @@ export class NewsDetailComponent implements OnInit {
                 console.log('News was deleted successfully!')
             })
     }
-
-    getUrlToImage(urls: string[]) {
-        return urls.find(value => {
-            return value.includes('600/300')
-        })
-    }
 }

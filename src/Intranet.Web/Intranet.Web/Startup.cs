@@ -21,6 +21,8 @@ using Intranet.Web.Authentication.Models;
 using Intranet.Web.Authentication.Services;
 using Intranet.Web.Authentication.Providers;
 using Intranet.Web.Services;
+using Amazon.S3;
+using Amazon.S3.Transfer;
 
 namespace Intranet_Web
 {
@@ -36,8 +38,22 @@ namespace Intranet_Web
                     .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                     .AddEnvironmentVariables();
 
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
+
             Configuration = builder.Build();
             CurrentEnvironment = env;
+
+            if (env.IsDevelopment())
+            {
+                // Hack to be able to use user-secrets because... aws... 🤦
+                Environment.SetEnvironmentVariable("AWS_BUCKET_NAME", Configuration["AWS_BUCKET_NAME"]);
+                Environment.SetEnvironmentVariable("AWS_SECRET_ACCESS_KEY", Configuration["AWS_SECRET_ACCESS_KEY"]);
+                Environment.SetEnvironmentVariable("AWS_REGION", Configuration["AWS_REGION"]);
+                Environment.SetEnvironmentVariable("AWS_ACCESS_KEY_ID", Configuration["AWS_ACCESS_KEY_ID"]);
+            }
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -46,7 +62,6 @@ namespace Intranet_Web
         public void ConfigureServices(IServiceCollection services)
         {
             #region Dependency Injection
-            // Dependency injection
             if (CurrentEnvironment.IsProduction())
             {
                 services.AddTransient<IAuthenticationProvider, AuthenticationProvider>();
@@ -60,7 +75,9 @@ namespace Intranet_Web
             services.AddTransient<ITokenProvider, JwtTokenProvider>();
             services.AddTransient<IDateTimeFactory, DateTimeFactory>();
             services.AddTransient<IImageService, ImageService>();
-            services.AddTransient<IFileStorageService, LocalFileStorageService>();
+            services.AddAWSService<IAmazonS3>();
+            services.AddTransient<ITransferUtility, TransferUtility>();
+            services.AddTransient<IFileStorageService, S3FileStorageService>();
             #endregion
 
             #region Options
@@ -87,6 +104,10 @@ namespace Intranet_Web
                 options.Issuer = "ExampleIssuer";
                 options.SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
             });
+            services.Configure<S3Options>(options =>
+            {
+                options.BucketName = Configuration["AWS_BUCKET_NAME"];
+            });
             #endregion
 
             #region Mvc
@@ -100,6 +121,11 @@ namespace Intranet_Web
 
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
+            #endregion
+
+            #region AWS
+            var awsOptions = Configuration.GetAWSOptions();
+            services.AddDefaultAWSOptions(awsOptions);
             #endregion
         }
 

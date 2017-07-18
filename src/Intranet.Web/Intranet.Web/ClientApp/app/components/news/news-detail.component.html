@@ -7,7 +7,7 @@
     </div>
     <div class="card">
       <div *ngIf="newsItem.headerImage">
-        <img class="img-responsive card-img-caps" src="{{ getUrlToImage(newsItem.headerImage.urls) }}">
+        <img class="img-responsive card-img-caps" src="{{ '/image/600/300/' + newsItem.headerImage.fileName }}">
       </div>
       <p class="text-uppercase"><strong>BY {{ newsItem.user.displayName }}</strong> | {{ newsItem.date | date }}</p>
       <div class="card-block">

@@ -17,7 +17,7 @@
     </div>
     <div class="card" *ngFor="let newsItem of newsItems">
       <div *ngIf="newsItem.headerImage">
-        <a [routerLink]="['/news-detail', newsItem.id]"><img src="{{ getUrlToImage(newsItem.headerImage.urls) }}" class="card-img-caps"></a>
+        <a [routerLink]="['/news-detail', newsItem.id]"><img src="{{ '/image/600/300/' + newsItem.headerImage.fileName }}" class="card-img-caps"></a>
       </div>
       <p class="text-uppercase"><strong>BY {{newsItem.user.displayName}}</strong> | {{ newsItem.date | date }}</p> 
     <div class="card-block">

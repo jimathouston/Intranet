@@ -1060,18 +1060,6 @@ references:
   commentId: Overload:Intranet.API.Domain.Models.Entities.Image.Id
   fullName: Intranet.API.Domain.Models.Entities.Image.Id
   nameWithType: Image.Id
-- uid: Intranet.API.Domain.Models.Entities.Image.Urls
-  name: Urls
-  href: api/Intranet.API.Domain.Models.Entities.Image.html#Intranet_API_Domain_Models_Entities_Image_Urls
-  commentId: P:Intranet.API.Domain.Models.Entities.Image.Urls
-  fullName: Intranet.API.Domain.Models.Entities.Image.Urls
-  nameWithType: Image.Urls
-- uid: Intranet.API.Domain.Models.Entities.Image.Urls*
-  name: Urls
-  href: api/Intranet.API.Domain.Models.Entities.Image.html#Intranet_API_Domain_Models_Entities_Image_Urls_
-  commentId: Overload:Intranet.API.Domain.Models.Entities.Image.Urls
-  fullName: Intranet.API.Domain.Models.Entities.Image.Urls
-  nameWithType: Image.Urls
 - uid: Intranet.API.Domain.Models.Entities.Location
   name: Location
   href: api/Intranet.API.Domain.Models.Entities.Location.html
@@ -3061,6 +3049,48 @@ references:
   commentId: Overload:Intranet.Web.Controllers.FileController.Put
   fullName: Intranet.Web.Controllers.FileController.Put
   nameWithType: FileController.Put
+- uid: Intranet.Web.Extensions
+  name: Intranet.Web.Extensions
+  href: api/Intranet.Web.Extensions.html
+  commentId: N:Intranet.Web.Extensions
+  fullName: Intranet.Web.Extensions
+  nameWithType: Intranet.Web.Extensions
+- uid: Intranet.Web.Extensions.ObjectExtensions
+  name: ObjectExtensions
+  href: api/Intranet.Web.Extensions.ObjectExtensions.html
+  commentId: T:Intranet.Web.Extensions.ObjectExtensions
+  fullName: Intranet.Web.Extensions.ObjectExtensions
+  nameWithType: ObjectExtensions
+- uid: Intranet.Web.Extensions.ObjectExtensions.IsNotNull*
+  name: IsNotNull
+  href: api/Intranet.Web.Extensions.ObjectExtensions.html#Intranet_Web_Extensions_ObjectExtensions_IsNotNull_
+  commentId: Overload:Intranet.Web.Extensions.ObjectExtensions.IsNotNull
+  fullName: Intranet.Web.Extensions.ObjectExtensions.IsNotNull
+  nameWithType: ObjectExtensions.IsNotNull
+- uid: Intranet.Web.Extensions.ObjectExtensions.IsNotNull``1(``0)
+  name: IsNotNull<T>(T)
+  href: api/Intranet.Web.Extensions.ObjectExtensions.html#Intranet_Web_Extensions_ObjectExtensions_IsNotNull__1___0_
+  commentId: M:Intranet.Web.Extensions.ObjectExtensions.IsNotNull``1(``0)
+  name.vb: IsNotNull(Of T)(T)
+  fullName: Intranet.Web.Extensions.ObjectExtensions.IsNotNull<T>(T)
+  fullName.vb: Intranet.Web.Extensions.ObjectExtensions.IsNotNull(Of T)(T)
+  nameWithType: ObjectExtensions.IsNotNull<T>(T)
+  nameWithType.vb: ObjectExtensions.IsNotNull(Of T)(T)
+- uid: Intranet.Web.Extensions.ObjectExtensions.IsNull*
+  name: IsNull
+  href: api/Intranet.Web.Extensions.ObjectExtensions.html#Intranet_Web_Extensions_ObjectExtensions_IsNull_
+  commentId: Overload:Intranet.Web.Extensions.ObjectExtensions.IsNull
+  fullName: Intranet.Web.Extensions.ObjectExtensions.IsNull
+  nameWithType: ObjectExtensions.IsNull
+- uid: Intranet.Web.Extensions.ObjectExtensions.IsNull``1(``0)
+  name: IsNull<T>(T)
+  href: api/Intranet.Web.Extensions.ObjectExtensions.html#Intranet_Web_Extensions_ObjectExtensions_IsNull__1___0_
+  commentId: M:Intranet.Web.Extensions.ObjectExtensions.IsNull``1(``0)
+  name.vb: IsNull(Of T)(T)
+  fullName: Intranet.Web.Extensions.ObjectExtensions.IsNull<T>(T)
+  fullName.vb: Intranet.Web.Extensions.ObjectExtensions.IsNull(Of T)(T)
+  nameWithType: ObjectExtensions.IsNull<T>(T)
+  nameWithType.vb: ObjectExtensions.IsNull(Of T)(T)
 - uid: Intranet.Web.Factories
   name: Intranet.Web.Factories
   href: api/Intranet.Web.Factories.html
@@ -3127,12 +3157,36 @@ references:
   commentId: Overload:Intranet.Web.Factories.IDateTimeFactory.GetCurrentDateTimeOffset
   fullName: Intranet.Web.Factories.IDateTimeFactory.GetCurrentDateTimeOffset
   nameWithType: IDateTimeFactory.GetCurrentDateTimeOffset
+- uid: Intranet.Web.Models
+  name: Intranet.Web.Models
+  href: api/Intranet.Web.Models.html
+  commentId: N:Intranet.Web.Models
+  fullName: Intranet.Web.Models
+  nameWithType: Intranet.Web.Models
 - uid: Intranet.Web.Models.Options
   name: Intranet.Web.Models.Options
   href: api/Intranet.Web.Models.Options.html
   commentId: N:Intranet.Web.Models.Options
   fullName: Intranet.Web.Models.Options
   nameWithType: Intranet.Web.Models.Options
+- uid: Intranet.Web.Models.Options.S3Options
+  name: S3Options
+  href: api/Intranet.Web.Models.Options.S3Options.html
+  commentId: T:Intranet.Web.Models.Options.S3Options
+  fullName: Intranet.Web.Models.Options.S3Options
+  nameWithType: S3Options
+- uid: Intranet.Web.Models.Options.S3Options.BucketName
+  name: BucketName
+  href: api/Intranet.Web.Models.Options.S3Options.html#Intranet_Web_Models_Options_S3Options_BucketName
+  commentId: P:Intranet.Web.Models.Options.S3Options.BucketName
+  fullName: Intranet.Web.Models.Options.S3Options.BucketName
+  nameWithType: S3Options.BucketName
+- uid: Intranet.Web.Models.Options.S3Options.BucketName*
+  name: BucketName
+  href: api/Intranet.Web.Models.Options.S3Options.html#Intranet_Web_Models_Options_S3Options_BucketName_
+  commentId: Overload:Intranet.Web.Models.Options.S3Options.BucketName
+  fullName: Intranet.Web.Models.Options.S3Options.BucketName
+  nameWithType: S3Options.BucketName
 - uid: Intranet.Web.Models.Options.TokenProviderOptions
   name: TokenProviderOptions
   href: api/Intranet.Web.Models.Options.TokenProviderOptions.html
@@ -3187,6 +3241,60 @@ references:
   commentId: Overload:Intranet.Web.Models.Options.TokenProviderOptions.SigningCredentials
   fullName: Intranet.Web.Models.Options.TokenProviderOptions.SigningCredentials
   nameWithType: TokenProviderOptions.SigningCredentials
+- uid: Intranet.Web.Models.StreamWithMetadata
+  name: StreamWithMetadata
+  href: api/Intranet.Web.Models.StreamWithMetadata.html
+  commentId: T:Intranet.Web.Models.StreamWithMetadata
+  fullName: Intranet.Web.Models.StreamWithMetadata
+  nameWithType: StreamWithMetadata
+- uid: Intranet.Web.Models.StreamWithMetadata.#ctor(System.IO.Stream,System.String,System.String)
+  name: StreamWithMetadata(Stream, String, String)
+  href: api/Intranet.Web.Models.StreamWithMetadata.html#Intranet_Web_Models_StreamWithMetadata__ctor_System_IO_Stream_System_String_System_String_
+  commentId: M:Intranet.Web.Models.StreamWithMetadata.#ctor(System.IO.Stream,System.String,System.String)
+  fullName: Intranet.Web.Models.StreamWithMetadata.StreamWithMetadata(System.IO.Stream, System.String, System.String)
+  nameWithType: StreamWithMetadata.StreamWithMetadata(Stream, String, String)
+- uid: Intranet.Web.Models.StreamWithMetadata.#ctor*
+  name: StreamWithMetadata
+  href: api/Intranet.Web.Models.StreamWithMetadata.html#Intranet_Web_Models_StreamWithMetadata__ctor_
+  commentId: Overload:Intranet.Web.Models.StreamWithMetadata.#ctor
+  fullName: Intranet.Web.Models.StreamWithMetadata.StreamWithMetadata
+  nameWithType: StreamWithMetadata.StreamWithMetadata
+- uid: Intranet.Web.Models.StreamWithMetadata.ContentType
+  name: ContentType
+  href: api/Intranet.Web.Models.StreamWithMetadata.html#Intranet_Web_Models_StreamWithMetadata_ContentType
+  commentId: P:Intranet.Web.Models.StreamWithMetadata.ContentType
+  fullName: Intranet.Web.Models.StreamWithMetadata.ContentType
+  nameWithType: StreamWithMetadata.ContentType
+- uid: Intranet.Web.Models.StreamWithMetadata.ContentType*
+  name: ContentType
+  href: api/Intranet.Web.Models.StreamWithMetadata.html#Intranet_Web_Models_StreamWithMetadata_ContentType_
+  commentId: Overload:Intranet.Web.Models.StreamWithMetadata.ContentType
+  fullName: Intranet.Web.Models.StreamWithMetadata.ContentType
+  nameWithType: StreamWithMetadata.ContentType
+- uid: Intranet.Web.Models.StreamWithMetadata.ETag
+  name: ETag
+  href: api/Intranet.Web.Models.StreamWithMetadata.html#Intranet_Web_Models_StreamWithMetadata_ETag
+  commentId: P:Intranet.Web.Models.StreamWithMetadata.ETag
+  fullName: Intranet.Web.Models.StreamWithMetadata.ETag
+  nameWithType: StreamWithMetadata.ETag
+- uid: Intranet.Web.Models.StreamWithMetadata.ETag*
+  name: ETag
+  href: api/Intranet.Web.Models.StreamWithMetadata.html#Intranet_Web_Models_StreamWithMetadata_ETag_
+  commentId: Overload:Intranet.Web.Models.StreamWithMetadata.ETag
+  fullName: Intranet.Web.Models.StreamWithMetadata.ETag
+  nameWithType: StreamWithMetadata.ETag
+- uid: Intranet.Web.Models.StreamWithMetadata.Stream
+  name: Stream
+  href: api/Intranet.Web.Models.StreamWithMetadata.html#Intranet_Web_Models_StreamWithMetadata_Stream
+  commentId: P:Intranet.Web.Models.StreamWithMetadata.Stream
+  fullName: Intranet.Web.Models.StreamWithMetadata.Stream
+  nameWithType: StreamWithMetadata.Stream
+- uid: Intranet.Web.Models.StreamWithMetadata.Stream*
+  name: Stream
+  href: api/Intranet.Web.Models.StreamWithMetadata.html#Intranet_Web_Models_StreamWithMetadata_Stream_
+  commentId: Overload:Intranet.Web.Models.StreamWithMetadata.Stream
+  fullName: Intranet.Web.Models.StreamWithMetadata.Stream
+  nameWithType: StreamWithMetadata.Stream
 - uid: Intranet.Web.Providers
   name: Intranet.Web.Providers
   href: api/Intranet.Web.Providers.html
@@ -3262,132 +3370,117 @@ references:
   commentId: T:Intranet.Web.Services.IFileStorageService
   fullName: Intranet.Web.Services.IFileStorageService
   nameWithType: IFileStorageService
-- uid: Intranet.Web.Services.IFileStorageService.GetFile(System.String)
-  name: GetFile(String)
-  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_GetFile_System_String_
-  commentId: M:Intranet.Web.Services.IFileStorageService.GetFile(System.String)
-  fullName: Intranet.Web.Services.IFileStorageService.GetFile(System.String)
-  nameWithType: IFileStorageService.GetFile(String)
-- uid: Intranet.Web.Services.IFileStorageService.GetFile*
-  name: GetFile
-  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_GetFile_
-  commentId: Overload:Intranet.Web.Services.IFileStorageService.GetFile
-  fullName: Intranet.Web.Services.IFileStorageService.GetFile
-  nameWithType: IFileStorageService.GetFile
-- uid: Intranet.Web.Services.IFileStorageService.GetImage(System.String,Intranet.Shared.Common.Enums.ImageVariantType)
-  name: GetImage(String, ImageVariantType)
-  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_GetImage_System_String_Intranet_Shared_Common_Enums_ImageVariantType_
-  commentId: M:Intranet.Web.Services.IFileStorageService.GetImage(System.String,Intranet.Shared.Common.Enums.ImageVariantType)
-  fullName: Intranet.Web.Services.IFileStorageService.GetImage(System.String, Intranet.Shared.Common.Enums.ImageVariantType)
-  nameWithType: IFileStorageService.GetImage(String, ImageVariantType)
-- uid: Intranet.Web.Services.IFileStorageService.GetImage*
-  name: GetImage
-  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_GetImage_
-  commentId: Overload:Intranet.Web.Services.IFileStorageService.GetImage
-  fullName: Intranet.Web.Services.IFileStorageService.GetImage
-  nameWithType: IFileStorageService.GetImage
-- uid: Intranet.Web.Services.IFileStorageService.SaveBlob(System.String,Microsoft.AspNetCore.Http.IFormFile)
-  name: SaveBlob(String, IFormFile)
-  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_SaveBlob_System_String_Microsoft_AspNetCore_Http_IFormFile_
-  commentId: M:Intranet.Web.Services.IFileStorageService.SaveBlob(System.String,Microsoft.AspNetCore.Http.IFormFile)
-  fullName: Intranet.Web.Services.IFileStorageService.SaveBlob(System.String, Microsoft.AspNetCore.Http.IFormFile)
-  nameWithType: IFileStorageService.SaveBlob(String, IFormFile)
-- uid: Intranet.Web.Services.IFileStorageService.SaveBlob*
-  name: SaveBlob
-  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_SaveBlob_
-  commentId: Overload:Intranet.Web.Services.IFileStorageService.SaveBlob
-  fullName: Intranet.Web.Services.IFileStorageService.SaveBlob
-  nameWithType: IFileStorageService.SaveBlob
-- uid: Intranet.Web.Services.IFileStorageService.SaveImage(System.String,Microsoft.AspNetCore.Http.IFormFile)
-  name: SaveImage(String, IFormFile)
-  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_SaveImage_System_String_Microsoft_AspNetCore_Http_IFormFile_
-  commentId: M:Intranet.Web.Services.IFileStorageService.SaveImage(System.String,Microsoft.AspNetCore.Http.IFormFile)
-  fullName: Intranet.Web.Services.IFileStorageService.SaveImage(System.String, Microsoft.AspNetCore.Http.IFormFile)
-  nameWithType: IFileStorageService.SaveImage(String, IFormFile)
-- uid: Intranet.Web.Services.IFileStorageService.SaveImage*
-  name: SaveImage
-  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_SaveImage_
-  commentId: Overload:Intranet.Web.Services.IFileStorageService.SaveImage
-  fullName: Intranet.Web.Services.IFileStorageService.SaveImage
-  nameWithType: IFileStorageService.SaveImage
+- uid: Intranet.Web.Services.IFileStorageService.GetBlobAsync(System.String)
+  name: GetBlobAsync(String)
+  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_GetBlobAsync_System_String_
+  commentId: M:Intranet.Web.Services.IFileStorageService.GetBlobAsync(System.String)
+  fullName: Intranet.Web.Services.IFileStorageService.GetBlobAsync(System.String)
+  nameWithType: IFileStorageService.GetBlobAsync(String)
+- uid: Intranet.Web.Services.IFileStorageService.GetBlobAsync*
+  name: GetBlobAsync
+  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_GetBlobAsync_
+  commentId: Overload:Intranet.Web.Services.IFileStorageService.GetBlobAsync
+  fullName: Intranet.Web.Services.IFileStorageService.GetBlobAsync
+  nameWithType: IFileStorageService.GetBlobAsync
+- uid: Intranet.Web.Services.IFileStorageService.GetImageAsync(System.String)
+  name: GetImageAsync(String)
+  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_GetImageAsync_System_String_
+  commentId: M:Intranet.Web.Services.IFileStorageService.GetImageAsync(System.String)
+  fullName: Intranet.Web.Services.IFileStorageService.GetImageAsync(System.String)
+  nameWithType: IFileStorageService.GetImageAsync(String)
+- uid: Intranet.Web.Services.IFileStorageService.GetImageAsync(System.String,System.Int32,System.Int32)
+  name: GetImageAsync(String, Int32, Int32)
+  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_GetImageAsync_System_String_System_Int32_System_Int32_
+  commentId: M:Intranet.Web.Services.IFileStorageService.GetImageAsync(System.String,System.Int32,System.Int32)
+  fullName: Intranet.Web.Services.IFileStorageService.GetImageAsync(System.String, System.Int32, System.Int32)
+  nameWithType: IFileStorageService.GetImageAsync(String, Int32, Int32)
+- uid: Intranet.Web.Services.IFileStorageService.GetImageAsync*
+  name: GetImageAsync
+  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_GetImageAsync_
+  commentId: Overload:Intranet.Web.Services.IFileStorageService.GetImageAsync
+  fullName: Intranet.Web.Services.IFileStorageService.GetImageAsync
+  nameWithType: IFileStorageService.GetImageAsync
+- uid: Intranet.Web.Services.IFileStorageService.SetBlobAsync(Microsoft.AspNetCore.Http.IFormFile)
+  name: SetBlobAsync(IFormFile)
+  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_SetBlobAsync_Microsoft_AspNetCore_Http_IFormFile_
+  commentId: M:Intranet.Web.Services.IFileStorageService.SetBlobAsync(Microsoft.AspNetCore.Http.IFormFile)
+  fullName: Intranet.Web.Services.IFileStorageService.SetBlobAsync(Microsoft.AspNetCore.Http.IFormFile)
+  nameWithType: IFileStorageService.SetBlobAsync(IFormFile)
+- uid: Intranet.Web.Services.IFileStorageService.SetBlobAsync*
+  name: SetBlobAsync
+  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_SetBlobAsync_
+  commentId: Overload:Intranet.Web.Services.IFileStorageService.SetBlobAsync
+  fullName: Intranet.Web.Services.IFileStorageService.SetBlobAsync
+  nameWithType: IFileStorageService.SetBlobAsync
+- uid: Intranet.Web.Services.IFileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile)
+  name: SetImageAsync(IFormFile)
+  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_SetImageAsync_Microsoft_AspNetCore_Http_IFormFile_
+  commentId: M:Intranet.Web.Services.IFileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile)
+  fullName: Intranet.Web.Services.IFileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile)
+  nameWithType: IFileStorageService.SetImageAsync(IFormFile)
+- uid: Intranet.Web.Services.IFileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile,System.Int32,System.Int32)
+  name: SetImageAsync(IFormFile, Int32, Int32)
+  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_SetImageAsync_Microsoft_AspNetCore_Http_IFormFile_System_Int32_System_Int32_
+  commentId: M:Intranet.Web.Services.IFileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile,System.Int32,System.Int32)
+  fullName: Intranet.Web.Services.IFileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile, System.Int32, System.Int32)
+  nameWithType: IFileStorageService.SetImageAsync(IFormFile, Int32, Int32)
+- uid: Intranet.Web.Services.IFileStorageService.SetImageAsync(System.IO.Stream,System.String,System.Int32,System.Int32)
+  name: SetImageAsync(Stream, String, Int32, Int32)
+  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_SetImageAsync_System_IO_Stream_System_String_System_Int32_System_Int32_
+  commentId: M:Intranet.Web.Services.IFileStorageService.SetImageAsync(System.IO.Stream,System.String,System.Int32,System.Int32)
+  fullName: Intranet.Web.Services.IFileStorageService.SetImageAsync(System.IO.Stream, System.String, System.Int32, System.Int32)
+  nameWithType: IFileStorageService.SetImageAsync(Stream, String, Int32, Int32)
+- uid: Intranet.Web.Services.IFileStorageService.SetImageAsync*
+  name: SetImageAsync
+  href: api/Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_SetImageAsync_
+  commentId: Overload:Intranet.Web.Services.IFileStorageService.SetImageAsync
+  fullName: Intranet.Web.Services.IFileStorageService.SetImageAsync
+  nameWithType: IFileStorageService.SetImageAsync
 - uid: Intranet.Web.Services.IImageService
   name: IImageService
   href: api/Intranet.Web.Services.IImageService.html
   commentId: T:Intranet.Web.Services.IImageService
   fullName: Intranet.Web.Services.IImageService
   nameWithType: IImageService
-- uid: Intranet.Web.Services.IImageService.CropAndResizeImage(ImageSharp.Image{ImageSharp.Rgba32},Intranet.Shared.Common.Enums.ImageVariantType)
-  name: CropAndResizeImage(Image<Rgba32>, ImageVariantType)
-  href: api/Intranet.Web.Services.IImageService.html#Intranet_Web_Services_IImageService_CropAndResizeImage_ImageSharp_Image_ImageSharp_Rgba32__Intranet_Shared_Common_Enums_ImageVariantType_
-  commentId: M:Intranet.Web.Services.IImageService.CropAndResizeImage(ImageSharp.Image{ImageSharp.Rgba32},Intranet.Shared.Common.Enums.ImageVariantType)
-  name.vb: CropAndResizeImage(Image(Of Rgba32), ImageVariantType)
-  fullName: Intranet.Web.Services.IImageService.CropAndResizeImage(ImageSharp.Image<ImageSharp.Rgba32>, Intranet.Shared.Common.Enums.ImageVariantType)
-  fullName.vb: Intranet.Web.Services.IImageService.CropAndResizeImage(ImageSharp.Image(Of ImageSharp.Rgba32), Intranet.Shared.Common.Enums.ImageVariantType)
-  nameWithType: IImageService.CropAndResizeImage(Image<Rgba32>, ImageVariantType)
-  nameWithType.vb: IImageService.CropAndResizeImage(Image(Of Rgba32), ImageVariantType)
+- uid: Intranet.Web.Services.IImageService.CropAndResizeImage(ImageSharp.Image{ImageSharp.Rgba32},System.Int32,System.Int32)
+  name: CropAndResizeImage(Image<Rgba32>, Int32, Int32)
+  href: api/Intranet.Web.Services.IImageService.html#Intranet_Web_Services_IImageService_CropAndResizeImage_ImageSharp_Image_ImageSharp_Rgba32__System_Int32_System_Int32_
+  commentId: M:Intranet.Web.Services.IImageService.CropAndResizeImage(ImageSharp.Image{ImageSharp.Rgba32},System.Int32,System.Int32)
+  name.vb: CropAndResizeImage(Image(Of Rgba32), Int32, Int32)
+  fullName: Intranet.Web.Services.IImageService.CropAndResizeImage(ImageSharp.Image<ImageSharp.Rgba32>, System.Int32, System.Int32)
+  fullName.vb: Intranet.Web.Services.IImageService.CropAndResizeImage(ImageSharp.Image(Of ImageSharp.Rgba32), System.Int32, System.Int32)
+  nameWithType: IImageService.CropAndResizeImage(Image<Rgba32>, Int32, Int32)
+  nameWithType.vb: IImageService.CropAndResizeImage(Image(Of Rgba32), Int32, Int32)
 - uid: Intranet.Web.Services.IImageService.CropAndResizeImage*
   name: CropAndResizeImage
   href: api/Intranet.Web.Services.IImageService.html#Intranet_Web_Services_IImageService_CropAndResizeImage_
   commentId: Overload:Intranet.Web.Services.IImageService.CropAndResizeImage
   fullName: Intranet.Web.Services.IImageService.CropAndResizeImage
   nameWithType: IImageService.CropAndResizeImage
-- uid: Intranet.Web.Services.IImageService.CropImage(ImageSharp.Image{ImageSharp.Rgba32},Intranet.Shared.Common.Enums.ImageVariantType)
-  name: CropImage(Image<Rgba32>, ImageVariantType)
-  href: api/Intranet.Web.Services.IImageService.html#Intranet_Web_Services_IImageService_CropImage_ImageSharp_Image_ImageSharp_Rgba32__Intranet_Shared_Common_Enums_ImageVariantType_
-  commentId: M:Intranet.Web.Services.IImageService.CropImage(ImageSharp.Image{ImageSharp.Rgba32},Intranet.Shared.Common.Enums.ImageVariantType)
-  name.vb: CropImage(Image(Of Rgba32), ImageVariantType)
-  fullName: Intranet.Web.Services.IImageService.CropImage(ImageSharp.Image<ImageSharp.Rgba32>, Intranet.Shared.Common.Enums.ImageVariantType)
-  fullName.vb: Intranet.Web.Services.IImageService.CropImage(ImageSharp.Image(Of ImageSharp.Rgba32), Intranet.Shared.Common.Enums.ImageVariantType)
-  nameWithType: IImageService.CropImage(Image<Rgba32>, ImageVariantType)
-  nameWithType.vb: IImageService.CropImage(Image(Of Rgba32), ImageVariantType)
+- uid: Intranet.Web.Services.IImageService.CropImage(ImageSharp.Image{ImageSharp.Rgba32},System.Int32,System.Int32)
+  name: CropImage(Image<Rgba32>, Int32, Int32)
+  href: api/Intranet.Web.Services.IImageService.html#Intranet_Web_Services_IImageService_CropImage_ImageSharp_Image_ImageSharp_Rgba32__System_Int32_System_Int32_
+  commentId: M:Intranet.Web.Services.IImageService.CropImage(ImageSharp.Image{ImageSharp.Rgba32},System.Int32,System.Int32)
+  name.vb: CropImage(Image(Of Rgba32), Int32, Int32)
+  fullName: Intranet.Web.Services.IImageService.CropImage(ImageSharp.Image<ImageSharp.Rgba32>, System.Int32, System.Int32)
+  fullName.vb: Intranet.Web.Services.IImageService.CropImage(ImageSharp.Image(Of ImageSharp.Rgba32), System.Int32, System.Int32)
+  nameWithType: IImageService.CropImage(Image<Rgba32>, Int32, Int32)
+  nameWithType.vb: IImageService.CropImage(Image(Of Rgba32), Int32, Int32)
 - uid: Intranet.Web.Services.IImageService.CropImage*
   name: CropImage
   href: api/Intranet.Web.Services.IImageService.html#Intranet_Web_Services_IImageService_CropImage_
   commentId: Overload:Intranet.Web.Services.IImageService.CropImage
   fullName: Intranet.Web.Services.IImageService.CropImage
   nameWithType: IImageService.CropImage
-- uid: Intranet.Web.Services.IImageService.GetImageVariantType(System.Int32,System.Int32)
-  name: GetImageVariantType(Int32, Int32)
-  href: api/Intranet.Web.Services.IImageService.html#Intranet_Web_Services_IImageService_GetImageVariantType_System_Int32_System_Int32_
-  commentId: M:Intranet.Web.Services.IImageService.GetImageVariantType(System.Int32,System.Int32)
-  fullName: Intranet.Web.Services.IImageService.GetImageVariantType(System.Int32, System.Int32)
-  nameWithType: IImageService.GetImageVariantType(Int32, Int32)
-- uid: Intranet.Web.Services.IImageService.GetImageVariantType*
-  name: GetImageVariantType
-  href: api/Intranet.Web.Services.IImageService.html#Intranet_Web_Services_IImageService_GetImageVariantType_
-  commentId: Overload:Intranet.Web.Services.IImageService.GetImageVariantType
-  fullName: Intranet.Web.Services.IImageService.GetImageVariantType
-  nameWithType: IImageService.GetImageVariantType
-- uid: Intranet.Web.Services.IImageService.GetSize(Intranet.Shared.Common.Enums.ImageVariantType)
-  name: GetSize(ImageVariantType)
-  href: api/Intranet.Web.Services.IImageService.html#Intranet_Web_Services_IImageService_GetSize_Intranet_Shared_Common_Enums_ImageVariantType_
-  commentId: M:Intranet.Web.Services.IImageService.GetSize(Intranet.Shared.Common.Enums.ImageVariantType)
-  fullName: Intranet.Web.Services.IImageService.GetSize(Intranet.Shared.Common.Enums.ImageVariantType)
-  nameWithType: IImageService.GetSize(ImageVariantType)
-- uid: Intranet.Web.Services.IImageService.GetSize(Intranet.Shared.Common.Enums.ImageVariantType,ImageSharp.Image{ImageSharp.Rgba32})
-  name: GetSize(ImageVariantType, Image<Rgba32>)
-  href: api/Intranet.Web.Services.IImageService.html#Intranet_Web_Services_IImageService_GetSize_Intranet_Shared_Common_Enums_ImageVariantType_ImageSharp_Image_ImageSharp_Rgba32__
-  commentId: M:Intranet.Web.Services.IImageService.GetSize(Intranet.Shared.Common.Enums.ImageVariantType,ImageSharp.Image{ImageSharp.Rgba32})
-  name.vb: GetSize(ImageVariantType, Image(Of Rgba32))
-  fullName: Intranet.Web.Services.IImageService.GetSize(Intranet.Shared.Common.Enums.ImageVariantType, ImageSharp.Image<ImageSharp.Rgba32>)
-  fullName.vb: Intranet.Web.Services.IImageService.GetSize(Intranet.Shared.Common.Enums.ImageVariantType, ImageSharp.Image(Of ImageSharp.Rgba32))
-  nameWithType: IImageService.GetSize(ImageVariantType, Image<Rgba32>)
-  nameWithType.vb: IImageService.GetSize(ImageVariantType, Image(Of Rgba32))
-- uid: Intranet.Web.Services.IImageService.GetSize*
-  name: GetSize
-  href: api/Intranet.Web.Services.IImageService.html#Intranet_Web_Services_IImageService_GetSize_
-  commentId: Overload:Intranet.Web.Services.IImageService.GetSize
-  fullName: Intranet.Web.Services.IImageService.GetSize
-  nameWithType: IImageService.GetSize
-- uid: Intranet.Web.Services.IImageService.ResizeImage(ImageSharp.Image{ImageSharp.Rgba32},Intranet.Shared.Common.Enums.ImageVariantType)
-  name: ResizeImage(Image<Rgba32>, ImageVariantType)
-  href: api/Intranet.Web.Services.IImageService.html#Intranet_Web_Services_IImageService_ResizeImage_ImageSharp_Image_ImageSharp_Rgba32__Intranet_Shared_Common_Enums_ImageVariantType_
-  commentId: M:Intranet.Web.Services.IImageService.ResizeImage(ImageSharp.Image{ImageSharp.Rgba32},Intranet.Shared.Common.Enums.ImageVariantType)
-  name.vb: ResizeImage(Image(Of Rgba32), ImageVariantType)
-  fullName: Intranet.Web.Services.IImageService.ResizeImage(ImageSharp.Image<ImageSharp.Rgba32>, Intranet.Shared.Common.Enums.ImageVariantType)
-  fullName.vb: Intranet.Web.Services.IImageService.ResizeImage(ImageSharp.Image(Of ImageSharp.Rgba32), Intranet.Shared.Common.Enums.ImageVariantType)
-  nameWithType: IImageService.ResizeImage(Image<Rgba32>, ImageVariantType)
-  nameWithType.vb: IImageService.ResizeImage(Image(Of Rgba32), ImageVariantType)
+- uid: Intranet.Web.Services.IImageService.ResizeImage(ImageSharp.Image{ImageSharp.Rgba32},System.Int32,System.Int32)
+  name: ResizeImage(Image<Rgba32>, Int32, Int32)
+  href: api/Intranet.Web.Services.IImageService.html#Intranet_Web_Services_IImageService_ResizeImage_ImageSharp_Image_ImageSharp_Rgba32__System_Int32_System_Int32_
+  commentId: M:Intranet.Web.Services.IImageService.ResizeImage(ImageSharp.Image{ImageSharp.Rgba32},System.Int32,System.Int32)
+  name.vb: ResizeImage(Image(Of Rgba32), Int32, Int32)
+  fullName: Intranet.Web.Services.IImageService.ResizeImage(ImageSharp.Image<ImageSharp.Rgba32>, System.Int32, System.Int32)
+  fullName.vb: Intranet.Web.Services.IImageService.ResizeImage(ImageSharp.Image(Of ImageSharp.Rgba32), System.Int32, System.Int32)
+  nameWithType: IImageService.ResizeImage(Image<Rgba32>, Int32, Int32)
+  nameWithType.vb: IImageService.ResizeImage(Image(Of Rgba32), Int32, Int32)
 - uid: Intranet.Web.Services.IImageService.ResizeImage*
   name: ResizeImage
   href: api/Intranet.Web.Services.IImageService.html#Intranet_Web_Services_IImageService_ResizeImage_
@@ -3400,78 +3493,45 @@ references:
   commentId: T:Intranet.Web.Services.ImageService
   fullName: Intranet.Web.Services.ImageService
   nameWithType: ImageService
-- uid: Intranet.Web.Services.ImageService.CropAndResizeImage(ImageSharp.Image{ImageSharp.Rgba32},Intranet.Shared.Common.Enums.ImageVariantType)
-  name: CropAndResizeImage(Image<Rgba32>, ImageVariantType)
-  href: api/Intranet.Web.Services.ImageService.html#Intranet_Web_Services_ImageService_CropAndResizeImage_ImageSharp_Image_ImageSharp_Rgba32__Intranet_Shared_Common_Enums_ImageVariantType_
-  commentId: M:Intranet.Web.Services.ImageService.CropAndResizeImage(ImageSharp.Image{ImageSharp.Rgba32},Intranet.Shared.Common.Enums.ImageVariantType)
-  name.vb: CropAndResizeImage(Image(Of Rgba32), ImageVariantType)
-  fullName: Intranet.Web.Services.ImageService.CropAndResizeImage(ImageSharp.Image<ImageSharp.Rgba32>, Intranet.Shared.Common.Enums.ImageVariantType)
-  fullName.vb: Intranet.Web.Services.ImageService.CropAndResizeImage(ImageSharp.Image(Of ImageSharp.Rgba32), Intranet.Shared.Common.Enums.ImageVariantType)
-  nameWithType: ImageService.CropAndResizeImage(Image<Rgba32>, ImageVariantType)
-  nameWithType.vb: ImageService.CropAndResizeImage(Image(Of Rgba32), ImageVariantType)
+- uid: Intranet.Web.Services.ImageService.CropAndResizeImage(ImageSharp.Image{ImageSharp.Rgba32},System.Int32,System.Int32)
+  name: CropAndResizeImage(Image<Rgba32>, Int32, Int32)
+  href: api/Intranet.Web.Services.ImageService.html#Intranet_Web_Services_ImageService_CropAndResizeImage_ImageSharp_Image_ImageSharp_Rgba32__System_Int32_System_Int32_
+  commentId: M:Intranet.Web.Services.ImageService.CropAndResizeImage(ImageSharp.Image{ImageSharp.Rgba32},System.Int32,System.Int32)
+  name.vb: CropAndResizeImage(Image(Of Rgba32), Int32, Int32)
+  fullName: Intranet.Web.Services.ImageService.CropAndResizeImage(ImageSharp.Image<ImageSharp.Rgba32>, System.Int32, System.Int32)
+  fullName.vb: Intranet.Web.Services.ImageService.CropAndResizeImage(ImageSharp.Image(Of ImageSharp.Rgba32), System.Int32, System.Int32)
+  nameWithType: ImageService.CropAndResizeImage(Image<Rgba32>, Int32, Int32)
+  nameWithType.vb: ImageService.CropAndResizeImage(Image(Of Rgba32), Int32, Int32)
 - uid: Intranet.Web.Services.ImageService.CropAndResizeImage*
   name: CropAndResizeImage
   href: api/Intranet.Web.Services.ImageService.html#Intranet_Web_Services_ImageService_CropAndResizeImage_
   commentId: Overload:Intranet.Web.Services.ImageService.CropAndResizeImage
   fullName: Intranet.Web.Services.ImageService.CropAndResizeImage
   nameWithType: ImageService.CropAndResizeImage
-- uid: Intranet.Web.Services.ImageService.CropImage(ImageSharp.Image{ImageSharp.Rgba32},Intranet.Shared.Common.Enums.ImageVariantType)
-  name: CropImage(Image<Rgba32>, ImageVariantType)
-  href: api/Intranet.Web.Services.ImageService.html#Intranet_Web_Services_ImageService_CropImage_ImageSharp_Image_ImageSharp_Rgba32__Intranet_Shared_Common_Enums_ImageVariantType_
-  commentId: M:Intranet.Web.Services.ImageService.CropImage(ImageSharp.Image{ImageSharp.Rgba32},Intranet.Shared.Common.Enums.ImageVariantType)
-  name.vb: CropImage(Image(Of Rgba32), ImageVariantType)
-  fullName: Intranet.Web.Services.ImageService.CropImage(ImageSharp.Image<ImageSharp.Rgba32>, Intranet.Shared.Common.Enums.ImageVariantType)
-  fullName.vb: Intranet.Web.Services.ImageService.CropImage(ImageSharp.Image(Of ImageSharp.Rgba32), Intranet.Shared.Common.Enums.ImageVariantType)
-  nameWithType: ImageService.CropImage(Image<Rgba32>, ImageVariantType)
-  nameWithType.vb: ImageService.CropImage(Image(Of Rgba32), ImageVariantType)
+- uid: Intranet.Web.Services.ImageService.CropImage(ImageSharp.Image{ImageSharp.Rgba32},System.Int32,System.Int32)
+  name: CropImage(Image<Rgba32>, Int32, Int32)
+  href: api/Intranet.Web.Services.ImageService.html#Intranet_Web_Services_ImageService_CropImage_ImageSharp_Image_ImageSharp_Rgba32__System_Int32_System_Int32_
+  commentId: M:Intranet.Web.Services.ImageService.CropImage(ImageSharp.Image{ImageSharp.Rgba32},System.Int32,System.Int32)
+  name.vb: CropImage(Image(Of Rgba32), Int32, Int32)
+  fullName: Intranet.Web.Services.ImageService.CropImage(ImageSharp.Image<ImageSharp.Rgba32>, System.Int32, System.Int32)
+  fullName.vb: Intranet.Web.Services.ImageService.CropImage(ImageSharp.Image(Of ImageSharp.Rgba32), System.Int32, System.Int32)
+  nameWithType: ImageService.CropImage(Image<Rgba32>, Int32, Int32)
+  nameWithType.vb: ImageService.CropImage(Image(Of Rgba32), Int32, Int32)
 - uid: Intranet.Web.Services.ImageService.CropImage*
   name: CropImage
   href: api/Intranet.Web.Services.ImageService.html#Intranet_Web_Services_ImageService_CropImage_
   commentId: Overload:Intranet.Web.Services.ImageService.CropImage
   fullName: Intranet.Web.Services.ImageService.CropImage
   nameWithType: ImageService.CropImage
-- uid: Intranet.Web.Services.ImageService.GetImageVariantType(System.Int32,System.Int32)
-  name: GetImageVariantType(Int32, Int32)
-  href: api/Intranet.Web.Services.ImageService.html#Intranet_Web_Services_ImageService_GetImageVariantType_System_Int32_System_Int32_
-  commentId: M:Intranet.Web.Services.ImageService.GetImageVariantType(System.Int32,System.Int32)
-  fullName: Intranet.Web.Services.ImageService.GetImageVariantType(System.Int32, System.Int32)
-  nameWithType: ImageService.GetImageVariantType(Int32, Int32)
-- uid: Intranet.Web.Services.ImageService.GetImageVariantType*
-  name: GetImageVariantType
-  href: api/Intranet.Web.Services.ImageService.html#Intranet_Web_Services_ImageService_GetImageVariantType_
-  commentId: Overload:Intranet.Web.Services.ImageService.GetImageVariantType
-  fullName: Intranet.Web.Services.ImageService.GetImageVariantType
-  nameWithType: ImageService.GetImageVariantType
-- uid: Intranet.Web.Services.ImageService.GetSize(Intranet.Shared.Common.Enums.ImageVariantType)
-  name: GetSize(ImageVariantType)
-  href: api/Intranet.Web.Services.ImageService.html#Intranet_Web_Services_ImageService_GetSize_Intranet_Shared_Common_Enums_ImageVariantType_
-  commentId: M:Intranet.Web.Services.ImageService.GetSize(Intranet.Shared.Common.Enums.ImageVariantType)
-  fullName: Intranet.Web.Services.ImageService.GetSize(Intranet.Shared.Common.Enums.ImageVariantType)
-  nameWithType: ImageService.GetSize(ImageVariantType)
-- uid: Intranet.Web.Services.ImageService.GetSize(Intranet.Shared.Common.Enums.ImageVariantType,ImageSharp.Image{ImageSharp.Rgba32})
-  name: GetSize(ImageVariantType, Image<Rgba32>)
-  href: api/Intranet.Web.Services.ImageService.html#Intranet_Web_Services_ImageService_GetSize_Intranet_Shared_Common_Enums_ImageVariantType_ImageSharp_Image_ImageSharp_Rgba32__
-  commentId: M:Intranet.Web.Services.ImageService.GetSize(Intranet.Shared.Common.Enums.ImageVariantType,ImageSharp.Image{ImageSharp.Rgba32})
-  name.vb: GetSize(ImageVariantType, Image(Of Rgba32))
-  fullName: Intranet.Web.Services.ImageService.GetSize(Intranet.Shared.Common.Enums.ImageVariantType, ImageSharp.Image<ImageSharp.Rgba32>)
-  fullName.vb: Intranet.Web.Services.ImageService.GetSize(Intranet.Shared.Common.Enums.ImageVariantType, ImageSharp.Image(Of ImageSharp.Rgba32))
-  nameWithType: ImageService.GetSize(ImageVariantType, Image<Rgba32>)
-  nameWithType.vb: ImageService.GetSize(ImageVariantType, Image(Of Rgba32))
-- uid: Intranet.Web.Services.ImageService.GetSize*
-  name: GetSize
-  href: api/Intranet.Web.Services.ImageService.html#Intranet_Web_Services_ImageService_GetSize_
-  commentId: Overload:Intranet.Web.Services.ImageService.GetSize
-  fullName: Intranet.Web.Services.ImageService.GetSize
-  nameWithType: ImageService.GetSize
-- uid: Intranet.Web.Services.ImageService.ResizeImage(ImageSharp.Image{ImageSharp.Rgba32},Intranet.Shared.Common.Enums.ImageVariantType)
-  name: ResizeImage(Image<Rgba32>, ImageVariantType)
-  href: api/Intranet.Web.Services.ImageService.html#Intranet_Web_Services_ImageService_ResizeImage_ImageSharp_Image_ImageSharp_Rgba32__Intranet_Shared_Common_Enums_ImageVariantType_
-  commentId: M:Intranet.Web.Services.ImageService.ResizeImage(ImageSharp.Image{ImageSharp.Rgba32},Intranet.Shared.Common.Enums.ImageVariantType)
-  name.vb: ResizeImage(Image(Of Rgba32), ImageVariantType)
-  fullName: Intranet.Web.Services.ImageService.ResizeImage(ImageSharp.Image<ImageSharp.Rgba32>, Intranet.Shared.Common.Enums.ImageVariantType)
-  fullName.vb: Intranet.Web.Services.ImageService.ResizeImage(ImageSharp.Image(Of ImageSharp.Rgba32), Intranet.Shared.Common.Enums.ImageVariantType)
-  nameWithType: ImageService.ResizeImage(Image<Rgba32>, ImageVariantType)
-  nameWithType.vb: ImageService.ResizeImage(Image(Of Rgba32), ImageVariantType)
+- uid: Intranet.Web.Services.ImageService.ResizeImage(ImageSharp.Image{ImageSharp.Rgba32},System.Int32,System.Int32)
+  name: ResizeImage(Image<Rgba32>, Int32, Int32)
+  href: api/Intranet.Web.Services.ImageService.html#Intranet_Web_Services_ImageService_ResizeImage_ImageSharp_Image_ImageSharp_Rgba32__System_Int32_System_Int32_
+  commentId: M:Intranet.Web.Services.ImageService.ResizeImage(ImageSharp.Image{ImageSharp.Rgba32},System.Int32,System.Int32)
+  name.vb: ResizeImage(Image(Of Rgba32), Int32, Int32)
+  fullName: Intranet.Web.Services.ImageService.ResizeImage(ImageSharp.Image<ImageSharp.Rgba32>, System.Int32, System.Int32)
+  fullName.vb: Intranet.Web.Services.ImageService.ResizeImage(ImageSharp.Image(Of ImageSharp.Rgba32), System.Int32, System.Int32)
+  nameWithType: ImageService.ResizeImage(Image<Rgba32>, Int32, Int32)
+  nameWithType.vb: ImageService.ResizeImage(Image(Of Rgba32), Int32, Int32)
 - uid: Intranet.Web.Services.ImageService.ResizeImage*
   name: ResizeImage
   href: api/Intranet.Web.Services.ImageService.html#Intranet_Web_Services_ImageService_ResizeImage_
@@ -3496,54 +3556,159 @@ references:
   commentId: Overload:Intranet.Web.Services.LocalFileStorageService.#ctor
   fullName: Intranet.Web.Services.LocalFileStorageService.LocalFileStorageService
   nameWithType: LocalFileStorageService.LocalFileStorageService
-- uid: Intranet.Web.Services.LocalFileStorageService.GetFile(System.String)
-  name: GetFile(String)
-  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_GetFile_System_String_
-  commentId: M:Intranet.Web.Services.LocalFileStorageService.GetFile(System.String)
-  fullName: Intranet.Web.Services.LocalFileStorageService.GetFile(System.String)
-  nameWithType: LocalFileStorageService.GetFile(String)
-- uid: Intranet.Web.Services.LocalFileStorageService.GetFile*
-  name: GetFile
-  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_GetFile_
-  commentId: Overload:Intranet.Web.Services.LocalFileStorageService.GetFile
-  fullName: Intranet.Web.Services.LocalFileStorageService.GetFile
-  nameWithType: LocalFileStorageService.GetFile
-- uid: Intranet.Web.Services.LocalFileStorageService.GetImage(System.String,Intranet.Shared.Common.Enums.ImageVariantType)
-  name: GetImage(String, ImageVariantType)
-  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_GetImage_System_String_Intranet_Shared_Common_Enums_ImageVariantType_
-  commentId: M:Intranet.Web.Services.LocalFileStorageService.GetImage(System.String,Intranet.Shared.Common.Enums.ImageVariantType)
-  fullName: Intranet.Web.Services.LocalFileStorageService.GetImage(System.String, Intranet.Shared.Common.Enums.ImageVariantType)
-  nameWithType: LocalFileStorageService.GetImage(String, ImageVariantType)
-- uid: Intranet.Web.Services.LocalFileStorageService.GetImage*
-  name: GetImage
-  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_GetImage_
-  commentId: Overload:Intranet.Web.Services.LocalFileStorageService.GetImage
-  fullName: Intranet.Web.Services.LocalFileStorageService.GetImage
-  nameWithType: LocalFileStorageService.GetImage
-- uid: Intranet.Web.Services.LocalFileStorageService.SaveBlob(System.String,Microsoft.AspNetCore.Http.IFormFile)
-  name: SaveBlob(String, IFormFile)
-  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_SaveBlob_System_String_Microsoft_AspNetCore_Http_IFormFile_
-  commentId: M:Intranet.Web.Services.LocalFileStorageService.SaveBlob(System.String,Microsoft.AspNetCore.Http.IFormFile)
-  fullName: Intranet.Web.Services.LocalFileStorageService.SaveBlob(System.String, Microsoft.AspNetCore.Http.IFormFile)
-  nameWithType: LocalFileStorageService.SaveBlob(String, IFormFile)
-- uid: Intranet.Web.Services.LocalFileStorageService.SaveBlob*
-  name: SaveBlob
-  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_SaveBlob_
-  commentId: Overload:Intranet.Web.Services.LocalFileStorageService.SaveBlob
-  fullName: Intranet.Web.Services.LocalFileStorageService.SaveBlob
-  nameWithType: LocalFileStorageService.SaveBlob
-- uid: Intranet.Web.Services.LocalFileStorageService.SaveImage(System.String,Microsoft.AspNetCore.Http.IFormFile)
-  name: SaveImage(String, IFormFile)
-  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_SaveImage_System_String_Microsoft_AspNetCore_Http_IFormFile_
-  commentId: M:Intranet.Web.Services.LocalFileStorageService.SaveImage(System.String,Microsoft.AspNetCore.Http.IFormFile)
-  fullName: Intranet.Web.Services.LocalFileStorageService.SaveImage(System.String, Microsoft.AspNetCore.Http.IFormFile)
-  nameWithType: LocalFileStorageService.SaveImage(String, IFormFile)
-- uid: Intranet.Web.Services.LocalFileStorageService.SaveImage*
-  name: SaveImage
-  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_SaveImage_
-  commentId: Overload:Intranet.Web.Services.LocalFileStorageService.SaveImage
-  fullName: Intranet.Web.Services.LocalFileStorageService.SaveImage
-  nameWithType: LocalFileStorageService.SaveImage
+- uid: Intranet.Web.Services.LocalFileStorageService.GetBlobAsync(System.String)
+  name: GetBlobAsync(String)
+  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_GetBlobAsync_System_String_
+  commentId: M:Intranet.Web.Services.LocalFileStorageService.GetBlobAsync(System.String)
+  fullName: Intranet.Web.Services.LocalFileStorageService.GetBlobAsync(System.String)
+  nameWithType: LocalFileStorageService.GetBlobAsync(String)
+- uid: Intranet.Web.Services.LocalFileStorageService.GetBlobAsync*
+  name: GetBlobAsync
+  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_GetBlobAsync_
+  commentId: Overload:Intranet.Web.Services.LocalFileStorageService.GetBlobAsync
+  fullName: Intranet.Web.Services.LocalFileStorageService.GetBlobAsync
+  nameWithType: LocalFileStorageService.GetBlobAsync
+- uid: Intranet.Web.Services.LocalFileStorageService.GetImageAsync(System.String)
+  name: GetImageAsync(String)
+  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_GetImageAsync_System_String_
+  commentId: M:Intranet.Web.Services.LocalFileStorageService.GetImageAsync(System.String)
+  fullName: Intranet.Web.Services.LocalFileStorageService.GetImageAsync(System.String)
+  nameWithType: LocalFileStorageService.GetImageAsync(String)
+- uid: Intranet.Web.Services.LocalFileStorageService.GetImageAsync(System.String,System.Int32,System.Int32)
+  name: GetImageAsync(String, Int32, Int32)
+  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_GetImageAsync_System_String_System_Int32_System_Int32_
+  commentId: M:Intranet.Web.Services.LocalFileStorageService.GetImageAsync(System.String,System.Int32,System.Int32)
+  fullName: Intranet.Web.Services.LocalFileStorageService.GetImageAsync(System.String, System.Int32, System.Int32)
+  nameWithType: LocalFileStorageService.GetImageAsync(String, Int32, Int32)
+- uid: Intranet.Web.Services.LocalFileStorageService.GetImageAsync*
+  name: GetImageAsync
+  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_GetImageAsync_
+  commentId: Overload:Intranet.Web.Services.LocalFileStorageService.GetImageAsync
+  fullName: Intranet.Web.Services.LocalFileStorageService.GetImageAsync
+  nameWithType: LocalFileStorageService.GetImageAsync
+- uid: Intranet.Web.Services.LocalFileStorageService.SetBlobAsync(Microsoft.AspNetCore.Http.IFormFile)
+  name: SetBlobAsync(IFormFile)
+  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_SetBlobAsync_Microsoft_AspNetCore_Http_IFormFile_
+  commentId: M:Intranet.Web.Services.LocalFileStorageService.SetBlobAsync(Microsoft.AspNetCore.Http.IFormFile)
+  fullName: Intranet.Web.Services.LocalFileStorageService.SetBlobAsync(Microsoft.AspNetCore.Http.IFormFile)
+  nameWithType: LocalFileStorageService.SetBlobAsync(IFormFile)
+- uid: Intranet.Web.Services.LocalFileStorageService.SetBlobAsync*
+  name: SetBlobAsync
+  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_SetBlobAsync_
+  commentId: Overload:Intranet.Web.Services.LocalFileStorageService.SetBlobAsync
+  fullName: Intranet.Web.Services.LocalFileStorageService.SetBlobAsync
+  nameWithType: LocalFileStorageService.SetBlobAsync
+- uid: Intranet.Web.Services.LocalFileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile)
+  name: SetImageAsync(IFormFile)
+  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_SetImageAsync_Microsoft_AspNetCore_Http_IFormFile_
+  commentId: M:Intranet.Web.Services.LocalFileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile)
+  fullName: Intranet.Web.Services.LocalFileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile)
+  nameWithType: LocalFileStorageService.SetImageAsync(IFormFile)
+- uid: Intranet.Web.Services.LocalFileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile,System.Int32,System.Int32)
+  name: SetImageAsync(IFormFile, Int32, Int32)
+  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_SetImageAsync_Microsoft_AspNetCore_Http_IFormFile_System_Int32_System_Int32_
+  commentId: M:Intranet.Web.Services.LocalFileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile,System.Int32,System.Int32)
+  fullName: Intranet.Web.Services.LocalFileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile, System.Int32, System.Int32)
+  nameWithType: LocalFileStorageService.SetImageAsync(IFormFile, Int32, Int32)
+- uid: Intranet.Web.Services.LocalFileStorageService.SetImageAsync(System.IO.Stream,System.String,System.Int32,System.Int32)
+  name: SetImageAsync(Stream, String, Int32, Int32)
+  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_SetImageAsync_System_IO_Stream_System_String_System_Int32_System_Int32_
+  commentId: M:Intranet.Web.Services.LocalFileStorageService.SetImageAsync(System.IO.Stream,System.String,System.Int32,System.Int32)
+  fullName: Intranet.Web.Services.LocalFileStorageService.SetImageAsync(System.IO.Stream, System.String, System.Int32, System.Int32)
+  nameWithType: LocalFileStorageService.SetImageAsync(Stream, String, Int32, Int32)
+- uid: Intranet.Web.Services.LocalFileStorageService.SetImageAsync*
+  name: SetImageAsync
+  href: api/Intranet.Web.Services.LocalFileStorageService.html#Intranet_Web_Services_LocalFileStorageService_SetImageAsync_
+  commentId: Overload:Intranet.Web.Services.LocalFileStorageService.SetImageAsync
+  fullName: Intranet.Web.Services.LocalFileStorageService.SetImageAsync
+  nameWithType: LocalFileStorageService.SetImageAsync
+- uid: Intranet.Web.Services.S3FileStorageService
+  name: S3FileStorageService
+  href: api/Intranet.Web.Services.S3FileStorageService.html
+  commentId: T:Intranet.Web.Services.S3FileStorageService
+  fullName: Intranet.Web.Services.S3FileStorageService
+  nameWithType: S3FileStorageService
+- uid: Intranet.Web.Services.S3FileStorageService.#ctor(Amazon.S3.IAmazonS3,Microsoft.Extensions.Options.IOptions{Intranet.Web.Models.Options.S3Options},Amazon.S3.Transfer.ITransferUtility)
+  name: S3FileStorageService(IAmazonS3, IOptions<S3Options>, ITransferUtility)
+  href: api/Intranet.Web.Services.S3FileStorageService.html#Intranet_Web_Services_S3FileStorageService__ctor_Amazon_S3_IAmazonS3_Microsoft_Extensions_Options_IOptions_Intranet_Web_Models_Options_S3Options__Amazon_S3_Transfer_ITransferUtility_
+  commentId: M:Intranet.Web.Services.S3FileStorageService.#ctor(Amazon.S3.IAmazonS3,Microsoft.Extensions.Options.IOptions{Intranet.Web.Models.Options.S3Options},Amazon.S3.Transfer.ITransferUtility)
+  name.vb: S3FileStorageService(IAmazonS3, IOptions(Of S3Options), ITransferUtility)
+  fullName: Intranet.Web.Services.S3FileStorageService.S3FileStorageService(Amazon.S3.IAmazonS3, Microsoft.Extensions.Options.IOptions<Intranet.Web.Models.Options.S3Options>, Amazon.S3.Transfer.ITransferUtility)
+  fullName.vb: Intranet.Web.Services.S3FileStorageService.S3FileStorageService(Amazon.S3.IAmazonS3, Microsoft.Extensions.Options.IOptions(Of Intranet.Web.Models.Options.S3Options), Amazon.S3.Transfer.ITransferUtility)
+  nameWithType: S3FileStorageService.S3FileStorageService(IAmazonS3, IOptions<S3Options>, ITransferUtility)
+  nameWithType.vb: S3FileStorageService.S3FileStorageService(IAmazonS3, IOptions(Of S3Options), ITransferUtility)
+- uid: Intranet.Web.Services.S3FileStorageService.#ctor*
+  name: S3FileStorageService
+  href: api/Intranet.Web.Services.S3FileStorageService.html#Intranet_Web_Services_S3FileStorageService__ctor_
+  commentId: Overload:Intranet.Web.Services.S3FileStorageService.#ctor
+  fullName: Intranet.Web.Services.S3FileStorageService.S3FileStorageService
+  nameWithType: S3FileStorageService.S3FileStorageService
+- uid: Intranet.Web.Services.S3FileStorageService.GetBlobAsync(System.String)
+  name: GetBlobAsync(String)
+  href: api/Intranet.Web.Services.S3FileStorageService.html#Intranet_Web_Services_S3FileStorageService_GetBlobAsync_System_String_
+  commentId: M:Intranet.Web.Services.S3FileStorageService.GetBlobAsync(System.String)
+  fullName: Intranet.Web.Services.S3FileStorageService.GetBlobAsync(System.String)
+  nameWithType: S3FileStorageService.GetBlobAsync(String)
+- uid: Intranet.Web.Services.S3FileStorageService.GetBlobAsync*
+  name: GetBlobAsync
+  href: api/Intranet.Web.Services.S3FileStorageService.html#Intranet_Web_Services_S3FileStorageService_GetBlobAsync_
+  commentId: Overload:Intranet.Web.Services.S3FileStorageService.GetBlobAsync
+  fullName: Intranet.Web.Services.S3FileStorageService.GetBlobAsync
+  nameWithType: S3FileStorageService.GetBlobAsync
+- uid: Intranet.Web.Services.S3FileStorageService.GetImageAsync(System.String)
+  name: GetImageAsync(String)
+  href: api/Intranet.Web.Services.S3FileStorageService.html#Intranet_Web_Services_S3FileStorageService_GetImageAsync_System_String_
+  commentId: M:Intranet.Web.Services.S3FileStorageService.GetImageAsync(System.String)
+  fullName: Intranet.Web.Services.S3FileStorageService.GetImageAsync(System.String)
+  nameWithType: S3FileStorageService.GetImageAsync(String)
+- uid: Intranet.Web.Services.S3FileStorageService.GetImageAsync(System.String,System.Int32,System.Int32)
+  name: GetImageAsync(String, Int32, Int32)
+  href: api/Intranet.Web.Services.S3FileStorageService.html#Intranet_Web_Services_S3FileStorageService_GetImageAsync_System_String_System_Int32_System_Int32_
+  commentId: M:Intranet.Web.Services.S3FileStorageService.GetImageAsync(System.String,System.Int32,System.Int32)
+  fullName: Intranet.Web.Services.S3FileStorageService.GetImageAsync(System.String, System.Int32, System.Int32)
+  nameWithType: S3FileStorageService.GetImageAsync(String, Int32, Int32)
+- uid: Intranet.Web.Services.S3FileStorageService.GetImageAsync*
+  name: GetImageAsync
+  href: api/Intranet.Web.Services.S3FileStorageService.html#Intranet_Web_Services_S3FileStorageService_GetImageAsync_
+  commentId: Overload:Intranet.Web.Services.S3FileStorageService.GetImageAsync
+  fullName: Intranet.Web.Services.S3FileStorageService.GetImageAsync
+  nameWithType: S3FileStorageService.GetImageAsync
+- uid: Intranet.Web.Services.S3FileStorageService.SetBlobAsync(Microsoft.AspNetCore.Http.IFormFile)
+  name: SetBlobAsync(IFormFile)
+  href: api/Intranet.Web.Services.S3FileStorageService.html#Intranet_Web_Services_S3FileStorageService_SetBlobAsync_Microsoft_AspNetCore_Http_IFormFile_
+  commentId: M:Intranet.Web.Services.S3FileStorageService.SetBlobAsync(Microsoft.AspNetCore.Http.IFormFile)
+  fullName: Intranet.Web.Services.S3FileStorageService.SetBlobAsync(Microsoft.AspNetCore.Http.IFormFile)
+  nameWithType: S3FileStorageService.SetBlobAsync(IFormFile)
+- uid: Intranet.Web.Services.S3FileStorageService.SetBlobAsync*
+  name: SetBlobAsync
+  href: api/Intranet.Web.Services.S3FileStorageService.html#Intranet_Web_Services_S3FileStorageService_SetBlobAsync_
+  commentId: Overload:Intranet.Web.Services.S3FileStorageService.SetBlobAsync
+  fullName: Intranet.Web.Services.S3FileStorageService.SetBlobAsync
+  nameWithType: S3FileStorageService.SetBlobAsync
+- uid: Intranet.Web.Services.S3FileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile)
+  name: SetImageAsync(IFormFile)
+  href: api/Intranet.Web.Services.S3FileStorageService.html#Intranet_Web_Services_S3FileStorageService_SetImageAsync_Microsoft_AspNetCore_Http_IFormFile_
+  commentId: M:Intranet.Web.Services.S3FileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile)
+  fullName: Intranet.Web.Services.S3FileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile)
+  nameWithType: S3FileStorageService.SetImageAsync(IFormFile)
+- uid: Intranet.Web.Services.S3FileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile,System.Int32,System.Int32)
+  name: SetImageAsync(IFormFile, Int32, Int32)
+  href: api/Intranet.Web.Services.S3FileStorageService.html#Intranet_Web_Services_S3FileStorageService_SetImageAsync_Microsoft_AspNetCore_Http_IFormFile_System_Int32_System_Int32_
+  commentId: M:Intranet.Web.Services.S3FileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile,System.Int32,System.Int32)
+  fullName: Intranet.Web.Services.S3FileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile, System.Int32, System.Int32)
+  nameWithType: S3FileStorageService.SetImageAsync(IFormFile, Int32, Int32)
+- uid: Intranet.Web.Services.S3FileStorageService.SetImageAsync(System.IO.Stream,System.String,System.Int32,System.Int32)
+  name: SetImageAsync(Stream, String, Int32, Int32)
+  href: api/Intranet.Web.Services.S3FileStorageService.html#Intranet_Web_Services_S3FileStorageService_SetImageAsync_System_IO_Stream_System_String_System_Int32_System_Int32_
+  commentId: M:Intranet.Web.Services.S3FileStorageService.SetImageAsync(System.IO.Stream,System.String,System.Int32,System.Int32)
+  fullName: Intranet.Web.Services.S3FileStorageService.SetImageAsync(System.IO.Stream, System.String, System.Int32, System.Int32)
+  nameWithType: S3FileStorageService.SetImageAsync(Stream, String, Int32, Int32)
+- uid: Intranet.Web.Services.S3FileStorageService.SetImageAsync*
+  name: SetImageAsync
+  href: api/Intranet.Web.Services.S3FileStorageService.html#Intranet_Web_Services_S3FileStorageService_SetImageAsync_
+  commentId: Overload:Intranet.Web.Services.S3FileStorageService.SetImageAsync
+  fullName: Intranet.Web.Services.S3FileStorageService.SetImageAsync
+  nameWithType: S3FileStorageService.SetImageAsync
 - uid: Intranet_Web
   name: Intranet_Web
   href: api/Intranet_Web.html

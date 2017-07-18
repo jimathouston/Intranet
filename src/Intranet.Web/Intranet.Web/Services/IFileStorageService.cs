@@ -1,13 +1,18 @@
-﻿using Intranet.Shared.Common.Enums;
+﻿using Intranet.Web.Models;
 using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Intranet.Web.Services
 {
     public interface IFileStorageService
     {
-        (string path, string mime) GetFile(string filename);
-        (string path, string mime) GetImage(string filename, ImageVariantType imageVariantType = ImageVariantType.Original);
-        string SaveBlob(string filePath, IFormFile file);
-        string SaveImage(string filePath, IFormFile image);
+        Task<StreamWithMetadata> GetBlobAsync(string filename);
+        Task<StreamWithMetadata> GetImageAsync(string filename);
+        Task<StreamWithMetadata> GetImageAsync(string filename, int width, int height);
+        Task<string> SetBlobAsync(IFormFile file);
+        Task<string> SetImageAsync(IFormFile image);
+        Task<string> SetImageAsync(IFormFile image, int width, int height);
+        Task<string> SetImageAsync(Stream image, string filename, int width, int height);
     }
 }

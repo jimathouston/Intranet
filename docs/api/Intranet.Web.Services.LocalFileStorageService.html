@@ -121,10 +121,10 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Certaincy/Intranet/new/feature/docfx/apiSpec/new?filename=Intranet_Web_Services_LocalFileStorageService__ctor_Intranet_Web_Services_IImageService_.md&amp;value=---%0Auid%3A%20Intranet.Web.Services.LocalFileStorageService.%23ctor(Intranet.Web.Services.IImageService)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_Web_Services_LocalFileStorageService__ctor_Intranet_Web_Services_IImageService_.md&amp;value=---%0Auid%3A%20Intranet.Web.Services.LocalFileStorageService.%23ctor(Intranet.Web.Services.IImageService)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Certaincy/Intranet/blob/feature/docfx/src/Intranet.Web/Intranet.Web/Services/LocalFileStorageService.cs/#L17">View Source</a>
+    <a href="https://github.com/Certaincy/Intranet/blob/s3blob/src/Intranet.Web/Intranet.Web/Services/LocalFileStorageService.cs/#L17">View Source</a>
   </span>
   <a id="Intranet_Web_Services_LocalFileStorageService__ctor_" data-uid="Intranet.Web.Services.LocalFileStorageService.#ctor*"></a>
   <h4 id="Intranet_Web_Services_LocalFileStorageService__ctor_Intranet_Web_Services_IImageService_" data-uid="Intranet.Web.Services.LocalFileStorageService.#ctor(Intranet.Web.Services.IImageService)">LocalFileStorageService(IImageService)</h4>
@@ -155,18 +155,18 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Certaincy/Intranet/new/feature/docfx/apiSpec/new?filename=Intranet_Web_Services_LocalFileStorageService_GetFile_System_String_.md&amp;value=---%0Auid%3A%20Intranet.Web.Services.LocalFileStorageService.GetFile(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_Web_Services_LocalFileStorageService_GetBlobAsync_System_String_.md&amp;value=---%0Auid%3A%20Intranet.Web.Services.LocalFileStorageService.GetBlobAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Certaincy/Intranet/blob/feature/docfx/src/Intranet.Web/Intranet.Web/Services/LocalFileStorageService.cs/#L61">View Source</a>
+    <a href="https://github.com/Certaincy/Intranet/blob/s3blob/src/Intranet.Web/Intranet.Web/Services/LocalFileStorageService.cs/#L87">View Source</a>
   </span>
-  <a id="Intranet_Web_Services_LocalFileStorageService_GetFile_" data-uid="Intranet.Web.Services.LocalFileStorageService.GetFile*"></a>
-  <h4 id="Intranet_Web_Services_LocalFileStorageService_GetFile_System_String_" data-uid="Intranet.Web.Services.LocalFileStorageService.GetFile(System.String)">GetFile(String)</h4>
+  <a id="Intranet_Web_Services_LocalFileStorageService_GetBlobAsync_" data-uid="Intranet.Web.Services.LocalFileStorageService.GetBlobAsync*"></a>
+  <h4 id="Intranet_Web_Services_LocalFileStorageService_GetBlobAsync_System_String_" data-uid="Intranet.Web.Services.LocalFileStorageService.GetBlobAsync(System.String)">GetBlobAsync(String)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GetFile(string filename)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;StreamWithMetadata&gt; GetBlobAsync(string filename)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -195,27 +195,76 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.</span></td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Intranet.Web.Models.StreamWithMetadata.html">StreamWithMetadata</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_GetFile_System_String_">IFileStorageService.GetFile(String)</a></div>
+      <div><a class="xref" href="Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_GetBlobAsync_System_String_">IFileStorageService.GetBlobAsync(String)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Certaincy/Intranet/new/feature/docfx/apiSpec/new?filename=Intranet_Web_Services_LocalFileStorageService_GetImage_System_String_Intranet_Shared_Common_Enums_ImageVariantType_.md&amp;value=---%0Auid%3A%20Intranet.Web.Services.LocalFileStorageService.GetImage(System.String%2CIntranet.Shared.Common.Enums.ImageVariantType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_Web_Services_LocalFileStorageService_GetImageAsync_System_String_.md&amp;value=---%0Auid%3A%20Intranet.Web.Services.LocalFileStorageService.GetImageAsync(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Certaincy/Intranet/blob/feature/docfx/src/Intranet.Web/Intranet.Web/Services/LocalFileStorageService.cs/#L74">View Source</a>
+    <a href="https://github.com/Certaincy/Intranet/blob/s3blob/src/Intranet.Web/Intranet.Web/Services/LocalFileStorageService.cs/#L93">View Source</a>
   </span>
-  <a id="Intranet_Web_Services_LocalFileStorageService_GetImage_" data-uid="Intranet.Web.Services.LocalFileStorageService.GetImage*"></a>
-  <h4 id="Intranet_Web_Services_LocalFileStorageService_GetImage_System_String_Intranet_Shared_Common_Enums_ImageVariantType_" data-uid="Intranet.Web.Services.LocalFileStorageService.GetImage(System.String,Intranet.Shared.Common.Enums.ImageVariantType)">GetImage(String, ImageVariantType)</h4>
+  <a id="Intranet_Web_Services_LocalFileStorageService_GetImageAsync_" data-uid="Intranet.Web.Services.LocalFileStorageService.GetImageAsync*"></a>
+  <h4 id="Intranet_Web_Services_LocalFileStorageService_GetImageAsync_System_String_" data-uid="Intranet.Web.Services.LocalFileStorageService.GetImageAsync(System.String)">GetImageAsync(String)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GetImage(string filename, ImageVariantType imageVariantType = ImageVariantType.Original)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;StreamWithMetadata&gt; GetImageAsync(string filename)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">filename</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Intranet.Web.Models.StreamWithMetadata.html">StreamWithMetadata</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_GetImageAsync_System_String_">IFileStorageService.GetImageAsync(String)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_Web_Services_LocalFileStorageService_GetImageAsync_System_String_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20Intranet.Web.Services.LocalFileStorageService.GetImageAsync(System.String%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Certaincy/Intranet/blob/s3blob/src/Intranet.Web/Intranet.Web/Services/LocalFileStorageService.cs/#L99">View Source</a>
+  </span>
+  <a id="Intranet_Web_Services_LocalFileStorageService_GetImageAsync_" data-uid="Intranet.Web.Services.LocalFileStorageService.GetImageAsync*"></a>
+  <h4 id="Intranet_Web_Services_LocalFileStorageService_GetImageAsync_System_String_System_Int32_System_Int32_" data-uid="Intranet.Web.Services.LocalFileStorageService.GetImageAsync(System.String,System.Int32,System.Int32)">GetImageAsync(String, Int32, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;StreamWithMetadata&gt; GetImageAsync(string filename, int width, int height)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -233,8 +282,13 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="Intranet.Shared.Common.Enums.ImageVariantType.html">ImageVariantType</a></td>
-        <td><span class="parametername">imageVariantType</span></td>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">width</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">height</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -249,27 +303,27 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.</span></td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<a class="xref" href="Intranet.Web.Models.StreamWithMetadata.html">StreamWithMetadata</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_GetImage_System_String_Intranet_Shared_Common_Enums_ImageVariantType_">IFileStorageService.GetImage(String, ImageVariantType)</a></div>
+      <div><a class="xref" href="Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_GetImageAsync_System_String_System_Int32_System_Int32_">IFileStorageService.GetImageAsync(String, Int32, Int32)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Certaincy/Intranet/new/feature/docfx/apiSpec/new?filename=Intranet_Web_Services_LocalFileStorageService_SaveBlob_System_String_Microsoft_AspNetCore_Http_IFormFile_.md&amp;value=---%0Auid%3A%20Intranet.Web.Services.LocalFileStorageService.SaveBlob(System.String%2CMicrosoft.AspNetCore.Http.IFormFile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_Web_Services_LocalFileStorageService_SetBlobAsync_Microsoft_AspNetCore_Http_IFormFile_.md&amp;value=---%0Auid%3A%20Intranet.Web.Services.LocalFileStorageService.SetBlobAsync(Microsoft.AspNetCore.Http.IFormFile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Certaincy/Intranet/blob/feature/docfx/src/Intranet.Web/Intranet.Web/Services/LocalFileStorageService.cs/#L22">View Source</a>
+    <a href="https://github.com/Certaincy/Intranet/blob/s3blob/src/Intranet.Web/Intranet.Web/Services/LocalFileStorageService.cs/#L22">View Source</a>
   </span>
-  <a id="Intranet_Web_Services_LocalFileStorageService_SaveBlob_" data-uid="Intranet.Web.Services.LocalFileStorageService.SaveBlob*"></a>
-  <h4 id="Intranet_Web_Services_LocalFileStorageService_SaveBlob_System_String_Microsoft_AspNetCore_Http_IFormFile_" data-uid="Intranet.Web.Services.LocalFileStorageService.SaveBlob(System.String,Microsoft.AspNetCore.Http.IFormFile)">SaveBlob(String, IFormFile)</h4>
+  <a id="Intranet_Web_Services_LocalFileStorageService_SetBlobAsync_" data-uid="Intranet.Web.Services.LocalFileStorageService.SetBlobAsync*"></a>
+  <h4 id="Intranet_Web_Services_LocalFileStorageService_SetBlobAsync_Microsoft_AspNetCore_Http_IFormFile_" data-uid="Intranet.Web.Services.LocalFileStorageService.SetBlobAsync(Microsoft.AspNetCore.Http.IFormFile)">SetBlobAsync(IFormFile)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string SaveBlob(string filePath, IFormFile file)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; SetBlobAsync(IFormFile file)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -281,11 +335,6 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">filePath</span></td>
-        <td></td>
-      </tr>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Http.IFormFile</span></td>
         <td><span class="parametername">file</span></td>
@@ -303,27 +352,27 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_SaveBlob_System_String_Microsoft_AspNetCore_Http_IFormFile_">IFileStorageService.SaveBlob(String, IFormFile)</a></div>
+      <div><a class="xref" href="Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_SetBlobAsync_Microsoft_AspNetCore_Http_IFormFile_">IFileStorageService.SetBlobAsync(IFormFile)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Certaincy/Intranet/new/feature/docfx/apiSpec/new?filename=Intranet_Web_Services_LocalFileStorageService_SaveImage_System_String_Microsoft_AspNetCore_Http_IFormFile_.md&amp;value=---%0Auid%3A%20Intranet.Web.Services.LocalFileStorageService.SaveImage(System.String%2CMicrosoft.AspNetCore.Http.IFormFile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_Web_Services_LocalFileStorageService_SetImageAsync_Microsoft_AspNetCore_Http_IFormFile_.md&amp;value=---%0Auid%3A%20Intranet.Web.Services.LocalFileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Certaincy/Intranet/blob/feature/docfx/src/Intranet.Web/Intranet.Web/Services/LocalFileStorageService.cs/#L40">View Source</a>
+    <a href="https://github.com/Certaincy/Intranet/blob/s3blob/src/Intranet.Web/Intranet.Web/Services/LocalFileStorageService.cs/#L38">View Source</a>
   </span>
-  <a id="Intranet_Web_Services_LocalFileStorageService_SaveImage_" data-uid="Intranet.Web.Services.LocalFileStorageService.SaveImage*"></a>
-  <h4 id="Intranet_Web_Services_LocalFileStorageService_SaveImage_System_String_Microsoft_AspNetCore_Http_IFormFile_" data-uid="Intranet.Web.Services.LocalFileStorageService.SaveImage(System.String,Microsoft.AspNetCore.Http.IFormFile)">SaveImage(String, IFormFile)</h4>
+  <a id="Intranet_Web_Services_LocalFileStorageService_SetImageAsync_" data-uid="Intranet.Web.Services.LocalFileStorageService.SetImageAsync*"></a>
+  <h4 id="Intranet_Web_Services_LocalFileStorageService_SetImageAsync_Microsoft_AspNetCore_Http_IFormFile_" data-uid="Intranet.Web.Services.LocalFileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile)">SetImageAsync(IFormFile)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string SaveImage(string filePath, IFormFile image)</code></pre>
+    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; SetImageAsync(IFormFile image)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -335,11 +384,6 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">filePath</span></td>
-        <td></td>
-      </tr>
       <tr>
         <td><span class="xref">Microsoft.AspNetCore.Http.IFormFile</span></td>
         <td><span class="parametername">image</span></td>
@@ -357,13 +401,143 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <h5 class="implements">Implements</h5>
-      <div><a class="xref" href="Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_SaveImage_System_String_Microsoft_AspNetCore_Http_IFormFile_">IFileStorageService.SaveImage(String, IFormFile)</a></div>
+      <div><a class="xref" href="Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_SetImageAsync_Microsoft_AspNetCore_Http_IFormFile_">IFileStorageService.SetImageAsync(IFormFile)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_Web_Services_LocalFileStorageService_SetImageAsync_Microsoft_AspNetCore_Http_IFormFile_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20Intranet.Web.Services.LocalFileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Certaincy/Intranet/blob/s3blob/src/Intranet.Web/Intranet.Web/Services/LocalFileStorageService.cs/#L54">View Source</a>
+  </span>
+  <a id="Intranet_Web_Services_LocalFileStorageService_SetImageAsync_" data-uid="Intranet.Web.Services.LocalFileStorageService.SetImageAsync*"></a>
+  <h4 id="Intranet_Web_Services_LocalFileStorageService_SetImageAsync_Microsoft_AspNetCore_Http_IFormFile_System_Int32_System_Int32_" data-uid="Intranet.Web.Services.LocalFileStorageService.SetImageAsync(Microsoft.AspNetCore.Http.IFormFile,System.Int32,System.Int32)">SetImageAsync(IFormFile, Int32, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; SetImageAsync(IFormFile image, int width, int height)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.AspNetCore.Http.IFormFile</span></td>
+        <td><span class="parametername">image</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">width</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">height</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_SetImageAsync_Microsoft_AspNetCore_Http_IFormFile_System_Int32_System_Int32_">IFileStorageService.SetImageAsync(IFormFile, Int32, Int32)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_Web_Services_LocalFileStorageService_SetImageAsync_System_IO_Stream_System_String_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20Intranet.Web.Services.LocalFileStorageService.SetImageAsync(System.IO.Stream%2CSystem.String%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Certaincy/Intranet/blob/s3blob/src/Intranet.Web/Intranet.Web/Services/LocalFileStorageService.cs/#L71">View Source</a>
+  </span>
+  <a id="Intranet_Web_Services_LocalFileStorageService_SetImageAsync_" data-uid="Intranet.Web.Services.LocalFileStorageService.SetImageAsync*"></a>
+  <h4 id="Intranet_Web_Services_LocalFileStorageService_SetImageAsync_System_IO_Stream_System_String_System_Int32_System_Int32_" data-uid="Intranet.Web.Services.LocalFileStorageService.SetImageAsync(System.IO.Stream,System.String,System.Int32,System.Int32)">SetImageAsync(Stream, String, Int32, Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;string&gt; SetImageAsync(Stream image, string filename, int width, int height)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IO.Stream</span></td>
+        <td><span class="parametername">image</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">filename</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">width</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">height</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="implements">Implements</h5>
+      <div><a class="xref" href="Intranet.Web.Services.IFileStorageService.html#Intranet_Web_Services_IFileStorageService_SetImageAsync_System_IO_Stream_System_String_System_Int32_System_Int32_">IFileStorageService.SetImageAsync(Stream, String, Int32, Int32)</a></div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Intranet.Web.Extensions.ObjectExtensions.html#Intranet_Web_Extensions_ObjectExtensions_IsNull__1___0_">ObjectExtensions.IsNull&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="Intranet.Web.Extensions.ObjectExtensions.html#Intranet_Web_Extensions_ObjectExtensions_IsNotNull__1___0_">ObjectExtensions.IsNotNull&lt;T&gt;(T)</a>
+  </div>
 </article>
           </div>
           
@@ -372,10 +546,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Certaincy/Intranet/new/feature/docfx/apiSpec/new?filename=Intranet_Web_Services_LocalFileStorageService.md&amp;value=---%0Auid%3A%20Intranet.Web.Services.LocalFileStorageService%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_Web_Services_LocalFileStorageService.md&amp;value=---%0Auid%3A%20Intranet.Web.Services.LocalFileStorageService%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Certaincy/Intranet/blob/feature/docfx/src/Intranet.Web/Intranet.Web/Services/LocalFileStorageService.cs/#L13" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Certaincy/Intranet/blob/s3blob/src/Intranet.Web/Intranet.Web/Services/LocalFileStorageService.cs/#L13" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
