@@ -343,12 +343,12 @@ references:
   commentId: T:Intranet.API.Controllers.NewsController
   fullName: Intranet.API.Controllers.NewsController
   nameWithType: NewsController
-- uid: Intranet.API.Controllers.NewsController.#ctor(Intranet.API.Domain.Data.IntranetApiContext)
-  name: NewsController(IntranetApiContext)
-  href: api/Intranet.API.Controllers.NewsController.html#Intranet_API_Controllers_NewsController__ctor_Intranet_API_Domain_Data_IntranetApiContext_
-  commentId: M:Intranet.API.Controllers.NewsController.#ctor(Intranet.API.Domain.Data.IntranetApiContext)
-  fullName: Intranet.API.Controllers.NewsController.NewsController(Intranet.API.Domain.Data.IntranetApiContext)
-  nameWithType: NewsController.NewsController(IntranetApiContext)
+- uid: Intranet.API.Controllers.NewsController.#ctor(Intranet.API.Domain.Data.IntranetApiContext,Intranet.Shared.Factories.IDateTimeFactory)
+  name: NewsController(IntranetApiContext, IDateTimeFactory)
+  href: api/Intranet.API.Controllers.NewsController.html#Intranet_API_Controllers_NewsController__ctor_Intranet_API_Domain_Data_IntranetApiContext_Intranet_Shared_Factories_IDateTimeFactory_
+  commentId: M:Intranet.API.Controllers.NewsController.#ctor(Intranet.API.Domain.Data.IntranetApiContext,Intranet.Shared.Factories.IDateTimeFactory)
+  fullName: Intranet.API.Controllers.NewsController.NewsController(Intranet.API.Domain.Data.IntranetApiContext, Intranet.Shared.Factories.IDateTimeFactory)
+  nameWithType: NewsController.NewsController(IntranetApiContext, IDateTimeFactory)
 - uid: Intranet.API.Controllers.NewsController.#ctor*
   name: NewsController
   href: api/Intranet.API.Controllers.NewsController.html#Intranet_API_Controllers_NewsController__ctor_
@@ -385,24 +385,24 @@ references:
   commentId: Overload:Intranet.API.Controllers.NewsController.Get
   fullName: Intranet.API.Controllers.NewsController.Get
   nameWithType: NewsController.Get
-- uid: Intranet.API.Controllers.NewsController.Post(Intranet.API.Domain.Models.Entities.News)
-  name: Post(News)
-  href: api/Intranet.API.Controllers.NewsController.html#Intranet_API_Controllers_NewsController_Post_Intranet_API_Domain_Models_Entities_News_
-  commentId: M:Intranet.API.Controllers.NewsController.Post(Intranet.API.Domain.Models.Entities.News)
-  fullName: Intranet.API.Controllers.NewsController.Post(Intranet.API.Domain.Models.Entities.News)
-  nameWithType: NewsController.Post(News)
+- uid: Intranet.API.Controllers.NewsController.Post(Intranet.API.ViewModels.NewsViewModel)
+  name: Post(NewsViewModel)
+  href: api/Intranet.API.Controllers.NewsController.html#Intranet_API_Controllers_NewsController_Post_Intranet_API_ViewModels_NewsViewModel_
+  commentId: M:Intranet.API.Controllers.NewsController.Post(Intranet.API.ViewModels.NewsViewModel)
+  fullName: Intranet.API.Controllers.NewsController.Post(Intranet.API.ViewModels.NewsViewModel)
+  nameWithType: NewsController.Post(NewsViewModel)
 - uid: Intranet.API.Controllers.NewsController.Post*
   name: Post
   href: api/Intranet.API.Controllers.NewsController.html#Intranet_API_Controllers_NewsController_Post_
   commentId: Overload:Intranet.API.Controllers.NewsController.Post
   fullName: Intranet.API.Controllers.NewsController.Post
   nameWithType: NewsController.Post
-- uid: Intranet.API.Controllers.NewsController.Put(System.Int32,Intranet.API.Domain.Models.Entities.News)
-  name: Put(Int32, News)
-  href: api/Intranet.API.Controllers.NewsController.html#Intranet_API_Controllers_NewsController_Put_System_Int32_Intranet_API_Domain_Models_Entities_News_
-  commentId: M:Intranet.API.Controllers.NewsController.Put(System.Int32,Intranet.API.Domain.Models.Entities.News)
-  fullName: Intranet.API.Controllers.NewsController.Put(System.Int32, Intranet.API.Domain.Models.Entities.News)
-  nameWithType: NewsController.Put(Int32, News)
+- uid: Intranet.API.Controllers.NewsController.Put(System.Int32,Intranet.API.ViewModels.NewsViewModel)
+  name: Put(Int32, NewsViewModel)
+  href: api/Intranet.API.Controllers.NewsController.html#Intranet_API_Controllers_NewsController_Put_System_Int32_Intranet_API_ViewModels_NewsViewModel_
+  commentId: M:Intranet.API.Controllers.NewsController.Put(System.Int32,Intranet.API.ViewModels.NewsViewModel)
+  fullName: Intranet.API.Controllers.NewsController.Put(System.Int32, Intranet.API.ViewModels.NewsViewModel)
+  nameWithType: NewsController.Put(Int32, NewsViewModel)
 - uid: Intranet.API.Controllers.NewsController.Put*
   name: Put
   href: api/Intranet.API.Controllers.NewsController.html#Intranet_API_Controllers_NewsController_Put_
@@ -580,6 +580,18 @@ references:
   commentId: Overload:Intranet.API.Domain.Data.IntranetApiContext.Images
   fullName: Intranet.API.Domain.Data.IntranetApiContext.Images
   nameWithType: IntranetApiContext.Images
+- uid: Intranet.API.Domain.Data.IntranetApiContext.Keywords
+  name: Keywords
+  href: api/Intranet.API.Domain.Data.IntranetApiContext.html#Intranet_API_Domain_Data_IntranetApiContext_Keywords
+  commentId: P:Intranet.API.Domain.Data.IntranetApiContext.Keywords
+  fullName: Intranet.API.Domain.Data.IntranetApiContext.Keywords
+  nameWithType: IntranetApiContext.Keywords
+- uid: Intranet.API.Domain.Data.IntranetApiContext.Keywords*
+  name: Keywords
+  href: api/Intranet.API.Domain.Data.IntranetApiContext.html#Intranet_API_Domain_Data_IntranetApiContext_Keywords_
+  commentId: Overload:Intranet.API.Domain.Data.IntranetApiContext.Keywords
+  fullName: Intranet.API.Domain.Data.IntranetApiContext.Keywords
+  nameWithType: IntranetApiContext.Keywords
 - uid: Intranet.API.Domain.Data.IntranetApiContext.News
   name: News
   href: api/Intranet.API.Domain.Data.IntranetApiContext.html#Intranet_API_Domain_Data_IntranetApiContext_News
@@ -622,6 +634,48 @@ references:
   commentId: N:Intranet.API.Domain.Migrations
   fullName: Intranet.API.Domain.Migrations
   nameWithType: Intranet.API.Domain.Migrations
+- uid: Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration
+  name: AddKeywordsToNews_Migration
+  href: api/Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.html
+  commentId: T:Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration
+  fullName: Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration
+  nameWithType: AddKeywordsToNews_Migration
+- uid: Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
+  name: BuildTargetModel(ModelBuilder)
+  href: api/Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.html#Intranet_API_Domain_Migrations_AddKeywordsToNews_Migration_BuildTargetModel_Microsoft_EntityFrameworkCore_ModelBuilder_
+  commentId: M:Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
+  fullName: Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
+  nameWithType: AddKeywordsToNews_Migration.BuildTargetModel(ModelBuilder)
+- uid: Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.BuildTargetModel*
+  name: BuildTargetModel
+  href: api/Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.html#Intranet_API_Domain_Migrations_AddKeywordsToNews_Migration_BuildTargetModel_
+  commentId: Overload:Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.BuildTargetModel
+  fullName: Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.BuildTargetModel
+  nameWithType: AddKeywordsToNews_Migration.BuildTargetModel
+- uid: Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  name: Down(MigrationBuilder)
+  href: api/Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.html#Intranet_API_Domain_Migrations_AddKeywordsToNews_Migration_Down_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
+  commentId: M:Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  fullName: Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  nameWithType: AddKeywordsToNews_Migration.Down(MigrationBuilder)
+- uid: Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.Down*
+  name: Down
+  href: api/Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.html#Intranet_API_Domain_Migrations_AddKeywordsToNews_Migration_Down_
+  commentId: Overload:Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.Down
+  fullName: Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.Down
+  nameWithType: AddKeywordsToNews_Migration.Down
+- uid: Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  name: Up(MigrationBuilder)
+  href: api/Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.html#Intranet_API_Domain_Migrations_AddKeywordsToNews_Migration_Up_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
+  commentId: M:Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  fullName: Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  nameWithType: AddKeywordsToNews_Migration.Up(MigrationBuilder)
+- uid: Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.Up*
+  name: Up
+  href: api/Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.html#Intranet_API_Domain_Migrations_AddKeywordsToNews_Migration_Up_
+  commentId: Overload:Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.Up
+  fullName: Intranet.API.Domain.Migrations.AddKeywordsToNews_Migration.Up
+  nameWithType: AddKeywordsToNews_Migration.Up
 - uid: Intranet.API.Domain.Migrations.Init
   name: Init
   href: api/Intranet.API.Domain.Migrations.Init.html
@@ -664,6 +718,48 @@ references:
   commentId: Overload:Intranet.API.Domain.Migrations.Init.Up
   fullName: Intranet.API.Domain.Migrations.Init.Up
   nameWithType: Init.Up
+- uid: Intranet.API.Domain.Migrations.NewsPublish
+  name: NewsPublish
+  href: api/Intranet.API.Domain.Migrations.NewsPublish.html
+  commentId: T:Intranet.API.Domain.Migrations.NewsPublish
+  fullName: Intranet.API.Domain.Migrations.NewsPublish
+  nameWithType: NewsPublish
+- uid: Intranet.API.Domain.Migrations.NewsPublish.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
+  name: BuildTargetModel(ModelBuilder)
+  href: api/Intranet.API.Domain.Migrations.NewsPublish.html#Intranet_API_Domain_Migrations_NewsPublish_BuildTargetModel_Microsoft_EntityFrameworkCore_ModelBuilder_
+  commentId: M:Intranet.API.Domain.Migrations.NewsPublish.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
+  fullName: Intranet.API.Domain.Migrations.NewsPublish.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)
+  nameWithType: NewsPublish.BuildTargetModel(ModelBuilder)
+- uid: Intranet.API.Domain.Migrations.NewsPublish.BuildTargetModel*
+  name: BuildTargetModel
+  href: api/Intranet.API.Domain.Migrations.NewsPublish.html#Intranet_API_Domain_Migrations_NewsPublish_BuildTargetModel_
+  commentId: Overload:Intranet.API.Domain.Migrations.NewsPublish.BuildTargetModel
+  fullName: Intranet.API.Domain.Migrations.NewsPublish.BuildTargetModel
+  nameWithType: NewsPublish.BuildTargetModel
+- uid: Intranet.API.Domain.Migrations.NewsPublish.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  name: Down(MigrationBuilder)
+  href: api/Intranet.API.Domain.Migrations.NewsPublish.html#Intranet_API_Domain_Migrations_NewsPublish_Down_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
+  commentId: M:Intranet.API.Domain.Migrations.NewsPublish.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  fullName: Intranet.API.Domain.Migrations.NewsPublish.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  nameWithType: NewsPublish.Down(MigrationBuilder)
+- uid: Intranet.API.Domain.Migrations.NewsPublish.Down*
+  name: Down
+  href: api/Intranet.API.Domain.Migrations.NewsPublish.html#Intranet_API_Domain_Migrations_NewsPublish_Down_
+  commentId: Overload:Intranet.API.Domain.Migrations.NewsPublish.Down
+  fullName: Intranet.API.Domain.Migrations.NewsPublish.Down
+  nameWithType: NewsPublish.Down
+- uid: Intranet.API.Domain.Migrations.NewsPublish.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  name: Up(MigrationBuilder)
+  href: api/Intranet.API.Domain.Migrations.NewsPublish.html#Intranet_API_Domain_Migrations_NewsPublish_Up_Microsoft_EntityFrameworkCore_Migrations_MigrationBuilder_
+  commentId: M:Intranet.API.Domain.Migrations.NewsPublish.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  fullName: Intranet.API.Domain.Migrations.NewsPublish.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)
+  nameWithType: NewsPublish.Up(MigrationBuilder)
+- uid: Intranet.API.Domain.Migrations.NewsPublish.Up*
+  name: Up
+  href: api/Intranet.API.Domain.Migrations.NewsPublish.html#Intranet_API_Domain_Migrations_NewsPublish_Up_
+  commentId: Overload:Intranet.API.Domain.Migrations.NewsPublish.Up
+  fullName: Intranet.API.Domain.Migrations.NewsPublish.Up
+  nameWithType: NewsPublish.Up
 - uid: Intranet.API.Domain.Models.Entities
   name: Intranet.API.Domain.Models.Entities
   href: api/Intranet.API.Domain.Models.Entities.html
@@ -1060,6 +1156,48 @@ references:
   commentId: Overload:Intranet.API.Domain.Models.Entities.Image.Id
   fullName: Intranet.API.Domain.Models.Entities.Image.Id
   nameWithType: Image.Id
+- uid: Intranet.API.Domain.Models.Entities.Keyword
+  name: Keyword
+  href: api/Intranet.API.Domain.Models.Entities.Keyword.html
+  commentId: T:Intranet.API.Domain.Models.Entities.Keyword
+  fullName: Intranet.API.Domain.Models.Entities.Keyword
+  nameWithType: Keyword
+- uid: Intranet.API.Domain.Models.Entities.Keyword.Name
+  name: Name
+  href: api/Intranet.API.Domain.Models.Entities.Keyword.html#Intranet_API_Domain_Models_Entities_Keyword_Name
+  commentId: P:Intranet.API.Domain.Models.Entities.Keyword.Name
+  fullName: Intranet.API.Domain.Models.Entities.Keyword.Name
+  nameWithType: Keyword.Name
+- uid: Intranet.API.Domain.Models.Entities.Keyword.Name*
+  name: Name
+  href: api/Intranet.API.Domain.Models.Entities.Keyword.html#Intranet_API_Domain_Models_Entities_Keyword_Name_
+  commentId: Overload:Intranet.API.Domain.Models.Entities.Keyword.Name
+  fullName: Intranet.API.Domain.Models.Entities.Keyword.Name
+  nameWithType: Keyword.Name
+- uid: Intranet.API.Domain.Models.Entities.Keyword.NewsKeyword
+  name: NewsKeyword
+  href: api/Intranet.API.Domain.Models.Entities.Keyword.html#Intranet_API_Domain_Models_Entities_Keyword_NewsKeyword
+  commentId: P:Intranet.API.Domain.Models.Entities.Keyword.NewsKeyword
+  fullName: Intranet.API.Domain.Models.Entities.Keyword.NewsKeyword
+  nameWithType: Keyword.NewsKeyword
+- uid: Intranet.API.Domain.Models.Entities.Keyword.NewsKeyword*
+  name: NewsKeyword
+  href: api/Intranet.API.Domain.Models.Entities.Keyword.html#Intranet_API_Domain_Models_Entities_Keyword_NewsKeyword_
+  commentId: Overload:Intranet.API.Domain.Models.Entities.Keyword.NewsKeyword
+  fullName: Intranet.API.Domain.Models.Entities.Keyword.NewsKeyword
+  nameWithType: Keyword.NewsKeyword
+- uid: Intranet.API.Domain.Models.Entities.Keyword.ToString
+  name: ToString()
+  href: api/Intranet.API.Domain.Models.Entities.Keyword.html#Intranet_API_Domain_Models_Entities_Keyword_ToString
+  commentId: M:Intranet.API.Domain.Models.Entities.Keyword.ToString
+  fullName: Intranet.API.Domain.Models.Entities.Keyword.ToString()
+  nameWithType: Keyword.ToString()
+- uid: Intranet.API.Domain.Models.Entities.Keyword.ToString*
+  name: ToString
+  href: api/Intranet.API.Domain.Models.Entities.Keyword.html#Intranet_API_Domain_Models_Entities_Keyword_ToString_
+  commentId: Overload:Intranet.API.Domain.Models.Entities.Keyword.ToString
+  fullName: Intranet.API.Domain.Models.Entities.Keyword.ToString
+  nameWithType: Keyword.ToString
 - uid: Intranet.API.Domain.Models.Entities.Location
   name: Location
   href: api/Intranet.API.Domain.Models.Entities.Location.html
@@ -1120,18 +1258,30 @@ references:
   commentId: T:Intranet.API.Domain.Models.Entities.News
   fullName: Intranet.API.Domain.Models.Entities.News
   nameWithType: News
-- uid: Intranet.API.Domain.Models.Entities.News.Date
-  name: Date
-  href: api/Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_Date
-  commentId: P:Intranet.API.Domain.Models.Entities.News.Date
-  fullName: Intranet.API.Domain.Models.Entities.News.Date
-  nameWithType: News.Date
-- uid: Intranet.API.Domain.Models.Entities.News.Date*
-  name: Date
-  href: api/Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_Date_
-  commentId: Overload:Intranet.API.Domain.Models.Entities.News.Date
-  fullName: Intranet.API.Domain.Models.Entities.News.Date
-  nameWithType: News.Date
+- uid: Intranet.API.Domain.Models.Entities.News.Created
+  name: Created
+  href: api/Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_Created
+  commentId: P:Intranet.API.Domain.Models.Entities.News.Created
+  fullName: Intranet.API.Domain.Models.Entities.News.Created
+  nameWithType: News.Created
+- uid: Intranet.API.Domain.Models.Entities.News.Created*
+  name: Created
+  href: api/Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_Created_
+  commentId: Overload:Intranet.API.Domain.Models.Entities.News.Created
+  fullName: Intranet.API.Domain.Models.Entities.News.Created
+  nameWithType: News.Created
+- uid: Intranet.API.Domain.Models.Entities.News.HasEverBeenPublished
+  name: HasEverBeenPublished
+  href: api/Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_HasEverBeenPublished
+  commentId: P:Intranet.API.Domain.Models.Entities.News.HasEverBeenPublished
+  fullName: Intranet.API.Domain.Models.Entities.News.HasEverBeenPublished
+  nameWithType: News.HasEverBeenPublished
+- uid: Intranet.API.Domain.Models.Entities.News.HasEverBeenPublished*
+  name: HasEverBeenPublished
+  href: api/Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_HasEverBeenPublished_
+  commentId: Overload:Intranet.API.Domain.Models.Entities.News.HasEverBeenPublished
+  fullName: Intranet.API.Domain.Models.Entities.News.HasEverBeenPublished
+  nameWithType: News.HasEverBeenPublished
 - uid: Intranet.API.Domain.Models.Entities.News.HeaderImage
   name: HeaderImage
   href: api/Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_HeaderImage
@@ -1156,6 +1306,30 @@ references:
   commentId: Overload:Intranet.API.Domain.Models.Entities.News.Id
   fullName: Intranet.API.Domain.Models.Entities.News.Id
   nameWithType: News.Id
+- uid: Intranet.API.Domain.Models.Entities.News.NewsKeywords
+  name: NewsKeywords
+  href: api/Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_NewsKeywords
+  commentId: P:Intranet.API.Domain.Models.Entities.News.NewsKeywords
+  fullName: Intranet.API.Domain.Models.Entities.News.NewsKeywords
+  nameWithType: News.NewsKeywords
+- uid: Intranet.API.Domain.Models.Entities.News.NewsKeywords*
+  name: NewsKeywords
+  href: api/Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_NewsKeywords_
+  commentId: Overload:Intranet.API.Domain.Models.Entities.News.NewsKeywords
+  fullName: Intranet.API.Domain.Models.Entities.News.NewsKeywords
+  nameWithType: News.NewsKeywords
+- uid: Intranet.API.Domain.Models.Entities.News.Published
+  name: Published
+  href: api/Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_Published
+  commentId: P:Intranet.API.Domain.Models.Entities.News.Published
+  fullName: Intranet.API.Domain.Models.Entities.News.Published
+  nameWithType: News.Published
+- uid: Intranet.API.Domain.Models.Entities.News.Published*
+  name: Published
+  href: api/Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_Published_
+  commentId: Overload:Intranet.API.Domain.Models.Entities.News.Published
+  fullName: Intranet.API.Domain.Models.Entities.News.Published
+  nameWithType: News.Published
 - uid: Intranet.API.Domain.Models.Entities.News.Text
   name: Text
   href: api/Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_Text
@@ -1180,6 +1354,18 @@ references:
   commentId: Overload:Intranet.API.Domain.Models.Entities.News.Title
   fullName: Intranet.API.Domain.Models.Entities.News.Title
   nameWithType: News.Title
+- uid: Intranet.API.Domain.Models.Entities.News.Updated
+  name: Updated
+  href: api/Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_Updated
+  commentId: P:Intranet.API.Domain.Models.Entities.News.Updated
+  fullName: Intranet.API.Domain.Models.Entities.News.Updated
+  nameWithType: News.Updated
+- uid: Intranet.API.Domain.Models.Entities.News.Updated*
+  name: Updated
+  href: api/Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_Updated_
+  commentId: Overload:Intranet.API.Domain.Models.Entities.News.Updated
+  fullName: Intranet.API.Domain.Models.Entities.News.Updated
+  nameWithType: News.Updated
 - uid: Intranet.API.Domain.Models.Entities.News.User
   name: User
   href: api/Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_User
@@ -1204,60 +1390,60 @@ references:
   commentId: Overload:Intranet.API.Domain.Models.Entities.News.UserId
   fullName: Intranet.API.Domain.Models.Entities.News.UserId
   nameWithType: News.UserId
-- uid: Intranet.API.Domain.Models.Entities.NewsTag
-  name: NewsTag
-  href: api/Intranet.API.Domain.Models.Entities.NewsTag.html
-  commentId: T:Intranet.API.Domain.Models.Entities.NewsTag
-  fullName: Intranet.API.Domain.Models.Entities.NewsTag
-  nameWithType: NewsTag
-- uid: Intranet.API.Domain.Models.Entities.NewsTag.News
+- uid: Intranet.API.Domain.Models.Entities.NewsKeyword
+  name: NewsKeyword
+  href: api/Intranet.API.Domain.Models.Entities.NewsKeyword.html
+  commentId: T:Intranet.API.Domain.Models.Entities.NewsKeyword
+  fullName: Intranet.API.Domain.Models.Entities.NewsKeyword
+  nameWithType: NewsKeyword
+- uid: Intranet.API.Domain.Models.Entities.NewsKeyword.Keyword
+  name: Keyword
+  href: api/Intranet.API.Domain.Models.Entities.NewsKeyword.html#Intranet_API_Domain_Models_Entities_NewsKeyword_Keyword
+  commentId: P:Intranet.API.Domain.Models.Entities.NewsKeyword.Keyword
+  fullName: Intranet.API.Domain.Models.Entities.NewsKeyword.Keyword
+  nameWithType: NewsKeyword.Keyword
+- uid: Intranet.API.Domain.Models.Entities.NewsKeyword.Keyword*
+  name: Keyword
+  href: api/Intranet.API.Domain.Models.Entities.NewsKeyword.html#Intranet_API_Domain_Models_Entities_NewsKeyword_Keyword_
+  commentId: Overload:Intranet.API.Domain.Models.Entities.NewsKeyword.Keyword
+  fullName: Intranet.API.Domain.Models.Entities.NewsKeyword.Keyword
+  nameWithType: NewsKeyword.Keyword
+- uid: Intranet.API.Domain.Models.Entities.NewsKeyword.KeywordId
+  name: KeywordId
+  href: api/Intranet.API.Domain.Models.Entities.NewsKeyword.html#Intranet_API_Domain_Models_Entities_NewsKeyword_KeywordId
+  commentId: P:Intranet.API.Domain.Models.Entities.NewsKeyword.KeywordId
+  fullName: Intranet.API.Domain.Models.Entities.NewsKeyword.KeywordId
+  nameWithType: NewsKeyword.KeywordId
+- uid: Intranet.API.Domain.Models.Entities.NewsKeyword.KeywordId*
+  name: KeywordId
+  href: api/Intranet.API.Domain.Models.Entities.NewsKeyword.html#Intranet_API_Domain_Models_Entities_NewsKeyword_KeywordId_
+  commentId: Overload:Intranet.API.Domain.Models.Entities.NewsKeyword.KeywordId
+  fullName: Intranet.API.Domain.Models.Entities.NewsKeyword.KeywordId
+  nameWithType: NewsKeyword.KeywordId
+- uid: Intranet.API.Domain.Models.Entities.NewsKeyword.News
   name: News
-  href: api/Intranet.API.Domain.Models.Entities.NewsTag.html#Intranet_API_Domain_Models_Entities_NewsTag_News
-  commentId: P:Intranet.API.Domain.Models.Entities.NewsTag.News
-  fullName: Intranet.API.Domain.Models.Entities.NewsTag.News
-  nameWithType: NewsTag.News
-- uid: Intranet.API.Domain.Models.Entities.NewsTag.News*
+  href: api/Intranet.API.Domain.Models.Entities.NewsKeyword.html#Intranet_API_Domain_Models_Entities_NewsKeyword_News
+  commentId: P:Intranet.API.Domain.Models.Entities.NewsKeyword.News
+  fullName: Intranet.API.Domain.Models.Entities.NewsKeyword.News
+  nameWithType: NewsKeyword.News
+- uid: Intranet.API.Domain.Models.Entities.NewsKeyword.News*
   name: News
-  href: api/Intranet.API.Domain.Models.Entities.NewsTag.html#Intranet_API_Domain_Models_Entities_NewsTag_News_
-  commentId: Overload:Intranet.API.Domain.Models.Entities.NewsTag.News
-  fullName: Intranet.API.Domain.Models.Entities.NewsTag.News
-  nameWithType: NewsTag.News
-- uid: Intranet.API.Domain.Models.Entities.NewsTag.NewsId
+  href: api/Intranet.API.Domain.Models.Entities.NewsKeyword.html#Intranet_API_Domain_Models_Entities_NewsKeyword_News_
+  commentId: Overload:Intranet.API.Domain.Models.Entities.NewsKeyword.News
+  fullName: Intranet.API.Domain.Models.Entities.NewsKeyword.News
+  nameWithType: NewsKeyword.News
+- uid: Intranet.API.Domain.Models.Entities.NewsKeyword.NewsId
   name: NewsId
-  href: api/Intranet.API.Domain.Models.Entities.NewsTag.html#Intranet_API_Domain_Models_Entities_NewsTag_NewsId
-  commentId: P:Intranet.API.Domain.Models.Entities.NewsTag.NewsId
-  fullName: Intranet.API.Domain.Models.Entities.NewsTag.NewsId
-  nameWithType: NewsTag.NewsId
-- uid: Intranet.API.Domain.Models.Entities.NewsTag.NewsId*
+  href: api/Intranet.API.Domain.Models.Entities.NewsKeyword.html#Intranet_API_Domain_Models_Entities_NewsKeyword_NewsId
+  commentId: P:Intranet.API.Domain.Models.Entities.NewsKeyword.NewsId
+  fullName: Intranet.API.Domain.Models.Entities.NewsKeyword.NewsId
+  nameWithType: NewsKeyword.NewsId
+- uid: Intranet.API.Domain.Models.Entities.NewsKeyword.NewsId*
   name: NewsId
-  href: api/Intranet.API.Domain.Models.Entities.NewsTag.html#Intranet_API_Domain_Models_Entities_NewsTag_NewsId_
-  commentId: Overload:Intranet.API.Domain.Models.Entities.NewsTag.NewsId
-  fullName: Intranet.API.Domain.Models.Entities.NewsTag.NewsId
-  nameWithType: NewsTag.NewsId
-- uid: Intranet.API.Domain.Models.Entities.NewsTag.Tag
-  name: Tag
-  href: api/Intranet.API.Domain.Models.Entities.NewsTag.html#Intranet_API_Domain_Models_Entities_NewsTag_Tag
-  commentId: P:Intranet.API.Domain.Models.Entities.NewsTag.Tag
-  fullName: Intranet.API.Domain.Models.Entities.NewsTag.Tag
-  nameWithType: NewsTag.Tag
-- uid: Intranet.API.Domain.Models.Entities.NewsTag.Tag*
-  name: Tag
-  href: api/Intranet.API.Domain.Models.Entities.NewsTag.html#Intranet_API_Domain_Models_Entities_NewsTag_Tag_
-  commentId: Overload:Intranet.API.Domain.Models.Entities.NewsTag.Tag
-  fullName: Intranet.API.Domain.Models.Entities.NewsTag.Tag
-  nameWithType: NewsTag.Tag
-- uid: Intranet.API.Domain.Models.Entities.NewsTag.TagId
-  name: TagId
-  href: api/Intranet.API.Domain.Models.Entities.NewsTag.html#Intranet_API_Domain_Models_Entities_NewsTag_TagId
-  commentId: P:Intranet.API.Domain.Models.Entities.NewsTag.TagId
-  fullName: Intranet.API.Domain.Models.Entities.NewsTag.TagId
-  nameWithType: NewsTag.TagId
-- uid: Intranet.API.Domain.Models.Entities.NewsTag.TagId*
-  name: TagId
-  href: api/Intranet.API.Domain.Models.Entities.NewsTag.html#Intranet_API_Domain_Models_Entities_NewsTag_TagId_
-  commentId: Overload:Intranet.API.Domain.Models.Entities.NewsTag.TagId
-  fullName: Intranet.API.Domain.Models.Entities.NewsTag.TagId
-  nameWithType: NewsTag.TagId
+  href: api/Intranet.API.Domain.Models.Entities.NewsKeyword.html#Intranet_API_Domain_Models_Entities_NewsKeyword_NewsId_
+  commentId: Overload:Intranet.API.Domain.Models.Entities.NewsKeyword.NewsId
+  fullName: Intranet.API.Domain.Models.Entities.NewsKeyword.NewsId
+  nameWithType: NewsKeyword.NewsId
 - uid: Intranet.API.Domain.Models.Entities.Project
   name: Project
   href: api/Intranet.API.Domain.Models.Entities.Project.html
@@ -1612,48 +1798,6 @@ references:
   commentId: Overload:Intranet.API.Domain.Models.Entities.SkillLevel.Id
   fullName: Intranet.API.Domain.Models.Entities.SkillLevel.Id
   nameWithType: SkillLevel.Id
-- uid: Intranet.API.Domain.Models.Entities.Tag
-  name: Tag
-  href: api/Intranet.API.Domain.Models.Entities.Tag.html
-  commentId: T:Intranet.API.Domain.Models.Entities.Tag
-  fullName: Intranet.API.Domain.Models.Entities.Tag
-  nameWithType: Tag
-- uid: Intranet.API.Domain.Models.Entities.Tag.Description
-  name: Description
-  href: api/Intranet.API.Domain.Models.Entities.Tag.html#Intranet_API_Domain_Models_Entities_Tag_Description
-  commentId: P:Intranet.API.Domain.Models.Entities.Tag.Description
-  fullName: Intranet.API.Domain.Models.Entities.Tag.Description
-  nameWithType: Tag.Description
-- uid: Intranet.API.Domain.Models.Entities.Tag.Description*
-  name: Description
-  href: api/Intranet.API.Domain.Models.Entities.Tag.html#Intranet_API_Domain_Models_Entities_Tag_Description_
-  commentId: Overload:Intranet.API.Domain.Models.Entities.Tag.Description
-  fullName: Intranet.API.Domain.Models.Entities.Tag.Description
-  nameWithType: Tag.Description
-- uid: Intranet.API.Domain.Models.Entities.Tag.Id
-  name: Id
-  href: api/Intranet.API.Domain.Models.Entities.Tag.html#Intranet_API_Domain_Models_Entities_Tag_Id
-  commentId: P:Intranet.API.Domain.Models.Entities.Tag.Id
-  fullName: Intranet.API.Domain.Models.Entities.Tag.Id
-  nameWithType: Tag.Id
-- uid: Intranet.API.Domain.Models.Entities.Tag.Id*
-  name: Id
-  href: api/Intranet.API.Domain.Models.Entities.Tag.html#Intranet_API_Domain_Models_Entities_Tag_Id_
-  commentId: Overload:Intranet.API.Domain.Models.Entities.Tag.Id
-  fullName: Intranet.API.Domain.Models.Entities.Tag.Id
-  nameWithType: Tag.Id
-- uid: Intranet.API.Domain.Models.Entities.Tag.NewsTags
-  name: NewsTags
-  href: api/Intranet.API.Domain.Models.Entities.Tag.html#Intranet_API_Domain_Models_Entities_Tag_NewsTags
-  commentId: P:Intranet.API.Domain.Models.Entities.Tag.NewsTags
-  fullName: Intranet.API.Domain.Models.Entities.Tag.NewsTags
-  nameWithType: Tag.NewsTags
-- uid: Intranet.API.Domain.Models.Entities.Tag.NewsTags*
-  name: NewsTags
-  href: api/Intranet.API.Domain.Models.Entities.Tag.html#Intranet_API_Domain_Models_Entities_Tag_NewsTags_
-  commentId: Overload:Intranet.API.Domain.Models.Entities.Tag.NewsTags
-  fullName: Intranet.API.Domain.Models.Entities.Tag.NewsTags
-  nameWithType: Tag.NewsTags
 - uid: Intranet.API.Domain.Models.Entities.ToDo
   name: ToDo
   href: api/Intranet.API.Domain.Models.Entities.ToDo.html
@@ -1798,6 +1942,30 @@ references:
   commentId: Overload:Intranet.API.Filters.ModelValidationFilterAttribute.OnActionExecuting
   fullName: Intranet.API.Filters.ModelValidationFilterAttribute.OnActionExecuting
   nameWithType: ModelValidationFilterAttribute.OnActionExecuting
+- uid: Intranet.API.Helpers
+  name: Intranet.API.Helpers
+  href: api/Intranet.API.Helpers.html
+  commentId: N:Intranet.API.Helpers
+  fullName: Intranet.API.Helpers
+  nameWithType: Intranet.API.Helpers
+- uid: Intranet.API.Helpers.NewsKeywordHelper
+  name: NewsKeywordHelper
+  href: api/Intranet.API.Helpers.NewsKeywordHelper.html
+  commentId: T:Intranet.API.Helpers.NewsKeywordHelper
+  fullName: Intranet.API.Helpers.NewsKeywordHelper
+  nameWithType: NewsKeywordHelper
+- uid: Intranet.API.Helpers.NewsKeywordHelper.SetKeywords(System.String,Intranet.API.Domain.Models.Entities.News,Intranet.API.Domain.Data.IntranetApiContext)
+  name: SetKeywords(String, News, IntranetApiContext)
+  href: api/Intranet.API.Helpers.NewsKeywordHelper.html#Intranet_API_Helpers_NewsKeywordHelper_SetKeywords_System_String_Intranet_API_Domain_Models_Entities_News_Intranet_API_Domain_Data_IntranetApiContext_
+  commentId: M:Intranet.API.Helpers.NewsKeywordHelper.SetKeywords(System.String,Intranet.API.Domain.Models.Entities.News,Intranet.API.Domain.Data.IntranetApiContext)
+  fullName: Intranet.API.Helpers.NewsKeywordHelper.SetKeywords(System.String, Intranet.API.Domain.Models.Entities.News, Intranet.API.Domain.Data.IntranetApiContext)
+  nameWithType: NewsKeywordHelper.SetKeywords(String, News, IntranetApiContext)
+- uid: Intranet.API.Helpers.NewsKeywordHelper.SetKeywords*
+  name: SetKeywords
+  href: api/Intranet.API.Helpers.NewsKeywordHelper.html#Intranet_API_Helpers_NewsKeywordHelper_SetKeywords_
+  commentId: Overload:Intranet.API.Helpers.NewsKeywordHelper.SetKeywords
+  fullName: Intranet.API.Helpers.NewsKeywordHelper.SetKeywords
+  nameWithType: NewsKeywordHelper.SetKeywords
 - uid: Intranet.API.Models
   name: Intranet.API.Models
   href: api/Intranet.API.Models.html
@@ -2143,6 +2311,54 @@ references:
   commentId: Overload:Intranet.API.ViewModels.EmployeeSkillViewModel.SkillId
   fullName: Intranet.API.ViewModels.EmployeeSkillViewModel.SkillId
   nameWithType: EmployeeSkillViewModel.SkillId
+- uid: Intranet.API.ViewModels.NewsViewModel
+  name: NewsViewModel
+  href: api/Intranet.API.ViewModels.NewsViewModel.html
+  commentId: T:Intranet.API.ViewModels.NewsViewModel
+  fullName: Intranet.API.ViewModels.NewsViewModel
+  nameWithType: NewsViewModel
+- uid: Intranet.API.ViewModels.NewsViewModel.#ctor
+  name: NewsViewModel()
+  href: api/Intranet.API.ViewModels.NewsViewModel.html#Intranet_API_ViewModels_NewsViewModel__ctor
+  commentId: M:Intranet.API.ViewModels.NewsViewModel.#ctor
+  fullName: Intranet.API.ViewModels.NewsViewModel.NewsViewModel()
+  nameWithType: NewsViewModel.NewsViewModel()
+- uid: Intranet.API.ViewModels.NewsViewModel.#ctor(Intranet.API.Domain.Models.Entities.News)
+  name: NewsViewModel(News)
+  href: api/Intranet.API.ViewModels.NewsViewModel.html#Intranet_API_ViewModels_NewsViewModel__ctor_Intranet_API_Domain_Models_Entities_News_
+  commentId: M:Intranet.API.ViewModels.NewsViewModel.#ctor(Intranet.API.Domain.Models.Entities.News)
+  fullName: Intranet.API.ViewModels.NewsViewModel.NewsViewModel(Intranet.API.Domain.Models.Entities.News)
+  nameWithType: NewsViewModel.NewsViewModel(News)
+- uid: Intranet.API.ViewModels.NewsViewModel.#ctor*
+  name: NewsViewModel
+  href: api/Intranet.API.ViewModels.NewsViewModel.html#Intranet_API_ViewModels_NewsViewModel__ctor_
+  commentId: Overload:Intranet.API.ViewModels.NewsViewModel.#ctor
+  fullName: Intranet.API.ViewModels.NewsViewModel.NewsViewModel
+  nameWithType: NewsViewModel.NewsViewModel
+- uid: Intranet.API.ViewModels.NewsViewModel.Keywords
+  name: Keywords
+  href: api/Intranet.API.ViewModels.NewsViewModel.html#Intranet_API_ViewModels_NewsViewModel_Keywords
+  commentId: P:Intranet.API.ViewModels.NewsViewModel.Keywords
+  fullName: Intranet.API.ViewModels.NewsViewModel.Keywords
+  nameWithType: NewsViewModel.Keywords
+- uid: Intranet.API.ViewModels.NewsViewModel.Keywords*
+  name: Keywords
+  href: api/Intranet.API.ViewModels.NewsViewModel.html#Intranet_API_ViewModels_NewsViewModel_Keywords_
+  commentId: Overload:Intranet.API.ViewModels.NewsViewModel.Keywords
+  fullName: Intranet.API.ViewModels.NewsViewModel.Keywords
+  nameWithType: NewsViewModel.Keywords
+- uid: Intranet.API.ViewModels.NewsViewModel.NewsKeywords
+  name: NewsKeywords
+  href: api/Intranet.API.ViewModels.NewsViewModel.html#Intranet_API_ViewModels_NewsViewModel_NewsKeywords
+  commentId: P:Intranet.API.ViewModels.NewsViewModel.NewsKeywords
+  fullName: Intranet.API.ViewModels.NewsViewModel.NewsKeywords
+  nameWithType: NewsViewModel.NewsKeywords
+- uid: Intranet.API.ViewModels.NewsViewModel.NewsKeywords*
+  name: NewsKeywords
+  href: api/Intranet.API.ViewModels.NewsViewModel.html#Intranet_API_ViewModels_NewsViewModel_NewsKeywords_
+  commentId: Overload:Intranet.API.ViewModels.NewsViewModel.NewsKeywords
+  fullName: Intranet.API.ViewModels.NewsViewModel.NewsKeywords
+  nameWithType: NewsViewModel.NewsKeywords
 - uid: Intranet.API.ViewModels.ProfileViewModel
   name: ProfileViewModel
   href: api/Intranet.API.ViewModels.ProfileViewModel.html
@@ -2395,108 +2611,138 @@ references:
   commentId: Overload:Intranet.API.ViewModels.ProjectEmployeeViewModel.StartDate
   fullName: Intranet.API.ViewModels.ProjectEmployeeViewModel.StartDate
   nameWithType: ProjectEmployeeViewModel.StartDate
-- uid: Intranet.Shared.Common.Enums
-  name: Intranet.Shared.Common.Enums
-  href: api/Intranet.Shared.Common.Enums.html
-  commentId: N:Intranet.Shared.Common.Enums
-  fullName: Intranet.Shared.Common.Enums
-  nameWithType: Intranet.Shared.Common.Enums
-- uid: Intranet.Shared.Common.Enums.ImageVariantType
-  name: ImageVariantType
-  href: api/Intranet.Shared.Common.Enums.ImageVariantType.html
-  commentId: T:Intranet.Shared.Common.Enums.ImageVariantType
-  fullName: Intranet.Shared.Common.Enums.ImageVariantType
-  nameWithType: ImageVariantType
-- uid: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_01_32x32
-  name: Intranet_01_32x32
-  href: api/Intranet.Shared.Common.Enums.ImageVariantType.html#Intranet_Shared_Common_Enums_ImageVariantType_Intranet_01_32x32
-  commentId: F:Intranet.Shared.Common.Enums.ImageVariantType.Intranet_01_32x32
-  fullName: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_01_32x32
-  nameWithType: ImageVariantType.Intranet_01_32x32
-- uid: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_02_60x60
-  name: Intranet_02_60x60
-  href: api/Intranet.Shared.Common.Enums.ImageVariantType.html#Intranet_Shared_Common_Enums_ImageVariantType_Intranet_02_60x60
-  commentId: F:Intranet.Shared.Common.Enums.ImageVariantType.Intranet_02_60x60
-  fullName: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_02_60x60
-  nameWithType: ImageVariantType.Intranet_02_60x60
-- uid: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_03_100x100
-  name: Intranet_03_100x100
-  href: api/Intranet.Shared.Common.Enums.ImageVariantType.html#Intranet_Shared_Common_Enums_ImageVariantType_Intranet_03_100x100
-  commentId: F:Intranet.Shared.Common.Enums.ImageVariantType.Intranet_03_100x100
-  fullName: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_03_100x100
-  nameWithType: ImageVariantType.Intranet_03_100x100
-- uid: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_04_200x200
-  name: Intranet_04_200x200
-  href: api/Intranet.Shared.Common.Enums.ImageVariantType.html#Intranet_Shared_Common_Enums_ImageVariantType_Intranet_04_200x200
-  commentId: F:Intranet.Shared.Common.Enums.ImageVariantType.Intranet_04_200x200
-  fullName: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_04_200x200
-  nameWithType: ImageVariantType.Intranet_04_200x200
-- uid: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_05_300x200
-  name: Intranet_05_300x200
-  href: api/Intranet.Shared.Common.Enums.ImageVariantType.html#Intranet_Shared_Common_Enums_ImageVariantType_Intranet_05_300x200
-  commentId: F:Intranet.Shared.Common.Enums.ImageVariantType.Intranet_05_300x200
-  fullName: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_05_300x200
-  nameWithType: ImageVariantType.Intranet_05_300x200
-- uid: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_06_300x300
-  name: Intranet_06_300x300
-  href: api/Intranet.Shared.Common.Enums.ImageVariantType.html#Intranet_Shared_Common_Enums_ImageVariantType_Intranet_06_300x300
-  commentId: F:Intranet.Shared.Common.Enums.ImageVariantType.Intranet_06_300x300
-  fullName: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_06_300x300
-  nameWithType: ImageVariantType.Intranet_06_300x300
-- uid: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_07_500x215
-  name: Intranet_07_500x215
-  href: api/Intranet.Shared.Common.Enums.ImageVariantType.html#Intranet_Shared_Common_Enums_ImageVariantType_Intranet_07_500x215
-  commentId: F:Intranet.Shared.Common.Enums.ImageVariantType.Intranet_07_500x215
-  fullName: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_07_500x215
-  nameWithType: ImageVariantType.Intranet_07_500x215
-- uid: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_08_500x250
-  name: Intranet_08_500x250
-  href: api/Intranet.Shared.Common.Enums.ImageVariantType.html#Intranet_Shared_Common_Enums_ImageVariantType_Intranet_08_500x250
-  commentId: F:Intranet.Shared.Common.Enums.ImageVariantType.Intranet_08_500x250
-  fullName: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_08_500x250
-  nameWithType: ImageVariantType.Intranet_08_500x250
-- uid: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_09_500x300
-  name: Intranet_09_500x300
-  href: api/Intranet.Shared.Common.Enums.ImageVariantType.html#Intranet_Shared_Common_Enums_ImageVariantType_Intranet_09_500x300
-  commentId: F:Intranet.Shared.Common.Enums.ImageVariantType.Intranet_09_500x300
-  fullName: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_09_500x300
-  nameWithType: ImageVariantType.Intranet_09_500x300
-- uid: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_10_500x365
-  name: Intranet_10_500x365
-  href: api/Intranet.Shared.Common.Enums.ImageVariantType.html#Intranet_Shared_Common_Enums_ImageVariantType_Intranet_10_500x365
-  commentId: F:Intranet.Shared.Common.Enums.ImageVariantType.Intranet_10_500x365
-  fullName: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_10_500x365
-  nameWithType: ImageVariantType.Intranet_10_500x365
-- uid: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_11_500x500
-  name: Intranet_11_500x500
-  href: api/Intranet.Shared.Common.Enums.ImageVariantType.html#Intranet_Shared_Common_Enums_ImageVariantType_Intranet_11_500x500
-  commentId: F:Intranet.Shared.Common.Enums.ImageVariantType.Intranet_11_500x500
-  fullName: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_11_500x500
-  nameWithType: ImageVariantType.Intranet_11_500x500
-- uid: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_12_600x300
-  name: Intranet_12_600x300
-  href: api/Intranet.Shared.Common.Enums.ImageVariantType.html#Intranet_Shared_Common_Enums_ImageVariantType_Intranet_12_600x300
-  commentId: F:Intranet.Shared.Common.Enums.ImageVariantType.Intranet_12_600x300
-  fullName: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_12_600x300
-  nameWithType: ImageVariantType.Intranet_12_600x300
-- uid: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_13_900x390
-  name: Intranet_13_900x390
-  href: api/Intranet.Shared.Common.Enums.ImageVariantType.html#Intranet_Shared_Common_Enums_ImageVariantType_Intranet_13_900x390
-  commentId: F:Intranet.Shared.Common.Enums.ImageVariantType.Intranet_13_900x390
-  fullName: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_13_900x390
-  nameWithType: ImageVariantType.Intranet_13_900x390
-- uid: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_14_1600x500
-  name: Intranet_14_1600x500
-  href: api/Intranet.Shared.Common.Enums.ImageVariantType.html#Intranet_Shared_Common_Enums_ImageVariantType_Intranet_14_1600x500
-  commentId: F:Intranet.Shared.Common.Enums.ImageVariantType.Intranet_14_1600x500
-  fullName: Intranet.Shared.Common.Enums.ImageVariantType.Intranet_14_1600x500
-  nameWithType: ImageVariantType.Intranet_14_1600x500
-- uid: Intranet.Shared.Common.Enums.ImageVariantType.Original
-  name: Original
-  href: api/Intranet.Shared.Common.Enums.ImageVariantType.html#Intranet_Shared_Common_Enums_ImageVariantType_Original
-  commentId: F:Intranet.Shared.Common.Enums.ImageVariantType.Original
-  fullName: Intranet.Shared.Common.Enums.ImageVariantType.Original
-  nameWithType: ImageVariantType.Original
+- uid: Intranet.Shared.Extensions
+  name: Intranet.Shared.Extensions
+  href: api/Intranet.Shared.Extensions.html
+  commentId: N:Intranet.Shared.Extensions
+  fullName: Intranet.Shared.Extensions
+  nameWithType: Intranet.Shared.Extensions
+- uid: Intranet.Shared.Extensions.ObjectExtensions
+  name: ObjectExtensions
+  href: api/Intranet.Shared.Extensions.ObjectExtensions.html
+  commentId: T:Intranet.Shared.Extensions.ObjectExtensions
+  fullName: Intranet.Shared.Extensions.ObjectExtensions
+  nameWithType: ObjectExtensions
+- uid: Intranet.Shared.Extensions.ObjectExtensions.IsNotNull*
+  name: IsNotNull
+  href: api/Intranet.Shared.Extensions.ObjectExtensions.html#Intranet_Shared_Extensions_ObjectExtensions_IsNotNull_
+  commentId: Overload:Intranet.Shared.Extensions.ObjectExtensions.IsNotNull
+  fullName: Intranet.Shared.Extensions.ObjectExtensions.IsNotNull
+  nameWithType: ObjectExtensions.IsNotNull
+- uid: Intranet.Shared.Extensions.ObjectExtensions.IsNotNull``1(``0)
+  name: IsNotNull<T>(T)
+  href: api/Intranet.Shared.Extensions.ObjectExtensions.html#Intranet_Shared_Extensions_ObjectExtensions_IsNotNull__1___0_
+  commentId: M:Intranet.Shared.Extensions.ObjectExtensions.IsNotNull``1(``0)
+  name.vb: IsNotNull(Of T)(T)
+  fullName: Intranet.Shared.Extensions.ObjectExtensions.IsNotNull<T>(T)
+  fullName.vb: Intranet.Shared.Extensions.ObjectExtensions.IsNotNull(Of T)(T)
+  nameWithType: ObjectExtensions.IsNotNull<T>(T)
+  nameWithType.vb: ObjectExtensions.IsNotNull(Of T)(T)
+- uid: Intranet.Shared.Extensions.ObjectExtensions.IsNull*
+  name: IsNull
+  href: api/Intranet.Shared.Extensions.ObjectExtensions.html#Intranet_Shared_Extensions_ObjectExtensions_IsNull_
+  commentId: Overload:Intranet.Shared.Extensions.ObjectExtensions.IsNull
+  fullName: Intranet.Shared.Extensions.ObjectExtensions.IsNull
+  nameWithType: ObjectExtensions.IsNull
+- uid: Intranet.Shared.Extensions.ObjectExtensions.IsNull``1(``0)
+  name: IsNull<T>(T)
+  href: api/Intranet.Shared.Extensions.ObjectExtensions.html#Intranet_Shared_Extensions_ObjectExtensions_IsNull__1___0_
+  commentId: M:Intranet.Shared.Extensions.ObjectExtensions.IsNull``1(``0)
+  name.vb: IsNull(Of T)(T)
+  fullName: Intranet.Shared.Extensions.ObjectExtensions.IsNull<T>(T)
+  fullName.vb: Intranet.Shared.Extensions.ObjectExtensions.IsNull(Of T)(T)
+  nameWithType: ObjectExtensions.IsNull<T>(T)
+  nameWithType.vb: ObjectExtensions.IsNull(Of T)(T)
+- uid: Intranet.Shared.Factories
+  name: Intranet.Shared.Factories
+  href: api/Intranet.Shared.Factories.html
+  commentId: N:Intranet.Shared.Factories
+  fullName: Intranet.Shared.Factories
+  nameWithType: Intranet.Shared.Factories
+- uid: Intranet.Shared.Factories.DateTimeFactory
+  name: DateTimeFactory
+  href: api/Intranet.Shared.Factories.DateTimeFactory.html
+  commentId: T:Intranet.Shared.Factories.DateTimeFactory
+  fullName: Intranet.Shared.Factories.DateTimeFactory
+  nameWithType: DateTimeFactory
+- uid: Intranet.Shared.Factories.DateTimeFactory.DateTime
+  name: DateTime
+  href: api/Intranet.Shared.Factories.DateTimeFactory.html#Intranet_Shared_Factories_DateTimeFactory_DateTime
+  commentId: P:Intranet.Shared.Factories.DateTimeFactory.DateTime
+  fullName: Intranet.Shared.Factories.DateTimeFactory.DateTime
+  nameWithType: DateTimeFactory.DateTime
+- uid: Intranet.Shared.Factories.DateTimeFactory.DateTime*
+  name: DateTime
+  href: api/Intranet.Shared.Factories.DateTimeFactory.html#Intranet_Shared_Factories_DateTimeFactory_DateTime_
+  commentId: Overload:Intranet.Shared.Factories.DateTimeFactory.DateTime
+  fullName: Intranet.Shared.Factories.DateTimeFactory.DateTime
+  nameWithType: DateTimeFactory.DateTime
+- uid: Intranet.Shared.Factories.DateTimeFactory.DateTimeOffset
+  name: DateTimeOffset
+  href: api/Intranet.Shared.Factories.DateTimeFactory.html#Intranet_Shared_Factories_DateTimeFactory_DateTimeOffset
+  commentId: P:Intranet.Shared.Factories.DateTimeFactory.DateTimeOffset
+  fullName: Intranet.Shared.Factories.DateTimeFactory.DateTimeOffset
+  nameWithType: DateTimeFactory.DateTimeOffset
+- uid: Intranet.Shared.Factories.DateTimeFactory.DateTimeOffset*
+  name: DateTimeOffset
+  href: api/Intranet.Shared.Factories.DateTimeFactory.html#Intranet_Shared_Factories_DateTimeFactory_DateTimeOffset_
+  commentId: Overload:Intranet.Shared.Factories.DateTimeFactory.DateTimeOffset
+  fullName: Intranet.Shared.Factories.DateTimeFactory.DateTimeOffset
+  nameWithType: DateTimeFactory.DateTimeOffset
+- uid: Intranet.Shared.Factories.DateTimeFactory.DateTimeOffsetUtc
+  name: DateTimeOffsetUtc
+  href: api/Intranet.Shared.Factories.DateTimeFactory.html#Intranet_Shared_Factories_DateTimeFactory_DateTimeOffsetUtc
+  commentId: P:Intranet.Shared.Factories.DateTimeFactory.DateTimeOffsetUtc
+  fullName: Intranet.Shared.Factories.DateTimeFactory.DateTimeOffsetUtc
+  nameWithType: DateTimeFactory.DateTimeOffsetUtc
+- uid: Intranet.Shared.Factories.DateTimeFactory.DateTimeOffsetUtc*
+  name: DateTimeOffsetUtc
+  href: api/Intranet.Shared.Factories.DateTimeFactory.html#Intranet_Shared_Factories_DateTimeFactory_DateTimeOffsetUtc_
+  commentId: Overload:Intranet.Shared.Factories.DateTimeFactory.DateTimeOffsetUtc
+  fullName: Intranet.Shared.Factories.DateTimeFactory.DateTimeOffsetUtc
+  nameWithType: DateTimeFactory.DateTimeOffsetUtc
+- uid: Intranet.Shared.Factories.IDateTimeFactory
+  name: IDateTimeFactory
+  href: api/Intranet.Shared.Factories.IDateTimeFactory.html
+  commentId: T:Intranet.Shared.Factories.IDateTimeFactory
+  fullName: Intranet.Shared.Factories.IDateTimeFactory
+  nameWithType: IDateTimeFactory
+- uid: Intranet.Shared.Factories.IDateTimeFactory.DateTime
+  name: DateTime
+  href: api/Intranet.Shared.Factories.IDateTimeFactory.html#Intranet_Shared_Factories_IDateTimeFactory_DateTime
+  commentId: P:Intranet.Shared.Factories.IDateTimeFactory.DateTime
+  fullName: Intranet.Shared.Factories.IDateTimeFactory.DateTime
+  nameWithType: IDateTimeFactory.DateTime
+- uid: Intranet.Shared.Factories.IDateTimeFactory.DateTime*
+  name: DateTime
+  href: api/Intranet.Shared.Factories.IDateTimeFactory.html#Intranet_Shared_Factories_IDateTimeFactory_DateTime_
+  commentId: Overload:Intranet.Shared.Factories.IDateTimeFactory.DateTime
+  fullName: Intranet.Shared.Factories.IDateTimeFactory.DateTime
+  nameWithType: IDateTimeFactory.DateTime
+- uid: Intranet.Shared.Factories.IDateTimeFactory.DateTimeOffset
+  name: DateTimeOffset
+  href: api/Intranet.Shared.Factories.IDateTimeFactory.html#Intranet_Shared_Factories_IDateTimeFactory_DateTimeOffset
+  commentId: P:Intranet.Shared.Factories.IDateTimeFactory.DateTimeOffset
+  fullName: Intranet.Shared.Factories.IDateTimeFactory.DateTimeOffset
+  nameWithType: IDateTimeFactory.DateTimeOffset
+- uid: Intranet.Shared.Factories.IDateTimeFactory.DateTimeOffset*
+  name: DateTimeOffset
+  href: api/Intranet.Shared.Factories.IDateTimeFactory.html#Intranet_Shared_Factories_IDateTimeFactory_DateTimeOffset_
+  commentId: Overload:Intranet.Shared.Factories.IDateTimeFactory.DateTimeOffset
+  fullName: Intranet.Shared.Factories.IDateTimeFactory.DateTimeOffset
+  nameWithType: IDateTimeFactory.DateTimeOffset
+- uid: Intranet.Shared.Factories.IDateTimeFactory.DateTimeOffsetUtc
+  name: DateTimeOffsetUtc
+  href: api/Intranet.Shared.Factories.IDateTimeFactory.html#Intranet_Shared_Factories_IDateTimeFactory_DateTimeOffsetUtc
+  commentId: P:Intranet.Shared.Factories.IDateTimeFactory.DateTimeOffsetUtc
+  fullName: Intranet.Shared.Factories.IDateTimeFactory.DateTimeOffsetUtc
+  nameWithType: IDateTimeFactory.DateTimeOffsetUtc
+- uid: Intranet.Shared.Factories.IDateTimeFactory.DateTimeOffsetUtc*
+  name: DateTimeOffsetUtc
+  href: api/Intranet.Shared.Factories.IDateTimeFactory.html#Intranet_Shared_Factories_IDateTimeFactory_DateTimeOffsetUtc_
+  commentId: Overload:Intranet.Shared.Factories.IDateTimeFactory.DateTimeOffsetUtc
+  fullName: Intranet.Shared.Factories.IDateTimeFactory.DateTimeOffsetUtc
+  nameWithType: IDateTimeFactory.DateTimeOffsetUtc
 - uid: Intranet.Web.Attributes
   name: Intranet.Web.Attributes
   href: api/Intranet.Web.Attributes.html
@@ -3049,114 +3295,6 @@ references:
   commentId: Overload:Intranet.Web.Controllers.FileController.Put
   fullName: Intranet.Web.Controllers.FileController.Put
   nameWithType: FileController.Put
-- uid: Intranet.Web.Extensions
-  name: Intranet.Web.Extensions
-  href: api/Intranet.Web.Extensions.html
-  commentId: N:Intranet.Web.Extensions
-  fullName: Intranet.Web.Extensions
-  nameWithType: Intranet.Web.Extensions
-- uid: Intranet.Web.Extensions.ObjectExtensions
-  name: ObjectExtensions
-  href: api/Intranet.Web.Extensions.ObjectExtensions.html
-  commentId: T:Intranet.Web.Extensions.ObjectExtensions
-  fullName: Intranet.Web.Extensions.ObjectExtensions
-  nameWithType: ObjectExtensions
-- uid: Intranet.Web.Extensions.ObjectExtensions.IsNotNull*
-  name: IsNotNull
-  href: api/Intranet.Web.Extensions.ObjectExtensions.html#Intranet_Web_Extensions_ObjectExtensions_IsNotNull_
-  commentId: Overload:Intranet.Web.Extensions.ObjectExtensions.IsNotNull
-  fullName: Intranet.Web.Extensions.ObjectExtensions.IsNotNull
-  nameWithType: ObjectExtensions.IsNotNull
-- uid: Intranet.Web.Extensions.ObjectExtensions.IsNotNull``1(``0)
-  name: IsNotNull<T>(T)
-  href: api/Intranet.Web.Extensions.ObjectExtensions.html#Intranet_Web_Extensions_ObjectExtensions_IsNotNull__1___0_
-  commentId: M:Intranet.Web.Extensions.ObjectExtensions.IsNotNull``1(``0)
-  name.vb: IsNotNull(Of T)(T)
-  fullName: Intranet.Web.Extensions.ObjectExtensions.IsNotNull<T>(T)
-  fullName.vb: Intranet.Web.Extensions.ObjectExtensions.IsNotNull(Of T)(T)
-  nameWithType: ObjectExtensions.IsNotNull<T>(T)
-  nameWithType.vb: ObjectExtensions.IsNotNull(Of T)(T)
-- uid: Intranet.Web.Extensions.ObjectExtensions.IsNull*
-  name: IsNull
-  href: api/Intranet.Web.Extensions.ObjectExtensions.html#Intranet_Web_Extensions_ObjectExtensions_IsNull_
-  commentId: Overload:Intranet.Web.Extensions.ObjectExtensions.IsNull
-  fullName: Intranet.Web.Extensions.ObjectExtensions.IsNull
-  nameWithType: ObjectExtensions.IsNull
-- uid: Intranet.Web.Extensions.ObjectExtensions.IsNull``1(``0)
-  name: IsNull<T>(T)
-  href: api/Intranet.Web.Extensions.ObjectExtensions.html#Intranet_Web_Extensions_ObjectExtensions_IsNull__1___0_
-  commentId: M:Intranet.Web.Extensions.ObjectExtensions.IsNull``1(``0)
-  name.vb: IsNull(Of T)(T)
-  fullName: Intranet.Web.Extensions.ObjectExtensions.IsNull<T>(T)
-  fullName.vb: Intranet.Web.Extensions.ObjectExtensions.IsNull(Of T)(T)
-  nameWithType: ObjectExtensions.IsNull<T>(T)
-  nameWithType.vb: ObjectExtensions.IsNull(Of T)(T)
-- uid: Intranet.Web.Factories
-  name: Intranet.Web.Factories
-  href: api/Intranet.Web.Factories.html
-  commentId: N:Intranet.Web.Factories
-  fullName: Intranet.Web.Factories
-  nameWithType: Intranet.Web.Factories
-- uid: Intranet.Web.Factories.DateTimeFactory
-  name: DateTimeFactory
-  href: api/Intranet.Web.Factories.DateTimeFactory.html
-  commentId: T:Intranet.Web.Factories.DateTimeFactory
-  fullName: Intranet.Web.Factories.DateTimeFactory
-  nameWithType: DateTimeFactory
-- uid: Intranet.Web.Factories.DateTimeFactory.GetCurrentDateTime
-  name: GetCurrentDateTime()
-  href: api/Intranet.Web.Factories.DateTimeFactory.html#Intranet_Web_Factories_DateTimeFactory_GetCurrentDateTime
-  commentId: M:Intranet.Web.Factories.DateTimeFactory.GetCurrentDateTime
-  fullName: Intranet.Web.Factories.DateTimeFactory.GetCurrentDateTime()
-  nameWithType: DateTimeFactory.GetCurrentDateTime()
-- uid: Intranet.Web.Factories.DateTimeFactory.GetCurrentDateTime*
-  name: GetCurrentDateTime
-  href: api/Intranet.Web.Factories.DateTimeFactory.html#Intranet_Web_Factories_DateTimeFactory_GetCurrentDateTime_
-  commentId: Overload:Intranet.Web.Factories.DateTimeFactory.GetCurrentDateTime
-  fullName: Intranet.Web.Factories.DateTimeFactory.GetCurrentDateTime
-  nameWithType: DateTimeFactory.GetCurrentDateTime
-- uid: Intranet.Web.Factories.DateTimeFactory.GetCurrentDateTimeOffset
-  name: GetCurrentDateTimeOffset()
-  href: api/Intranet.Web.Factories.DateTimeFactory.html#Intranet_Web_Factories_DateTimeFactory_GetCurrentDateTimeOffset
-  commentId: M:Intranet.Web.Factories.DateTimeFactory.GetCurrentDateTimeOffset
-  fullName: Intranet.Web.Factories.DateTimeFactory.GetCurrentDateTimeOffset()
-  nameWithType: DateTimeFactory.GetCurrentDateTimeOffset()
-- uid: Intranet.Web.Factories.DateTimeFactory.GetCurrentDateTimeOffset*
-  name: GetCurrentDateTimeOffset
-  href: api/Intranet.Web.Factories.DateTimeFactory.html#Intranet_Web_Factories_DateTimeFactory_GetCurrentDateTimeOffset_
-  commentId: Overload:Intranet.Web.Factories.DateTimeFactory.GetCurrentDateTimeOffset
-  fullName: Intranet.Web.Factories.DateTimeFactory.GetCurrentDateTimeOffset
-  nameWithType: DateTimeFactory.GetCurrentDateTimeOffset
-- uid: Intranet.Web.Factories.IDateTimeFactory
-  name: IDateTimeFactory
-  href: api/Intranet.Web.Factories.IDateTimeFactory.html
-  commentId: T:Intranet.Web.Factories.IDateTimeFactory
-  fullName: Intranet.Web.Factories.IDateTimeFactory
-  nameWithType: IDateTimeFactory
-- uid: Intranet.Web.Factories.IDateTimeFactory.GetCurrentDateTime
-  name: GetCurrentDateTime()
-  href: api/Intranet.Web.Factories.IDateTimeFactory.html#Intranet_Web_Factories_IDateTimeFactory_GetCurrentDateTime
-  commentId: M:Intranet.Web.Factories.IDateTimeFactory.GetCurrentDateTime
-  fullName: Intranet.Web.Factories.IDateTimeFactory.GetCurrentDateTime()
-  nameWithType: IDateTimeFactory.GetCurrentDateTime()
-- uid: Intranet.Web.Factories.IDateTimeFactory.GetCurrentDateTime*
-  name: GetCurrentDateTime
-  href: api/Intranet.Web.Factories.IDateTimeFactory.html#Intranet_Web_Factories_IDateTimeFactory_GetCurrentDateTime_
-  commentId: Overload:Intranet.Web.Factories.IDateTimeFactory.GetCurrentDateTime
-  fullName: Intranet.Web.Factories.IDateTimeFactory.GetCurrentDateTime
-  nameWithType: IDateTimeFactory.GetCurrentDateTime
-- uid: Intranet.Web.Factories.IDateTimeFactory.GetCurrentDateTimeOffset
-  name: GetCurrentDateTimeOffset()
-  href: api/Intranet.Web.Factories.IDateTimeFactory.html#Intranet_Web_Factories_IDateTimeFactory_GetCurrentDateTimeOffset
-  commentId: M:Intranet.Web.Factories.IDateTimeFactory.GetCurrentDateTimeOffset
-  fullName: Intranet.Web.Factories.IDateTimeFactory.GetCurrentDateTimeOffset()
-  nameWithType: IDateTimeFactory.GetCurrentDateTimeOffset()
-- uid: Intranet.Web.Factories.IDateTimeFactory.GetCurrentDateTimeOffset*
-  name: GetCurrentDateTimeOffset
-  href: api/Intranet.Web.Factories.IDateTimeFactory.html#Intranet_Web_Factories_IDateTimeFactory_GetCurrentDateTimeOffset_
-  commentId: Overload:Intranet.Web.Factories.IDateTimeFactory.GetCurrentDateTimeOffset
-  fullName: Intranet.Web.Factories.IDateTimeFactory.GetCurrentDateTimeOffset
-  nameWithType: IDateTimeFactory.GetCurrentDateTimeOffset
 - uid: Intranet.Web.Models
   name: Intranet.Web.Models
   href: api/Intranet.Web.Models.html
@@ -3331,13 +3469,13 @@ references:
   commentId: T:Intranet.Web.Providers.JwtTokenProvider
   fullName: Intranet.Web.Providers.JwtTokenProvider
   nameWithType: JwtTokenProvider
-- uid: Intranet.Web.Providers.JwtTokenProvider.#ctor(Microsoft.Extensions.Options.IOptions{Intranet.Web.Models.Options.TokenProviderOptions},Intranet.Web.Factories.IDateTimeFactory)
+- uid: Intranet.Web.Providers.JwtTokenProvider.#ctor(Microsoft.Extensions.Options.IOptions{Intranet.Web.Models.Options.TokenProviderOptions},Intranet.Shared.Factories.IDateTimeFactory)
   name: JwtTokenProvider(IOptions<TokenProviderOptions>, IDateTimeFactory)
-  href: api/Intranet.Web.Providers.JwtTokenProvider.html#Intranet_Web_Providers_JwtTokenProvider__ctor_Microsoft_Extensions_Options_IOptions_Intranet_Web_Models_Options_TokenProviderOptions__Intranet_Web_Factories_IDateTimeFactory_
-  commentId: M:Intranet.Web.Providers.JwtTokenProvider.#ctor(Microsoft.Extensions.Options.IOptions{Intranet.Web.Models.Options.TokenProviderOptions},Intranet.Web.Factories.IDateTimeFactory)
+  href: api/Intranet.Web.Providers.JwtTokenProvider.html#Intranet_Web_Providers_JwtTokenProvider__ctor_Microsoft_Extensions_Options_IOptions_Intranet_Web_Models_Options_TokenProviderOptions__Intranet_Shared_Factories_IDateTimeFactory_
+  commentId: M:Intranet.Web.Providers.JwtTokenProvider.#ctor(Microsoft.Extensions.Options.IOptions{Intranet.Web.Models.Options.TokenProviderOptions},Intranet.Shared.Factories.IDateTimeFactory)
   name.vb: JwtTokenProvider(IOptions(Of TokenProviderOptions), IDateTimeFactory)
-  fullName: Intranet.Web.Providers.JwtTokenProvider.JwtTokenProvider(Microsoft.Extensions.Options.IOptions<Intranet.Web.Models.Options.TokenProviderOptions>, Intranet.Web.Factories.IDateTimeFactory)
-  fullName.vb: Intranet.Web.Providers.JwtTokenProvider.JwtTokenProvider(Microsoft.Extensions.Options.IOptions(Of Intranet.Web.Models.Options.TokenProviderOptions), Intranet.Web.Factories.IDateTimeFactory)
+  fullName: Intranet.Web.Providers.JwtTokenProvider.JwtTokenProvider(Microsoft.Extensions.Options.IOptions<Intranet.Web.Models.Options.TokenProviderOptions>, Intranet.Shared.Factories.IDateTimeFactory)
+  fullName.vb: Intranet.Web.Providers.JwtTokenProvider.JwtTokenProvider(Microsoft.Extensions.Options.IOptions(Of Intranet.Web.Models.Options.TokenProviderOptions), Intranet.Shared.Factories.IDateTimeFactory)
   nameWithType: JwtTokenProvider.JwtTokenProvider(IOptions<TokenProviderOptions>, IDateTimeFactory)
   nameWithType.vb: JwtTokenProvider.JwtTokenProvider(IOptions(Of TokenProviderOptions), IDateTimeFactory)
 - uid: Intranet.Web.Providers.JwtTokenProvider.#ctor*

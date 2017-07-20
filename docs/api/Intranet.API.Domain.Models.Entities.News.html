@@ -87,6 +87,7 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">News</span></div>
   </div>
+      <div class="level2"><a class="xref" href="Intranet.API.ViewModels.NewsViewModel.html">NewsViewModel</a></div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
@@ -121,18 +122,19 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_API_Domain_Models_Entities_News_Date.md&amp;value=---%0Auid%3A%20Intranet.API.Domain.Models.Entities.News.Date%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_API_Domain_Models_Entities_News_Created.md&amp;value=---%0Auid%3A%20Intranet.API.Domain.Models.Entities.News.Created%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Certaincy/Intranet/blob/s3blob/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L15">View Source</a>
+    <a href="https://github.com/Certaincy/Intranet/blob/develop/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L23">View Source</a>
   </span>
-  <a id="Intranet_API_Domain_Models_Entities_News_Date_" data-uid="Intranet.API.Domain.Models.Entities.News.Date*"></a>
-  <h4 id="Intranet_API_Domain_Models_Entities_News_Date" data-uid="Intranet.API.Domain.Models.Entities.News.Date">Date</h4>
-  <div class="markdown level1 summary"></div>
+  <a id="Intranet_API_Domain_Models_Entities_News_Created_" data-uid="Intranet.API.Domain.Models.Entities.News.Created*"></a>
+  <h4 id="Intranet_API_Domain_Models_Entities_News_Created" data-uid="Intranet.API.Domain.Models.Entities.News.Created">Created</h4>
+  <div class="markdown level1 summary"><p>Setting this property will set <a class="xref" href="Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_Updated">Updated</a> as well if <a class="xref" href="Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_Updated">Updated</a> is not yet set.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DateTimeOffset Date { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public DateTimeOffset Created { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -151,10 +153,41 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_API_Domain_Models_Entities_News_HasEverBeenPublished.md&amp;value=---%0Auid%3A%20Intranet.API.Domain.Models.Entities.News.HasEverBeenPublished%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Certaincy/Intranet/blob/develop/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L52">View Source</a>
+  </span>
+  <a id="Intranet_API_Domain_Models_Entities_News_HasEverBeenPublished_" data-uid="Intranet.API.Domain.Models.Entities.News.HasEverBeenPublished*"></a>
+  <h4 id="Intranet_API_Domain_Models_Entities_News_HasEverBeenPublished" data-uid="Intranet.API.Domain.Models.Entities.News.HasEverBeenPublished">HasEverBeenPublished</h4>
+  <div class="markdown level1 summary"><p>Can only be changed once, from false to true, via <a class="xref" href="Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_Published">Published</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasEverBeenPublished { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_API_Domain_Models_Entities_News_HeaderImage.md&amp;value=---%0Auid%3A%20Intranet.API.Domain.Models.Entities.News.HeaderImage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Certaincy/Intranet/blob/s3blob/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L25">View Source</a>
+    <a href="https://github.com/Certaincy/Intranet/blob/develop/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L47">View Source</a>
   </span>
   <a id="Intranet_API_Domain_Models_Entities_News_HeaderImage_" data-uid="Intranet.API.Domain.Models.Entities.News.HeaderImage*"></a>
   <h4 id="Intranet_API_Domain_Models_Entities_News_HeaderImage" data-uid="Intranet.API.Domain.Models.Entities.News.HeaderImage">HeaderImage</h4>
@@ -184,7 +217,7 @@
     <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_API_Domain_Models_Entities_News_Id.md&amp;value=---%0Auid%3A%20Intranet.API.Domain.Models.Entities.News.Id%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Certaincy/Intranet/blob/s3blob/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L10">View Source</a>
+    <a href="https://github.com/Certaincy/Intranet/blob/develop/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L15">View Source</a>
   </span>
   <a id="Intranet_API_Domain_Models_Entities_News_Id_" data-uid="Intranet.API.Domain.Models.Entities.News.Id*"></a>
   <h4 id="Intranet_API_Domain_Models_Entities_News_Id" data-uid="Intranet.API.Domain.Models.Entities.News.Id">Id</h4>
@@ -211,10 +244,71 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_API_Domain_Models_Entities_News_NewsKeywords.md&amp;value=---%0Auid%3A%20Intranet.API.Domain.Models.Entities.News.NewsKeywords%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Certaincy/Intranet/blob/develop/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L77">View Source</a>
+  </span>
+  <a id="Intranet_API_Domain_Models_Entities_News_NewsKeywords_" data-uid="Intranet.API.Domain.Models.Entities.News.NewsKeywords*"></a>
+  <h4 id="Intranet_API_Domain_Models_Entities_News_NewsKeywords" data-uid="Intranet.API.Domain.Models.Entities.News.NewsKeywords">NewsKeywords</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ICollection&lt;NewsKeyword&gt; NewsKeywords { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.ICollection&lt;Intranet.API.Domain.Models.Entities.NewsKeyword&gt;</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_API_Domain_Models_Entities_News_Published.md&amp;value=---%0Auid%3A%20Intranet.API.Domain.Models.Entities.News.Published%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Certaincy/Intranet/blob/develop/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L60">View Source</a>
+  </span>
+  <a id="Intranet_API_Domain_Models_Entities_News_Published_" data-uid="Intranet.API.Domain.Models.Entities.News.Published*"></a>
+  <h4 id="Intranet_API_Domain_Models_Entities_News_Published" data-uid="Intranet.API.Domain.Models.Entities.News.Published">Published</h4>
+  <div class="markdown level1 summary"><p>Indicates wether or not the News is published or not. The first time <a class="xref" href="Intranet.API.Domain.Models.Entities.News.html#Intranet_API_Domain_Models_Entities_News_HasEverBeenPublished">HasEverBeenPublished</a> will also be set to true.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Published { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_API_Domain_Models_Entities_News_Text.md&amp;value=---%0Auid%3A%20Intranet.API.Domain.Models.Entities.News.Text%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Certaincy/Intranet/blob/s3blob/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L17">View Source</a>
+    <a href="https://github.com/Certaincy/Intranet/blob/develop/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L39">View Source</a>
   </span>
   <a id="Intranet_API_Domain_Models_Entities_News_Text_" data-uid="Intranet.API.Domain.Models.Entities.News.Text*"></a>
   <h4 id="Intranet_API_Domain_Models_Entities_News_Text" data-uid="Intranet.API.Domain.Models.Entities.News.Text">Text</h4>
@@ -245,7 +339,7 @@ public string Text { get; set; }</code></pre>
     <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_API_Domain_Models_Entities_News_Title.md&amp;value=---%0Auid%3A%20Intranet.API.Domain.Models.Entities.News.Title%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Certaincy/Intranet/blob/s3blob/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L12">View Source</a>
+    <a href="https://github.com/Certaincy/Intranet/blob/develop/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L17">View Source</a>
   </span>
   <a id="Intranet_API_Domain_Models_Entities_News_Title_" data-uid="Intranet.API.Domain.Models.Entities.News.Title*"></a>
   <h4 id="Intranet_API_Domain_Models_Entities_News_Title" data-uid="Intranet.API.Domain.Models.Entities.News.Title">Title</h4>
@@ -273,10 +367,40 @@ public string Title { get; set; }</code></pre>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_API_Domain_Models_Entities_News_Updated.md&amp;value=---%0Auid%3A%20Intranet.API.Domain.Models.Entities.News.Updated%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Certaincy/Intranet/blob/develop/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L37">View Source</a>
+  </span>
+  <a id="Intranet_API_Domain_Models_Entities_News_Updated_" data-uid="Intranet.API.Domain.Models.Entities.News.Updated*"></a>
+  <h4 id="Intranet_API_Domain_Models_Entities_News_Updated" data-uid="Intranet.API.Domain.Models.Entities.News.Updated">Updated</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateTimeOffset Updated { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.DateTimeOffset</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_API_Domain_Models_Entities_News_User.md&amp;value=---%0Auid%3A%20Intranet.API.Domain.Models.Entities.News.User%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Certaincy/Intranet/blob/s3blob/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L23">View Source</a>
+    <a href="https://github.com/Certaincy/Intranet/blob/develop/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L45">View Source</a>
   </span>
   <a id="Intranet_API_Domain_Models_Entities_News_User_" data-uid="Intranet.API.Domain.Models.Entities.News.User*"></a>
   <h4 id="Intranet_API_Domain_Models_Entities_News_User" data-uid="Intranet.API.Domain.Models.Entities.News.User">User</h4>
@@ -306,7 +430,7 @@ public string Title { get; set; }</code></pre>
     <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_API_Domain_Models_Entities_News_UserId.md&amp;value=---%0Auid%3A%20Intranet.API.Domain.Models.Entities.News.UserId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Certaincy/Intranet/blob/s3blob/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L20">View Source</a>
+    <a href="https://github.com/Certaincy/Intranet/blob/develop/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L42">View Source</a>
   </span>
   <a id="Intranet_API_Domain_Models_Entities_News_UserId_" data-uid="Intranet.API.Domain.Models.Entities.News.UserId*"></a>
   <h4 id="Intranet_API_Domain_Models_Entities_News_UserId" data-uid="Intranet.API.Domain.Models.Entities.News.UserId">UserId</h4>
@@ -334,10 +458,10 @@ public string UserId { get; set; }</code></pre>
   </table>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
-      <a class="xref" href="Intranet.Web.Extensions.ObjectExtensions.html#Intranet_Web_Extensions_ObjectExtensions_IsNull__1___0_">ObjectExtensions.IsNull&lt;T&gt;(T)</a>
+      <a class="xref" href="Intranet.Shared.Extensions.ObjectExtensions.html#Intranet_Shared_Extensions_ObjectExtensions_IsNull__1___0_">ObjectExtensions.IsNull&lt;T&gt;(T)</a>
   </div>
   <div>
-      <a class="xref" href="Intranet.Web.Extensions.ObjectExtensions.html#Intranet_Web_Extensions_ObjectExtensions_IsNotNull__1___0_">ObjectExtensions.IsNotNull&lt;T&gt;(T)</a>
+      <a class="xref" href="Intranet.Shared.Extensions.ObjectExtensions.html#Intranet_Shared_Extensions_ObjectExtensions_IsNotNull__1___0_">ObjectExtensions.IsNotNull&lt;T&gt;(T)</a>
   </div>
 </article>
           </div>
@@ -350,7 +474,7 @@ public string UserId { get; set; }</code></pre>
                     <a href="https://github.com/Certaincy/Intranet/new/develop/apiSpec/new?filename=Intranet_API_Domain_Models_Entities_News.md&amp;value=---%0Auid%3A%20Intranet.API.Domain.Models.Entities.News%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Certaincy/Intranet/blob/s3blob/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L8" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Certaincy/Intranet/blob/develop/src/Intranet.API/Intranet.API.Domain/Models/Entities/News.cs/#L8" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
