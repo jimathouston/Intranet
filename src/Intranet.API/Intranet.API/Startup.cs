@@ -19,6 +19,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Intranet.API.Domain;
 using Intranet.API.Filters;
 using Microsoft.EntityFrameworkCore;
+using Intranet.Shared.Factories;
 
 namespace Intranet.API
 {
@@ -47,6 +48,10 @@ namespace Intranet.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region Dependency Injection
+            services.AddTransient<IDateTimeFactory, DateTimeFactory>();
+            #endregion
+
             #region Database
             var sqlConnectionString = Configuration["CONNECTION_STRING"];
 

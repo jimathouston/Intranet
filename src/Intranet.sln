@@ -8,6 +8,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.Web", "Intranet.Web\Intranet.Web\Intranet.Web.csproj", "{30AEF3E4-2824-4040-9C76-95B559A13D90}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D1612536-24AF-4EDE-ABFD-70F49B3A8CAD} = {D1612536-24AF-4EDE-ABFD-70F49B3A8CAD}
+		{1C36748D-F1CD-4D25-84C5-B67274E4CF3C} = {1C36748D-F1CD-4D25-84C5-B67274E4CF3C}
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.Web.UnitTests", "Intranet.Web\Intranet.Web.UnitTests\Intranet.Web.UnitTests.csproj", "{E7BB55C2-8774-4BBF-BA17-86378DC4D55E}"
@@ -15,6 +16,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.API.Domain", "Intranet.API\Intranet.API.Domain\Intranet.API.Domain.csproj", "{B89283DA-B3F1-4632-9590-E592E9DD74BF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.API", "Intranet.API\Intranet.API\Intranet.API.csproj", "{D22CA285-59EF-4EA3-9C26-8FABCFB33B93}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0FA3A101-43E1-4794-885D-D6133A6A447B} = {0FA3A101-43E1-4794-885D-D6133A6A447B}
+		{1C36748D-F1CD-4D25-84C5-B67274E4CF3C} = {1C36748D-F1CD-4D25-84C5-B67274E4CF3C}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.API.UnitTests", "Intranet.API\Intranet.API.UnitTests\Intranet.API.UnitTests.csproj", "{3E9F10BB-8940-47D8-9BAD-056E08A34179}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -44,6 +49,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.Shared.Common", "Intranet.Shared\Intranet.Shared.Common\Intranet.Shared.Common.csproj", "{0FA3A101-43E1-4794-885D-D6133A6A447B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "docs", "docs\docs.csproj", "{E175DD6A-977B-40C8-B185-1F45588F78A2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.Shared", "Intranet.Shared\Intranet.Shared\Intranet.Shared.csproj", "{1C36748D-F1CD-4D25-84C5-B67274E4CF3C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -151,6 +158,18 @@ Global
 		{E175DD6A-977B-40C8-B185-1F45588F78A2}.Release|x64.Build.0 = Release|Any CPU
 		{E175DD6A-977B-40C8-B185-1F45588F78A2}.Release|x86.ActiveCfg = Release|Any CPU
 		{E175DD6A-977B-40C8-B185-1F45588F78A2}.Release|x86.Build.0 = Release|Any CPU
+		{1C36748D-F1CD-4D25-84C5-B67274E4CF3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C36748D-F1CD-4D25-84C5-B67274E4CF3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C36748D-F1CD-4D25-84C5-B67274E4CF3C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1C36748D-F1CD-4D25-84C5-B67274E4CF3C}.Debug|x64.Build.0 = Debug|Any CPU
+		{1C36748D-F1CD-4D25-84C5-B67274E4CF3C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1C36748D-F1CD-4D25-84C5-B67274E4CF3C}.Debug|x86.Build.0 = Debug|Any CPU
+		{1C36748D-F1CD-4D25-84C5-B67274E4CF3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C36748D-F1CD-4D25-84C5-B67274E4CF3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C36748D-F1CD-4D25-84C5-B67274E4CF3C}.Release|x64.ActiveCfg = Release|Any CPU
+		{1C36748D-F1CD-4D25-84C5-B67274E4CF3C}.Release|x64.Build.0 = Release|Any CPU
+		{1C36748D-F1CD-4D25-84C5-B67274E4CF3C}.Release|x86.ActiveCfg = Release|Any CPU
+		{1C36748D-F1CD-4D25-84C5-B67274E4CF3C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

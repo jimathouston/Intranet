@@ -8,7 +8,7 @@ using System.IO;
 using Microsoft.AspNetCore.Http;
 using Intranet.Web.Services;
 using Microsoft.AspNetCore.Authorization;
-using Intranet.Web.Extensions;
+using Intranet.Shared.Extensions;
 using ImageSharp;
 
 namespace Intranet.Web.Controllers

@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Authorization;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Intranet.API.Extensions;
+using Intranet.Shared.Factories;
+using Intranet.API.Helpers;
+using Intranet.API.ViewModels;
 
 namespace Intranet.API.Controllers
 {
@@ -19,12 +22,14 @@ namespace Intranet.API.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("/api/v1/[controller]")]
-    public class NewsController : Controller, IRestController<News>
+    public class NewsController : Controller, IRestController<NewsViewModel>
     {
         private readonly IntranetApiContext _intranetApiContext;
+        private readonly IDateTimeFactory _dateTimeFactory;
 
-        public NewsController(IntranetApiContext intranetApiContext)
+        public NewsController(IntranetApiContext intranetApiContext, IDateTimeFactory dateTimeFactory)
         {
+            _dateTimeFactory = dateTimeFactory;
             _intranetApiContext = intranetApiContext;
         }
 
@@ -34,7 +39,7 @@ namespace Intranet.API.Controllers
         /// <param name="news"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Post([FromBody] News news)
+        public IActionResult Post([FromBody] NewsViewModel news)
         {
             try
             {
@@ -57,6 +62,7 @@ namespace Intranet.API.Controllers
                     Title = news.Title,
                     Text = news.Text,
                     UserId = username,
+                    Published = news.Published,
                 };
 
                 if (!String.IsNullOrWhiteSpace(news.HeaderImage?.FileName))
@@ -67,10 +73,16 @@ namespace Intranet.API.Controllers
                     };
                 }
 
+                newNews.Created = _dateTimeFactory.DateTimeOffsetUtc;
+
+                NewsKeywordHelper.SetKeywords(news.Keywords, newNews, _intranetApiContext);
+
                 _intranetApiContext.News.Add(newNews);
                 _intranetApiContext.SaveChanges();
 
-                return Ok(ModelState);
+                var newsViewModel = new NewsViewModel(newNews);
+
+                return Ok(newsViewModel);
             }
             catch (Exception)
             {
@@ -86,7 +98,7 @@ namespace Intranet.API.Controllers
         /// <returns></returns>
         [Route("{id:int}")]
         [HttpPut]
-        public IActionResult Put(int id, [FromBody] News news)
+        public IActionResult Put(int id, [FromBody] NewsViewModel news)
         {
             try
             {
@@ -108,17 +120,32 @@ namespace Intranet.API.Controllers
                     return Forbid();
                 }
 
+                // If the news changes to Published for the first time, set creation date
+                if (!contextEntity.HasEverBeenPublished && news.Published)
+                {
+                    contextEntity.Created = _dateTimeFactory.DateTimeOffsetUtc;
+                }
+                else if (news.Published)
+                {
+                    contextEntity.Updated = _dateTimeFactory.DateTimeOffsetUtc;
+                }
+
                 contextEntity.Title = news.Title;
                 contextEntity.Text = news.Text;
-                contextEntity.Date = DateTimeOffset.UtcNow;
+                contextEntity.Published = news.Published;
 
                 if (contextEntity.HeaderImage != null)
                 {
                     contextEntity.HeaderImage.FileName = news.HeaderImage?.FileName;
                 }
 
+                NewsKeywordHelper.SetKeywords(news.Keywords, contextEntity, _intranetApiContext);
+
                 _intranetApiContext.SaveChanges();
-                return Ok(ModelState);
+
+                var newsViewModel = new NewsViewModel(contextEntity);
+
+                return Ok(newsViewModel);
             }
             catch (Exception)
             {
@@ -177,9 +204,15 @@ namespace Intranet.API.Controllers
                 var news = _intranetApiContext.News
                     .Include(n => n.HeaderImage)
                     .Include(n => n.User)
+                    .Include(n => n.NewsKeywords)
+                        .ThenInclude(nk => nk.Keyword)
                     .ToList();
 
-                return new OkObjectResult(news);
+                var newsViewModel = news
+                    .Select(n => new NewsViewModel(n))
+                    .ToList();
+
+                return new OkObjectResult(newsViewModel);
             }
             catch (Exception)
             {
@@ -198,26 +231,25 @@ namespace Intranet.API.Controllers
         {
             try
             {
-                var news = _intranetApiContext.News.Find(id);
+                var news = _intranetApiContext.News
+                    .Include(n => n.HeaderImage)
+                    .Include(n => n.User)
+                    .Include(n => n.NewsKeywords)
+                        .ThenInclude(nk => nk.Keyword)
+                    .SingleOrDefault(n => n.Id == id);
 
                 if (news == null)
                 {
                     return NotFound();
                 }
 
-                _intranetApiContext.Entry(news)
-                    .Reference(n => n.HeaderImage)
-                    .Load();
+                var newsViewModel = new NewsViewModel(news);
 
-                _intranetApiContext.Entry(news)
-                    .Reference(n => n.User)
-                    .Load();
-
-                return new OkObjectResult(news);
+                return new OkObjectResult(newsViewModel);
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new News());
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Intranet.Web.Factories;
+using Intranet.Shared.Factories;
 using Intranet.Web.Models.Options;
 using Intranet.Web.Providers;
 using Intranet.Web.Providers.Contracts;
@@ -48,7 +48,7 @@ namespace Intranet_Web
 
             if (env.IsDevelopment())
             {
-                // Hack to be able to use user-secrets because... aws... 🤦
+                // Bodge to be able to use user-secrets because... aws... 🤦
                 Environment.SetEnvironmentVariable("AWS_BUCKET_NAME", Configuration["AWS_BUCKET_NAME"]);
                 Environment.SetEnvironmentVariable("AWS_SECRET_ACCESS_KEY", Configuration["AWS_SECRET_ACCESS_KEY"]);
                 Environment.SetEnvironmentVariable("AWS_REGION", Configuration["AWS_REGION"]);

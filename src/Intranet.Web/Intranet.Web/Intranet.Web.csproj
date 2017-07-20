@@ -36,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Intranet.Shared\Intranet.Shared.Common\Intranet.Shared.Common.csproj" />
+    <ProjectReference Include="..\..\Intranet.Shared\Intranet.Shared\Intranet.Shared.csproj" />
     <ProjectReference Include="..\Intranet.Web.Authentication\Intranet.Web.Authentication.csproj" />
   </ItemGroup>
   <ItemGroup>

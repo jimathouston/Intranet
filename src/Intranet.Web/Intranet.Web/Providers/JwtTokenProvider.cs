@@ -4,7 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Intranet.Web.Factories;
+using Intranet.Shared.Factories;
 using Intranet.Web.Models.Options;
 using Intranet.Web.Providers.Contracts;
 using Microsoft.Extensions.Options;
@@ -25,7 +25,7 @@ namespace Intranet.Web.Providers
 
         public (string accessToken, int expiresIn) GenerateToken(ClaimsPrincipal user)
         {
-            var now = _dateTimeFactory.GetCurrentDateTimeOffset();
+            var now = _dateTimeFactory.DateTimeOffset;
 
             // Specifically add the jti (random nonce), iat (issued timestamp), and sub (subject/user) claims.
             // You can add other claims here, if you want:

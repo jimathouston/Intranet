@@ -4,7 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using Intranet.Web.Factories;
+using Intranet.Shared.Factories;
 using Intranet.Web.Models;
 using Intranet.Web.Models.Options;
 using Intranet.Web.Providers;
@@ -49,10 +49,9 @@ namespace Intranet.Web.UnitTests
             #region DateTimeFactoryMock
             var dateTimeOffset = new DateTimeOffset(2017, 02, 10, 11, 11, 12, TimeSpan.FromMinutes(0));
             var dateTimeFactoryMock = new Mock<IDateTimeFactory>();
-            dateTimeFactoryMock.Setup(m => m.GetCurrentDateTimeOffset()).Returns(dateTimeOffset);
+            dateTimeFactoryMock.Setup(m => m.DateTimeOffset).Returns(dateTimeOffset);
             #endregion
             #region ClaimsPrincipal
-            // TODO: To mock or not to mock?
             var user = new User
             {
                 DisplayName = "Oskar",

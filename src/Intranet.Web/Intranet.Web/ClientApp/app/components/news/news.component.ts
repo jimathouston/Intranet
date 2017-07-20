@@ -12,20 +12,29 @@ export class NewsComponent implements OnInit {
     newsItems: NewsItem[]
     newsitemsFilter: NewsItem[]
     selectedNewsitem: NewsItem
+    info: string
 
     constructor(
         private dataService: DataService,
     ) { }
 
     ngOnInit() {
-        this.dataService.getNewsItems().subscribe(
-            (newsItems: NewsItem[]) => {
-                this.newsItems = newsItems
-            }
-        )
+        this.updateData()
     }
 
     onSelect(newsitem: NewsItem) {
         this.selectedNewsitem = newsitem
+    }
+
+    handleOnDelete(info: string) {
+      this.updateData()
+    }
+
+    updateData() {
+      this.dataService.getNewsItems().subscribe(
+            (newsItems: NewsItem[]) => {
+                this.newsItems = newsItems
+            }
+        )
     }
 }

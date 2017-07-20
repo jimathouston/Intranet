@@ -14,16 +14,13 @@ import NewsItem from '../../models/newsItem.model'
 export class NewsEditComponent implements OnInit {
     newsItem: NewsItem
     info: string = ''
-    newsItemEdited: boolean = false
-    loadedNewsItem: boolean
+    newsItemEdited: boolean
 
     constructor(
       private dataService: DataService,
       private route: ActivatedRoute,
       private location: Location
-    ) {
-        this.newsItem = new NewsItem()
-    }
+    ) { }
 
     onEditorContentChange(content: string) {
         this.newsItem.text = content
@@ -39,7 +36,6 @@ export class NewsEditComponent implements OnInit {
         this.dataService.getNewsItem(id).subscribe(
             (newsitem: NewsItem) => {
                 this.newsItem = newsitem
-                this.loadedNewsItem = true
             },
             error => {
                 console.log('Failed while trying to load specific newsitem of news' + error)

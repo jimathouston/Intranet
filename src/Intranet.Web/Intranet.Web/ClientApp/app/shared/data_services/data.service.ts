@@ -31,7 +31,7 @@ export class DataService {
                 return res.json()
             })
             .map((res: NewsItem[]) => {
-                return res.sort((a, b) => a.date < b.date ? 1 : -1)
+                return res.sort((a, b) => a.created < b.created ? 1 : -1)
             })
             .catch(this.handleError)
     }
@@ -55,7 +55,7 @@ export class DataService {
     }
 
     // updates a NewsItem
-    updateNewsItem(newsitem: NewsItem): Observable<void> {
+    updateNewsItem(newsitem: NewsItem): Observable<NewsItem> {
         const headers = new Headers()
         headers.append('Content-Type', 'application/json')
         headers.append('Access-Control-Allow-Origin', '*')
@@ -64,7 +64,7 @@ export class DataService {
 
         return this.http.put('news/' + newsitem.id, JSON.stringify(newsitem), options)
             .map((res: Response) => {
-                return
+                return res.json() as NewsItem
             })
     }
 

@@ -17,6 +17,13 @@ import { NewsNewComponent } from './components/news/news-new.component'
 import { NewsDetailComponent } from './components/news/news-detail.component'
 import { NewsEditComponent } from './components/news/news-edit.component'
 
+import {
+  DeleteNewsButtonComponent,
+  NewsInfoStripComponent,
+  TogglePublishedComponent,
+  NewsKeywordsStripComponent,
+} from './_directives'
+
 import { ProfilesComponent } from './components/profile/profiles.component'
 import { ProfileDetailComponent } from './components/profile/profile-detail.component'
 import { ProfileChecklistComponent } from './components/profile/profile-checklist.component'
@@ -43,6 +50,10 @@ export const sharedConfig: NgModule = {
         TruncatePipe,
         TextEditorComponent,
         SafeHtmlPipe,
+        DeleteNewsButtonComponent,
+        NewsInfoStripComponent,
+        TogglePublishedComponent,
+        NewsKeywordsStripComponent,
     ],
     providers: [
         DataService,

@@ -2,6 +2,8 @@
 using Intranet.API.Domain.Data;
 using Intranet.API.Domain.Models.Entities;
 using Intranet.API.UnitTests.Fakes;
+using Intranet.API.ViewModels;
+using Intranet.Shared.Factories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -26,16 +28,18 @@ namespace Intranet.API.UnitTests.Controllers
         {
             // Assign
             var newsItem = GetFakeNews().First();
+            var newsItemVM = new NewsViewModel(newsItem);
             var username = "test.user";
             var user = new ClaimsPrincipalFake(new Claim("username", username));
+            var dateTimeFactory = new DateTimeFactory();
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var newsController = ControllerFake.GetController<NewsController>(context);
+                var newsController = ControllerFake.GetController<NewsController>(context, dateTimeFactory);
                 newsController.ControllerContext.HttpContext.User = user;
 
                 // Act
-                var result = newsController.Post(newsItem);
+                var result = newsController.Post(newsItemVM);
 
                 // Assert
                 Assert.IsType<OkObjectResult>(result);
@@ -47,6 +51,7 @@ namespace Intranet.API.UnitTests.Controllers
         {
             // Assign
             var newsItem = GetFakeNews().First();
+            var dateTimeFactory = new DateTimeFactory();
             var username = "test.user";
             var displayName = "Test User";
             var user = new ClaimsPrincipalFake(new[] {
@@ -56,11 +61,11 @@ namespace Intranet.API.UnitTests.Controllers
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var newsController = ControllerFake.GetController<NewsController>(context);
+                var newsController = ControllerFake.GetController<NewsController>(context, dateTimeFactory);
                 newsController.ControllerContext.HttpContext.User = user;
 
                 // Act
-                newsController.Post(newsItem);
+                newsController.Post(new NewsViewModel(newsItem));
             }
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
@@ -76,6 +81,42 @@ namespace Intranet.API.UnitTests.Controllers
                 Assert.True(news.User.DisplayName == displayName);
             }
         }
+
+        [Fact]
+        public void SetPublishDateWhenCreatingNews()
+        {
+            // Assign
+            var dateTimeOffsetCreated = new DateTimeOffset(2017, 7, 18, 0, 0, 0, TimeSpan.Zero);
+            var newsItem = GetFakeNews(dateTimeOffsetCreated).First();
+            var dateTimeFactoryCreatedMock = new Mock<IDateTimeFactory>();
+
+            dateTimeFactoryCreatedMock.SetupGet(d => d.DateTimeOffsetUtc).Returns(dateTimeOffsetCreated);
+
+            var user = new ClaimsPrincipalFake(new Claim("username", "anne.the.admin"));
+
+            newsItem.UserId = "anne.the.admin";
+            newsItem.Published = true;
+
+            DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(newsItem), ensureDeleted: true);
+
+            using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+            {
+                var newsController = ControllerFake.GetController<NewsController>(context, dateTimeFactoryCreatedMock.Object);
+                newsController.ControllerContext.HttpContext.User = user;
+
+                // Act
+                var result = newsController.Post(new NewsViewModel(newsItem));
+            }
+
+            using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+            {
+                // Assert
+                Assert.Equal(context.News.First().Created, dateTimeOffsetCreated);
+                Assert.Equal(context.News.First().Updated, dateTimeOffsetCreated);
+                Assert.True(context.News.First().Published);
+                Assert.True(context.News.First().HasEverBeenPublished);
+            }
+        }
         #endregion
 
         #region Put
@@ -85,15 +126,16 @@ namespace Intranet.API.UnitTests.Controllers
             // Assign
             var news = GetFakeNews();
             int id = 5;
+            var dateTimeFactory = new DateTimeFactory();
 
             DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var newsController = ControllerFake.GetController<NewsController>(context);
+                var newsController = ControllerFake.GetController<NewsController>(context, dateTimeFactory);
 
                 // Act
-                var result = newsController.Put(id, news.First());
+                var result = newsController.Put(id, new NewsViewModel(news.First()));
 
                 // Assert
                 Assert.IsType<NotFoundObjectResult>(result);
@@ -106,6 +148,7 @@ namespace Intranet.API.UnitTests.Controllers
             // Assign
             var oldNewsItem = GetFakeNews().First();
             var newNewsItem = GetFakeNews().First();
+            var dateTimeFactory = new DateTimeFactory();
 
             newNewsItem.UserId = "connie.the.consultant";
 
@@ -113,10 +156,10 @@ namespace Intranet.API.UnitTests.Controllers
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var newsController = ControllerFake.GetController<NewsController>(context);
+                var newsController = ControllerFake.GetController<NewsController>(context, dateTimeFactory);
 
                 // Act
-                var result = newsController.Put(1, newNewsItem);
+                var result = newsController.Put(1, new NewsViewModel(newNewsItem));
 
                 // Assert
                 Assert.IsType<ForbidResult>(result);
@@ -129,6 +172,7 @@ namespace Intranet.API.UnitTests.Controllers
             // Assign
             var oldNewsItem = GetFakeNews().First();
             var newNewsItem = GetFakeNews().First();
+            var dateTimeFactory = new DateTimeFactory();
             var user = new ClaimsPrincipalFake(new Claim("username", "anne.the.admin"));
 
             newNewsItem.UserId = "anne.the.admin";
@@ -137,14 +181,53 @@ namespace Intranet.API.UnitTests.Controllers
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var newsController = ControllerFake.GetController<NewsController>(context);
+                var newsController = ControllerFake.GetController<NewsController>(context, dateTimeFactory);
                 newsController.ControllerContext.HttpContext.User = user;
 
                 // Act
-                var result = newsController.Put(1, newNewsItem);
+                var result = newsController.Put(1, new NewsViewModel(newNewsItem));
 
                 // Assert
                 Assert.IsType<OkObjectResult>(result);
+            }
+        }
+
+        [Fact]
+        public void SetPublishDateWhenUpdateNews()
+        {
+            // Assign
+            var dateTimeOffsetCreated = new DateTimeOffset(2017, 7, 18, 0, 0, 0, TimeSpan.Zero);
+            var dateTimeOffsetUpdated = new DateTimeOffset(2017, 7, 19, 0, 0, 0, TimeSpan.Zero);
+            var oldNewsItem = GetFakeNews(dateTimeOffsetCreated).First();
+            var newNewsItem = GetFakeNews(dateTimeOffsetCreated).First();
+            var dateTimeFactoryCreatedMock = new Mock<IDateTimeFactory>();
+            var dateTimeFactoryUpdatedMock = new Mock<IDateTimeFactory>();
+            
+            dateTimeFactoryUpdatedMock.SetupGet(d => d.DateTimeOffsetUtc).Returns(dateTimeOffsetUpdated);
+
+            var user = new ClaimsPrincipalFake(new Claim("username", "anne.the.admin"));
+
+            oldNewsItem.Published = true;
+
+            newNewsItem.UserId = "anne.the.admin";
+            newNewsItem.Published = true;
+
+            DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(oldNewsItem), ensureDeleted: true);
+
+            using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+            {
+                var newsController = ControllerFake.GetController<NewsController>(context, dateTimeFactoryUpdatedMock.Object);
+                newsController.ControllerContext.HttpContext.User = user;
+                
+                // Act
+                var result = newsController.Put(oldNewsItem.Id, new NewsViewModel(newNewsItem));
+            }
+
+            using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+            {
+                // Assert
+                Assert.Equal(context.News.First().Created, dateTimeOffsetCreated);
+                Assert.Equal(context.News.First().Updated, dateTimeOffsetUpdated);
             }
         }
 
@@ -154,6 +237,7 @@ namespace Intranet.API.UnitTests.Controllers
             // Assign
             var oldNewsItem = GetFakeNews().First();
             var newNewsItem = GetFakeNews().First();
+            var dateTimeFactory = new DateTimeFactory();
             var user = new ClaimsPrincipalFake(new Claim("role", "admin"));
 
             newNewsItem.UserId = "anne.the.admin";
@@ -162,11 +246,11 @@ namespace Intranet.API.UnitTests.Controllers
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var newsController = ControllerFake.GetController<NewsController>(context);
+                var newsController = ControllerFake.GetController<NewsController>(context, dateTimeFactory);
                 newsController.ControllerContext.HttpContext.User = user;
 
                 // Act
-                var result = newsController.Put(1, newNewsItem);
+                var result = newsController.Put(1, new NewsViewModel(newNewsItem));
 
                 // Assert
                 Assert.IsType<OkObjectResult>(result);
@@ -181,12 +265,13 @@ namespace Intranet.API.UnitTests.Controllers
             // Assign
             var news = GetFakeNews();
             int id = 5;
+            var dateTimeFactory = new DateTimeFactory();
 
             DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var newsController = ControllerFake.GetController<NewsController>(context);
+                var newsController = ControllerFake.GetController<NewsController>(context, dateTimeFactory);
 
                 // Act
                 var result = newsController.Delete(id);
@@ -201,12 +286,13 @@ namespace Intranet.API.UnitTests.Controllers
         {
             // Assign
             var news = GetFakeNews().First();
+            var dateTimeFactory = new DateTimeFactory();
 
             DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var newsController = ControllerFake.GetController<NewsController>(context);
+                var newsController = ControllerFake.GetController<NewsController>(context, dateTimeFactory);
 
                 // Act
                 var result = newsController.Delete(1);
@@ -222,12 +308,13 @@ namespace Intranet.API.UnitTests.Controllers
             // Assign
             var news = GetFakeNews().First();
             var user = new ClaimsPrincipalFake(new Claim("username", "anne.the.admin"));
+            var dateTimeFactory = new DateTimeFactory();
 
             DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var newsController = ControllerFake.GetController<NewsController>(context);
+                var newsController = ControllerFake.GetController<NewsController>(context, dateTimeFactory);
                 newsController.ControllerContext.HttpContext.User = user;
 
                 // Act
@@ -244,12 +331,13 @@ namespace Intranet.API.UnitTests.Controllers
             // Assign
             var news = GetFakeNews().First();
             var user = new ClaimsPrincipalFake(new Claim("role", "admin"));
+            var dateTimeFactory = new DateTimeFactory();
 
             DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var newsController = ControllerFake.GetController<NewsController>(context);
+                var newsController = ControllerFake.GetController<NewsController>(context, dateTimeFactory);
                 newsController.ControllerContext.HttpContext.User = user;
 
                 // Act
@@ -268,12 +356,13 @@ namespace Intranet.API.UnitTests.Controllers
             // Assign
             var id = 1;
             var news = GetFakeNews();
+            var dateTimeFactory = new DateTimeFactory();
 
             DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var newsController = new NewsController(context);
+                var newsController = new NewsController(context, dateTimeFactory);
 
                 // Act
                 var result = newsController.Get(id);
@@ -292,12 +381,13 @@ namespace Intranet.API.UnitTests.Controllers
             // Assign
             int id = 1;
             var news = GetFakeNews();
+            var dateTimeFactory = new DateTimeFactory();
 
             DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var newsController = new NewsController(context);
+                var newsController = new NewsController(context, dateTimeFactory);
 
                 // Act
                 var result = newsController.Get(id);
@@ -313,12 +403,13 @@ namespace Intranet.API.UnitTests.Controllers
             // Assign
             int id = 2;
             var news = GetFakeNews();
+            var dateTimeFactory = new DateTimeFactory();
 
             DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var newsController = new NewsController(context);
+                var newsController = new NewsController(context, dateTimeFactory);
 
                 // Act
                 var result = newsController.Get(id);
@@ -335,12 +426,13 @@ namespace Intranet.API.UnitTests.Controllers
             // Assign
             var utcDate = new DateTimeOffset(Convert.ToDateTime(newsDate));
             var news = GetFakeNews(id, utcDate, title, text, username);
+            var dateTimeFactory = new DateTimeFactory();
 
             DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var newsController = new NewsController(context);
+                var newsController = new NewsController(context, dateTimeFactory);
 
                 // Act
                 var fetchNews = newsController.Get();
@@ -350,7 +442,7 @@ namespace Intranet.API.UnitTests.Controllers
 
                 // Assert
                 Assert.Equal(newsFromController.Id, id);
-                Assert.Equal(newsFromController.Date, utcDate);
+                Assert.Equal(newsFromController.Created, utcDate);
                 Assert.Equal(newsFromController.Title, title);
                 Assert.Equal(newsFromController.Text, text);
                 Assert.Equal(newsFromController.UserId, username);
@@ -361,9 +453,11 @@ namespace Intranet.API.UnitTests.Controllers
         public void ReturnOkWhenGetAllNewsIsEmpty()
         {
             // Assign
+            var dateTimeFactory = new DateTimeFactory();
+
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var newsController = new NewsController(context);
+                var newsController = new NewsController(context, dateTimeFactory);
 
                 // Act
                 var newsFromController = newsController.Get();
@@ -380,12 +474,13 @@ namespace Intranet.API.UnitTests.Controllers
         {
             // Assign
             var news = GetFakeNews();
+            var dateTimeFactory = new DateTimeFactory();
 
             DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var newsController = new NewsController(context);
+                var newsController = new NewsController(context, dateTimeFactory);
 
                 // Act
                 var newsFromController = newsController.Get();
@@ -438,7 +533,7 @@ namespace Intranet.API.UnitTests.Controllers
                 new News
                 {
                     Id = id,
-                    Date = date,
+                    Created = date,
                     Title = title,
                     Text = text,
                     UserId = username

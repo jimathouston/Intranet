@@ -1,12 +1,12 @@
 ﻿<div class="container-fluid">
-  <h3>Certaincy News</h3>&nbsp;
+  <h3>News</h3>&nbsp;
     <div class="col-xs-3">
       <a [routerLink]="['/news-new']" class="btn btn-success btn-circle btn-new">
         <span class="glyphicon glyphicon-plus"></span>
       </a>
     </div>
     <div class="col-xs-3">
-      <a href="https://remote.certaincy.com/owa/" class="btn btn-warning btn-circle btn-mail">
+      <a href="https://outlook.office.com/owa/" class="btn btn-warning btn-circle btn-mail">
         <span class="glyphicon glyphicon-envelope"></span>
       </a>
     </div>
@@ -15,15 +15,22 @@
         <span class="glyphicon glyphicon-time"></span>
       </a>
     </div>
-    <div class="card" *ngFor="let newsItem of newsItems">
-      <div *ngIf="newsItem.headerImage">
-        <a [routerLink]="['/news-detail', newsItem.id]"><img src="{{ '/image/600/300/' + newsItem.headerImage.fileName }}" class="card-img-caps"></a>
+    <div class="card card-background" [class.draft-news]="!newsItem.published" *ngFor="let newsItem of newsItems">
+      <news-info-strip [newsItem]="newsItem"></news-info-strip>
+      <news-keywords-strip [keywords]="newsItem.keywords"></news-keywords-strip>
+      <div *ngIf="newsItem.headerImage" class="card-img-wrap">
+        <a [routerLink]="['/news-detail', newsItem.id]">
+          <img src="{{ '/image/600/300/' + newsItem.headerImage.fileName }}" class="card-img-caps">
+        </a>
       </div>
-      <p class="text-uppercase"><strong>BY {{newsItem.user.displayName}}</strong> | {{ newsItem.date | date }}</p> 
-    <div class="card-block">
-      <h4 class="card-title">{{ newsItem.title }}</h4>
-      <p class="card-text" [innerHTML]="newsItem.text | limitTo : 185 | safeHtml"></p>
-      <a [routerLink]="['/news-detail', newsItem.id]" class="btn btn-info">Read more!</a>  
-    </div>
+      <div class="card-block">
+        <h4 class="card-title">{{ newsItem.title }}</h4>
+        <p class="card-text" [innerHTML]="newsItem.text | limitTo : 185 | safeHtml"></p>
+        <div>
+          <a [routerLink]="['/news-detail', newsItem.id]" class="btn btn-info">Read more!</a>
+          <toggle-published [newsitem]="newsItem"></toggle-published>
+          <delete-news-button [newsItem]="newsItem" (onDelete)="handleOnDelete($event)"></delete-news-button>
+        </div>
+      </div>
     </div>
 </div>

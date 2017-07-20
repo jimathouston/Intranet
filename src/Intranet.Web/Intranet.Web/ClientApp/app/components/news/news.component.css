@@ -1,21 +1,38 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto);
+﻿@import url(https://fonts.googleapis.com/css?family=Roboto);
 
   h3, a, p, label, input {
   	font-family: 'Roboto';
   }
 
-
   .card {
-  	margin-bottom: 20px;
+  	max-width:820px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    padding: 1px 0 10px 10px;
+    border: thin solid lightgrey;
   }
 
-  .text-uppercase {
-  	margin-top: 10px;
+  /* .card-background:nth-child(even):not(.draft-news) {
+    background: #f3f3f3;
   }
+
+  .card-background:nth-child(odd):not(.draft-news) {
+    background: #e6e6e6;
+  } */
 
   img {
     max-width: 100%;
     height: auto;
+  }
+
+  .card-img-wrap {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .card-img-caps {
@@ -23,7 +40,6 @@
   }
 
   .card-text {
-  	max-width:600px;
     word-wrap:break-word;
   }
 
@@ -98,4 +114,8 @@
     padding: 10px;
     border-radius: 5px;
     float: right;
+  }
+
+  .draft-news {
+    border: thick solid rgba(255, 0, 0, 0.55);
   }

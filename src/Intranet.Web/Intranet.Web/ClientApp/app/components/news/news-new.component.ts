@@ -43,7 +43,19 @@ export class NewsNewComponent {
         this.newsItem.text = content
     }
 
-    async addNewsItem(title: string) {
+    async publishNewsItem() {
+      this.newsItem.published = true
+      const successMessage = 'News was created successfully!'
+      this.addNewsItemInternal(successMessage)
+    }
+
+    async saveDraft() {
+      this.newsItem.published = false
+      const successMessage = 'News was saved successfully but is not yet published!'
+      this.addNewsItemInternal(successMessage)
+    }
+
+    private async addNewsItemInternal(successMessage: string) {
         const fileName = await this.dataService.uploadFile(this.file)
         const jwt = await this.authenticationService.getJwtDecoded()
 
@@ -52,12 +64,11 @@ export class NewsNewComponent {
             this.newsItem.headerImage.fileName = fileName
         }
 
-        this.newsItem.title = title
         this.newsItem['userId'] = jwt.displayName
 
         this.dataService.createNewsItem(this.newsItem).then(
             newsitem => {
-                this.success = 'News was created successfully!'
+                this.success = successMessage
                 this.error = null
             },
             error => {

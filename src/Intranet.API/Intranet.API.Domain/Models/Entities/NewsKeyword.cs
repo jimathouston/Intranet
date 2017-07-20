@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Intranet.API.Domain.Models.Entities
 {
-    public class NewsTag
+    public class NewsKeyword
     {
         public int NewsId { get; set; }
         public News News { get; set; }
 
-        public int TagId { get; set; }
-        public Tag Tag { get; set; }
+        public string KeywordId { get; set; }
+        public Keyword Keyword { get; set; }
     }
 }

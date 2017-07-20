@@ -11,7 +11,7 @@ using Intranet.Web.Models.Options;
 using Amazon.S3.Transfer;
 using Intranet.Web.Models;
 using System.Text.RegularExpressions;
-using Intranet.Web.Extensions;
+using Intranet.Shared.Extensions;
 
 namespace Intranet.Web.Services
 {

@@ -1,10 +1,10 @@
 ﻿<div class="container-fluid">
-  <form #form="ngForm" class="form-horizontal">      
+  <form #form="ngForm" class="form-horizontal">
     <h3>Create News</h3>&nbsp;
       <div class="form-group">
         <label class="col-sm-2 control-label" id="title" for="title">Title</label>
         <div class="col-sm-10">
-          <input id="title" type="text" class="form-control" #title required>
+          <input id="title" name="title" type="text" class="form-control" #title required [(ngModel)]="newsItem.title">
         </div>
       </div>
       <div class="form-group">
@@ -14,19 +14,25 @@
             <small id="fileHelp" class="form-text text-muted">This image will be used as the news header.</small>
         </div>
       </div>
-      <div class="form-group"> 
+      <div class="form-group">
         <label class="col-sm-2 control-label" id="text" for="text">Text</label>
         <div class="col-sm-10">
           <text-editor [elementId]="'new-news-editor'" (onEditorContentChange)="handleEditorContentChange($event)"></text-editor>
         </div>
       </div>
       <div class="form-group">
+        <label class="col-sm-2 control-label" for="keywords">Keywords</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="keywords" [(ngModel)]="newsItem.keywords">
+        </div>
+      </div>
+      <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-          <button class="btn btn-info btn-default" type="submit" name="action" (click)="addNewsItem(title.value)">Create News
-          </button>
+          <button class="btn btn-info btn-warning" type="submit" name="action" (click)="publishNewsItem()">Publish News</button>
+          <button class="btn btn-info btn-default" type="submit" name="action" (click)="saveDraft()">Save As Draft</button>
           <a (click)="goBack()" class="btn btn-secondary btn-default">
             <span class="glyphicon glyphicon-arrow-left"></span> Back
-          </a>  
+          </a>
         </div>
         <div class="col-sm-offset-2 col-sm-10 alert-form alert-success" *ngIf="success">{{ success }}</div>
         <div class="col-sm-offset-2 col-sm-10 alert-form alert-danger" *ngIf="error">{{ error }}</div>

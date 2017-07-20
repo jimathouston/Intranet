@@ -1,0 +1,3 @@
+<p class="text-uppercase">
+  <strong>BY {{ newsItem.user && newsItem.user.displayName }}</strong> | {{ newsItem.created | date }} <span *ngIf="hasBeenUpdated(newsItem)">| <em >Edited {{ newsItem.updated | date }}</em></span>
+</p>

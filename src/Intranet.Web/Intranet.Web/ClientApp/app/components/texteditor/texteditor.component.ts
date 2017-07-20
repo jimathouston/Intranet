@@ -50,7 +50,6 @@ export class TextEditorComponent implements AfterViewInit, OnDestroy {
                 require('tinymce/plugins/lists')
                 require('tinymce/plugins/image')
                 require('tinymce/plugins/imagetools')
-                require('tinymce/plugins/save')
                 require('tinymce/plugins/wordcount')
 
                 this.TinyMCELoaded = true
@@ -58,8 +57,8 @@ export class TextEditorComponent implements AfterViewInit, OnDestroy {
                 tinymce.init({
                     selector: '#' + this.elementId,
                     height: 250,
-                    plugins: [ 'link', 'table', 'lists', 'image', 'imagetools', 'save', 'wordcount' ],
-                    toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | save media | codesample help',
+                    plugins: [ 'link', 'table', 'lists', 'image', 'imagetools', 'wordcount' ],
+                    toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | media | codesample help',
                     menubar: false,
                     images_upload_url: '/upload',
                     automatic_uploads: true,
