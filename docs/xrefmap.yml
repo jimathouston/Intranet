@@ -4,9 +4,6 @@ references:
 - uid: /Certaincy Intranet/v1
   name: Certaincy Intranet
   href: src/docs/restapi/intranet.html
-- uid: Certaincy Intranet/v1/ApiSampleDataWeatherForecastsGet
-  name: ApiSampleDataWeatherForecastsGet
-  href: src/docs/restapi/intranet.html#Certaincy_Intranet_v1_ApiSampleDataWeatherForecastsGet
 - uid: Certaincy Intranet/v1/ApiV1NewsByIdDelete
   name: ApiV1NewsByIdDelete
   href: src/docs/restapi/intranet.html#Certaincy_Intranet_v1_ApiV1NewsByIdDelete
@@ -22,21 +19,6 @@ references:
 - uid: Certaincy Intranet/v1/ApiV1NewsPost
   name: ApiV1NewsPost
   href: src/docs/restapi/intranet.html#Certaincy_Intranet_v1_ApiV1NewsPost
-- uid: Certaincy Intranet/v1/ApiValuesByIdDelete
-  name: ApiValuesByIdDelete
-  href: src/docs/restapi/intranet.html#Certaincy_Intranet_v1_ApiValuesByIdDelete
-- uid: Certaincy Intranet/v1/ApiValuesByIdGet
-  name: ApiValuesByIdGet
-  href: src/docs/restapi/intranet.html#Certaincy_Intranet_v1_ApiValuesByIdGet
-- uid: Certaincy Intranet/v1/ApiValuesByIdPut
-  name: ApiValuesByIdPut
-  href: src/docs/restapi/intranet.html#Certaincy_Intranet_v1_ApiValuesByIdPut
-- uid: Certaincy Intranet/v1/ApiValuesGet
-  name: ApiValuesGet
-  href: src/docs/restapi/intranet.html#Certaincy_Intranet_v1_ApiValuesGet
-- uid: Certaincy Intranet/v1/ApiValuesPost
-  name: ApiValuesPost
-  href: src/docs/restapi/intranet.html#Certaincy_Intranet_v1_ApiValuesPost
 - uid: Intranet.API
   name: Intranet.API
   href: api/Intranet.API.html
