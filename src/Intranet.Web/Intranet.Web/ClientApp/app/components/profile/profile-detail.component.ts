@@ -1,9 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core'
 import { RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { Location } from '@angular/common'
-import { DataService } from '../../shared/data_services/data.service'
+import { DataService } from '../../_services'
 
-import Profile from '../../models/profile.model'
+import { Profile } from '../../models'
 
 @Component({
     selector: 'profile-detail',
@@ -66,7 +66,6 @@ export class ProfileDetailComponent implements OnInit {
         this.selectedProfile = profile
         this.dataService.deleteProfile(this.selectedProfile.id)
             .subscribe(() => {
-                console.log('Profile was deleted successfully!')
                 this.dataService.getAllProfiles().subscribe((profiles: Profile[]) => {
                   this.profiles = profiles
                 },

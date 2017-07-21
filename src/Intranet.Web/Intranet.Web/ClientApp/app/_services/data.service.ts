@@ -9,12 +9,9 @@ import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
 import 'rxjs/add/operator/toPromise'
 
-import { ConfigService } from '../api_settings/config.service'
-import { AuthenticationService, SecureHttpService } from '../../_services'
+import { AuthenticationService, ConfigService, SecureHttpService } from './'
 
-import NewsItem from '../../models/newsItem.model'
-import Checklist from '../../models/checklist.model'
-import Profile from '../../models/profile.model'
+import { News, Checklist, Profile } from '../models'
 
 @Injectable()
 export class DataService {
@@ -25,12 +22,12 @@ export class DataService {
 // NEWS SERVICES ************************************************************  /
 
     // get all News
-    getNewsItems(): Observable<NewsItem[]> {
+    getNewsItems(): Observable<News[]> {
         return this.http.get('news')
             .map((res: Response) => {
                 return res.json()
             })
-            .map((newsItems: NewsItem[]) => {
+            .map((newsItems: News[]) => {
                 newsItems.forEach(news => {
                   news.created = new Date(news.created)
                   news.updated = new Date(news.updated)
@@ -41,7 +38,7 @@ export class DataService {
     }
 
     // get a specific news by Id
-    getNewsItem(id: number): Observable<NewsItem> {
+    getNewsItem(id: number): Observable<News> {
         return this.http.get('news/' + id)
             .map((res: Response) => {
                 return res.json()
@@ -50,7 +47,7 @@ export class DataService {
     }
 
         // get a specific news by Id
-    getNewsItemByDateAndUrl(date: Date, url: string): Observable<NewsItem> {
+    getNewsItemByDateAndUrl(date: Date, url: string): Observable<News> {
         return this.http.get(`news/${date.getUTCFullYear()}/${date.getUTCMonth() + 1}/${date.getUTCDate()}/${url}`)
             .map((res: Response) => {
                 return res.json()
@@ -59,16 +56,16 @@ export class DataService {
     }
 
     // create a new NewsItem
-    createNewsItem(newsitem: NewsItem): Promise<NewsItem> {
+    createNewsItem(newsitem: News): Promise<News> {
         const body = JSON.stringify(newsitem)
 
         return this.http.post('news/', body)
                 .toPromise()
-                .then(res => res.json().data as NewsItem)
+                .then(res => res.json().data as News)
     }
 
     // updates a NewsItem
-    updateNewsItem(newsitem: NewsItem): Observable<NewsItem> {
+    updateNewsItem(newsitem: News): Observable<News> {
         const headers = new Headers()
         headers.append('Content-Type', 'application/json')
         headers.append('Access-Control-Allow-Origin', '*')
@@ -77,7 +74,7 @@ export class DataService {
 
         return this.http.put('news/' + newsitem.id, JSON.stringify(newsitem), options)
             .map((res: Response) => {
-                return res.json() as NewsItem
+                return res.json() as News
             })
     }
 
@@ -150,7 +147,6 @@ export class DataService {
     getProfileChecklist(id: number): Observable<Checklist[]> {
         return this.http.get('profile/' + id + '/checklist')
             .map((res: Response) => {
-                console.log(res)
                 return res.json()
             })
             .catch(this.handleError)

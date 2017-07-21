@@ -1,8 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core'
-import { DataService } from '../shared/data_services/data.service'
-import { AuthenticationService } from '../_services'
+import { AuthenticationService, DataService } from '../_services'
 
-import NewsItem from '../models/newsItem.model'
+import { News } from '../models'
 
 @Component({
     selector: 'delete-news-button',
@@ -11,7 +10,7 @@ import NewsItem from '../models/newsItem.model'
 })
 
 export class DeleteNewsButtonComponent implements OnInit {
-    @Input() newsItem: NewsItem
+    @Input() newsItem: News
     @Output() onDelete = new EventEmitter<string>()
     isAuthorised: boolean
 

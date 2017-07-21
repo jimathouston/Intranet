@@ -1,7 +1,6 @@
-﻿import Image from './image.model'
-import User from './user.model'
+﻿import { Image, User} from './'
 
-export default class NewsItem {
+export class News {
     id: number | null
     title: string
     text: string

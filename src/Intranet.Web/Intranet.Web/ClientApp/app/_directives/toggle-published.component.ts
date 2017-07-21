@@ -1,8 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core'
-import { DataService } from '../shared/data_services/data.service'
-import { AuthenticationService } from '../_services'
+import { AuthenticationService, DataService } from '../_services'
 
-import NewsItem from '../models/newsItem.model'
+import { News } from '../models'
 
 @Component({
     selector: 'toggle-published',
@@ -11,7 +10,7 @@ import NewsItem from '../models/newsItem.model'
 })
 
 export class TogglePublishedComponent implements OnInit {
-    @Input() newsitem: NewsItem
+    @Input() newsitem: News
     @Output() onChangePublishState = new EventEmitter<string>()
     isAuthorised: boolean
 
@@ -27,7 +26,7 @@ export class TogglePublishedComponent implements OnInit {
       }
     }
 
-    publishNewsItem(newsitem: NewsItem) {
+    publishNewsItem(newsitem: News) {
         newsitem.published = true
         this.dataService.updateNewsItem(newsitem)
             .subscribe((savedNewsItem) => {
@@ -38,7 +37,7 @@ export class TogglePublishedComponent implements OnInit {
             })
     }
 
-    unpublishNewsItem(newsitem: NewsItem) {
+    unpublishNewsItem(newsitem: News) {
         newsitem.published = false
         this.dataService.updateNewsItem(newsitem)
             .subscribe((savedNewsItem) => {

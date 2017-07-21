@@ -1,9 +1,9 @@
 ﻿import { Component, OnInit, Input } from '@angular/core'
 import { RouterModule, Router, ActivatedRoute, Params } from '@angular/router'
 import { Location } from '@angular/common'
-import { DataService } from '../../shared/data_services/data.service'
+import { DataService } from '../../_services'
 
-import Profile from '../../models/profile.model'
+import { Profile } from '../../models'
 
 @Component({
     selector: 'profile-edit',
@@ -42,7 +42,6 @@ export class ProfileEditComponent implements OnInit {
          .subscribe(() => {
                 this.profileEdited = true
                 this.info = this.profile.firstName + this.profile.lastName + ' was edited successfully!'
-                console.log('Profiles was updated successfully. ')
             },
             error => {
                 console.log('Failed while trying to update the profiles. ' + error)

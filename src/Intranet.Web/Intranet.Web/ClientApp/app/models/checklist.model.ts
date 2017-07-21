@@ -1,4 +1,4 @@
-﻿export default class Checklist {
+﻿export class Checklist {
     toDoId: number | null
     description: string
     todos: boolean

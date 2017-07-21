@@ -1,9 +1,9 @@
 ﻿import { Component, OnInit, Input } from '@angular/core'
 import { RouterModule, Router, ActivatedRoute, Params } from '@angular/router'
 import { Location } from '@angular/common'
-import { DataService } from '../../shared/data_services/data.service'
+import { DataService } from '../../_services'
 
-import NewsItem from '../../models/newsItem.model'
+import { News } from '../../models'
 
 @Component({
     selector: 'news-edit',
@@ -12,7 +12,7 @@ import NewsItem from '../../models/newsItem.model'
 })
 
 export class NewsEditComponent implements OnInit {
-    newsItem: NewsItem
+    newsItem: News
     info: string = ''
     newsItemEdited: boolean
 
@@ -34,7 +34,7 @@ export class NewsEditComponent implements OnInit {
         const id = +this.route.snapshot.params['id']
 
         this.dataService.getNewsItem(id).subscribe(
-            (newsitem: NewsItem) => {
+            (newsitem: News) => {
                 this.newsItem = newsitem
             },
             error => {
@@ -48,7 +48,6 @@ export class NewsEditComponent implements OnInit {
             () => {
                 this.newsItemEdited = true
                 this.info = this.newsItem.title + ' was edited successfully!'
-                console.log('News was updated successfully. ')
             },
             error => {
                 console.log('Failed while trying to update the news. ' + error)

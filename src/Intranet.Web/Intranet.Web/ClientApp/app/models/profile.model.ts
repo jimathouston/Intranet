@@ -1,4 +1,4 @@
-﻿export default class Profile {
+﻿export class Profile {
     id: number | null
     firstName: string
     lastName: string

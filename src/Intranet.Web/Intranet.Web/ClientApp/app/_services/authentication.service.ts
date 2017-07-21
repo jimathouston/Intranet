@@ -1,7 +1,7 @@
 ﻿import { Injectable, Inject } from '@angular/core'
 import { Http, Headers, Response, RequestOptions } from '@angular/http'
 import * as jwtDecode from 'jwt-decode'
-import Jwt from '../models/jwt.model'
+import { Jwt } from '../models'
 
 @Injectable()
 export class AuthenticationService {

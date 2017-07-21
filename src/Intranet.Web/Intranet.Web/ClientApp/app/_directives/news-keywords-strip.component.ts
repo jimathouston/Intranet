@@ -1,7 +1,5 @@
 ﻿import { Component, Input } from '@angular/core'
 
-import NewsItem from '../models/newsItem.model'
-
 @Component({
     selector: 'news-keywords-strip',
     templateUrl: 'news-keywords-strip.component.html',

@@ -4,8 +4,7 @@ import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http'
 import { FormsModule } from '@angular/forms'
 import { APP_BASE_HREF } from '@angular/common'
 
-import { TruncatePipe }   from './shared/pipes/truncate'
-import { SafeHtmlPipe } from './shared/pipes/safehtml'
+import { SafeHtmlPipe, TruncatePipe }   from './_pipes'
 
 // Imports for loading & configuring the in-memory web api
 
@@ -34,9 +33,13 @@ import { ProfileSingleComponent } from './components/profile/profile-single.comp
 import { TextEditorComponent } from './components/texteditor/texteditor.component'
 
 // Services
-import { DataService } from './shared/data_services/data.service'
-import { ConfigService } from './shared/api_settings/config.service'
-import { AuthenticationService, SecureHttpService } from './_services'
+import {
+  AuthenticationService,
+  ConfigService,
+  DataService,
+  SecureHttpService,
+} from './_services'
+
 import { SecureHttpFactory } from './_factories'
 
 export const sharedConfig: NgModule = {

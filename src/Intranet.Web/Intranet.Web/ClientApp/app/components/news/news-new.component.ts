@@ -3,11 +3,8 @@ import { RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { Location } from '@angular/common'
 import { RequestOptions, Request, RequestMethod, Http, Headers } from '@angular/http'
 
-import NewsItem from '../../models/newsItem.model'
-import Image from '../../models/image.model'
-import { DataService } from '../../shared/data_services/data.service'
-import { ConfigService } from '../../shared/api_settings/config.service'
-import { AuthenticationService } from '../../_services'
+import { News, Image } from '../../models'
+import { AuthenticationService, ConfigService, DataService } from '../../_services'
 
 @Component({
     selector: 'news-new',
@@ -17,10 +14,10 @@ import { AuthenticationService } from '../../_services'
 })
 
 export class NewsNewComponent {
-    newsItem: NewsItem
+    newsItem: News
     success: string
     error: string
-    newsitems: NewsItem[]
+    newsitems: News[]
     file: File
     apiUrl: string
 
@@ -31,7 +28,7 @@ export class NewsNewComponent {
         private route: ActivatedRoute,
         private location: Location,
         private http: Http) {
-        this.newsItem = new NewsItem()
+        this.newsItem = new News()
         this.apiUrl = this.configService.getApiUrl()
     }
 

@@ -1,10 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core'
 import { RouterModule, Router, ActivatedRoute } from '@angular/router'
-import { DataService } from '../../shared/data_services/data.service'
+import { DataService } from '../../_services'
 import { Location } from '@angular/common'
 
-import Checklist from '../../models/checklist.model'
-import Profile from '../../models/profile.model'
+import { Checklist, Profile } from '../../models'
 
 @Component({
   selector: 'profile-checklist',

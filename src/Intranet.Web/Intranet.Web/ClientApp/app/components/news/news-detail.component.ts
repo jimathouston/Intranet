@@ -1,10 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core'
 import { RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { Location } from '@angular/common'
-import { DataService } from '../../shared/data_services/data.service'
-import { AuthenticationService } from '../../_services'
+import { AuthenticationService, DataService } from '../../_services'
 
-import NewsItem from '../../models/newsItem.model'
+import { News } from '../../models'
 
 @Component({
     selector: 'news-detail',
@@ -13,8 +12,8 @@ import NewsItem from '../../models/newsItem.model'
 })
 
 export class NewsDetailComponent implements OnInit {
-    newsItem: NewsItem
-    selectedNewsItem: NewsItem
+    newsItem: News
+    selectedNewsItem: News
     info: string
     isAuthorised: boolean
 
@@ -24,7 +23,7 @@ export class NewsDetailComponent implements OnInit {
         private route: ActivatedRoute,
         private location: Location,
     ) {
-        this.newsItem = new NewsItem()
+        this.newsItem = new News()
     }
 
     goBack(): void {
@@ -38,12 +37,10 @@ export class NewsDetailComponent implements OnInit {
         const url: string = this.route.snapshot.params['url']
         const date: Date = new Date(Date.UTC(year, month, day))
 
-        console.log(this.route.snapshot.params)
-
         const jwt = await this.authenticationService.getJwtDecoded()
 
         this.dataService.getNewsItemByDateAndUrl(date, url).subscribe(
-            (newsitem: NewsItem) => {
+            (newsitem: News) => {
                 this.newsItem = newsitem
                 if (jwt.role === 'Admin' || this.newsItem.user.username === jwt.username) {
                   this.isAuthorised = true
@@ -55,7 +52,7 @@ export class NewsDetailComponent implements OnInit {
         )
     }
 
-    onSelect(newsitem: NewsItem): void {
+    onSelect(newsitem: News): void {
         this.selectedNewsItem = newsitem
     }
 

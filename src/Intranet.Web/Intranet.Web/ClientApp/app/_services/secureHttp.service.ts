@@ -5,8 +5,7 @@ import 'rxjs/add/observable/fromPromise'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/mergeMap'
 
-import { AuthenticationService } from './'
-import { ConfigService } from '../shared/api_settings/config.service'
+import { AuthenticationService, ConfigService } from './'
 
 @Injectable()
 export class SecureHttpService extends Http {

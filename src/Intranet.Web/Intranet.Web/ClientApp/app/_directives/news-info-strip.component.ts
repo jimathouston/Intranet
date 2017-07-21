@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core'
 
-import NewsItem from '../models/newsItem.model'
+import { News } from '../models'
 
 @Component({
     selector: 'news-info-strip',
@@ -9,9 +9,9 @@ import NewsItem from '../models/newsItem.model'
 })
 
 export class NewsInfoStripComponent {
-    @Input() newsItem: NewsItem
+    @Input() newsItem: News
 
-    hasBeenUpdated(newsItem: NewsItem) {
+    hasBeenUpdated(newsItem: News) {
       return newsItem.created !== newsItem.updated
     }
 }

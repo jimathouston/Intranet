@@ -1,6 +1,6 @@
 ﻿import { XHRBackend, Http, RequestOptions } from '@angular/http'
 import { AuthenticationService, SecureHttpService } from '../_services'
-import { ConfigService } from '../shared/api_settings/config.service'
+import { ConfigService } from '../_services'
 
 export function SecureHttpFactory(
     xhrBackend: XHRBackend,

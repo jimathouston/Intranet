@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core'
-import NewsItem from '../../models/newsItem.model'
-import { DataService } from '../../shared/data_services/data.service'
+import { News } from '../../models'
+import { DataService } from '../../_services'
 
 @Component({
     selector: 'news',
@@ -9,9 +9,9 @@ import { DataService } from '../../shared/data_services/data.service'
 
 })
 export class NewsComponent implements OnInit {
-    newsItems: NewsItem[]
-    newsitemsFilter: NewsItem[]
-    selectedNewsitem: NewsItem
+    newsItems: News[]
+    newsitemsFilter: News[]
+    selectedNewsitem: News
     info: string
 
     constructor(
@@ -22,7 +22,7 @@ export class NewsComponent implements OnInit {
         this.updateData()
     }
 
-    onSelect(newsitem: NewsItem) {
+    onSelect(newsitem: News) {
         this.selectedNewsitem = newsitem
     }
 
@@ -32,13 +32,13 @@ export class NewsComponent implements OnInit {
 
     updateData() {
       this.dataService.getNewsItems().subscribe(
-            (newsItems: NewsItem[]) => {
+            (newsItems: News[]) => {
                 this.newsItems = newsItems
             }
         )
     }
 
-    generateUrl(newsItem: NewsItem) {
+    generateUrl(newsItem: News) {
       return `/news/${newsItem.created.getUTCFullYear()}/${newsItem.created.getUTCMonth()}/${newsItem.created.getUTCDate()}/${newsItem.url}`
     }
 }

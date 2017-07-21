@@ -1,4 +1,4 @@
-﻿export default class Jwt {
+﻿export class Jwt {
     jti: string
     iat: Date
     displayName: string

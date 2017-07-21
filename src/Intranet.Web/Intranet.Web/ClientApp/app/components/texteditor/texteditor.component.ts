@@ -4,10 +4,10 @@
     EventEmitter,
     OnDestroy,
     Input,
-    Output
+    Output,
 } from '@angular/core'
 
-import { ConfigService } from '../../shared/api_settings/config.service'
+import { ConfigService } from '../../_services'
 
 declare const tinymce: any
 

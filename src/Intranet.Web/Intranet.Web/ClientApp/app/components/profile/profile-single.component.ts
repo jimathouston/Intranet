@@ -1,9 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core'
 import { RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { Location } from '@angular/common'
-import { DataService } from '../../shared/data_services/data.service'
+import { DataService } from '../../_services'
 
-import Profile from '../../models/profile.model'
+import { Profile } from '../../models'
 
 @Component({
     selector: 'profile-single',
