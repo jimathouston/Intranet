@@ -13,7 +13,7 @@
       <news-keywords-strip [keywords]="newsItem.keywords"></news-keywords-strip>
       <div class="card-block">
         <h4 class="card-title">{{ newsItem.title }}</h4>
-        <p class="card-text" [innerHTML]="newsItem.text | safeHtml"></p>
+        <p *ngIf="newsItem.text" class="card-text" [innerHTML]="newsItem.text | safeHtml"></p>
       </div>
       <div class="card-block">
         <toggle-published [newsitem]="newsItem" (onChangePublishState)="handleChangePublishState($event)"></toggle-published>

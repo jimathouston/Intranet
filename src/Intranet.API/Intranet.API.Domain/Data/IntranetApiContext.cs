@@ -38,6 +38,9 @@ namespace Intranet.API.Domain.Data
             modelBuilder.Entity<News>()
                 .Property(n => n.Published)
                 .UsePropertyAccessMode(Microsoft.EntityFrameworkCore.Metadata.PropertyAccessMode.Property);
+
+            modelBuilder.Entity<News>()
+                .HasIndex(n => n.Url);
             #endregion
 
             #region NewsKeyword

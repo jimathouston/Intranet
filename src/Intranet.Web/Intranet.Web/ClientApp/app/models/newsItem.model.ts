@@ -12,4 +12,5 @@ export default class NewsItem {
     keywords: string
     published: boolean
     hasEverBeenPublished: boolean
+    url: string
 }

@@ -47,6 +47,30 @@ namespace Intranet.API.UnitTests.Controllers
         }
 
         [Fact]
+        public void ReturnBadRequestWhenPostingDuplicate()
+        {
+            // Assign
+            var newsItem = GetFakeNews().First();
+            var newsItemVM = new NewsViewModel(newsItem);
+            var username = "test.user";
+            var user = new ClaimsPrincipalFake(new Claim("username", username));
+            var dateTimeFactory = new DateTimeFactory();
+
+            using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+            {
+                var newsController = ControllerFake.GetController<NewsController>(context, dateTimeFactory);
+                newsController.ControllerContext.HttpContext.User = user;
+
+                // Act
+                newsController.Post(newsItemVM);
+                var result = newsController.Post(newsItemVM);
+
+                // Assert
+                Assert.IsType<BadRequestObjectResult>(result);
+            }
+        }
+
+        [Fact]
         public void CheckNewsItemWasCorrectlyPosted()
         {
             // Assign
@@ -367,7 +391,7 @@ namespace Intranet.API.UnitTests.Controllers
                 // Act
                 var result = newsController.Get(id);
                 var okObjectResult = result as OkObjectResult;
-                var newsContent = okObjectResult.Value as News;
+                var newsContent = okObjectResult.Value as NewsViewModel;
 
                 // Assert
                 Assert.NotNull(okObjectResult);
@@ -419,13 +443,86 @@ namespace Intranet.API.UnitTests.Controllers
             }
         }
 
+        [Fact]
+        public void ReturnNewsByUrl()
+        {
+            // Assign
+            var url = "news-title-1";
+            var news = GetFakeNews();
+            var dateTimeFactory = new DateTimeFactory();
+
+            var newsToFind = news.SingleOrDefault(n => n.Url == url);
+
+            DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
+
+            using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+            {
+                var newsController = new NewsController(context, dateTimeFactory);
+
+                // Act
+                var result = newsController.Get(newsToFind.Created.Year, newsToFind.Created.Month, newsToFind.Created.Day, url);
+                var okObjectResult = result as OkObjectResult;
+                var newsContent = okObjectResult.Value as NewsViewModel;
+
+                // Assert
+                Assert.NotNull(okObjectResult);
+                Assert.Equal(url, newsContent.Url);
+                Assert.IsType<OkObjectResult>(result);
+            }
+        }
+
+        [Fact]
+        public void ReturnNotFoundResultWhenSearchByUrl()
+        {
+            // Assign
+            var url = "news-title-2";
+            var news = GetFakeNews();
+            var dateTimeFactory = new DateTimeFactory();
+
+            DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
+
+            using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+            {
+                var newsController = new NewsController(context, dateTimeFactory);
+
+                // Act
+                var result = newsController.Get(2017, 7, 21, url);
+
+                // Assert
+                Assert.IsType<NotFoundResult>(result);
+            }
+        }
+
+        [Fact]
+        public void ReturnNotFoundResultWhenSearchByWrongDateUrl()
+        {
+            // Assign
+            var dateTimeOffsetCreated = new DateTimeOffset(2017, 7, 18, 0, 0, 0, TimeSpan.Zero);
+            var url = "news-title-1";
+            var news = GetFakeNews(dateTimeOffsetCreated);
+            var dateTimeFactory = new DateTimeFactory();
+
+            DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
+
+            using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+            {
+                var newsController = new NewsController(context, dateTimeFactory);
+
+                // Act
+                var result = newsController.Get(2017, 7, 21, url);
+
+                // Assert
+                Assert.IsType<NotFoundResult>(result);
+            }
+        }
+
         [Theory]
-        [InlineData(1, "2017-04-03 02:00:00", "News title 1", "This is a content placeholder for news title 1.", "anne.the.admin")]
-        public void ReturnCorrectNewsInfoWhenGetAllNews(int id, string newsDate, string title, string text, string username)
+        [InlineData(1, "2017-04-03 02:00:00", "News title 1", "This is a content placeholder for news title 1.", "anne.the.admin", "news-title-1")]
+        public void ReturnCorrectNewsInfoWhenGetAllNews(int id, string newsDate, string title, string text, string username, string url)
         {
             // Assign
             var utcDate = new DateTimeOffset(Convert.ToDateTime(newsDate));
-            var news = GetFakeNews(id, utcDate, title, text, username);
+            var news = GetFakeNews(id, utcDate, title, text, username, url);
             var dateTimeFactory = new DateTimeFactory();
 
             DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
@@ -514,7 +611,8 @@ namespace Intranet.API.UnitTests.Controllers
                     date: newsDate,
                     title: "News title 1",
                     text: "This is a content placeholder for news title 1",
-                    username: "anne.the.admin"
+                    username: "anne.the.admin",
+                    url: "news-title-1"
                 );
         }
 
@@ -526,7 +624,8 @@ namespace Intranet.API.UnitTests.Controllers
                                               DateTimeOffset date,
                                               string title,
                                               string text,
-                                              string username)
+                                              string username,
+                                              string url)
         {
             return new News[]
             {
@@ -536,7 +635,8 @@ namespace Intranet.API.UnitTests.Controllers
                     Created = date,
                     Title = title,
                     Text = text,
-                    UserId = username
+                    UserId = username,
+                    Url = url,
                 }
             };
         }

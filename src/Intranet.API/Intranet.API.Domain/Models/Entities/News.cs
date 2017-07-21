@@ -75,5 +75,8 @@ namespace Intranet.API.Domain.Models.Entities
         }
 
         public ICollection<NewsKeyword> NewsKeywords { get; set; }
+
+        [Required]
+        public string Url { get; set; }
     }
 }

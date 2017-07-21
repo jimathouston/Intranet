@@ -30,8 +30,12 @@ export class DataService {
             .map((res: Response) => {
                 return res.json()
             })
-            .map((res: NewsItem[]) => {
-                return res.sort((a, b) => a.created < b.created ? 1 : -1)
+            .map((newsItems: NewsItem[]) => {
+                newsItems.forEach(news => {
+                  news.created = new Date(news.created)
+                  news.updated = new Date(news.updated)
+                })
+                return newsItems.sort((a, b) => a.created < b.created ? 1 : -1)
             })
             .catch(this.handleError)
     }
@@ -39,6 +43,15 @@ export class DataService {
     // get a specific news by Id
     getNewsItem(id: number): Observable<NewsItem> {
         return this.http.get('news/' + id)
+            .map((res: Response) => {
+                return res.json()
+            })
+            .catch(this.handleError)
+    }
+
+        // get a specific news by Id
+    getNewsItemByDateAndUrl(date: Date, url: string): Observable<NewsItem> {
+        return this.http.get(`news/${date.getUTCFullYear()}/${date.getUTCMonth() + 1}/${date.getUTCDate()}/${url}`)
             .map((res: Response) => {
                 return res.json()
             })

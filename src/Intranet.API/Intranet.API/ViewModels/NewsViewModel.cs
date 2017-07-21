@@ -29,6 +29,7 @@ namespace Intranet.API.ViewModels
             Updated = news.Updated;
             User = news.User;
             UserId = news.UserId;
+            Url = news.Url;
         }
 
         /// <summary>
@@ -56,5 +57,7 @@ namespace Intranet.API.ViewModels
 
         [JsonIgnore]
         public new ICollection<NewsKeyword> NewsKeywords { get; set; }
+
+        public new string Url { get; set; }
     }
 }

@@ -67,8 +67,8 @@ export const sharedConfig: NgModule = {
         RouterModule.forRoot([
             { path: '', redirectTo: 'news', pathMatch: 'full' },
             { path: 'news', component: NewsComponent },
+            { path: 'news/:year/:month/:day/:url', component: NewsDetailComponent },
             { path: 'news-new', component: NewsNewComponent },
-            { path: 'news-detail/:id', component: NewsDetailComponent },
             { path: 'news-edit/:id', component: NewsEditComponent },
             { path: 'checklist', component: ProfileChecklistComponent },
             { path: 'profiles', component: ProfilesComponent },

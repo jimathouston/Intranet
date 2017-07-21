@@ -37,4 +37,8 @@ export class NewsComponent implements OnInit {
             }
         )
     }
+
+    generateUrl(newsItem: NewsItem) {
+      return `/news/${newsItem.created.getUTCFullYear()}/${newsItem.created.getUTCMonth()}/${newsItem.created.getUTCDate()}/${newsItem.url}`
+    }
 }

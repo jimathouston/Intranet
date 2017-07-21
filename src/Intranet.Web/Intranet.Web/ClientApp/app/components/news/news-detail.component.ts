@@ -13,7 +13,6 @@ import NewsItem from '../../models/newsItem.model'
 })
 
 export class NewsDetailComponent implements OnInit {
-    id: number
     newsItem: NewsItem
     selectedNewsItem: NewsItem
     info: string
@@ -33,10 +32,17 @@ export class NewsDetailComponent implements OnInit {
     }
 
     async ngOnInit() {
-        this.id = +this.route.snapshot.params['id']
+        const year: number = this.route.snapshot.params['year']
+        const month: number = this.route.snapshot.params['month']
+        const day: number = this.route.snapshot.params['day']
+        const url: string = this.route.snapshot.params['url']
+        const date: Date = new Date(Date.UTC(year, month, day))
+
+        console.log(this.route.snapshot.params)
+
         const jwt = await this.authenticationService.getJwtDecoded()
 
-        this.dataService.getNewsItem(this.id).subscribe(
+        this.dataService.getNewsItemByDateAndUrl(date, url).subscribe(
             (newsitem: NewsItem) => {
                 this.newsItem = newsitem
                 if (jwt.role === 'Admin' || this.newsItem.user.username === jwt.username) {

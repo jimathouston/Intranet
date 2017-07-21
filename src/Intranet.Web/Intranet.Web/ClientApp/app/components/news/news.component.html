@@ -19,7 +19,7 @@
       <news-info-strip [newsItem]="newsItem"></news-info-strip>
       <news-keywords-strip [keywords]="newsItem.keywords"></news-keywords-strip>
       <div *ngIf="newsItem.headerImage" class="card-img-wrap">
-        <a [routerLink]="['/news-detail', newsItem.id]">
+        <a [routerLink]="[generateUrl(newsItem)]">
           <img src="{{ '/image/600/300/' + newsItem.headerImage.fileName }}" class="card-img-caps">
         </a>
       </div>
@@ -27,7 +27,7 @@
         <h4 class="card-title">{{ newsItem.title }}</h4>
         <p class="card-text" [innerHTML]="newsItem.text | limitTo : 185 | safeHtml"></p>
         <div>
-          <a [routerLink]="['/news-detail', newsItem.id]" class="btn btn-info">Read more!</a>
+          <a [routerLink]="[generateUrl(newsItem)]" class="btn btn-info">Read more!</a>
           <toggle-published [newsitem]="newsItem"></toggle-published>
           <delete-news-button [newsItem]="newsItem" (onDelete)="handleOnDelete($event)"></delete-news-button>
         </div>

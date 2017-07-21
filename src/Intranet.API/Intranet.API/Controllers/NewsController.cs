@@ -63,6 +63,7 @@ namespace Intranet.API.Controllers
                     Text = news.Text,
                     UserId = username,
                     Published = news.Published,
+                    Url = UrlHelper.URLFriendly(news.Title),
                 };
 
                 if (!String.IsNullOrWhiteSpace(news.HeaderImage?.FileName))
@@ -74,6 +75,13 @@ namespace Intranet.API.Controllers
                 }
 
                 newNews.Created = _dateTimeFactory.DateTimeOffsetUtc;
+
+                var isTitleAndDateUniqe = !_intranetApiContext.News.Any(n => n.Created.Date == newNews.Created.Date && n.Url == newNews.Url);
+
+                if (!isTitleAndDateUniqe)
+                {
+                    return BadRequest(Json(new { error = "There has already been created a news with that title today!" }));
+                }
 
                 NewsKeywordHelper.SetKeywords(news.Keywords, newNews, _intranetApiContext);
 
@@ -237,6 +245,44 @@ namespace Intranet.API.Controllers
                     .Include(n => n.NewsKeywords)
                         .ThenInclude(nk => nk.Keyword)
                     .SingleOrDefault(n => n.Id == id);
+
+                if (news == null)
+                {
+                    return NotFound();
+                }
+
+                var newsViewModel = new NewsViewModel(news);
+
+                return new OkObjectResult(newsViewModel);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        /// <summary>
+        /// Retrieve a specific news item.
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <param name="day"></param>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        [Route("{year:int}/{month:int}/{day:int}/{url}")]
+        [HttpGet]
+        public IActionResult Get(int year, int month, int day, string url)
+        {
+            try
+            {
+                var date = new DateTimeOffset(year, month, day, 0, 0, 0, TimeSpan.Zero);
+
+                var news = _intranetApiContext.News
+                    .Include(n => n.HeaderImage)
+                    .Include(n => n.User)
+                    .Include(n => n.NewsKeywords)
+                        .ThenInclude(nk => nk.Keyword)
+                    .SingleOrDefault(n => n.Created.Date == date.Date && n.Url == url);
 
                 if (news == null)
                 {
