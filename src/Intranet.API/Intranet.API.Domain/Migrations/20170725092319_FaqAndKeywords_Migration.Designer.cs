@@ -8,14 +8,73 @@ using Intranet.API.Domain.Data;
 namespace Intranet.API.Domain.Migrations
 {
     [DbContext(typeof(IntranetApiContext))]
-    [Migration("20170721083725_AddUrlsForNews_Migration")]
-    partial class AddUrlsForNews_Migration
+    [Migration("20170725092319_FaqAndKeywords_Migration")]
+    partial class FaqAndKeywords_Migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Intranet.API.Domain.Models.Entities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Title")
+                        .IsRequired();
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Title")
+                        .IsUnique();
+
+                    b.HasIndex("Url")
+                        .IsUnique();
+
+                    b.ToTable("Category");
+                });
+
+            modelBuilder.Entity("Intranet.API.Domain.Models.Entities.Faq", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Answer")
+                        .IsRequired();
+
+                    b.Property<int>("CategoryId");
+
+                    b.Property<string>("Question")
+                        .IsRequired();
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("Url")
+                        .IsUnique();
+
+                    b.ToTable("Faq");
+                });
+
+            modelBuilder.Entity("Intranet.API.Domain.Models.Entities.FaqKeyword", b =>
+                {
+                    b.Property<int>("FaqId");
+
+                    b.Property<int>("KeywordId");
+
+                    b.HasKey("FaqId", "KeywordId");
+
+                    b.HasIndex("KeywordId");
+
+                    b.ToTable("FaqKeyword");
+                });
 
             modelBuilder.Entity("Intranet.API.Domain.Models.Entities.Image", b =>
                 {
@@ -32,10 +91,20 @@ namespace Intranet.API.Domain.Migrations
 
             modelBuilder.Entity("Intranet.API.Domain.Models.Entities.Keyword", b =>
                 {
-                    b.Property<string>("Name")
+                    b.Property<int>("KeywordId")
                         .ValueGeneratedOnAdd();
 
-                    b.HasKey("Name");
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("KeywordId");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.HasIndex("Url")
+                        .IsUnique();
 
                     b.ToTable("Keyword");
                 });
@@ -84,7 +153,7 @@ namespace Intranet.API.Domain.Migrations
                 {
                     b.Property<int>("NewsId");
 
-                    b.Property<string>("KeywordId");
+                    b.Property<int>("KeywordId");
 
                     b.HasKey("NewsId", "KeywordId");
 
@@ -106,6 +175,27 @@ namespace Intranet.API.Domain.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("Intranet.API.Domain.Models.Entities.Faq", b =>
+                {
+                    b.HasOne("Intranet.API.Domain.Models.Entities.Category", "Category")
+                        .WithMany("Faqs")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Intranet.API.Domain.Models.Entities.FaqKeyword", b =>
+                {
+                    b.HasOne("Intranet.API.Domain.Models.Entities.Faq", "Faq")
+                        .WithMany("FaqKeywords")
+                        .HasForeignKey("FaqId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Intranet.API.Domain.Models.Entities.Keyword", "Keyword")
+                        .WithMany("FaqKeywords")
+                        .HasForeignKey("KeywordId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Intranet.API.Domain.Models.Entities.News", b =>
                 {
                     b.HasOne("Intranet.API.Domain.Models.Entities.Image", "HeaderImage")
@@ -121,7 +211,7 @@ namespace Intranet.API.Domain.Migrations
             modelBuilder.Entity("Intranet.API.Domain.Models.Entities.NewsKeyword", b =>
                 {
                     b.HasOne("Intranet.API.Domain.Models.Entities.Keyword", "Keyword")
-                        .WithMany("NewsKeyword")
+                        .WithMany("NewsKeywords")
                         .HasForeignKey("KeywordId")
                         .OnDelete(DeleteBehavior.Cascade);
 

@@ -19,76 +19,7 @@ export class DataService {
         private http: SecureHttpService,
     ) { }
 
-// NEWS SERVICES ************************************************************  /
-
-    // get all News
-    getNewsItems(): Observable<News[]> {
-        return this.http.get('news')
-            .map((res: Response) => {
-                return res.json()
-            })
-            .map((newsItems: News[]) => {
-                newsItems.forEach(news => {
-                  news.created = new Date(news.created)
-                  news.updated = new Date(news.updated)
-                })
-                return newsItems.sort((a, b) => a.created < b.created ? 1 : -1)
-            })
-            .catch(this.handleError)
-    }
-
-    // get a specific news by Id
-    getNewsItem(id: number): Observable<News> {
-        return this.http.get('news/' + id)
-            .map((res: Response) => {
-                return res.json()
-            })
-            .catch(this.handleError)
-    }
-
-        // get a specific news by Id
-    getNewsItemByDateAndUrl(date: Date, url: string): Observable<News> {
-        return this.http.get(`news/${date.getUTCFullYear()}/${date.getUTCMonth() + 1}/${date.getUTCDate()}/${url}`)
-            .map((res: Response) => {
-                return res.json()
-            })
-            .catch(this.handleError)
-    }
-
-    // create a new NewsItem
-    createNewsItem(newsitem: News): Promise<News> {
-        const body = JSON.stringify(newsitem)
-
-        return this.http.post('news/', body)
-                .toPromise()
-                .then(res => res.json().data as News)
-    }
-
-    // updates a NewsItem
-    updateNewsItem(newsitem: News): Observable<News> {
-        const headers = new Headers()
-        headers.append('Content-Type', 'application/json')
-        headers.append('Access-Control-Allow-Origin', '*')
-
-        const options = new RequestOptions({ headers: headers })
-
-        return this.http.put('news/' + newsitem.id, JSON.stringify(newsitem), options)
-            .map((res: Response) => {
-                return res.json() as News
-            })
-    }
-
-
-    // delete newsitem
-    deleteNewsItem(id: number): Observable<void> {
-        return this.http.delete('news/' + id)
-            .map((res: Response) => {
-                return
-            })
-            .catch(this.handleError)
-    }
-
-// PROFILE SERVICE ************************************************  /
+    // PROFILE SERVICE ************************************************  /
 
      // get all Profiles
     getAllProfiles(): Observable<Profile[]> {
@@ -166,29 +97,29 @@ export class DataService {
             .catch(this.handleError)
     }
 
-    async uploadFile(file): Promise<string> {
-        if (typeof file !== 'undefined') {
+    // async uploadFile(file): Promise<string> {
+    //     if (typeof file !== 'undefined') {
 
-            const headers = new Headers(
-            {
-                'Accept': 'application/json'
-            })
+    //         const headers = new Headers(
+    //         {
+    //             'Accept': 'application/json'
+    //         })
 
-            const formData: FormData = new FormData()
+    //         const formData: FormData = new FormData()
 
-            formData.append(file.name, file)
-            // headers.append('Content-Type', 'multipart/form-data')
-            // DON'T SET THE Content-Type to multipart/form-data
-            // You'll get the Missing content-type boundary error
-            const options = new RequestOptions({ headers: headers })
+    //         formData.append(file.name, file)
+    //         // headers.append('Content-Type', 'multipart/form-data')
+    //         // DON'T SET THE Content-Type to multipart/form-data
+    //         // You'll get the Missing content-type boundary error
+    //         const options = new RequestOptions({ headers: headers })
 
-            const response = await this.http.post('upload', formData, options, true).toPromise()
+    //         const response = await this.http.post('upload', formData, options, true).toPromise()
 
-            return response.json().fileName
-        }
+    //         return response.json().fileName
+    //     }
 
-        return null
-    }
+    //     return null
+    // }
 
     private handleError (error: Response | any) {
         const applicationError = error.headers.get('constlication-Error')

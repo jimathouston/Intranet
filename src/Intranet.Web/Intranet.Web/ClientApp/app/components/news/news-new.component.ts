@@ -4,7 +4,7 @@ import { Location } from '@angular/common'
 import { RequestOptions, Request, RequestMethod, Http, Headers } from '@angular/http'
 
 import { News, Image } from '../../models'
-import { AuthenticationService, ConfigService, DataService } from '../../_services'
+import { AuthenticationService, ConfigService, NewsService } from '../../_services'
 
 @Component({
     selector: 'news-new',
@@ -22,7 +22,7 @@ export class NewsNewComponent {
     apiUrl: string
 
     constructor(
-        private dataService: DataService,
+        private newsService: NewsService,
         private authenticationService: AuthenticationService,
         private configService: ConfigService,
         private route: ActivatedRoute,
@@ -53,7 +53,7 @@ export class NewsNewComponent {
     }
 
     private async addNewsItemInternal(successMessage: string) {
-        const fileName = await this.dataService.uploadFile(this.file)
+        const fileName = await this.newsService.uploadFile(this.file)
         const jwt = await this.authenticationService.getJwtDecoded()
 
         if (fileName) {
@@ -63,7 +63,7 @@ export class NewsNewComponent {
 
         this.newsItem['userId'] = jwt.displayName
 
-        this.dataService.createNewsItem(this.newsItem).then(
+        this.newsService.postItem(this.newsItem).subscribe(
             newsitem => {
                 this.success = successMessage
                 this.error = null

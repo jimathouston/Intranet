@@ -4,9 +4,17 @@
   <div *ngIf="!TinyMCELoaded">
     <p>Loading...</p>
   </div>
+  <div *ngIf="inline; then inlineEditor else standaloneEditor"></div>
+</ng-template>
+
+<ng-template #inlineEditor>
+  <span [attr.hidden]="TinyMCELoaded ? null : ''" *ngIf="inline" id="{{elementId}}">{{text}}</span>
+</ng-template>
+
+<ng-template #standaloneEditor>
   <div [attr.hidden]="TinyMCELoaded ? null : ''">
     <form (ngSubmit)="handleSubmit()">
-      <textarea id="{{elementId}}">{{text}}</textarea>
+      <textarea *ngIf="!inline" id="{{elementId}}">{{text}}</textarea>
     </form>
     <div *ngIf="!Saved">
       <p>Don't forget to save!</p>

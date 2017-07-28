@@ -33,6 +33,7 @@ namespace Intranet.API.Controllers
             _intranetApiContext = intranetApiContext;
         }
 
+        #region POST
         /// <summary>
         /// Add a new news item.
         /// </summary>
@@ -83,7 +84,9 @@ namespace Intranet.API.Controllers
                     return BadRequest(Json(new { error = "There has already been created a news with that title today!" }));
                 }
 
-                NewsKeywordHelper.SetKeywords(news.Keywords, newNews, _intranetApiContext);
+                var keywords = KeywordHelper.GetKeywordsFromString(news.Keywords);
+                var allKeywordEntities = GetAllKeywordEntitiesInternal(news, keywords);
+                KeywordHelper.SetKeywords<News, NewsKeyword>(keywords, newNews, allKeywordEntities);
 
                 _intranetApiContext.News.Add(newNews);
                 _intranetApiContext.SaveChanges();
@@ -97,7 +100,9 @@ namespace Intranet.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        #endregion
 
+        #region PUT
         /// <summary>
         /// Change content of a news item.
         /// </summary>
@@ -147,7 +152,9 @@ namespace Intranet.API.Controllers
                     contextEntity.HeaderImage.FileName = news.HeaderImage?.FileName;
                 }
 
-                NewsKeywordHelper.SetKeywords(news.Keywords, contextEntity, _intranetApiContext);
+                var keywords = KeywordHelper.GetKeywordsFromString(news.Keywords);
+                var allKeywordEntities = GetAllKeywordEntitiesInternal(news, keywords);
+                KeywordHelper.SetKeywords<News, NewsKeyword>(keywords, contextEntity, allKeywordEntities);
 
                 _intranetApiContext.SaveChanges();
 
@@ -160,7 +167,9 @@ namespace Intranet.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        #endregion
 
+        #region DELETE
         /// <summary>
         /// Remove a news item.
         /// </summary>
@@ -197,7 +206,9 @@ namespace Intranet.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        #endregion
 
+        #region GET
         /// <summary>
         /// Retrieve a list of all news items.
         /// </summary>
@@ -298,5 +309,17 @@ namespace Intranet.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+        #endregion
+
+        #region Private Helpers
+        private List<Keyword> GetAllKeywordEntitiesInternal(NewsViewModel news, IEnumerable<string> keywords)
+        {
+            return _intranetApiContext.Keywords?
+            .Include(k => k.NewsKeywords)
+                .ThenInclude(nk => nk.News)?
+            .Where(k => keywords.Contains(k.Name, StringComparer.OrdinalIgnoreCase) || k.NewsKeywords.Any(nk => nk.NewsId.Equals(news.Id)))
+            .ToList();
+        }
+        #endregion
     }
 }

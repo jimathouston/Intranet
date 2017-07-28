@@ -2,6 +2,7 @@
 using Intranet.API.Domain.Data;
 using Intranet.API.Domain.Models.Entities;
 using Intranet.API.UnitTests.Fakes;
+using Intranet.API.UnitTests.TestHelpers;
 using Intranet.API.ViewModels;
 using Intranet.Shared.Factories;
 using Microsoft.AspNetCore.Http;
@@ -262,7 +263,7 @@ namespace Intranet.API.UnitTests.Controllers
             var oldNewsItem = GetFakeNews().First();
             var newNewsItem = GetFakeNews().First();
             var dateTimeFactory = new DateTimeFactory();
-            var user = new ClaimsPrincipalFake(new Claim("role", "admin"));
+            var user = new ClaimsPrincipalFake(new Claim(ClaimTypes.Role, "Admin"));
 
             newNewsItem.UserId = "anne.the.admin";
 
@@ -354,7 +355,7 @@ namespace Intranet.API.UnitTests.Controllers
         {
             // Assign
             var news = GetFakeNews().First();
-            var user = new ClaimsPrincipalFake(new Claim("role", "admin"));
+            var user = new ClaimsPrincipalFake(new Claim(ClaimTypes.Role, "Admin"));
             var dateTimeFactory = new DateTimeFactory();
 
             DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
@@ -558,7 +559,7 @@ namespace Intranet.API.UnitTests.Controllers
 
                 // Act
                 var newsFromController = newsController.Get();
-                var count = GetCountOfValueProperty(newsFromController);
+                var count = newsFromController.CountItems();
 
                 // Assert
                 Assert.IsType<OkObjectResult>(newsFromController);
@@ -581,7 +582,7 @@ namespace Intranet.API.UnitTests.Controllers
 
                 // Act
                 var newsFromController = newsController.Get();
-                var count = GetCountOfValueProperty(newsFromController);
+                var count = newsFromController.CountItems();
 
                 // Assert
                 Assert.IsType<OkObjectResult>(newsFromController);
@@ -591,13 +592,6 @@ namespace Intranet.API.UnitTests.Controllers
         #endregion
 
         #region Private Helpers
-        private static int GetCountOfValueProperty(IActionResult newsFromController)
-        {
-            var ValuePropValue = newsFromController.GetType().GetProperty("Value").GetValue(newsFromController);
-            var CountPropValue = (int)ValuePropValue.GetType().GetProperty("Count").GetValue(ValuePropValue);
-            return CountPropValue;
-        }
-
         private IEnumerable<News> GetFakeNews()
         {
             return GetFakeNews(newsDate: DateTimeOffset.Now);

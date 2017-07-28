@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit, Input } from '@angular/core'
 import { RouterModule, Router, ActivatedRoute, Params } from '@angular/router'
 import { Location } from '@angular/common'
-import { DataService } from '../../_services'
+import { NewsService } from '../../_services'
 
 import { News } from '../../models'
 
@@ -17,10 +17,12 @@ export class NewsEditComponent implements OnInit {
     newsItemEdited: boolean
 
     constructor(
-      private dataService: DataService,
+      private newsService: NewsService,
       private route: ActivatedRoute,
       private location: Location
-    ) { }
+    ) {
+      this.newsItem = new News()
+    }
 
     onEditorContentChange(content: string) {
         this.newsItem.text = content
@@ -33,7 +35,7 @@ export class NewsEditComponent implements OnInit {
     ngOnInit() {
         const id = +this.route.snapshot.params['id']
 
-        this.dataService.getNewsItem(id).subscribe(
+        this.newsService.getItem(id).subscribe(
             (newsitem: News) => {
                 this.newsItem = newsitem
             },
@@ -44,7 +46,7 @@ export class NewsEditComponent implements OnInit {
     }
 
     updateNewsItem() {
-        this.dataService.updateNewsItem(this.newsItem).subscribe(
+        this.newsService.putItem(this.newsItem).subscribe(
             () => {
                 this.newsItemEdited = true
                 this.info = this.newsItem.title + ' was edited successfully!'

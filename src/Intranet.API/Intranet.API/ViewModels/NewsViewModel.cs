@@ -55,9 +55,7 @@ namespace Intranet.API.ViewModels
             }
         }
 
-        [JsonIgnore]
-        public new ICollection<NewsKeyword> NewsKeywords { get; set; }
-
+        // Workaround to not get an excetion due to the required attribute
         public new string Url { get; set; }
     }
 }

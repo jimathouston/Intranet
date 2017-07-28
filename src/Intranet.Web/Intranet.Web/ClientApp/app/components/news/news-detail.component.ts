@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core'
 import { RouterModule, Router, ActivatedRoute } from '@angular/router'
 import { Location } from '@angular/common'
-import { AuthenticationService, DataService } from '../../_services'
+import { AuthenticationService, NewsService } from '../../_services'
 
 import { News } from '../../models'
 
@@ -18,7 +18,7 @@ export class NewsDetailComponent implements OnInit {
     isAuthorised: boolean
 
     constructor(
-        private dataService: DataService,
+        private newsService: NewsService,
         private authenticationService: AuthenticationService,
         private route: ActivatedRoute,
         private location: Location,
@@ -39,7 +39,7 @@ export class NewsDetailComponent implements OnInit {
 
         const jwt = await this.authenticationService.getJwtDecoded()
 
-        this.dataService.getNewsItemByDateAndUrl(date, url).subscribe(
+        this.newsService.getNewsByDateAndUrl(date, url).subscribe(
             (newsitem: News) => {
                 this.newsItem = newsitem
                 if (jwt.role === 'Admin' || this.newsItem.user.username === jwt.username) {

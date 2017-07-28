@@ -1,6 +1,7 @@
-﻿import { Image, User} from './'
+﻿import { HasId, HasUrl, HasKeywords } from '../contracts'
+import { Image, User, NewsKeyword} from './'
 
-export class News {
+export class News implements HasId, HasUrl, HasKeywords {
     id: number | null
     title: string
     text: string
@@ -11,5 +12,6 @@ export class News {
     keywords: string
     published: boolean
     hasEverBeenPublished: boolean
+    newsKeywords: NewsKeyword[]
     url: string
 }

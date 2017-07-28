@@ -10,7 +10,7 @@
         <img src="{{ '/image/600/300/' + newsItem.headerImage.fileName }}" class="card-img-caps">
       </div>
       <news-info-strip [newsItem]="newsItem"></news-info-strip>
-      <news-keywords-strip [keywords]="newsItem.keywords"></news-keywords-strip>
+      <keywords-strip [keywords]="newsItem.keywords"></keywords-strip>
       <div class="card-block">
         <h4 class="card-title">{{ newsItem.title }}</h4>
         <p *ngIf="newsItem.text" class="card-text" [innerHTML]="newsItem.text | safeHtml"></p>

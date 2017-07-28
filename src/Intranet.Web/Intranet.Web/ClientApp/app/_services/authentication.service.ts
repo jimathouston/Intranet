@@ -37,6 +37,16 @@ export class AuthenticationService {
         return jwtDecode(jwt) as Jwt
     }
 
+    async isAdmin() {
+      const jwt = await this.getJwtDecoded()
+      return jwt.role === 'Admin'
+    }
+
+    async isUser(username: string) {
+      const jwt = await this.getJwtDecoded()
+      return jwt.username.toLowerCase() === username.toLowerCase()
+    }
+
     private getJwtFromLocalStorage() {
         if (!this.hasLocalStorage) {
             return null

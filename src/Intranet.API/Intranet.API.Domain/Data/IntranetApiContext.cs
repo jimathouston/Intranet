@@ -54,8 +54,49 @@ namespace Intranet.API.Domain.Data
 
             modelBuilder.Entity<NewsKeyword>()
                 .HasOne(nk => nk.Keyword)
-                .WithMany(k => k.NewsKeyword)
+                .WithMany(k => k.NewsKeywords)
                 .HasForeignKey(nk => nk.KeywordId);
+            #endregion
+
+            #region Faq
+            modelBuilder.Entity<Faq>()
+                .HasIndex(f => f.Url)
+                .IsUnique();
+            #endregion
+
+            #region FaqKeyword
+            modelBuilder.Entity<FaqKeyword>()
+                .HasKey(k => new { k.FaqId, k.KeywordId });
+
+            modelBuilder.Entity<FaqKeyword>()
+                .HasOne(fk => fk.Faq)
+                .WithMany(f => f.FaqKeywords)
+                .HasForeignKey(fk => fk.FaqId);
+
+            modelBuilder.Entity<FaqKeyword>()
+                .HasOne(fk => fk.Keyword)
+                .WithMany(k => k.FaqKeywords)
+                .HasForeignKey(fk => fk.KeywordId);
+            #endregion
+
+            #region Category
+            modelBuilder.Entity<Category>()
+                .HasIndex(c => c.Url)
+                .IsUnique();
+
+            modelBuilder.Entity<Category>()
+                .HasIndex(c => c.Title)
+                .IsUnique();
+            #endregion
+
+            #region Keyword
+            modelBuilder.Entity<Keyword>()
+                .HasIndex(k => k.Url)
+                .IsUnique();
+
+            modelBuilder.Entity<Keyword>()
+                .HasIndex(k => k.Name)
+                .IsUnique();
             #endregion
 
             base.OnModelCreating(modelBuilder);
@@ -65,5 +106,7 @@ namespace Intranet.API.Domain.Data
         public virtual DbSet<Keyword> Keywords { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Faq> Faqs { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
     }
 }

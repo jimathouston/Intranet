@@ -20,6 +20,7 @@ using Intranet.API.Domain;
 using Intranet.API.Filters;
 using Microsoft.EntityFrameworkCore;
 using Intranet.Shared.Factories;
+using Intranet.API.Extensions;
 
 namespace Intranet.API
 {
@@ -75,6 +76,17 @@ namespace Intranet.API
                 // From: http://stackoverflow.com/questions/41728737/iso-utc-datetime-format-as-default-json-output-format-in-mvc-6-api-response
                 opt.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
                 opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
+            #endregion
+
+            #region Custom Authorization Policies
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(
+                    "IsAdmin",
+                    policyBuilder => policyBuilder.RequireAssertion(
+                        context => context.User.IsAdmin())
+                    );
             });
             #endregion
 

@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core'
-import { AuthenticationService, DataService } from '../_services'
+import { AuthenticationService, NewsService } from '../_services'
 
 import { News } from '../models'
 
@@ -15,7 +15,7 @@ export class TogglePublishedComponent implements OnInit {
     isAuthorised: boolean
 
     constructor(
-        private dataService: DataService,
+        private newsService: NewsService,
         private authenticationService: AuthenticationService,
     ) { }
 
@@ -28,7 +28,7 @@ export class TogglePublishedComponent implements OnInit {
 
     publishNewsItem(newsitem: News) {
         newsitem.published = true
-        this.dataService.updateNewsItem(newsitem)
+        this.newsService.putItem(newsitem)
             .subscribe((savedNewsItem) => {
                 newsitem = savedNewsItem
                 if (this.onChangePublishState) {
@@ -39,7 +39,7 @@ export class TogglePublishedComponent implements OnInit {
 
     unpublishNewsItem(newsitem: News) {
         newsitem.published = false
-        this.dataService.updateNewsItem(newsitem)
+        this.newsService.putItem(newsitem)
             .subscribe((savedNewsItem) => {
                 newsitem = savedNewsItem
                 if (this.onChangePublishState) {

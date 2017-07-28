@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core'
-import { AuthenticationService, DataService } from '../_services'
+import { AuthenticationService, NewsService } from '../_services'
 
 import { News } from '../models'
 
@@ -15,7 +15,7 @@ export class DeleteNewsButtonComponent implements OnInit {
     isAuthorised: boolean
 
     constructor(
-        private dataService: DataService,
+        private newsService: NewsService,
         private authenticationService: AuthenticationService,
     ) { }
 
@@ -27,7 +27,7 @@ export class DeleteNewsButtonComponent implements OnInit {
     }
 
     removeNewsItem() {
-        this.dataService.deleteNewsItem(this.newsItem.id)
+        this.newsService.deleteItem(this.newsItem.id)
             .subscribe(() => {
                 this.onDelete.emit(`${this.newsItem.title} was deleted successfully!`)
             })

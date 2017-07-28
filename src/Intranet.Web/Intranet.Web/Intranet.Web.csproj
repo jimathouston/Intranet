@@ -39,9 +39,6 @@
     <ProjectReference Include="..\..\Intranet.Shared\Intranet.Shared\Intranet.Shared.csproj" />
     <ProjectReference Include="..\Intranet.Web.Authentication\Intranet.Web.Authentication.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="wwwroot\assets\tinymce\skins\" />
-  </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec Command="npm install" />

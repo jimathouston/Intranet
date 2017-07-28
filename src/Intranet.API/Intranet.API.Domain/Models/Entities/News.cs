@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using Intranet.API.Domain.Contracts;
 
 namespace Intranet.API.Domain.Models.Entities
 {
-    public class News
+    public class News : IHasKeywords
     {
         // Backing fields: https://docs.microsoft.com/en-us/ef/core/modeling/backing-field
         private bool _hasEverBeenPublished;

@@ -32,6 +32,7 @@ module.exports = (env) => {
                 'event-source-polyfill',
                 'jquery',
                 'zone.js',
+                'lodash'
             ]
         },
         output: {

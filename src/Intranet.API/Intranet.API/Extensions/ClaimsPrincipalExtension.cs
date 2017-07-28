@@ -18,10 +18,7 @@ namespace Intranet.API.Extensions
         /// <returns></returns>
         public static bool IsAdmin(this ClaimsPrincipal claimsPrincipal)
         {
-            return claimsPrincipal.Claims
-                    .SingleOrDefault(c => c.Type.Equals("role", StringComparison.OrdinalIgnoreCase))?
-                    .Value
-                    .Equals("admin", StringComparison.OrdinalIgnoreCase) == true;
+            return claimsPrincipal.IsInRole("Admin");
         }
 
         /// <summary>

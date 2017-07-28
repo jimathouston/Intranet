@@ -103,6 +103,14 @@ namespace Intranet_Web
                 options.Audience = "ExampleAudience";
                 options.Issuer = "ExampleIssuer";
                 options.SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
+
+                if (CurrentEnvironment.IsDevelopment())
+                {
+                    // Set exp to 9 hours to be able to reuse the JWT in POSTMAN during the work day.
+                    // The secret is different in Development, Staging and Production so the JWT will
+                    // only be valid in development and nowhere else.
+                    options.Expiration = TimeSpan.FromHours(9);
+                }
             });
             services.Configure<S3Options>(options =>
             {
