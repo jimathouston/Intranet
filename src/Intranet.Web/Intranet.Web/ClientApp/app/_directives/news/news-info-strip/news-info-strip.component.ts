@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core'
 
-import { News } from '../models'
+import { News } from '../../../models'
 
 @Component({
     selector: 'news-info-strip',

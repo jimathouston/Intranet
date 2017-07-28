@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core'
-import { AuthenticationService, NewsService } from '../_services'
+import { AuthenticationService, NewsService } from '../../../_services'
 
-import { News } from '../models'
+import { News } from '../../../models'
 
 @Component({
     selector: 'toggle-published',

@@ -6,7 +6,6 @@ import { NewsService } from '../../_services'
     selector: 'news',
     templateUrl: './news.component.html',
     styleUrls: ['./news.component.css']
-
 })
 export class NewsComponent implements OnInit {
     newsItems: News[]

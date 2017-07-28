@@ -27,6 +27,8 @@ import {
   NewsInfoStripComponent,
   TogglePublishedComponent,
   KeywordsStripComponent,
+  FlashMessageComponent,
+  TextEditorComponent,
 } from './_directives'
 
 // import { ProfilesComponent } from './components/profile/profiles.component'
@@ -35,8 +37,6 @@ import {
 // import { ProfileNewComponent } from './components/profile/profile-new.component'
 // import { ProfileEditComponent } from './components/profile/profile-edit.component'
 // import { ProfileSingleComponent } from './components/profile/profile-single.component'
-
-import { TextEditorComponent } from './components/texteditor/texteditor.component'
 
 // Services
 import {
@@ -66,6 +66,7 @@ export const sharedConfig: NgModule = {
         TogglePublishedComponent,
         KeywordsStripComponent,
         FaqComponent,
+        FlashMessageComponent,
     ],
     providers: [
         NewsService,

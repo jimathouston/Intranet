@@ -1,12 +1,12 @@
 ﻿<div class="container-fluid">
   <h1>FAQ</h1>
   <!-- START: Flash messages  -->
-  <div *ngIf="!saved.faqId && !saved.categoryId && saved.success" class="alert alert-success">
-    <strong>Success!</strong> {{saved.success}}
-  </div>
-  <div *ngIf="!saved.faqId && !saved.categoryId && saved.error" class="alert alert-danger">
+  <flash-message [flash]="'success'" *ngIf="!saved.faqId && !saved.categoryId && saved.success">
+    {{saved.success}}
+  </flash-message>
+  <flash-message [flash]="'danger'" *ngIf="!saved.faqId && !saved.categoryId && saved.error">
     <strong>Error!</strong> {{saved.error}}
-  </div>
+  </flash-message>
   <!-- END: Flash messages  -->
   <div *ngFor="let faqByCategory of faqByCategories">
     <!-- START: Category Title -->
@@ -39,12 +39,12 @@
       <!-- END: Save and Delete  -->
     </h2>
     <!-- START: Flash messages  -->
-    <div *ngIf="saved.categoryId === faqByCategory.category.id && saved.success" class="alert alert-success">
-      <strong>Success!</strong> {{saved.success}}
-    </div>
-    <div *ngIf="saved.categoryId === faqByCategory.category.id && saved.error" class="alert alert-danger">
-      <strong>Error!</strong> {{saved.error}}
-    </div>
+    <flash-message [flash]="'success'" *ngIf="saved.categoryId === faqByCategory.category.id && saved.success">
+      {{saved.success}}
+    </flash-message>
+    <flash-message [flash]="'danger'" *ngIf="saved.categoryId === faqByCategory.category.id && saved.error">
+      {{saved.error}}
+    </flash-message>
     <!-- END: Flash messages  -->
     <!-- END: Category Title  -->
     <div class="list-group" (click)="$event.preventDefault()">
@@ -110,12 +110,12 @@
           ></keywords-strip>
         </div>
         <!-- START: Flash messages inside FAQ  -->
-        <div *ngIf="faq.id === saved.faqId && saved.success" class="alert alert-success">
-          <strong>Success!</strong> {{saved.success}}
-        </div>
-        <div *ngIf="faq.id === saved.faqId && saved.error" class="alert alert-danger">
-          <strong>Error!</strong> {{saved.error}}
-        </div>
+        <flash-message [flash]="'success'" *ngIf="faq.id === saved.faqId && saved.success">
+          {{saved.success}}
+        </flash-message>
+        <flash-message [flash]="'danger'" *ngIf="faq.id === saved.faqId && saved.error">
+          {{saved.error}}
+        </flash-message>
         <!-- END: Flash messages inside FAQ  -->
       </a>
     </div>
@@ -141,12 +141,12 @@
       <!-- END: Save and Delete  -->
     </h2>
     <!-- START: Flash messages  -->
-    <div *ngIf="saved.categoryId === newCategory.id && saved.success" class="alert alert-success">
-      <strong>Success!</strong> {{saved.success}}
-    </div>
-    <div *ngIf="saved.categoryId === newCategory.id && saved.error" class="alert alert-danger">
-      <strong>Error!</strong> {{saved.error}}
-    </div>
+    <flash-message [flash]="'success'" *ngIf="saved.categoryId === newCategory.id && saved.success">
+      {{saved.success}}
+    </flash-message>
+    <flash-message [flash]="'danger'" *ngIf="saved.categoryId === newCategory.id && saved.error">
+      {{saved.error}}
+    </flash-message>
     <!-- END: Flash messages  -->
   </div>
   <!-- END: New Category Title  -->
