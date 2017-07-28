@@ -108,8 +108,7 @@ namespace Intranet.API.Controllers
         #endregion
 
         #region POST
-        [AllowAnonymous]
-        //[Authorize("IsAdmin")]
+        [Authorize("IsAdmin")]
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] Category category)
         {
