@@ -15,38 +15,37 @@ using Xunit;
 
 namespace Intranet.API.UnitTests.Controllers
 {
-    public class FaqController_Fact
+    public class PolicyController_Fact
     {
         #region GET
         [Fact]
-        public async Task Get_Id_Should_Return_Faq()
+        public async Task Get_Id_Should_Return_Policy()
         {
             // Assign
-            var faq = new Faq
+            var policy = new Policy
             {
                 Id = 1,
-                Question = "q",
-                Answer = "",
+                Title = "t",
                 Category = new Category
                 {
                     Title = "t",
                 },
             };
 
-            DbContextFake.SeedDb<IntranetApiContext>(c => c.Add(faq));
+            DbContextFake.SeedDb<IntranetApiContext>(c => c.Add(policy));
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var faqController = ControllerFake.GetController<FaqController>(context);
+                var policyController = ControllerFake.GetController<PolicyController>(context);
 
                 // Act
-                var result = await faqController.GetAsync(1);
-                var returnedFaq = result.GetResponseAs<Faq>();
+                var result = await policyController.GetAsync(1);
+                var returnedPolicy = result.GetResponseAs<Policy>();
 
                 // Assert
                 Assert.IsType<OkObjectResult>(result);
-                Assert.Equal(returnedFaq.Question, "q");
-                Assert.Equal(returnedFaq.Category.Title, "t");
+                Assert.Equal(returnedPolicy.Title, "t");
+                Assert.Equal(returnedPolicy.Category.Title, "t");
             }
         }
 
@@ -56,10 +55,10 @@ namespace Intranet.API.UnitTests.Controllers
             // Assign
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var faqController = ControllerFake.GetController<FaqController>(context);
+                var policyController = ControllerFake.GetController<PolicyController>(context);
 
                 // Act
-                var result = await faqController.GetAsync(1);
+                var result = await policyController.GetAsync(1);
 
                 // Assert
                 Assert.IsType<NotFoundResult>(result);
@@ -72,10 +71,10 @@ namespace Intranet.API.UnitTests.Controllers
             // Assign
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var faqController = ControllerFake.GetController<FaqController>(context);
+                var policyController = ControllerFake.GetController<PolicyController>(context);
 
                 // Act
-                var result = await faqController.GetAsync();
+                var result = await policyController.GetAsync();
 
                 // Assert
                 Assert.IsType<OkObjectResult>(result);
@@ -84,35 +83,34 @@ namespace Intranet.API.UnitTests.Controllers
         }
 
         [Fact]
-        public async Task Get_Should_Return_All_Faqs()
+        public async Task Get_Should_Return_All_Policys()
         {
             // Assign
-            var faq = new Faq
+            var policy = new Policy
             {
                 Id = 1,
-                Question = "q",
-                Answer = "",
+                Title = "t",
                 Category = new Category
                 {
                     Title = "t",
                 },
             };
 
-            DbContextFake.SeedDb<IntranetApiContext>(c => c.Add(faq));
+            DbContextFake.SeedDb<IntranetApiContext>(c => c.Add(policy));
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var faqController = ControllerFake.GetController<FaqController>(context);
+                var policyController = ControllerFake.GetController<PolicyController>(context);
 
                 // Act
-                var result = await faqController.GetAsync();
-                var responses = result.GetResponsesAs<Faq>();
+                var result = await policyController.GetAsync();
+                var responses = result.GetResponsesAs<Policy>();
                 var response = responses.First();
 
                 // Assert
                 Assert.IsType<OkObjectResult>(result);
                 Assert.Equal(ActionResultHelpers.CountItems(result), 1);
-                Assert.Equal(response.Question, "q");
+                Assert.Equal(response.Title, "t");
                 Assert.Equal(response.Category.Title, "t");
             }
         }
@@ -123,10 +121,9 @@ namespace Intranet.API.UnitTests.Controllers
         public async Task Post_Should_Return_OkResult()
         {
             // Assign
-            var faq = new FaqViewModel
+            var policy = new PolicyViewModel
             {
-                Question = "q",
-                Answer = "",
+                Title = "tp",
                 Category = new Category
                 {
                     Title = "t",
@@ -135,22 +132,22 @@ namespace Intranet.API.UnitTests.Controllers
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var faqController = ControllerFake.GetController<FaqController>(context);
+                var policyController = ControllerFake.GetController<PolicyController>(context);
 
                 // Act
-                var response = await faqController.PostAsync(faq);
+                var response = await policyController.PostAsync(policy);
 
                 // Assert
                 Assert.IsType<OkObjectResult>(response);
             }
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var savedFaq = context.Faqs.Include(f => f.Category).First();
+                var savedPolicy = context.Policies.Include(f => f.Category).First();
 
-                Assert.Equal(savedFaq.Question, "q");
-                Assert.Equal(savedFaq.Url, "q");
-                Assert.Equal(savedFaq.Category.Title, "t");
-                Assert.Equal(savedFaq.Category.Url, "t");
+                Assert.Equal(savedPolicy.Title, "tp");
+                Assert.Equal(savedPolicy.Url, "tp");
+                Assert.Equal(savedPolicy.Category.Title, "t");
+                Assert.Equal(savedPolicy.Category.Url, "t");
             }
         }
         #endregion
@@ -162,10 +159,10 @@ namespace Intranet.API.UnitTests.Controllers
             // Assign
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var faqController = ControllerFake.GetController<FaqController>(context);
+                var policyController = ControllerFake.GetController<PolicyController>(context);
 
                 // Act
-                var result = await faqController.PutAsync(1, null);
+                var result = await policyController.PutAsync(1, null);
 
                 // Assert
                 Assert.IsType<NotFoundResult>(result);
@@ -176,12 +173,11 @@ namespace Intranet.API.UnitTests.Controllers
         public async Task Put_Should_Return_Ok()
         {
             // Assign
-            var faq = new Faq
+            var policy = new Policy
             {
                 Id = 1,
-                Question = "old question",
-                Answer = "",
-                Url = "old-question",
+                Title = "old policy",
+                Url = "old-policy",
                 Category = new Category
                 {
                     Title = "old category",
@@ -189,38 +185,37 @@ namespace Intranet.API.UnitTests.Controllers
                 },
             };
 
-            var newFaq = new FaqViewModel
+            var newPolicy = new PolicyViewModel
             {
-                Question = "q",
-                Answer = "",
+                Title = "q",
                 Category = new Category
                 {
                     Title = "t",
                 },
             };
 
-            DbContextFake.SeedDb<IntranetApiContext>(c => c.Add(faq));
+            DbContextFake.SeedDb<IntranetApiContext>(c => c.Add(policy));
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var faqController = ControllerFake.GetController<FaqController>(context);
+                var policyController = ControllerFake.GetController<PolicyController>(context);
 
                 // Act
-                var result = await faqController.PutAsync(1, newFaq);
+                var result = await policyController.PutAsync(1, newPolicy);
 
                 // Assert
                 Assert.IsType<OkObjectResult>(result);
             }
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var updatedFaq = context.Faqs.Include(f => f.Category).First();
+                var updatedPolicy = context.Policies.Include(f => f.Category).First();
 
-                Assert.Equal(faq.Question, "old question");
-                Assert.Equal(updatedFaq.Question, "q");
-                Assert.Equal(faq.Category.Title, "old category");
-                Assert.Equal(updatedFaq.Category.Title, "t");
-                Assert.Equal(updatedFaq.Url, "old-question");
-                Assert.Equal(updatedFaq.Category.Url, "t");
+                Assert.Equal(policy.Title, "old policy");
+                Assert.Equal(updatedPolicy.Title, "q");
+                Assert.Equal(policy.Category.Title, "old category");
+                Assert.Equal(updatedPolicy.Category.Title, "t");
+                Assert.Equal(updatedPolicy.Url, "old-policy");
+                Assert.Equal(updatedPolicy.Category.Url, "t");
             }
         }
         #endregion
@@ -230,18 +225,17 @@ namespace Intranet.API.UnitTests.Controllers
         public async Task Delete_Should_Return_OkResult()
         {
             // Assign
-            var faq = new Faq
+            var policy = new Policy
             {
                 Id = 1,
-                Question = "",
-                Answer = "",
+                Title = "",
                 Category = new Category
                 {
                     Title = "",
                 },
-                FaqKeywords = new List<FaqKeyword>
+                PolicyKeywords = new List<PolicyKeyword>
                 {
-                    new FaqKeyword
+                    new PolicyKeyword
                     {
                         Keyword = new Keyword
                         {
@@ -251,21 +245,21 @@ namespace Intranet.API.UnitTests.Controllers
                 },
             };
 
-            DbContextFake.SeedDb<IntranetApiContext>(c => c.Add(faq));
+            DbContextFake.SeedDb<IntranetApiContext>(c => c.Add(policy));
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var faqController = ControllerFake.GetController<FaqController>(context);
+                var policyController = ControllerFake.GetController<PolicyController>(context);
 
                 // Act
-                var result = await faqController.DeleteAsync(1);
+                var result = await policyController.DeleteAsync(1);
 
                 // Assert
                 Assert.IsType<OkResult>(result);
             }
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                Assert.Equal(0, context.Faqs.Count());
+                Assert.Equal(0, context.Policies.Count());
                 Assert.Equal(0, context.Categories.Count());
                 Assert.Equal(0, context.Keywords.Count());
             }
@@ -277,10 +271,10 @@ namespace Intranet.API.UnitTests.Controllers
             // Assign
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
-                var faqController = ControllerFake.GetController<FaqController>(context);
+                var policyController = ControllerFake.GetController<PolicyController>(context);
 
                 // Act
-                var result = await faqController.DeleteAsync(1);
+                var result = await policyController.DeleteAsync(1);
 
                 // Assert
                 Assert.IsType<NotFoundResult>(result);

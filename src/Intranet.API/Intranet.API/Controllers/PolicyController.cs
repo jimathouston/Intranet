@@ -24,11 +24,11 @@ namespace Intranet.API.Controllers
     /// </summary>
     [Produces("application/json")]
     [Route("/api/v1/[controller]")]
-    public class FaqController : Controller, IRestControllerAsync<FaqViewModel>
+    public class PolicyController : Controller, IRestControllerAsync<PolicyViewModel>
     {
         private readonly IntranetApiContext _context;
 
-        public FaqController(IntranetApiContext context)
+        public PolicyController(IntranetApiContext context)
         {
             _context = context;
         }
@@ -41,30 +41,30 @@ namespace Intranet.API.Controllers
         {
             try
             {
-                var faq = await _context.Faqs
-                    .Include(f => f.FaqKeywords)
+                var policy = await _context.Policies
+                    .Include(f => f.PolicyKeywords)
                         .ThenInclude(fk => fk.Keyword)
                     .Include(f => f.Category)
-                        .ThenInclude(c => c.Faqs)
+                        .ThenInclude(c => c.Policies)
                     .SingleOrDefaultAsync(f => f.Id == id);
 
-                if (faq.IsNull())
+                if (policy.IsNull())
                 {
                     return NotFound();
                 }
 
-                _context.Remove(faq);
+                _context.Remove(policy);
 
                 // If the category has no more related entities then delete the category as well
-                if (await CategoryHelpers.HasNoRelatedEntities(faq.Category, _context, ignore: faq))
+                if (await CategoryHelpers.HasNoRelatedEntities(policy.Category, _context, ignore: policy))
                 {
-                    _context.Remove(faq.Category);
+                    _context.Remove(policy.Category);
                 }
 
                 // If the keywords has no more related entities then delete the category as well
-                foreach (var keyword in faq.FaqKeywords.Select(fk => fk.Keyword))
+                foreach (var keyword in policy.PolicyKeywords.Select(fk => fk.Keyword))
                 {
-                    if (await KeywordHelpers.HasNoRelatedEntities(keyword, _context, ignore: faq.FaqKeywords))
+                    if (await KeywordHelpers.HasNoRelatedEntities(keyword, _context, ignore: policy.PolicyKeywords))
                     {
                         _context.Remove(keyword);
                     }
@@ -87,17 +87,17 @@ namespace Intranet.API.Controllers
         {
             try
             {
-                var faqs = await _context.Faqs
+                var policies = await _context.Policies
                     .Include(f => f.Category)
-                    .Include(f => f.FaqKeywords)
+                    .Include(f => f.PolicyKeywords)
                         .ThenInclude(fk => fk.Keyword)
                     .ToListAsync();
 
-                var faqViewModels = faqs?
-                    .Select(f => new FaqViewModel(f))
-                    .ToList() ?? new List<FaqViewModel>();
+                var policyViewModels = policies?
+                    .Select(f => new PolicyViewModel(f))
+                    .ToList() ?? new List<PolicyViewModel>();
 
-                return Ok(faqViewModels);
+                return Ok(policyViewModels);
             }
             catch (Exception)
             {
@@ -111,18 +111,18 @@ namespace Intranet.API.Controllers
         {
             try
             {
-                var faq = await _context.Faqs
+                var policy = await _context.Policies
                     .Include(f => f.Category)
-                    .Include(f => f.FaqKeywords)
+                    .Include(f => f.PolicyKeywords)
                         .ThenInclude(fk => fk.Keyword)
                     .SingleOrDefaultAsync(c => c.Id == id);
 
-                if (faq.IsNull())
+                if (policy.IsNull())
                 {
                     return NotFound();
                 }
 
-                return Ok(new FaqViewModel(faq));
+                return Ok(new PolicyViewModel(policy));
             }
             catch (Exception)
             {
@@ -134,42 +134,45 @@ namespace Intranet.API.Controllers
         #region POST
         [Authorize("IsAdmin")]
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] FaqViewModel faqVM)
+        public async Task<IActionResult> PostAsync([FromBody] PolicyViewModel policyVM)
         {
             try
             {
-                var category = await _context.Categories.SingleOrDefaultAsync(c => c.Title.Equals(faqVM.Category.Title, StringComparison.OrdinalIgnoreCase));
+                var category = await _context.Categories.SingleOrDefaultAsync(c => c.Title.Equals(policyVM.Category.Title, StringComparison.OrdinalIgnoreCase));
 
                 if (category.IsNotNull())
                 {
-                    faqVM.Category = category;
+                    policyVM.Category = category;
                 }
                 else
                 {
-                    faqVM.Category = new Category
+                    policyVM.Category = new Category
                     {
-                        Title = faqVM.Category.Title,
-                        Url = UrlHelper.URLFriendly(faqVM.Category.Title),
+                        Title = policyVM.Category.Title,
+                        Url = UrlHelper.URLFriendly(policyVM.Category.Title),
                     };
                 }
 
-                var faq = new Faq
+                var policy = new Policy
                 {
-                    Answer = faqVM.Answer,
-                    Category = faqVM.Category,
-                    Question = faqVM.Question,
-                    Url = UrlHelper.URLFriendly(faqVM.Question),
+                    Category = policyVM.Category,
+                    Description = policyVM.Description,
+                    FileUrl = policyVM.FileUrl,
+                    Id = policyVM.Id,
+                    PolicyKeywords = policyVM.PolicyKeywords,
+                    Title = policyVM.Title,
+                    Url = UrlHelper.URLFriendly(policyVM.Title)
                 };
 
-                var keywords = KeywordHelper.GetKeywordsFromString(faqVM.Keywords);
-                var allKeywordEntities = GetAllKeywordEntitiesInternal(faqVM, keywords);
-                KeywordHelper.SetKeywords<Faq, FaqKeyword>(keywords, faq, allKeywordEntities);
+                var keywords = KeywordHelper.GetKeywordsFromString(policyVM.Keywords);
+                var allKeywordEntities = GetAllKeywordEntitiesInternal(policyVM, keywords);
+                KeywordHelper.SetKeywords<Policy, PolicyKeyword>(keywords, policy, allKeywordEntities);
 
-                await _context.AddAsync(faq);
+                await _context.AddAsync(policy);
 
                 await _context.SaveChangesAsync();
 
-                return Ok(new FaqViewModel(faq));
+                return Ok(new PolicyViewModel(policy));
             }
             catch (Exception)
             {
@@ -182,11 +185,11 @@ namespace Intranet.API.Controllers
         [Authorize("IsAdmin")]
         [HttpPut]
         [Route("{id:int}")]
-        public async Task<IActionResult> PutAsync(int id, [FromBody] FaqViewModel faqVM)
+        public async Task<IActionResult> PutAsync(int id, [FromBody] PolicyViewModel policyVM)
         {
             try
             {
-                var entity = await _context.Faqs
+                var entity = await _context.Policies
                     .Include(f => f.Category)
                     .SingleOrDefaultAsync(c => c.Id == id);
 
@@ -195,9 +198,9 @@ namespace Intranet.API.Controllers
                     return NotFound();
                 }
 
-                if (!entity.Category.Title.Equals(faqVM.Category.Title, StringComparison.OrdinalIgnoreCase))
+                if (!entity.Category.Title.Equals(policyVM.Category.Title, StringComparison.OrdinalIgnoreCase))
                 {
-                    var category = await _context.Categories.SingleOrDefaultAsync(c => c.Title.Equals(faqVM.Category.Title, StringComparison.OrdinalIgnoreCase));
+                    var category = await _context.Categories.SingleOrDefaultAsync(c => c.Title.Equals(policyVM.Category.Title, StringComparison.OrdinalIgnoreCase));
 
                     if (category.IsNotNull())
                     {
@@ -207,22 +210,23 @@ namespace Intranet.API.Controllers
                     {
                         entity.Category = new Category
                         {
-                            Title = faqVM.Category.Title,
-                            Url = UrlHelper.URLFriendly(faqVM.Category.Title),
+                            Title = policyVM.Category.Title,
+                            Url = UrlHelper.URLFriendly(policyVM.Category.Title),
                         };
                     }
                 }
 
-                entity.Answer = faqVM.Answer;
-                entity.Question = faqVM.Question;
+                entity.Title = policyVM.Title;
+                entity.Description = policyVM.Description;
+                entity.FileUrl = policyVM.FileUrl;
 
-                var keywords = KeywordHelper.GetKeywordsFromString(faqVM.Keywords);
-                var allKeywordEntities = GetAllKeywordEntitiesInternal(faqVM, keywords);
-                KeywordHelper.SetKeywords<Faq, FaqKeyword>(keywords, entity, allKeywordEntities);
+                var keywords = KeywordHelper.GetKeywordsFromString(policyVM.Keywords);
+                var allKeywordEntities = GetAllKeywordEntitiesInternal(policyVM, keywords);
+                KeywordHelper.SetKeywords<Policy, PolicyKeyword>(keywords, entity, allKeywordEntities);
 
                 await _context.SaveChangesAsync();
 
-                return Ok(new FaqViewModel(entity));
+                return Ok(new PolicyViewModel(entity));
             }
             catch (Exception)
             {
@@ -232,12 +236,12 @@ namespace Intranet.API.Controllers
         #endregion
 
         #region Private Helpers
-        private List<Keyword> GetAllKeywordEntitiesInternal(FaqViewModel faq, IEnumerable<string> keywords)
+        private List<Keyword> GetAllKeywordEntitiesInternal(PolicyViewModel policy, IEnumerable<string> keywords)
         {
             return _context.Keywords?
-            .Include(k => k.FaqKeywords)
-                .ThenInclude(fk => fk.Faq)?
-            .Where(k => keywords.Contains(k.Name, StringComparer.OrdinalIgnoreCase) || k.FaqKeywords.Any(nk => nk.FaqId.Equals(faq.Id)))
+            .Include(k => k.PolicyKeywords)
+                .ThenInclude(fk => fk.Policy)?
+            .Where(k => keywords.Contains(k.Name, StringComparer.OrdinalIgnoreCase) || k.PolicyKeywords.Any(nk => nk.PolicyId.Equals(policy.Id)))
             .ToList();
         }
         #endregion

@@ -9,7 +9,5 @@ import { NgSwitch } from '@angular/common'
 })
 export class FlashMessageComponent {
   @Input() flash: 'success' | 'info' | 'warning' | 'danger'
-  constructor() {
-    console.log(this.flash)
-  }
+  @Input() message: string
 }

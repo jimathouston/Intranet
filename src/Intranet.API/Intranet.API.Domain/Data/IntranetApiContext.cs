@@ -79,6 +79,27 @@ namespace Intranet.API.Domain.Data
                 .HasForeignKey(fk => fk.KeywordId);
             #endregion
 
+            #region Policy
+            modelBuilder.Entity<Policy>()
+                .HasIndex(p => p.Url)
+                .IsUnique();
+            #endregion
+
+            #region PolicyKeyword
+            modelBuilder.Entity<PolicyKeyword>()
+                .HasKey(k => new { k.PolicyId, k.KeywordId });
+
+            modelBuilder.Entity<PolicyKeyword>()
+                .HasOne(pk => pk.Policy)
+                .WithMany(p => p.PolicyKeywords)
+                .HasForeignKey(pk => pk.PolicyId);
+
+            modelBuilder.Entity<PolicyKeyword>()
+                .HasOne(pk => pk.Keyword)
+                .WithMany(k => k.PolicyKeywords)
+                .HasForeignKey(pk => pk.KeywordId);
+            #endregion
+
             #region Category
             modelBuilder.Entity<Category>()
                 .HasIndex(c => c.Url)
@@ -107,6 +128,7 @@ namespace Intranet.API.Domain.Data
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Faq> Faqs { get; set; }
+        public virtual DbSet<Policy> Policies { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
     }
 }

@@ -1,14 +1,14 @@
 ﻿<ng-container [ngSwitch]="flash">
   <div *ngSwitchCase="'success'" class="alert alert-success">
-    <strong>Success!</strong> <ng-content></ng-content>
+    <strong>Success!</strong> {{message}}
   </div>
   <div *ngSwitchCase="'info'" class="alert alert-info">
-    <strong>Note!</strong> <ng-content></ng-content>
+    <strong>Note!</strong> {{message}}
   </div>
   <div *ngSwitchCase="'warning'" class="alert alert-warning">
-    <strong>Warning!</strong> <ng-content></ng-content>
+    <strong>Warning!</strong> {{message}}
   </div>
   <div *ngSwitchCase="'danger'" class="alert alert-danger">
-    <strong>Error!</strong> <ng-content></ng-content>
+    <strong>Error!</strong> {{message}}
   </div>
 </ng-container>

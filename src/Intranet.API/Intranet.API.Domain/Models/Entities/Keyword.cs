@@ -14,6 +14,7 @@ namespace Intranet.API.Domain.Models.Entities
 
         public ICollection<NewsKeyword> NewsKeywords { get; set; }
         public ICollection<FaqKeyword> FaqKeywords { get; set; }
+        public ICollection<PolicyKeyword> PolicyKeywords { get; set; }
 
         public override string ToString() => Name;
     }

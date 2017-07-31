@@ -8,9 +8,10 @@ using Intranet.API.Domain.Data;
 namespace Intranet.API.Domain.Migrations
 {
     [DbContext(typeof(IntranetApiContext))]
-    partial class IntranetApiContextModelSnapshot : ModelSnapshot
+    [Migration("20170728145548_Policy_Migration")]
+    partial class Policy_Migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

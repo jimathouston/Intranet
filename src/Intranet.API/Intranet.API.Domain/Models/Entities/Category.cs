@@ -15,15 +15,6 @@ namespace Intranet.API.Domain.Models.Entities
         public string Url { get; set; }
 
         public ICollection<Faq> Faqs { get; set; }
-
-        /// <summary>
-        /// NOTE: This method requires all relations to be eager loaded to work!
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public bool HasNoRelatedEntities(object obj)
-        {
-            return Faqs.Contains(obj) && Faqs.Count == 1;
-        }
+        public ICollection<Policy> Policies { get; set; }
     }
 }

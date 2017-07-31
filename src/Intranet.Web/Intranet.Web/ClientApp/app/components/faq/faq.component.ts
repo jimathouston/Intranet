@@ -164,7 +164,7 @@ export class FaqComponent implements OnInit {
         faq.id = data.id
         this.saved.categoryId = null
         this.saved.faqId = data.id
-        this.saved.success = faq.id === 0 || faq.id === null ? 'Created successfully!' : 'Updated successfully!'
+        this.saved.success = faq.id === 0 ? 'Created successfully!' : 'Updated successfully!'
         this.saved.error = null
         this.updateData()
       },
