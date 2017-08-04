@@ -14,6 +14,7 @@ namespace Intranet.Web.Authentication.Services
         private const string MemberOfAttribute = "memberOf";
         private const string DisplayNameAttribute = "displayName";
         private const string SAMAccountNameAttribute = "sAMAccountName";
+        private const string EMailAttribute = "mail";
 
         private readonly LdapConfig _config;
         private readonly LdapConnection _connection;
@@ -46,7 +47,7 @@ namespace Intranet.Web.Authentication.Services
                     @base: _config.SearchBase,
                     scope: LdapConnection.SCOPE_SUB,
                     filter: searchFilter,
-                    attrs: new[] { SAMAccountNameAttribute, DisplayNameAttribute, MemberOfAttribute },
+                    attrs: new[] { SAMAccountNameAttribute, DisplayNameAttribute, MemberOfAttribute, EMailAttribute },
                     typesOnly: false,
                     cons: new LdapSearchConstraints
                     {
@@ -64,6 +65,7 @@ namespace Intranet.Web.Authentication.Services
                         {
                             DisplayName = user.getAttribute(DisplayNameAttribute)?.StringValue ?? String.Empty,
                             Username = user.getAttribute(SAMAccountNameAttribute).StringValue,
+                            Email = user.getAttribute(EMailAttribute).StringValue,
                             IsAdmin = user.getAttribute(MemberOfAttribute)?.StringValueArray.Contains(_config.AdminCn) == true,
                             IsDeveloper = user.getAttribute(MemberOfAttribute)?.StringValueArray.Contains(_config.DeveloperCn) == true,
                         };

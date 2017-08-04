@@ -46,6 +46,18 @@ namespace Intranet.Web.Extensions
                 .Value;
         }
 
+        /// <summary>
+        /// Get the display name
+        /// </summary>
+        /// <param name="claimsPrincipal"></param>
+        /// <returns></returns>
+        public static string GetEmail(this ClaimsPrincipal claimsPrincipal)
+        {
+            return claimsPrincipal.Claims
+                .SingleOrDefault(c => c.Type.Equals(ClaimTypes.Email))?
+                .Value;
+        }
+
         #region NewsViewModel
         public static bool IsAllowedToModifyNews(this ClaimsPrincipal claimsPrincipal, NewsViewModel news)
         {

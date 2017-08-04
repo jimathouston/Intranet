@@ -26,7 +26,8 @@ namespace Intranet.Web.Authentication.Providers
             var userClaims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.DisplayName),
-                new Claim(ClaimTypes.NameIdentifier, user.Username)
+                new Claim(ClaimTypes.NameIdentifier, user.Username),
+                new Claim(ClaimTypes.Email, user.Email)
             };
 
             if (user.IsAdmin)

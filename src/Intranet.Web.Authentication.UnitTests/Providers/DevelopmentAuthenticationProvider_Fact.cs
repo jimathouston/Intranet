@@ -27,6 +27,7 @@ namespace Intranet.Web.Authentication.UnitTests.Providers
             {
                 DisplayName = "Calle Carlsson",
                 Username = "calle.carlsson",
+                Email = "calle.carlsson@gmail.com",
                 IsDeveloper = true,
             };
 
@@ -38,6 +39,7 @@ namespace Intranet.Web.Authentication.UnitTests.Providers
             Assert.True(claimsPrincipal.Identity.AuthenticationType == authService.GetType().Name);
             Assert.True(claimsPrincipal.HasClaim(c => c.Type == ClaimTypes.Name && c.Value == user.DisplayName));
             Assert.True(claimsPrincipal.HasClaim(c => c.Type == ClaimTypes.NameIdentifier && c.Value == user.Username));
+            Assert.True(claimsPrincipal.HasClaim(c => c.Type == ClaimTypes.Email && c.Value == user.Email));
             Assert.True(claimsPrincipal.HasClaim(c => c.Type == ClaimTypes.Role && c.Value == "Admin"));
         }
 
@@ -56,6 +58,7 @@ namespace Intranet.Web.Authentication.UnitTests.Providers
             {
                 DisplayName = "Calle Carlsson",
                 Username = "calle.carlsson",
+                Email = "calle.carlsson@gmail.com",
             };
 
             // Act
@@ -80,6 +83,7 @@ namespace Intranet.Web.Authentication.UnitTests.Providers
             {
                 DisplayName = "Calle Carlsson",
                 Username = "calle.carlsson",
+                Email = "calle.carlsson@gmail.com",
                 IsAdmin = true,
             };
 
@@ -105,6 +109,7 @@ namespace Intranet.Web.Authentication.UnitTests.Providers
             {
                 DisplayName = "Calle Carlsson",
                 Username = "calle.carlsson",
+                Email = "calle.carlsson@gmail.com",
                 IsAdmin = true,
                 IsDeveloper = true,
             };
