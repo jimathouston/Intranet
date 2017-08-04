@@ -1,25 +1,22 @@
 ﻿@model NewsViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Add News";
     Layout = "_Layout";
 }
 
-<h2>Create</h2>
+<h2>Add News</h2>
 
-<form enctype="multipart/form-data" asp-action="Create">
-    <div class="form-horizontal">
-        <h4>News</h4>
-        <hr />
-        <div asp-validation-summary="All" class="text-danger"></div>
-        @Html.Partial("_NewsForm", Model)
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+<div class="row">
+    <form enctype="multipart/form-data" asp-action="Create" class="col s12">
+        <div class="row">
+            @Html.Partial("_NewsForm", Model)
+            <div class="input-field">
+                <input type="submit" value="Create" class="btn" />
             </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>
 
 <div>
     <a asp-action="Index" class="btn btn-primary">Back to List</a>

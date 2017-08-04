@@ -1,0 +1,10 @@
+﻿@model Category
+
+<div asp-validation-summary="All" class="text-danger"></div>
+<div class="row">
+    <div class="input-field col s5">
+        <input asp-for="Title" class="form-control" />
+        <label asp-for="Title" class="col-md-2 control-label"></label>
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+</div>

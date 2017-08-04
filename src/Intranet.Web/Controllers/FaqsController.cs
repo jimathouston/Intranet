@@ -38,6 +38,7 @@ namespace Intranet.Web.Controllers
         }
 
         // GET: Faqs/Details/5
+        [Authorize("IsAdmin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -124,6 +125,7 @@ namespace Intranet.Web.Controllers
 
         #region EDIT
         // GET: Faqs/Edit/5
+        [Authorize("IsAdmin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -153,7 +155,7 @@ namespace Intranet.Web.Controllers
         [Authorize("IsAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Question,Answer,Url")] FaqViewModel faqVM)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Category,Question,Answer,Url")] FaqViewModel faqVM)
         {
             if (id != faqVM?.Id)
             {
@@ -272,6 +274,11 @@ namespace Intranet.Web.Controllers
         #region Private Helpers
         private List<Keyword> GetAllKeywordEntitiesInternal(FaqViewModel faq, IEnumerable<string> keywords)
         {
+            if (keywords.IsNull())
+            {
+                return new List<Keyword>();
+            }
+
             return _context.Keywords?
             .Include(k => k.FaqKeywords)
                 .ThenInclude(fk => fk.Faq)?

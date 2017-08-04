@@ -1,40 +1,30 @@
 ﻿@model FaqViewModel
-
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = $"FAQ - {Model.Question}";
 }
-
-<h2>Details</h2>
-
+<h2>FAQ</h2>
 <div>
-    <h4>Faq</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Category.Title)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Question)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Question)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Answer)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Answer)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Keywords)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Keywords)
-        </dd>
-    </dl>
+    <div class="row">
+        <h3>
+            @Model.Category.Title
+        </h3>
+        <ul class="collapsible">
+            <li id="@Html.DisplayFor(modelItem => modelItem.Url)">
+                <div class="collapsible-header valign-wrapper active">
+                    <i class="material-icons">question_answer</i>
+                    <span>
+                        @Html.DisplayFor(modelItem => modelItem.Question)
+                    </span>
+                </div>
+                <div class="collapsible-body">
+                    <span>
+                        @Html.Raw(Model.Answer)
+                    </span>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
