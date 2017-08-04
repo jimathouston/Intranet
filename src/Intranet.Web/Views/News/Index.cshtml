@@ -1,0 +1,18 @@
+﻿@model IEnumerable<NewsViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    var allNews = User.IsAdmin() ? Model.OrderBy(m => m.Published).ThenByDescending(m => m.Created) : Model.Where(m => m.Published) ;
+}
+
+<h2>News</h2>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+<div class="container-fluid">
+    @foreach (var news in allNews)
+    {
+        @Html.Partial("_News", news, new ViewDataDictionary(this.ViewData) { { "Summary", true } })
+    }
+</div>

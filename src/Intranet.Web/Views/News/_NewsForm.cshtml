@@ -1,0 +1,59 @@
+﻿@model NewsViewModel
+
+<div class="form-group">
+    <label asp-for="Title" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label for="Image" class="col-md-2 control-label">Header Image</label>
+    <div class="col-md-10">
+        <input name="Image" type="file" class="form-control-file" aria-describedby="fileHelp" accept="image/*">
+        <small id="fileHelp" class="form-text text-muted">
+            This image will be used as the news header. Hint: You can find a lot of great images at <a href="https://unsplash.it/images" target="_blank">unsplash.it/images</a> and <a href="https://unsplash.com" target="_blank">unsplash.com</a>.
+        </small>
+        <span for="Image" class="text-danger"></span>
+        @if (Model.HeaderImage.IsNotNull())
+        {
+            <div>
+                <img src="/image/w_250/h_125/@Model.HeaderImage.FileName" aria-describedby="originalImageHelp" />
+            </div>
+            <small id="originalImageHelp" class="form-text text-muted">
+                This is the current header image.
+            </small>
+        }
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="Text" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        <input asp-for="Text" class="form-control" />
+        <span asp-validation-for="Text" class="text-danger"></span>
+    </div>
+</div>
+@Html.Partial("_TextEditor", new TextEditorViewModel { Id = nameof(Model.Text), Text = Model.Text })
+<div class="form-group">
+    <label asp-for="Keywords" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        <input asp-for="Keywords" class="form-control" aria-describedby="keywordHelp" />
+        <small id="keywordHelp" class="form-text text-muted">
+            The keywords should be seperated by "," or ";".
+        </small>
+        <span asp-validation-for="User" class="text-danger"></span>
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="Published" class="col-md-2 control-label"></label>
+    <div class="col-md-10">
+        <input asp-for="Published" />
+    </div>
+</div>
+<div class="form-group">
+    <label asp-for="User" class="col-md-2 control-label">Author</label>
+    <div class="col-md-10">
+        <input asp-for="User" class="form-control" value="@User.Identity.Name" disabled />
+        <span asp-validation-for="User" class="text-danger"></span>
+    </div>
+</div>

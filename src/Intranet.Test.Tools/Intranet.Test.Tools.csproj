@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <PackageTargetFallback>dnxcore50;dotnet;portable-net45</PackageTargetFallback>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="TestHelpers\**" />
+    <EmbeddedResource Remove="TestHelpers\**" />
+    <None Remove="TestHelpers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Moq" Version="4.7.63" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Intranet.Web.Domain\Intranet.Web.Domain.csproj" />
+    <ProjectReference Include="..\Intranet.Web\Intranet.Web.csproj" />
+  </ItemGroup>
+
+</Project>

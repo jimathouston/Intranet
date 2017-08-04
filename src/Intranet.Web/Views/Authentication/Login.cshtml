@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+    var returnUrl = $"/Login?ReturnUrl={ViewBag.ReturnUrl}";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Intranet_Web</title>
+    <base href="/" />
+    <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/login.css" />
+</head>
+<body>
+    <div class="login-page">
+        <div class="form">
+            <h1>Certaincy</h1>
+            <form class="login-form" action="@returnUrl" method="post">
+                <input type="text" name="username" placeholder="username" />
+                <input type="password" name="password" placeholder="password" />
+                <button>login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+﻿[
+  {
+    "outputFileName": "Assets/scripts/site.min.js",
+    "inputFiles": [
+      "Assets/scripts/site.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": true
+  },
+  {
+    "outputFileName": "Assets/css/bundle.min.css",
+    "inputFiles": [
+      "Assets/css/site.css",
+      "Assets/css/cards.css",
+      "Assets/css/faq.css"
+    ],
+    "sourceMap": true,
+    "minify": {
+      "enabled": true
+    }
+  }
+]

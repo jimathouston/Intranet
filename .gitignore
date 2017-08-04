@@ -260,3 +260,4 @@ db/
 
 # Environment vars and secrets
 *.env
+/src/Intranet.Web/Assets/css/bundle.min.css

@@ -4,7 +4,6 @@
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 //////////////////////////////////////////////////////////////////////
-#addin "Cake.Npm"
 
 var target = Argument("target", "Default");
 var configuration =
@@ -17,13 +16,10 @@ var configuration =
 //////////////////////////////////////////////////////////////////////
 
 // Define directories.
-var apiDir = Directory("./Intranet.API/Intranet.API");
-var apiTestsDir = Directory("./Intranet.API/Intranet.API.UnitTests");
-
-var webDir = Directory("./Intranet.Web/Intranet.Web");
-var webTestsDir = Directory("./Intranet.Web/Intranet.Web.UnitTests");
-
-Func<String, String> GetBuildDirectory = (dir) => Directory(dir) + Directory("bin") + Directory(configuration);
+var src = Directory("./");
+var unitTestProjects = GetFiles("./**/*.UnitTests.csproj");
+var webDir = Directory("./Intranet.Web/");
+var directoriesToClean = GetDirectories("./**/bin/");
 
 // Define settings.
 var buildSettings = new DotNetCoreBuildSettings
@@ -41,30 +37,14 @@ var testSettings = new DotNetCoreTestSettings
 // TASKS
 //////////////////////////////////////////////////////////////////////
 
-Task("API:Clean")
+Task("Clean")
     .Does(() =>
 {
-    CleanDirectory(GetBuildDirectory(apiDir));
-    CleanDirectory(GetBuildDirectory(apiTestsDir));
+    CleanDirectories(directoriesToClean);
 });
 
-Task("Web:Clean")
-    .Does(() =>
-{
-    CleanDirectory(GetBuildDirectory(webDir));
-    CleanDirectory(GetBuildDirectory(webTestsDir));
-});
-
-Task("API:Restore-NuGet-Packages")
-    .IsDependentOn("API:Clean")
-    .Does(() =>
-{
-      DotNetCoreRestore(apiDir);
-      DotNetCoreRestore(apiTestsDir);
-});
-
-Task("Web:Restore-NuGet-Packages")
-    .IsDependentOn("Web:Clean")
+Task("Restore-NuGet-Packages")
+    .IsDependentOn("Clean")
     .Does(() =>
 {
       // TODO: This should live in it's own NuGet.config but that won't work at the moment:
@@ -86,57 +66,42 @@ Task("Web:Restore-NuGet-Packages")
         Source = new string[] { imageSharpSource, "https://api.nuget.org/v3/index.json" }
       });
 
-      DotNetCoreRestore(webDir);
-      DotNetCoreRestore(webTestsDir);
+      DotNetCoreRestore(src);
 
       CleanDirectory(tempCachePath);
       DeleteDirectory(tempCachePath);
 });
 
-Task("API:Build")
-    .IsDependentOn("API:Restore-NuGet-Packages")
+Task("Build")
+    .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
 {
-    DotNetCoreBuild(apiDir, buildSettings);
-    DotNetCoreBuild(apiTestsDir, buildSettings);
-});
-
-Task("Web:Build")
-    .IsDependentOn("Web:Restore-NuGet-Packages")
-    .Does(() =>
-{
+    Information("Building: {0}", "Intranet.Web");
     DotNetCoreBuild(webDir, buildSettings);
-    NpmInstall(settings => settings.FromPath("./Intranet.Web/Intranet.Web").WithLogLevel(NpmLogLevel.Warn));
-    DotNetCoreBuild(webTestsDir, buildSettings);
+    
+    foreach(var project in unitTestProjects)
+    {
+        Information("Building: {0}", project.GetFilenameWithoutExtension());
+        DotNetCoreBuild(project.FullPath, buildSettings);
+    }
 });
 
-Task("API:Run-Unit-Tests")
-    .IsDependentOn("API:Build")
+Task("Run-Unit-Tests")
+    .IsDependentOn("Build")
     .Does(() =>
 {
-    DotNetCoreTest("./Intranet.API/Intranet.API.UnitTests/Intranet.API.UnitTests.csproj", testSettings);
+    foreach(var file in unitTestProjects)
+    {
+        Information("Running unit test from: {0}", file.GetFilenameWithoutExtension());
+        DotNetCoreTest(file.FullPath, testSettings);
+    }
 });
 
-Task("Web:Run-Unit-Tests")
-    .IsDependentOn("Web:Build")
+Task("Publish")
+    .IsDependentOn("Run-Unit-Tests")
     .Does(() =>
 {
-    DotNetCoreTest("./Intranet.Web/Intranet.Web.UnitTests/Intranet.Web.UnitTests.csproj", testSettings);
-    NpmRunScript("test", settings => settings.FromPath("./Intranet.Web/Intranet.Web"));
-});
-
-Task("API:Publish")
-    .IsDependentOn("API:Run-Unit-Tests")
-    .Does(() =>
-{
-    DotNetCorePublish("./Intranet.API/Intranet.API");
-});
-
-Task("Web:Publish")
-    .IsDependentOn("Web:Run-Unit-Tests")
-    .Does(() =>
-{
-    DotNetCorePublish("./Intranet.Web/Intranet.Web");
+    DotNetCorePublish("./Intranet.Web");
 });
 
 //////////////////////////////////////////////////////////////////////
@@ -144,8 +109,7 @@ Task("Web:Publish")
 //////////////////////////////////////////////////////////////////////
 
 Task("Default")
-    .IsDependentOn("API:Run-Unit-Tests")
-    .IsDependentOn("Web:Run-Unit-Tests");
+    .IsDependentOn("Run-Unit-Tests");
 
 //////////////////////////////////////////////////////////////////////
 // EXECUTION

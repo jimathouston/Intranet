@@ -1,6 +1,0 @@
-﻿export * from './authentication.service'
-export * from './secureHttp.service'
-export * from './config.service'
-export * from './faq.service'
-export * from './category.service'
-export * from './news.service'

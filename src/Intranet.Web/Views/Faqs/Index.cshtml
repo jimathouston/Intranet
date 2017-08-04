@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "FAQ";
+    var dummy = new FaqViewModel();
+    var categories = User.IsInRole("Admin") ? Model : Model.Where(m => m.Faqs.Any());
+}
+
+<h2>FAQ's</h2>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-controller="Categories">Edit Categories</a>
+    </p>
+}
+<div class="row">
+    @foreach (var category in categories)
+    {
+        <h3>
+            @category.Title
+        </h3>
+        @if (category.Faqs.Any())
+        {
+            <ul class="collapsible" data-collapsible="expandable">
+                @foreach (var faq in category.Faqs)
+                {
+                    <li id="@Html.DisplayFor(modelItem => faq.Url)">
+                        @if (User.IsAdmin())
+                        {
+                            // In order to get the buttons in the right place we must set display:block...
+                            <div class="collapsible-header valign-wrapper" style="display:block">
+                                <i class="material-icons">question_answer</i>
+                                <span>
+                                    @Html.DisplayFor(modelItem => faq.Question)
+                                </span>
+                                <div class="right">
+                                    <a asp-action="Edit" asp-route-id="@faq.Id" class="btn-flat">Edit</a>
+                                    <a asp-action="Delete" asp-route-id="@faq.Id" class="btn-flat">Delete</a>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            // ...this will however look a bit worse so when a non admin is looking at the page, give them a better looking UI
+                            <div class="collapsible-header valign-wrapper">
+                                <i class="material-icons">question_answer</i>
+                                <span>
+                                    @Html.DisplayFor(modelItem => faq.Question)
+                                </span>
+                            </div>
+                        }
+                        <div class="collapsible-body">
+                            <span>
+                                @Html.DisplayFor(modelItem => faq.Answer)
+                            </span>
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        <i class="material-icons">question_answer</i>
+                        <span>
+                            No FAQ's in this category. Do you want to&nbsp;<a asp-action="Create">create</a>&nbsp;one?
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        }
+    }
+</div>
