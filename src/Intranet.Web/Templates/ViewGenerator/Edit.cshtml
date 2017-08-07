@@ -1,0 +1,151 @@
+﻿@inherits Microsoft.VisualStudio.Web.CodeGeneration.Templating.RazorTemplateBase
+@using Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore
+@@model @Model.ViewDataTypeName
+
+@{
+    if (Model.IsPartialView)
+    {
+    }
+    else if (Model.IsLayoutPageSelected)
+    {
+@:@@{
+    @:ViewData["Title"] = "@Model.ViewName";
+        if (!string.IsNullOrEmpty(Model.LayoutPageFile))
+        {
+    @:Layout = "@Model.LayoutPageFile";
+        }
+@:}
+@:
+@:<h2>@Model.ViewName</h2>
+@:
+    }
+    else
+    {
+@:@@{
+    @:Layout = null;
+@:}
+@:
+@:<!DOCTYPE html>
+@:
+@:<html>
+@:<head>
+    @:<meta name="viewport" content="width=device-width" />
+    @:<title>@Model.ViewName</title>
+@:</head>
+@:<body>
+@:
+        //    PushIndent("    ");
+    }
+@:<form asp-action="@Model.ViewName">
+    @:<div class="form-horizontal">
+        @:<h4>@Model.ViewDataTypeShortName</h4>
+        @:<hr />
+        @:<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @:@@* The below code can be moved into a common partial view. This isn't done *@@
+        @:@@* automatically due to current limitations in the CodeGenarator tool. *@@
+        @:@@* START: Identical to Create.cshtml *@@
+        foreach (PropertyMetadata property in Model.ModelMetadata.Properties)
+        {
+            if (property.PropertyName == "Url")
+            {
+                continue;
+            }
+            if (property.IsPrimaryKey)
+            {
+        @:<input type="hidden" asp-for="@property.PropertyName" />
+                    continue;
+            }
+
+            if (property.Scaffold)
+            {
+                if (property.IsReadOnly)
+                {
+                    continue;
+                }
+
+                if (property.IsForeignKey)
+                {
+        @:<div class="row">
+            @:<div class="input-field col s5">
+                @:<select asp-for="@property.PropertyName" asp-items="ViewBag.@property.PropertyName"></select>
+                @:<label asp-for="@property.PropertyName"></label>
+                @:<span asp-validation-for="@property.PropertyName" class="text-danger"></span>
+            @:</div>
+        @:</div>
+                        continue;
+                }
+
+                bool isCheckbox = property.TypeName.Equals("System.Boolean");
+                if (isCheckbox)
+                {
+        @:<div class="row">
+            @:<p>
+                    @:<input asp-for="@property.PropertyName" />
+                    @:<label asp-for="@property.PropertyName"></label>
+                @:</p>
+            @:</div>
+                    }
+                else if (property.IsEnum && !property.IsEnumFlags)
+                {
+        @:<div class="row">
+            @:<div class="input-field col s5">
+                @:<select asp-for="@property.PropertyName"></select>
+                @:<label asp-for="@property.PropertyName"></label>
+                @:<span asp-validation-for="@property.PropertyName" class="text-danger"></span>
+            @:</div>
+        @:</div>
+                    }
+                else
+                {
+        @:<div class="row">
+            @:<div class="input-field col s5">
+                @:<input asp-for="@property.PropertyName" />
+                @:<label asp-for="@property.PropertyName"></label>
+                @:<span asp-validation-for="@property.PropertyName" class="text-danger"></span>
+            @:</div>
+        @:</div>
+                    }
+            }
+            // Ideally we shouldn't be here  but if the user marks the foreign key as [ScaffoldColumn(false)], we want to atleast try to make it work.
+            else if (property.IsForeignKey)
+            {
+        @:<input type="hidden" asp-for="@property.PropertyName" />
+                continue;
+        }
+    }
+    @:@@* END: Identical to Create.cshtml *@@
+}
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@{
+    if (Model.ReferenceScriptLibraries)
+    {
+@:@@section Scripts {
+    @:@@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@:}
+    }
+    // The following code closes the tag used in the case of a view using a layout page and the body and html tags in the case of a regular view page
+    if (!Model.IsPartialView && !Model.IsLayoutPageSelected)
+    {
+@:</body>
+@:</html>
+    }
+}
+@functions
+{
+    string GetAssociationName(PropertyMetadata property)
+    {
+        //Todo: Implement properly.
+        return property.PropertyName;
+    }
+}
