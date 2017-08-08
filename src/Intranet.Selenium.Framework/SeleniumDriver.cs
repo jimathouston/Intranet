@@ -57,9 +57,19 @@ namespace Intranet.Selenium.Framework
             }
         }
 
+        public void Close()
+        {
+            Driver.Quit();
+        }
+
         public SeleniumNavigate Navigate()
         {
             return new SeleniumNavigate(Driver);
+        }
+
+        public SeleniumFind Find()
+        {
+            return new SeleniumFind(Driver);
         }
     }
 }
