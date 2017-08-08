@@ -21,6 +21,7 @@ namespace Intranet.Selenium.Framework
         public IWebDriver Driver { get; }
         public SeleniumNavigate Navigate { get; }
         public SeleniumFind Find { get; }
+        public SeleniumVerify Verify { get; }
 
         public SeleniumDriver (Browser browser)
         {
@@ -34,6 +35,7 @@ namespace Intranet.Selenium.Framework
                 case Browser.Firefox:
                     {
                         Driver = null;
+                        // Firefox temporary disabled as webdriver does not support specifying the path to the driver.
                         throw new NotImplementedException("Firefox Driver not yet implemented");
                     }
                 case Browser.InternetExplorer:
@@ -61,6 +63,7 @@ namespace Intranet.Selenium.Framework
 
             Navigate = new SeleniumNavigate(Driver);
             Find = new SeleniumFind(Driver);
+            Verify = new SeleniumVerify();
         }
 
         public void Kill()
