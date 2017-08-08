@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    var from = ViewData["from"] ?? String.Empty;
 }
 
 <h2>Categories</h2>
@@ -23,11 +24,11 @@
             {
                 <tr>
                     <td>@Html.DisplayFor(model => category.Title)</td>
-                    <td>@(category.Faqs.Any() ? "No" : "Yes")</td>
+                    <td>@(category.Faqs?.Any() == true || category.Policies?.Any() == true ? "No" : "Yes")</td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@category.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@category.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@category.Id">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@category.Id" asp-route-from="@from">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@category.Id" asp-route-from="@from">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@category.Id" asp-route-from="@from">Delete</a>
                     </td>
                 </tr>
             }
@@ -35,5 +36,12 @@
     </table>
 </div>
 <div>
-    <a asp-controller="Faqs" asp-action="Index">Back to Faq's</a>
+    @if ((string)ViewData["from"] == nameof(Faq))
+    {
+        <a asp-controller="Faqs" asp-action="Index">Back to Faq's</a>
+    }
+    else if ((string)ViewData["from"] == nameof(Policy))
+    {
+        <a asp-controller="Policies" asp-action="Index">Back to Policies</a>
+    }
 </div>

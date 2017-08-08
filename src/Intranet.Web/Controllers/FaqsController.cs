@@ -67,9 +67,16 @@ namespace Intranet.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         // GET: Faqs/Create
         [Authorize("IsAdmin")]
-        public IActionResult Create()
+        public IActionResult Create([FromQuery] string category = null)
         {
-            ViewData["Categories"] = new SelectList(_context.Categories, nameof(Category.Title), nameof(Category.Title));
+            if (category.IsNull())
+            {
+                ViewData["Categories"] = new SelectList(_context.Categories, nameof(Category.Title), nameof(Category.Title));
+            }
+            else
+            {
+                ViewData["Categories"] = new SelectList(_context.Categories, nameof(Category.Title), nameof(Category.Title), category);
+            }
 
             var vm = new FaqViewModel();
             vm.Category = new Category();

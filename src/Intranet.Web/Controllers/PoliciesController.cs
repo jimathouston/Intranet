@@ -66,9 +66,16 @@ namespace Intranet.Web.Controllers
         #region CREATE
         // GET: Policies/Create
         [Authorize("IsAdmin")]
-        public IActionResult Create()
+        public IActionResult Create([FromQuery] string category = null)
         {
-            ViewData["Categories"] = new SelectList(_context.Categories, nameof(Category.Title), nameof(Category.Title));
+            if (category.IsNull())
+            {
+                ViewData["Categories"] = new SelectList(_context.Categories, nameof(Category.Title), nameof(Category.Title));
+            }
+            else
+            {
+                ViewData["Categories"] = new SelectList(_context.Categories, nameof(Category.Title), nameof(Category.Title), category);
+            }
 
             var vm = new PolicyViewModel();
             vm.Category = new Category();

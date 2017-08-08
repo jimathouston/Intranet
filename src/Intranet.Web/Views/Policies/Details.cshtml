@@ -8,33 +8,27 @@
 
 <div>
     <h4>Policy</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Html.Raw(Model.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FileUrl)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FileUrl)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Url)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Url)
-        </dd>
-    </dl>
+    <ul class="collapsible">
+        <li id="@Html.DisplayFor(modelItem => modelItem.Url)">
+            <div class="collapsible-header valign-wrapper active" style="@(String.IsNullOrWhiteSpace(Model.Description) ? "cursor:default;" : String.Empty)">
+                <i class="material-icons">question_answer</i>
+                <span>
+                    @Html.DisplayFor(modelItem => modelItem.Title)
+                </span>
+            </div>
+            @if (Model.Description.IsNotNull())
+            {
+                <div class="collapsible-body">
+                    <span>
+                        @Html.Raw(Model.Description)
+                    </span>
+                </div>
+            }
+        </li>
+    </ul>
+    <p>
+        Download: <a href="blob/@Model.FileUrl">@Model.FileUrl</a>
+    </p>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |

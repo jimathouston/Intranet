@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Delete";
+    var from = ViewData["from"] ?? String.Empty;
 }
 
 <h2>Delete</h2>
@@ -27,10 +28,10 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
+    <form asp-action="Delete" asp-route-from="@from">
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            <a asp-action="Index">Back to List</a>
+            <a asp-action="Index" asp-route-from="@from">Back to List</a>
         </div>
     </form>
 </div>

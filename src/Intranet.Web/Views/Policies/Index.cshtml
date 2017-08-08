@@ -14,7 +14,7 @@
 @if (User.IsInRole("Admin"))
 {
     <p>
-        <a asp-controller="Categories">Edit Categories</a>
+        <a asp-controller="Categories" asp-route-from="@nameof(Policy)">Edit Categories</a>
     </p>
 }
 <div class="row">
@@ -70,7 +70,7 @@
                     <div class="collapsible-header">
                         <i class="material-icons">description</i>
                         <span>
-                            No policies in this category. Do you want to&nbsp;<a asp-action="Create">create</a>&nbsp;one?
+                            No policies in this category. Do you want to&nbsp;<a asp-action="Create" asp-route-category="@category.Title">create</a>&nbsp;one?
                         </span>
                     </div>
                 </li>
