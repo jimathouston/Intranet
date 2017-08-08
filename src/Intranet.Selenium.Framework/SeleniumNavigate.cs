@@ -18,5 +18,20 @@ namespace Intranet.Selenium.Framework
         {
             _driver.Navigate().GoToUrl(url);
         }
+
+        public void Refresh()
+        {
+            _driver.Navigate().Refresh();
+        }
+
+        public void GoBack()
+        {
+            _driver.Navigate().Back();
+        }
+
+        public void GoForward()
+        {
+            _driver.Navigate().Forward();
+        }
     }
 }
