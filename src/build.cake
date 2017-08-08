@@ -78,7 +78,7 @@ Task("Build")
 {
     Information("Building: {0}", "Intranet.Web");
     DotNetCoreBuild(webDir, buildSettings);
-    
+
     foreach(var project in unitTestProjects)
     {
         Information("Building: {0}", project.GetFilenameWithoutExtension());

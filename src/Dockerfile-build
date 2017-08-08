@@ -7,10 +7,5 @@ RUN apt-get update
 RUN apt install mono-complete -y
 
 WORKDIR /app
-EXPOSE 3000
-COPY ./api-init-dev-env.sh /app
-COPY ./build.sh /app
-COPY ./development.env /app
-RUN chmod +x ./api-init-dev-env.sh
-RUN chmod +x ./build.sh
-ENTRYPOINT ["./api-init-dev-env.sh"]
+EXPOSE 80
+ENTRYPOINT ["./build.sh", "--target", "Publish"]
