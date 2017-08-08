@@ -57,7 +57,7 @@ namespace Intranet.Selenium.Framework
             }
         }
 
-        public void Close()
+        public void Kill()
         {
             Driver.Quit();
         }
