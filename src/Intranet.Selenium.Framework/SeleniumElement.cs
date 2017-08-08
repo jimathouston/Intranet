@@ -7,12 +7,21 @@ namespace Intranet.Selenium.Framework
 {
     public class SeleniumElement
     {
-        public IWebElement Element { get; set; }
+        public List<IWebElement> Elements { get; set; }
         public string Name { get; set; }
 
         public SeleniumElement (IWebElement element, string elementName)
         {
-            Element = element;
+            Elements = new List<IWebElement>
+            {
+                element
+            };
+            Name = elementName;
+        }
+
+        public SeleniumElement (List<IWebElement> elements, string elementName)
+        {
+            Elements = new List<IWebElement>(elements);
             Name = elementName;
         }
     }
