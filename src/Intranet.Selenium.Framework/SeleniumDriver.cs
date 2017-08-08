@@ -3,6 +3,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.PhantomJS;
+using Microsoft.DotNet.PlatformAbstractions;
 using System;
 
 namespace Intranet.Selenium.Framework
@@ -18,6 +19,8 @@ namespace Intranet.Selenium.Framework
     public class SeleniumDriver
     {
         public IWebDriver Driver { get; }
+        public SeleniumNavigate Navigate { get; }
+        public SeleniumFind Find { get; }
 
         public SeleniumDriver (Browser browser)
         {
@@ -25,13 +28,13 @@ namespace Intranet.Selenium.Framework
             {
                 case Browser.Chrome:
                     {
-                        Driver = new ChromeDriver();
+                        Driver = new ChromeDriver(ApplicationEnvironment.ApplicationBasePath);
                         break;
                     }
                 case Browser.Firefox:
                     {
-                        Driver = new FirefoxDriver();
-                        break;
+                        Driver = null;
+                        throw new NotImplementedException("Firefox Driver not yet implemented");
                     }
                 case Browser.InternetExplorer:
                     {
@@ -41,12 +44,12 @@ namespace Intranet.Selenium.Framework
                             RequireWindowFocus = true,  // Required for Clicking, Dragging and Dropping to work.
                             IgnoreZoomLevel = true      // Required as ieDriver will otherwise only function at 100% zoom.
                         };
-                        Driver = new InternetExplorerDriver(options);
+                        Driver = new InternetExplorerDriver(ApplicationEnvironment.ApplicationBasePath, options);
                         break;
                     }
                 case Browser.PhantomJS:
                     {
-                        Driver = new PhantomJSDriver();
+                        Driver = new PhantomJSDriver(ApplicationEnvironment.ApplicationBasePath);
                         break;
                     }
                 default:
@@ -55,21 +58,14 @@ namespace Intranet.Selenium.Framework
                         throw new ArgumentOutOfRangeException($"No entry matching '{browser}' found in Enum 'Browser'");
                     }
             }
+
+            Navigate = new SeleniumNavigate(Driver);
+            Find = new SeleniumFind(Driver);
         }
 
         public void Kill()
         {
             Driver.Quit();
-        }
-
-        public SeleniumNavigate Navigate()
-        {
-            return new SeleniumNavigate(Driver);
-        }
-
-        public SeleniumFind Find()
-        {
-            return new SeleniumFind(Driver);
         }
     }
 }
