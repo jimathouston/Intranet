@@ -33,5 +33,10 @@ namespace Intranet.Selenium.Framework
         {
             _driver.Navigate().Forward();
         }
+
+        public void ScrollToElement(IWebElement target)
+        {
+            ((IJavaScriptExecutor)_driver).ExecuteScript("arguments[0].scrollIntoView(true)", target);
+        }
     }
 }
