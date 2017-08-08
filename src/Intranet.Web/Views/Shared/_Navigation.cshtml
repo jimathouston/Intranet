@@ -1,6 +1,7 @@
 ﻿@using System.Security.Principal
-
-
+@{ 
+    var title = ViewData["NavBarTitle"] ?? ViewData["Title"] ?? String.Empty;
+}
 
 <ul id="slide-out" class="side-nav fixed">
     <li>
@@ -15,6 +16,7 @@
     </li>
     <li><a asp-area="" asp-controller="News" asp-action="Index">News</a></li>
     <li><a asp-area="" asp-controller="Faqs" asp-action="Index">FAQ's</a></li>
+    <li><a asp-area="" asp-controller="Policies" asp-action="Index">Policies</a></li>
     <li><div class="divider"></div></li>
     <li><a class="subheader">External Sites</a></li>
     <li>
@@ -37,6 +39,7 @@
 <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
 
 <div class="nav-wrapper">
+    <a href="#" class="brand-logo center">@title</a>
     <ul class="right hide-on-med-and-down">
         <li>
             <a href="http://time.certaincy.com/" target="_blank">

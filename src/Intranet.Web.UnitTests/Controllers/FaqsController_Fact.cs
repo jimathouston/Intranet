@@ -351,7 +351,7 @@ namespace Intranet.Web.UnitTests.Controllers
         }
 
         [Fact]
-        public async Task Delete_Should_Return_OkResult()
+        public async Task Delete_Faq_Should_Return_OkResult()
         {
             // Assign
             var faq = new Faq

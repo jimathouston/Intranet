@@ -23,6 +23,7 @@ namespace Intranet.Web.Domain.Models.Entities
 
         public string FileUrl { get; set; }
 
+        [Required]
         public string Url { get; set; }
     }
 }

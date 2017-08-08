@@ -1,0 +1,55 @@
+﻿@model PolicyViewModel
+
+<input type="hidden" asp-for="Id" />
+<div class="row">
+    <div class="input-field col s5">
+        <select asp-for="Category.Title" asp-items="ViewBag.Categories"></select>
+        <label asp-for="Category.Title">Category</label>
+    </div>
+</div>
+<div class="row">
+    <div class="input-field col s5">
+        <input asp-for="Title" />
+        <label asp-for="Title"></label>
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="input-field col s12">
+        <textarea class="materialize-textarea" asp-for="Description"></textarea>
+        <label asp-for="Description"></label>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    @Html.Partial("_TextEditor", new TextEditorViewModel { Id = nameof(Model.Description), Text = Model.Description})
+</div>
+<div class="row">
+    <div class="input-field col s5">
+        <span asp-validation-for="FileUrl" class="text-danger"></span>
+        <div class="file-field input-field">
+            <div class="btn">
+                <span>File</span>
+                <input name="File" type="file" aria-describedby="fileHelp">
+                <span for="File" class="text-danger"></span>
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
+            @if (Model.FileUrl.IsNotNull())
+            {
+                <div>
+                    <a href="/blob/@Model.FileUrl" aria-describedby="originalFileHelp" />
+                </div>
+                <small id="originalFileHelp" class="form-text text-muted">
+                    This is the current policy.
+                </small>
+            }
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="input-field col s5">
+        <input asp-for="Keywords" />
+        <label asp-for="Keywords"></label>
+        <span asp-validation-for="Keywords" class="text-danger"></span>
+    </div>
+</div>

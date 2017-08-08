@@ -27,30 +27,25 @@
                 @foreach (var faq in category.Faqs)
                 {
                     <li id="@Html.DisplayFor(modelItem => faq.Url)">
-                        @if (User.IsAdmin())
-                        {
-                            // In order to get the buttons in the right place we must set display:block...
-                            <div class="collapsible-header valign-wrapper" style="display:block">
-                                <i class="material-icons">question_answer</i>
-                                <span>
-                                    @Html.DisplayFor(modelItem => faq.Question)
-                                </span>
-                                <div class="right">
-                                    <a asp-action="Edit" asp-route-id="@faq.Id" class="btn-flat">Edit</a>
-                                    <a asp-action="Delete" asp-route-id="@faq.Id" class="btn-flat">Delete</a>
+                        <div class="collapsible-header">
+                            <div class="row" style="width:100%;margin:0;">
+                                <div class="col s8 valign-wrapper" style="padding:0;height:100%;">
+                                    <i class="material-icons">question_answer</i>
+                                    <div style="height:100%;">
+                                        @faq.Question
+                                    </div>
+                                </div>
+                                <div class="card col s4 right" style="margin:0;box-shadow:0 0 0 0 rgba(0,0,0,0), 0 0 0 0 rgba(0,0,0,0), 0 0 0 0 rgba(0,0,0,0);">
+                                    <div class="card-action right" style="border-top:0;margin:0;padding:4px 24px 4px 24px;">
+                                        @if (User.IsAdmin())
+                                        {
+                                            <a style="margin:0 0 0 24px" asp-action="Edit" asp-route-id="@faq.Id">Edit</a>
+                                            <a style="margin:0 0 0 24px" asp-action="Delete" asp-route-id="@faq.Id">Delete</a>
+                                        }
+                                    </div>
                                 </div>
                             </div>
-                        }
-                        else
-                        {
-                            // ...this will however look a bit worse so when a non admin is looking at the page, give them a better looking UI
-                            <div class="collapsible-header valign-wrapper">
-                                <i class="material-icons">question_answer</i>
-                                <span>
-                                    @Html.DisplayFor(modelItem => faq.Question)
-                                </span>
-                            </div>
-                        }
+                        </div>
                         <div class="collapsible-body">
                             <span>
                                 @Html.Raw(faq.Answer)
