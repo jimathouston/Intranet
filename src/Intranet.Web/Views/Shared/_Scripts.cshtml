@@ -2,10 +2,10 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+<script src="~/assets/scripts/bundle.min.js" asp-append-version="true"></script>
 <environment names="Development">
     @*<script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>*@
-    <script src="~/assets/scripts/site.js" asp-append-version="true"></script>
 </environment>
 <environment names="Staging,Production">
     @*<script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -20,5 +20,4 @@
                 crossorigin="anonymous"
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>*@
-    <script src="~/assets/scripts/site.min.js" asp-append-version="true"></script>
 </environment>

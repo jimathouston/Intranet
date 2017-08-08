@@ -1,5 +1,6 @@
 ﻿#addin "NuGet.Core"
 #addin "Cake.ExtendedNuGet"
+#addin "Cake.Npm"
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -43,7 +44,7 @@ Task("Clean")
     CleanDirectories(directoriesToClean);
 });
 
-Task("Restore-NuGet-Packages")
+Task("Restore-Packages")
     .IsDependentOn("Clean")
     .Does(() =>
 {
@@ -70,13 +71,16 @@ Task("Restore-NuGet-Packages")
 
       CleanDirectory(tempCachePath);
       DeleteDirectory(tempCachePath);
+
+      NpmInstall(settings => settings.FromPath("./Intranet.Web").WithLogLevel(NpmLogLevel.Warn));
 });
 
 Task("Build")
-    .IsDependentOn("Restore-NuGet-Packages")
+    .IsDependentOn("Restore-Packages")
     .Does(() =>
 {
     Information("Building: {0}", "Intranet.Web");
+    NpmRunScript("build", settings => settings.FromPath("./Intranet.Web"));
     DotNetCoreBuild(webDir, buildSettings);
 
     foreach(var project in unitTestProjects)

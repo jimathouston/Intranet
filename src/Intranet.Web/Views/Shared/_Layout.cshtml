@@ -7,15 +7,11 @@
     <title>@ViewData["Title"] - Intranet.Web</title>
 
     <environment names="Development">
-        <link rel="stylesheet" href="~/assets/css/site.css" />
-        <link rel="stylesheet" href="~/assets/css/faq.css" />
-        <link rel="stylesheet" href="~/assets/css/cards.css" />
     </environment>
     <environment names="Staging,Production">
         @*<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />*@
-        <link rel="stylesheet" href="~/assets/css/bundle.min.css" asp-append-version="true" />
     </environment>
     <!--Import Roboto Font-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
@@ -23,7 +19,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
+    <link rel="stylesheet" href="~/assets/css/materialize.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/assets/css/main.css" asp-append-version="true" />
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
