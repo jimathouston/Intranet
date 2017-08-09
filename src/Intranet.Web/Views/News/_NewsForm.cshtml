@@ -3,14 +3,14 @@
 <div asp-validation-summary="All" class="text-danger"></div>
 <input type="hidden" asp-for="Id" />
 <div class="row">
-    <div class="input-field col s5">
+    <div class="input-field col s12 m5">
         <input asp-for="Title" class="validate" />
         <label asp-for="Title"></label>
         <span asp-validation-for="Title" class="text-danger"></span>
     </div>
 </div>
 <div class="row">
-    <div class="input-field col s5">
+    <div class="input-field col s12 m5">
         <small id="fileHelp" class="form-text text-muted">
             This image will be used as the news header. Hint: You can find a lot of great images at <a href="https://unsplash.it/images" target="_blank">unsplash.it/images</a> and <a href="https://unsplash.com" target="_blank">unsplash.com</a>.
         </small>
@@ -44,7 +44,7 @@
     @Html.Partial("_TextEditor", new TextEditorViewModel { Id = nameof(Model.Text), Text = Model.Text })
 </div>
 <div class="row">
-    <div class="input-field col s5">
+    <div class="input-field col s12 m5">
         <input asp-for="Tags" aria-describedby="tagHelp" />
         <label asp-for="Tags"></label>
         <small id="tagHelp" class="form-text text-muted">
@@ -64,7 +64,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="input-field col s5">
+    <div class="input-field col s12 m5">
         <input asp-for="User" value="@(String.IsNullOrWhiteSpace(Model.User?.DisplayName) ? User.Identity.Name : Model.User.DisplayName)" disabled />
         <label asp-for="User">Author</label>
         <span asp-validation-for="User" class="text-danger"></span>

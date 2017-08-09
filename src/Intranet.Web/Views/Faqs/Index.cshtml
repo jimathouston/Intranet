@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Category>
 @{
-    ViewData["Title"] = "FAQ";
+    ViewData["Title"] = "FAQ's";
     var dummy = new FaqViewModel();
     var categories = User.IsInRole("Admin") ? Model : Model.Where(m => m.Faqs.Any());
 }
 
-<h2>FAQ's</h2>
+<h2>@ViewData["Title"]</h2>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn" asp-action="Create">Create New</a>
 </p>
 @if (User.IsInRole("Admin"))
 {

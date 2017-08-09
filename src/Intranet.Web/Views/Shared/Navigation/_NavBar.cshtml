@@ -1,0 +1,25 @@
+﻿@using Intranet.Web.Extensions
+@{ 
+    var title = (string)ViewData["MobileTitle"] ?? (string)ViewData["Title"] ?? String.Empty;
+}
+
+<div class="nav-wrapper">
+    <a href="#" class="brand-logo center hide-on-med-and-up">@title.TruncateWords(10)</a>
+    <ul class="right hide-on-med-and-down">
+        <li>
+            <a href="http://time.certaincy.com/" target="_blank">
+                <i class="material-icons left">watch_later</i> TIME
+            </a>
+        </li>
+        <li>
+            <a href="https://outlook.office.com/owa/" target="_blank">
+                <i class="material-icons left">mail</i> Webmail
+            </a>
+        </li>
+        <li>
+            <a asp-area="" asp-controller="Authentication" asp-action="Logout">
+                <i class="material-icons left">power_settings_new</i> Sign Out
+            </a>
+        </li>
+    </ul>
+</div>

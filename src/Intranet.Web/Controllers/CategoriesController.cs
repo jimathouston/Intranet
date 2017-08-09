@@ -189,7 +189,7 @@ namespace Intranet.Web.Controllers
 
             if (category.Faqs.Any())
             {
-                ModelState.AddModelError("Error", "Must remove all FAQ's first!");
+                ModelState.AddModelError("Error", "Must remove all FAQ's and policies first!");
             }
 
             ViewData["from"] = from;
@@ -213,7 +213,7 @@ namespace Intranet.Web.Controllers
 
             if (category.Faqs.Any())
             {
-                ModelState.AddModelError("Error", "Must remove all FAQ's first!");
+                ModelState.AddModelError("Error", "Must remove all FAQ's and policies first!");
                 return View(category);
             }
 

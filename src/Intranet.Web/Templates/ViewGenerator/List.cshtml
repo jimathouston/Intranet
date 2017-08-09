@@ -16,7 +16,7 @@
         }
 @:}
 @:
-@:<h2>@Model.ViewName</h2>
+@:<h2>@@ViewData["Title"]</h2>
 @:
     }
     else
@@ -36,7 +36,7 @@
         //    PushIndent("    ");
     }
 @:<p>
-    @:<a asp-action="Create">Create New</a>
+    @:<a class="btn" asp-action="Create">Create New</a>
 @:</p>
 @:<table class="table">
     @:<thead>

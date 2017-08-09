@@ -16,7 +16,7 @@
         }
 @:}
 @:
-@:<h2>@Model.ViewName</h2>
+@:<h2>@@ViewData["Title"]</h2>
 @:
     }
     else
@@ -67,7 +67,7 @@
                     if (property.IsForeignKey)
                     {
             @:<div class="row">
-                @:<div class="input-field col s5">
+                @:<div class="input-field col s12 m5">
                     @:<select asp-for="@property.PropertyName" asp-items="ViewBag.@property.PropertyName"></select>
                     @:<label asp-for="@property.PropertyName"></label>
                     @:<span asp-validation-for="@property.PropertyName" class="text-danger"></span>
@@ -89,7 +89,7 @@
                     else if (property.IsEnum && !property.IsEnumFlags)
                     {
             @:<div class="row">
-                @:<div class="input-field col s5">
+                @:<div class="input-field col s12 m5">
                     @:<select asp-for="@property.PropertyName"></select>
                     @:<label asp-for="@property.PropertyName"></label>
                     @:<span asp-validation-for="@property.PropertyName" class="text-danger"></span>
@@ -99,7 +99,7 @@
                     else
                     {
             @:<div class="row">
-                @:<div class="input-field col s5">
+                @:<div class="input-field col s12 m5">
                     @:<input asp-for="@property.PropertyName" />
                     @:<label asp-for="@property.PropertyName"></label>
                     @:<span asp-validation-for="@property.PropertyName" class="text-danger"></span>
