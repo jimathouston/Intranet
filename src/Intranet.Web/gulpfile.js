@@ -26,10 +26,15 @@ gulp.task('clean-sass', function () {
 })
 
 gulp.task('sass', ['clean-sass'], function () {
-    return gulp.src(['scss/main.scss', 'scss/login.scss', 'scss/materialize.scss'])
+    return gulp.src([
+            'scss/main.scss',
+            'scss/login.scss',
+            'scss/materialize.light.scss',
+            'scss/materialize.complete.scss'
+        ])
         .pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(sass({ outputStyle: 'compressed' }))
-        .pipe(sourcemaps.write())
+        .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('Assets/css'))
 })
 
