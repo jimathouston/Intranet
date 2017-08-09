@@ -10,7 +10,7 @@
             @if (Model.HeaderImage.IsNotNull())
             {
                 <div class="card-image">
-                    <img src="/image/w_1160/h_500/@Model.HeaderImage.FileName">
+                    <img class="lazyload" data-src="/image/w_1160/h_500/@Model.HeaderImage.FileName">
                 </div>
             }
             <div class="card-content">
