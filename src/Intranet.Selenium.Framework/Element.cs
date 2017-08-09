@@ -5,12 +5,12 @@ using OpenQA.Selenium;
 
 namespace Intranet.Selenium.Framework
 {
-    public class SeleniumElement
+    public class Element
     {
         public List<IWebElement> Elements { get; set; }
         public string Name { get; set; }
 
-        public SeleniumElement (IWebElement element, string elementName)
+        public Element (IWebElement element, string elementName)
         {
             Elements = new List<IWebElement>
             {
@@ -19,7 +19,7 @@ namespace Intranet.Selenium.Framework
             Name = elementName;
         }
 
-        public SeleniumElement (List<IWebElement> elements, string elementName)
+        public Element (List<IWebElement> elements, string elementName)
         {
             Elements = new List<IWebElement>(elements);
             Name = elementName;

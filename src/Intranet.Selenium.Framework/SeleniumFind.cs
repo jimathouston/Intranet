@@ -15,13 +15,13 @@ namespace Intranet.Selenium.Framework
             _driver = driver;
         }
 
-        public SeleniumElement Elements(By identifier, string elementName)
+        public Element Elements(By identifier, string elementName)
         {
             List<IWebElement> elements = new List<IWebElement>(_driver.FindElements(identifier));
-            return new SeleniumElement(elements, elementName);
+            return new Element(elements, elementName);
         }
 
-        public SeleniumElement Elements(By identifier, string elementName, int timeOut)
+        public Element Elements(By identifier, string elementName, int timeOut)
         {
             const int pollFreq = 100;
 
@@ -36,7 +36,7 @@ namespace Intranet.Selenium.Framework
 
             if (elements.Count > 0)
             {
-                return new SeleniumElement(elements, elementName);
+                return new Element(elements, elementName);
             }
             else throw new NoSuchElementException("No matching element found within specified time limit");
         }
