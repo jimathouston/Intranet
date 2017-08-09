@@ -35,11 +35,11 @@ namespace Intranet.Selenium.Framework
         {
             _logName = logName;
             _logStart = logStart;
-            _basePath = ApplicationEnvironment.ApplicationBasePath;
+            _basePath = Path.GetFullPath($@"{ApplicationEnvironment.ApplicationBasePath}\..\..\..");
             CreateReportDirectory();
 
             _logConfig = new LoggingConfiguration();
-            _logger = GetLogger(logName, minLevel);
+            _logger = GetLogger(_logName, minLevel);
 
             _screenshotDriver = driver as ITakesScreenshot;
 
@@ -82,7 +82,9 @@ namespace Intranet.Selenium.Framework
         {
             Screenshot screenshot = _screenshotDriver.GetScreenshot();
             string savePath = GetSavePath();
-            string fullPath = $@"{savePath}\{fileName}.png";
+            string time = _logStart.ToString("yyyyMMdd-HHmm");
+
+            string fullPath = $@"{savePath}\{time}_{_logName}_{fileName}.png";
 
             Write($"Saving Screenshot as: {fullPath}", Level.Info);
             screenshot.SaveAsFile(fullPath, ScreenshotImageFormat.Png);
@@ -95,18 +97,18 @@ namespace Intranet.Selenium.Framework
             var fileTarget = new FileTarget();                                  // Create a target
             var consoleTarget = new ConsoleTarget();
 
-            _logConfig.AddTarget($"{name}_file", fileTarget);                   // Add the target to the configuration
-            _logConfig.AddTarget($"{name}_console", consoleTarget);
-
             if (String.IsNullOrWhiteSpace(name))
             {
                 name = "Log";
             }
 
+            _logConfig.AddTarget($"{name}_file", fileTarget);                   // Add the target to the configuration
+            _logConfig.AddTarget($"{name}_console", consoleTarget);
+
             string time = _logStart.ToString("yyyyMMdd-HHmm");
 
             fileTarget.FileName = $@"{savePath}\{time}_{name}.log";                    //set name (and path) of savefile
-            fileTarget.Layout = @"${date}:${time} | ${level} | ${message}";     //Define layout for file
+            fileTarget.Layout = @"${date} | ${level} | ${message}";     //Define layout for file
 
             consoleTarget.Layout = @"${time} | ${level} | ${message}";
 
@@ -130,7 +132,7 @@ namespace Intranet.Selenium.Framework
 
         private string GetSavePath()
         {
-            string compiledPath = $@"{_basePath}\Logs\{_logName}";
+            string compiledPath = $@"{_basePath}\log";
 
             return compiledPath;
         }

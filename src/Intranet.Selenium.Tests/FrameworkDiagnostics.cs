@@ -13,21 +13,29 @@ namespace Intranet.Selenium.Tests
         [Fact]
         public void ATest()
         {
-            SeleniumDriver driver = new SeleniumDriver(Browser.Chrome);
+            SeleniumDriver driver = new SeleniumDriver(Browser.Chrome, nameof(ATest));
+            driver.Log.Write($"Test Initiated: {DateTime.Now}");
 
             driver.Navigate.GoToUrl("www.google.com");
+            driver.Log.SaveScreenshot("Navigation");
+            driver.Log.Write("Navigation Successful");
 
             driver.Kill();
+            driver.Log.Write($"Test completed: {DateTime.Now}");
         }
 
         [Fact]
         public void BTest()
         {
-            SeleniumDriver driver = new SeleniumDriver(Browser.InternetExplorer);
+            SeleniumDriver driver = new SeleniumDriver(Browser.InternetExplorer, nameof(BTest));
+            driver.Log.Write($"Test Initiated");
 
             driver.Navigate.GoToUrl("www.google.com");
+            driver.Log.SaveScreenshot("Navigation");
+            driver.Log.Write("Navigation Successful");
 
             driver.Kill();
+            driver.Log.Write($"Test completed");
         }
     }
 }

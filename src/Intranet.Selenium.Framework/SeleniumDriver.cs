@@ -24,7 +24,7 @@ namespace Intranet.Selenium.Framework
         public SeleniumVerify Verify { get; }
         public SeleniumLogger Log { get; }
 
-        public SeleniumDriver (Browser browser)
+        public SeleniumDriver(Browser browser, string testName)
         {
             switch (browser)
             {
@@ -65,7 +65,7 @@ namespace Intranet.Selenium.Framework
             Navigate = new SeleniumNavigate(Driver);
             Find = new SeleniumFind(Driver);
             Verify = new SeleniumVerify();
-            Log = new SeleniumLogger("", NLog.LogLevel.Info, DateTime.Now, Driver);
+            Log = new SeleniumLogger(testName, NLog.LogLevel.Info, DateTime.Now, Driver);
         }
 
         public void Kill()
