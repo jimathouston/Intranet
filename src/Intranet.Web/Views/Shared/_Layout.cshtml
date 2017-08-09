@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Intranet.Web</title>
+    <title>@ViewData["Title"] - Certaincy Intranet</title>
 
     <environment names="Development">
     </environment>
@@ -24,6 +24,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @RenderSection("Styles", required: false)
     @Html.Raw(JavaScriptSnippet.FullScript)
+    @Html.Partial("_GoogleAnalytics")
 </head>
 <body>
     <nav>

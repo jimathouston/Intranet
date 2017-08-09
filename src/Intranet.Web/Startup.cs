@@ -109,6 +109,11 @@ namespace Intranet.Web
             {
                 options.BucketName = Configuration["AWS_BUCKET_NAME"];
             });
+
+            services.Configure<GoogleAnalyticsOptions>(options =>
+            {
+                options.TrackingId = Configuration["GA_TRACKING_ID"];
+            });
             #endregion
 
             #region Mvc
