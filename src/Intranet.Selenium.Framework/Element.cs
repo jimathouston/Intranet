@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using OpenQA.Selenium;
 
@@ -23,6 +24,11 @@ namespace Intranet.Selenium.Framework
         {
             Elements = new List<IWebElement>(elements);
             Name = elementName;
+        }
+
+        public IWebElement FirstOrDefault()
+        {
+            return Elements.FirstOrDefault();
         }
     }
 }
