@@ -84,7 +84,7 @@ namespace Intranet.Selenium.Framework
             string savePath = GetSavePath();
             string fullPath = $@"{savePath}\{fileName}.png";
 
-            Log($"Saving Screenshot as: {fullPath}", Level.Info);
+            Write($"Saving Screenshot as: {fullPath}", Level.Info);
             screenshot.SaveAsFile(fullPath, ScreenshotImageFormat.Png);
         }
 
