@@ -33,8 +33,8 @@ namespace Intranet.Web.Controllers
         {
             var categories = await _context.Categories
                     .Include(c => c.Policies)
-                        .ThenInclude(f => f.PolicyKeywords)
-                            .ThenInclude(pk => pk.Keyword)
+                        .ThenInclude(f => f.PolicyTags)
+                            .ThenInclude(pt => pt.Tag)
                     .ToListAsync() ?? new List<Category>();
 
             return View(categories);
@@ -50,8 +50,8 @@ namespace Intranet.Web.Controllers
 
             var policy = await _context.Policies
                 .Include(f => f.Category)
-                .Include(f => f.PolicyKeywords)
-                    .ThenInclude(pk => pk.Keyword)
+                .Include(f => f.PolicyTags)
+                    .ThenInclude(pt => pt.Tag)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
             if (policy.IsNull())
@@ -88,7 +88,7 @@ namespace Intranet.Web.Controllers
         [Authorize("IsAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Category,Title,Description,Keywords")] PolicyViewModel policyVM)
+        public async Task<IActionResult> Create([Bind("Id,Category,Title,Description,Tags")] PolicyViewModel policyVM)
         {
             if (ModelState.IsValid)
             {
@@ -126,9 +126,9 @@ namespace Intranet.Web.Controllers
                     policy.FileUrl = filename;
                 }
 
-                var keywords = KeywordHelpers.GetKeywordsFromString(policyVM.Keywords);
-                var allKeywordEntities = GetAllKeywordEntitiesInternal(policyVM, keywords);
-                KeywordHelpers.SetKeywords<Policy, PolicyKeyword>(keywords, policy, allKeywordEntities);
+                var tags = TagHelpers.GetTagsFromString(policyVM.Tags);
+                var allTagEntities = GetAllTagEntitiesInternal(policyVM, tags);
+                TagHelpers.SetTags<Policy, PolicyTag>(tags, policy, allTagEntities);
 
                 await _context.AddAsync(policy);
 
@@ -153,8 +153,8 @@ namespace Intranet.Web.Controllers
 
             var policy = await _context.Policies
                 .Include(f => f.Category)
-                .Include(f => f.PolicyKeywords)
-                    .ThenInclude(pk => pk.Keyword)
+                .Include(f => f.PolicyTags)
+                    .ThenInclude(pt => pt.Tag)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
             if (policy == null)
@@ -173,7 +173,7 @@ namespace Intranet.Web.Controllers
         [Authorize("IsAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Category,Title,Description,Keywords")] PolicyViewModel policyVM)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Category,Title,Description,Tags")] PolicyViewModel policyVM)
         {
             if (id != policyVM?.Id)
             {
@@ -220,9 +220,9 @@ namespace Intranet.Web.Controllers
                     entity.FileUrl =  filename;
                 }
 
-                var keywords = KeywordHelpers.GetKeywordsFromString(policyVM.Keywords);
-                var allKeywordEntities = GetAllKeywordEntitiesInternal(policyVM, keywords);
-                KeywordHelpers.SetKeywords<Policy, PolicyKeyword>(keywords, entity, allKeywordEntities);
+                var tags = TagHelpers.GetTagsFromString(policyVM.Tags);
+                var allTagEntities = GetAllTagEntitiesInternal(policyVM, tags);
+                TagHelpers.SetTags<Policy, PolicyTag>(tags, entity, allTagEntities);
 
                 await _context.SaveChangesAsync();
 
@@ -244,8 +244,8 @@ namespace Intranet.Web.Controllers
 
             var policy = await _context.Policies
                 .Include(f => f.Category)
-                .Include(f => f.PolicyKeywords)
-                    .ThenInclude(pk => pk.Keyword)
+                .Include(f => f.PolicyTags)
+                    .ThenInclude(pt => pt.Tag)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
             if (policy == null)
@@ -263,8 +263,8 @@ namespace Intranet.Web.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var policy = await _context.Policies
-                    .Include(p => p.PolicyKeywords)
-                        .ThenInclude(pk => pk.Keyword)
+                    .Include(p => p.PolicyTags)
+                        .ThenInclude(pt => pt.Tag)
                     .Include(p => p.Category)
                         .ThenInclude(c => c.Policies)
                     .SingleOrDefaultAsync(p => p.Id == id);
@@ -284,12 +284,12 @@ namespace Intranet.Web.Controllers
                 _context.Remove(policy.Category);
             }
 
-            // If the keywords has no more related entities then delete the keyword as well
-            foreach (var keyword in policy.PolicyKeywords.Select(fk => fk.Keyword))
+            // If the tags has no more related entities then delete the tag as well
+            foreach (var tag in policy.PolicyTags.Select(ft => ft.Tag))
             {
-                if (await KeywordHelpers.HasNoRelatedEntities(keyword, _context, ignore: policy.PolicyKeywords))
+                if (await TagHelpers.HasNoRelatedEntities(tag, _context, ignore: policy.PolicyTags))
                 {
-                    _context.Remove(keyword);
+                    _context.Remove(tag);
                 }
             }
 
@@ -300,17 +300,17 @@ namespace Intranet.Web.Controllers
         #endregion
 
         #region Private Helpers
-        private List<Keyword> GetAllKeywordEntitiesInternal(PolicyViewModel policy, IEnumerable<string> keywords)
+        private List<Tag> GetAllTagEntitiesInternal(PolicyViewModel policy, IEnumerable<string> tags)
         {
-            if (keywords.IsNull())
+            if (tags.IsNull())
             {
-                return new List<Keyword>();
+                return new List<Tag>();
             }
 
-            return _context.Keywords?
-            .Include(k => k.PolicyKeywords)
-                .ThenInclude(pk => pk.Policy)?
-            .Where(k => keywords.Contains(k.Name, StringComparer.OrdinalIgnoreCase) || k.PolicyKeywords.Any(nk => nk.PolicyId.Equals(policy.Id)))
+            return _context.Tags?
+            .Include(k => k.PolicyTags)
+                .ThenInclude(pt => pt.Policy)?
+            .Where(k => tags.Contains(k.Name, StringComparer.OrdinalIgnoreCase) || k.PolicyTags.Any(nt => nt.PolicyId.Equals(policy.Id)))
             .ToList();
         }
 

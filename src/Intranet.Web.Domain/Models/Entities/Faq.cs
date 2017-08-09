@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Intranet.Web.Domain.Models.Entities
 {
-    public class Faq : IHasKeywords
+    public class Faq : IHasTags
     {
         public int Id { get; set; }
 
@@ -20,7 +20,7 @@ namespace Intranet.Web.Domain.Models.Entities
         [Required]
         public string Answer { get; set; }
 
-        public ICollection<FaqKeyword> FaqKeywords { get; set; }
+        public ICollection<FaqTag> FaqTags { get; set; }
 
         public string Url { get; set; }
     }

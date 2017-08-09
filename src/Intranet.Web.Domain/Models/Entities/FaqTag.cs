@@ -6,20 +6,20 @@ using System.Text;
 
 namespace Intranet.Web.Domain.Models.Entities
 {
-    public class NewsKeyword : KeywordRelation, IKeywordRelation
+    public class FaqTag : TagRelation, ITagRelation
     {
-        public NewsKeyword()
+        public FaqTag()
         {
             // Empty
         }
 
-        public NewsKeyword(Keyword keyword)
-            : base(keyword)
+        public FaqTag(Tag tag)
+            : base(tag)
         {
-
+            // Empty
         }
 
-        public int NewsId { get; set; }
-        public News News { get; set; }
+        public int FaqId { get; set; }
+        public Faq Faq { get; set; }
     }
 }

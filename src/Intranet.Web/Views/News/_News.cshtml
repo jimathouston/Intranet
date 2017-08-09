@@ -35,9 +35,9 @@
                         @Html.Raw(Model.Text)
                     }
                 </p>
-                @if (Model.Keywords.IsNotNull())
+                @if (!String.IsNullOrWhiteSpace(Model.Tags))
                 {
-                    <p class="card-keywords"><strong>Keywords:</strong> <em>@Model.Keywords.Replace(",", ", ")</em></p>
+                    <p class="card-tags"><strong>Tags:</strong> <em>@Model.Tags.Replace(",", ", ")</em></p>
                 }
             </div>
             @if (!hideButtons)

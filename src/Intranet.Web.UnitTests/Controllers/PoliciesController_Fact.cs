@@ -382,11 +382,11 @@ namespace Intranet.Web.UnitTests.Controllers
                 {
                     Title = "",
                 },
-                PolicyKeywords = new List<PolicyKeyword>
+                PolicyTags = new List<PolicyTag>
                 {
-                    new PolicyKeyword
+                    new PolicyTag
                     {
-                        Keyword = new Keyword
+                        Tag = new Tag
                         {
                             Id = 1,
                         },
@@ -411,7 +411,7 @@ namespace Intranet.Web.UnitTests.Controllers
             {
                 Assert.Equal(0, context.Policies.Count());
                 Assert.Equal(0, context.Categories.Count());
-                Assert.Equal(0, context.Keywords.Count());
+                Assert.Equal(0, context.Tags.Count());
             }
         }
 

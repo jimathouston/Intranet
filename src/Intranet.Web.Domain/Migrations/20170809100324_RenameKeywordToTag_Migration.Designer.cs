@@ -8,9 +8,10 @@ using Intranet.Web.Domain.Data;
 namespace Intranet.Web.Domain.Migrations
 {
     [DbContext(typeof(IntranetApiContext))]
-    partial class IntranetApiContextModelSnapshot : ModelSnapshot
+    [Migration("20170809100324_RenameKeywordToTag_Migration")]
+    partial class RenameKeywordToTag_Migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

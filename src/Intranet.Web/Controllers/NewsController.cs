@@ -42,8 +42,8 @@ namespace Intranet.Web.Controllers
                 var news = await _context.News
                     .Include(n => n.HeaderImage)
                     .Include(n => n.User)
-                    .Include(n => n.NewsKeywords)
-                        .ThenInclude(nk => nk.Keyword)
+                    .Include(n => n.NewsTags)
+                        .ThenInclude(nt => nt.Tag)
                     .ToListAsync();
 
                 var newsViewModel = news
@@ -71,8 +71,8 @@ namespace Intranet.Web.Controllers
                 var news = await _context.News
                     .Include(n => n.HeaderImage)
                     .Include(n => n.User)
-                    .Include(n => n.NewsKeywords)
-                        .ThenInclude(nk => nk.Keyword)
+                    .Include(n => n.NewsTags)
+                        .ThenInclude(nt => nt.Tag)
                     .SingleOrDefaultAsync(n => n.Id == id);
 
                 if (news == null)
@@ -102,8 +102,8 @@ namespace Intranet.Web.Controllers
                 var news = await _context.News
                     .Include(n => n.HeaderImage)
                     .Include(n => n.User)
-                    .Include(n => n.NewsKeywords)
-                        .ThenInclude(nk => nk.Keyword)
+                    .Include(n => n.NewsTags)
+                        .ThenInclude(nt => nt.Tag)
                     .SingleOrDefaultAsync(n => n.Created.Date == date.Date && n.Url == url);
 
                 if (news == null)
@@ -134,7 +134,7 @@ namespace Intranet.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,Text,Published,HeaderImage,Keywords")] NewsViewModel news)
+        public async Task<IActionResult> Create([Bind("Title,Text,Published,HeaderImage,Tags")] NewsViewModel news)
         {
             try
             {
@@ -193,9 +193,9 @@ namespace Intranet.Web.Controllers
                     return View(news);
                 }
 
-                var keywords = KeywordHelpers.GetKeywordsFromString(news.Keywords);
-                var allKeywordEntities = GetAllKeywordEntitiesInternal(news, keywords);
-                KeywordHelpers.SetKeywords<News, NewsKeyword>(keywords, newNews, allKeywordEntities);
+                var tags = TagHelpers.GetTagsFromString(news.Tags);
+                var allTagEntities = GetAllTagEntitiesInternal(news, tags);
+                TagHelpers.SetTags<News, NewsTag>(tags, newNews, allTagEntities);
 
                 _context.News.Add(newNews);
                 await _context.SaveChangesAsync();
@@ -225,8 +225,8 @@ namespace Intranet.Web.Controllers
                 var news = await _context.News
                     .Include(n => n.HeaderImage)
                     .Include(n => n.User)
-                    .Include(n => n.NewsKeywords)
-                        .ThenInclude(nk => nk.Keyword)
+                    .Include(n => n.NewsTags)
+                        .ThenInclude(nt => nt.Tag)
                     .SingleOrDefaultAsync(n => n.Id.Equals(id));
 
                 if (news == null)
@@ -249,7 +249,7 @@ namespace Intranet.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Text,Published,HeaderImage,Keywords")] NewsViewModel news)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Text,Published,HeaderImage,Tags")] NewsViewModel news)
         {
             try
             {
@@ -311,9 +311,9 @@ namespace Intranet.Web.Controllers
                     };
                 }
 
-                var keywords = KeywordHelpers.GetKeywordsFromString(news.Keywords);
-                var allKeywordEntities = GetAllKeywordEntitiesInternal(news, keywords);
-                KeywordHelpers.SetKeywords<News, NewsKeyword>(keywords, entity, allKeywordEntities);
+                var tags = TagHelpers.GetTagsFromString(news.Tags);
+                var allTagEntities = GetAllTagEntitiesInternal(news, tags);
+                TagHelpers.SetTags<News, NewsTag>(tags, entity, allTagEntities);
 
                 _context.SaveChanges();
 
@@ -389,17 +389,17 @@ namespace Intranet.Web.Controllers
             return _context.News.Any(e => e.Id == id);
         }
 
-        private List<Keyword> GetAllKeywordEntitiesInternal(NewsViewModel news, IEnumerable<string> keywords)
+        private List<Tag> GetAllTagEntitiesInternal(NewsViewModel news, IEnumerable<string> tags)
         {
-            if (keywords.IsNull())
+            if (tags.IsNull())
             {
-                return new List<Keyword>();
+                return new List<Tag>();
             }
 
-            return _context.Keywords?
-            .Include(k => k.NewsKeywords)
-                .ThenInclude(nk => nk.News)?
-            .Where(k => keywords.Contains(k.Name, StringComparer.OrdinalIgnoreCase) || k.NewsKeywords.Any(nk => nk.NewsId.Equals(news.Id)))
+            return _context.Tags?
+            .Include(k => k.NewsTags)
+                .ThenInclude(nt => nt.News)?
+            .Where(k => tags.Contains(k.Name, StringComparer.OrdinalIgnoreCase) || k.NewsTags.Any(nt => nt.NewsId.Equals(news.Id)))
             .ToList();
         }
         #endregion

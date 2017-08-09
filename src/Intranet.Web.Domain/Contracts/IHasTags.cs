@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Intranet.Web.Domain.Contracts
 {
-    public interface IHasKeywords
+    public interface IHasTags
     {
         int Id { get; set; }
     }

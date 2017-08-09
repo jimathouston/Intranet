@@ -6,7 +6,7 @@ using Intranet.Web.Domain.Contracts;
 
 namespace Intranet.Web.Domain.Models.Entities
 {
-    public class News : IHasKeywords
+    public class News : IHasTags
     {
         // Backing fields: https://docs.microsoft.com/en-us/ef/core/modeling/backing-field
         private bool _hasEverBeenPublished;
@@ -75,7 +75,7 @@ namespace Intranet.Web.Domain.Models.Entities
             }
         }
 
-        public ICollection<NewsKeyword> NewsKeywords { get; set; }
+        public ICollection<NewsTag> NewsTags { get; set; }
 
         [Required]
         public string Url { get; set; }

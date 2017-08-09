@@ -9,7 +9,7 @@ namespace Intranet.Web.ViewModels
 {
     public class NewsViewModel : News
     {
-        private string _keywords;
+        private string _tags;
 
         public NewsViewModel()
         {
@@ -21,7 +21,7 @@ namespace Intranet.Web.ViewModels
             Created = news.Created;
             HeaderImage = news.HeaderImage;
             Id = news.Id;
-            NewsKeywords = news.NewsKeywords;
+            NewsTags = news.NewsTags;
             Published = news.Published;
             Text = news.Text;
             Title = news.Title;
@@ -32,25 +32,25 @@ namespace Intranet.Web.ViewModels
         }
 
         /// <summary>
-        /// This property is only for either returning <see cref="NewsKeywords"/> as a string OR to be set by the model binder. Not both.
+        /// This property is only for either returning <see cref="NewsTags"/> as a string OR to be set by the model binder. Not both.
         /// </summary>
-        public string Keywords
+        public string Tags
         {
             get
             {
-                if (_keywords.IsNull())
+                if (_tags.IsNull())
                 {
-                    return this.NewsKeywords.IsNull()
+                    return this.NewsTags.IsNull()
                         ? null
-                        : String.Join(",", this.NewsKeywords.Select(k => k.Keyword?.Name)?.Where(k => !String.IsNullOrWhiteSpace(k)));
+                        : String.Join(",", this.NewsTags.Select(k => k.Tag?.Name)?.Where(k => !String.IsNullOrWhiteSpace(k)));
                 }
 
-                return _keywords;
+                return _tags;
             }
 
             set
             {
-                _keywords = value;
+                _tags = value;
             }
         }
 

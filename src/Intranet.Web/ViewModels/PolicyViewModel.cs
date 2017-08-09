@@ -9,7 +9,7 @@ namespace Intranet.Web.ViewModels
 {
     public class PolicyViewModel : Policy
     {
-        private string _keywords;
+        private string _tags;
 
         public PolicyViewModel()
         {
@@ -22,31 +22,31 @@ namespace Intranet.Web.ViewModels
             Description = policy.Description;
             FileUrl = policy.FileUrl;
             Id = policy.Id;
-            PolicyKeywords = policy.PolicyKeywords;
+            PolicyTags = policy.PolicyTags;
             Title = policy.Title;
             Url = policy.Url;
         }
 
         /// <summary>
-        /// This property is only for either returning <see cref="PolicyKeywords"/> as a string OR to be set by the model binder. Not both.
+        /// This property is only for either returning <see cref="PolicyTag"/> as a string OR to be set by the model binder. Not both.
         /// </summary>
-        public string Keywords
+        public string Tags
         {
             get
             {
-                if (_keywords.IsNull())
+                if (_tags.IsNull())
                 {
-                    return this.PolicyKeywords.IsNull()
+                    return this.PolicyTags.IsNull()
                         ? null
-                        : String.Join(",", this.PolicyKeywords.Select(k => k.Keyword?.Name)?.Where(k => !String.IsNullOrWhiteSpace(k)));
+                        : String.Join(",", this.PolicyTags.Select(k => k.Tag?.Name)?.Where(k => !String.IsNullOrWhiteSpace(k)));
                 }
 
-                return _keywords;
+                return _tags;
             }
 
             set
             {
-                _keywords = value;
+                _tags = value;
             }
         }
 

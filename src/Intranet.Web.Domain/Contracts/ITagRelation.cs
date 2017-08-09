@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Intranet.Web.Domain.Contracts
 {
-    public interface IKeywordRelation
+    public interface ITagRelation
     {
-        int KeywordId { get; set; }
-        Keyword Keyword { get; set; }
+        int TagId { get; set; }
+        Tag Tag { get; set; }
     }
 }

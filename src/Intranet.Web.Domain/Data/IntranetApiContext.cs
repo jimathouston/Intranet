@@ -43,19 +43,19 @@ namespace Intranet.Web.Domain.Data
                 .HasIndex(n => n.Url);
             #endregion
 
-            #region NewsKeyword
-            modelBuilder.Entity<NewsKeyword>()
-                .HasKey(k => new { k.NewsId, k.KeywordId });
+            #region NewsTag
+            modelBuilder.Entity<NewsTag>()
+                .HasKey(k => new { k.NewsId, k.TagId });
 
-            modelBuilder.Entity<NewsKeyword>()
-                .HasOne(nk => nk.News)
-                .WithMany(n => n.NewsKeywords)
-                .HasForeignKey(nk => nk.NewsId);
+            modelBuilder.Entity<NewsTag>()
+                .HasOne(nt => nt.News)
+                .WithMany(n => n.NewsTags)
+                .HasForeignKey(nt => nt.NewsId);
 
-            modelBuilder.Entity<NewsKeyword>()
-                .HasOne(nk => nk.Keyword)
-                .WithMany(k => k.NewsKeywords)
-                .HasForeignKey(nk => nk.KeywordId);
+            modelBuilder.Entity<NewsTag>()
+                .HasOne(nt => nt.Tag)
+                .WithMany(k => k.NewsTags)
+                .HasForeignKey(nt => nt.TagId);
             #endregion
 
             #region Faq
@@ -64,19 +64,19 @@ namespace Intranet.Web.Domain.Data
                 .IsUnique();
             #endregion
 
-            #region FaqKeyword
-            modelBuilder.Entity<FaqKeyword>()
-                .HasKey(k => new { k.FaqId, k.KeywordId });
+            #region FaqTag
+            modelBuilder.Entity<FaqTag>()
+                .HasKey(k => new { k.FaqId, k.TagId });
 
-            modelBuilder.Entity<FaqKeyword>()
-                .HasOne(fk => fk.Faq)
-                .WithMany(f => f.FaqKeywords)
-                .HasForeignKey(fk => fk.FaqId);
+            modelBuilder.Entity<FaqTag>()
+                .HasOne(ft => ft.Faq)
+                .WithMany(f => f.FaqTags)
+                .HasForeignKey(ft => ft.FaqId);
 
-            modelBuilder.Entity<FaqKeyword>()
-                .HasOne(fk => fk.Keyword)
-                .WithMany(k => k.FaqKeywords)
-                .HasForeignKey(fk => fk.KeywordId);
+            modelBuilder.Entity<FaqTag>()
+                .HasOne(ft => ft.Tag)
+                .WithMany(k => k.FaqTags)
+                .HasForeignKey(ft => ft.TagId);
             #endregion
 
             #region Policy
@@ -85,19 +85,19 @@ namespace Intranet.Web.Domain.Data
                 .IsUnique();
             #endregion
 
-            #region PolicyKeyword
-            modelBuilder.Entity<PolicyKeyword>()
-                .HasKey(k => new { k.PolicyId, k.KeywordId });
+            #region PolicyTag
+            modelBuilder.Entity<PolicyTag>()
+                .HasKey(k => new { k.PolicyId, k.TagId });
 
-            modelBuilder.Entity<PolicyKeyword>()
-                .HasOne(pk => pk.Policy)
-                .WithMany(p => p.PolicyKeywords)
-                .HasForeignKey(pk => pk.PolicyId);
+            modelBuilder.Entity<PolicyTag>()
+                .HasOne(pt => pt.Policy)
+                .WithMany(p => p.PolicyTags)
+                .HasForeignKey(pt => pt.PolicyId);
 
-            modelBuilder.Entity<PolicyKeyword>()
-                .HasOne(pk => pk.Keyword)
-                .WithMany(k => k.PolicyKeywords)
-                .HasForeignKey(pk => pk.KeywordId);
+            modelBuilder.Entity<PolicyTag>()
+                .HasOne(pt => pt.Tag)
+                .WithMany(k => k.PolicyTags)
+                .HasForeignKey(pt => pt.TagId);
             #endregion
 
             #region Category
@@ -110,12 +110,12 @@ namespace Intranet.Web.Domain.Data
                 .IsUnique();
             #endregion
 
-            #region Keyword
-            modelBuilder.Entity<Keyword>()
+            #region Tag
+            modelBuilder.Entity<Tag>()
                 .HasIndex(k => k.Url)
                 .IsUnique();
 
-            modelBuilder.Entity<Keyword>()
+            modelBuilder.Entity<Tag>()
                 .HasIndex(k => k.Name)
                 .IsUnique();
             #endregion
@@ -124,7 +124,7 @@ namespace Intranet.Web.Domain.Data
         }
 
         public virtual DbSet<News> News { get; set; }
-        public virtual DbSet<Keyword> Keywords { get; set; }
+        public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Faq> Faqs { get; set; }

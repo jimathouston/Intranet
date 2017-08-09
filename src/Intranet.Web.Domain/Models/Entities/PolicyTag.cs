@@ -6,15 +6,15 @@ using System.Text;
 
 namespace Intranet.Web.Domain.Models.Entities
 {
-    public class PolicyKeyword : KeywordRelation, IKeywordRelation
+    public class PolicyTag : TagRelation, ITagRelation
     {
-        public PolicyKeyword()
+        public PolicyTag()
         {
             // Empty
         }
 
-        public PolicyKeyword(Keyword keyword)
-            : base(keyword)
+        public PolicyTag(Tag tag)
+            : base(tag)
         {
             // Empty
         }

@@ -9,7 +9,7 @@ namespace Intranet.Web.ViewModels
 {
     public class FaqViewModel : Faq
     {
-        private string _keywords;
+        private string _tags;
 
         public FaqViewModel()
         {
@@ -20,32 +20,32 @@ namespace Intranet.Web.ViewModels
         {
             Answer = faq.Answer;
             Category = faq.Category;
-            FaqKeywords = faq.FaqKeywords;
+            FaqTags = faq.FaqTags;
             Id = faq.Id;
             Question = faq.Question;
             Url = faq.Url;
         }
 
         /// <summary>
-        /// This property is only for either returning <see cref="NewsKeywords"/> as a string OR to be set by the model binder. Not both.
+        /// This property is only for either returning <see cref="FaqTag"/> as a string OR to be set by the model binder. Not both.
         /// </summary>
-        public string Keywords
+        public string Tags
         {
             get
             {
-                if (_keywords.IsNull())
+                if (_tags.IsNull())
                 {
-                    return this.FaqKeywords.IsNull()
+                    return this.FaqTags.IsNull()
                         ? null
-                        : String.Join(",", this.FaqKeywords.Select(k => k.Keyword?.Name)?.Where(k => !String.IsNullOrWhiteSpace(k)));
+                        : String.Join(",", this.FaqTags.Select(k => k.Tag?.Name)?.Where(k => !String.IsNullOrWhiteSpace(k)));
                 }
 
-                return _keywords;
+                return _tags;
             }
 
             set
             {
-                _keywords = value;
+                _tags = value;
             }
         }
 
