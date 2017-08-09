@@ -27,6 +27,7 @@ using Amazon.S3.Transfer;
 using Intranet.Web.Models.Options;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using Microsoft.AspNetCore.ResponseCompression;
 
 namespace Intranet.Web
 {
@@ -114,6 +115,14 @@ namespace Intranet.Web
             {
                 options.TrackingId = Configuration["GA_TRACKING_ID"];
             });
+
+            services.Configure<GzipCompressionProviderOptions>(options =>
+                options.Level = System.IO.Compression.CompressionLevel.Optimal
+            );
+            #endregion
+
+            #region Response Compression
+            services.AddResponseCompression();
             #endregion
 
             #region Mvc
@@ -184,6 +193,10 @@ namespace Intranet.Web
             #region Logging
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            #endregion
+
+            #region Response Compression
+            app.UseResponseCompression();
             #endregion
 
             #region Static Files
