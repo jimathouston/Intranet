@@ -10,13 +10,15 @@ namespace Intranet.Selenium.Tests
 {
     public class FrameworkDiagnostics
     {
+        const string Url = "http://34.248.135.81";
+
         [Fact]
         public void ATest()
         {
             SeleniumDriver driver = new SeleniumDriver(Browser.Chrome, nameof(ATest));
             driver.Log.Write($"Test Initiated: {DateTime.Now}");
 
-            driver.Navigate.GoToUrl("www.google.com");
+            driver.Navigate.GoToUrl(Url);
             driver.Log.SaveScreenshot("Navigation");
             driver.Log.Write("Navigation Successful");
 
@@ -30,7 +32,7 @@ namespace Intranet.Selenium.Tests
             SeleniumDriver driver = new SeleniumDriver(Browser.InternetExplorer, nameof(BTest));
             driver.Log.Write($"Test Initiated");
 
-            driver.Navigate.GoToUrl("www.google.com");
+            driver.Navigate.GoToUrl(Url);
             driver.Log.SaveScreenshot("Navigation");
             driver.Log.Write("Navigation Successful");
 

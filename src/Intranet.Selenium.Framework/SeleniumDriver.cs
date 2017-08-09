@@ -39,7 +39,7 @@ namespace Intranet.Selenium.Framework
                     {
                         _driver = null;
                         // Firefox temporary disabled as webdriver does not support specifying the path to the driver.
-                        throw new NotImplementedException("Firefox Driver not yet implemented");
+                        throw new NotImplementedException("Firefox Driver not implemented as driver does not support .NetCore");
                     }
                 case Browser.InternetExplorer:
                     {
@@ -64,14 +64,15 @@ namespace Intranet.Selenium.Framework
                     }
             }
 
-            Navigate = new SeleniumNavigate(_driver);
-            Find = new SeleniumFind(_driver);
-            Verify = new SeleniumVerify();
-            Interact = new SeleniumInteract(_driver);
             Log = new SeleniumLogger(testName, NLog.LogLevel.Info, DateTime.Now, _driver);
+            Navigate = new SeleniumNavigate(_driver, Log);
+            Find = new SeleniumFind(_driver, Log);
+            Verify = new SeleniumVerify(_driver, Log);
+            Interact = new SeleniumInteract(_driver, Log);
+            
         }
 
-        public IWebDriver Driver()
+        public IWebDriver DriverComponent()
         {
             return _driver;
         }
