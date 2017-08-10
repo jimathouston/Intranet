@@ -52,7 +52,11 @@ namespace Intranet.Selenium.Framework
                 _logger.Write($"{elements.Count} matching Element(s) found");
                 return new Element(elements, elementName);
             }
-            else _logger.Write("0 matching Element(s) found within time limit", Level.Warn);
+            else
+            {
+                _logger.Write("0 matching Element(s) found within time limit", Level.Warn);
+                return null;
+            }
         }
 
         private bool ElementExists(By identifier, ref List<IWebElement> elements)
