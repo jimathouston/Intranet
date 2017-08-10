@@ -4,6 +4,7 @@
 # [Client App](client-app.md)
 # [Environment Variables](environment-variables.md)
 # [Authentication Flow](authentication-flow.md)
+# [E2E Testing](e2e-testing.md)
 # [File Handling](file-handling.md)
 # [Image Processing](image-processing.md)
 # [Swagger](swagger.md)

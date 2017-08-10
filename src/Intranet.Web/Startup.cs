@@ -28,6 +28,7 @@ using Intranet.Web.Models.Options;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using Microsoft.AspNetCore.ResponseCompression;
+using Intranet.Web.Authentication.Services.E2E;
 
 namespace Intranet.Web
 {
@@ -76,7 +77,15 @@ namespace Intranet.Web
                 services.AddTransient<IAuthenticationProvider, DevelopmentAuthenticationProvider>();
             }
 
-            services.AddTransient<IAuthenticationService, LdapAuthenticationService>();
+            if (CurrentEnvironment.IsE2e())
+            {
+                services.AddTransient<IAuthenticationService, E2EAuthenticationService>();
+            }
+            else
+            {
+                services.AddTransient<IAuthenticationService, LdapAuthenticationService>();
+            }
+
             services.AddTransient<IDateTimeFactory, DateTimeFactory>();
             services.AddTransient<IImageService, ImageService>();
             services.AddAWSService<IAmazonS3>();
