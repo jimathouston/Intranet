@@ -8,6 +8,7 @@ using System.Linq;
 
 namespace Intranet.Selenium.Tests
 {
+#pragma warning disable S3881 //full implementation of IDisposable not necessary; only used as a workaround (since xUnit does not support [TearDown] or similar)
     public class FrameworkDiagnostics : IDisposable
     {
         const string Url = "http://34.248.135.81";
