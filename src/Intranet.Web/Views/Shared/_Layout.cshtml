@@ -7,11 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Certaincy Intranet</title>
 
-    <environment names="Development">
-    </environment>
-    <environment names="Staging,Production">
-    </environment>
-    <link rel="stylesheet" href="~/assets/css/materialize.light.css" asp-append-version="true" />
+    @Html.Partial("_Styles")
     @RenderSection("Styles", required: false)
     @Html.Raw(JavaScriptSnippet.FullScript)
     @Html.Partial("_GoogleAnalytics")
@@ -28,10 +24,6 @@
     <footer class="page-footer">
         @Html.Partial("_Footer")
     </footer>
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="~/assets/css/materialize.complete.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/assets/css/main.css" asp-append-version="true" />
     @Html.Partial("_Scripts")
     @RenderSection("Scripts", required: false)
 </body>
