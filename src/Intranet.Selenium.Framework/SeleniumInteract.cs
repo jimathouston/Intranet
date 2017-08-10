@@ -40,7 +40,7 @@ namespace Intranet.Selenium.Framework
                 _logger.Write($"Action Completed");
             }
             catch (Exception e) when (e is InvalidElementStateException || e is ElementNotVisibleException || 
-                e is StaleElementReferenceException || e is NoSuchElementException)
+                e is StaleElementReferenceException || e is NoSuchElementException || e is NullReferenceException)
             {
                 string exception = e.GetType().ToString();
                 _logger.Write($"Element {name} could not be clicked: {exception}", Level.Error);
@@ -79,7 +79,7 @@ namespace Intranet.Selenium.Framework
                 _logger.Write("Action Completed");
             }
             catch (Exception e) when (e is InvalidElementStateException || e is ElementNotVisibleException || 
-                e is StaleElementReferenceException || e is NoSuchElementException)
+                e is StaleElementReferenceException || e is NoSuchElementException || e is NullReferenceException)
             {
                 string exception = e.GetType().ToString();
                 _logger.Write($"Element {name} could not be clicked: {exception}", Level.Error);
@@ -140,7 +140,7 @@ namespace Intranet.Selenium.Framework
                 _logger.Write("Action Completed");
             }
             catch (Exception e) when (e is InvalidElementStateException || e is ElementNotVisibleException || 
-                e is StaleElementReferenceException || e is NoSuchElementException)
+                e is StaleElementReferenceException || e is NoSuchElementException || e is NullReferenceException)
             {
                 string exception = e.GetType().ToString();
                 _logger.Write($"Input could not be sent to Element {name}: {exception}", Level.Error);
