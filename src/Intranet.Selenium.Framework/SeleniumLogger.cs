@@ -10,16 +10,6 @@ using OpenQA.Selenium;
 
 namespace Intranet.Selenium.Framework
 {
-    public enum Level
-    {
-        Trace,
-        Debug,
-        Info,
-        Warn,
-        Error,
-        Fatal
-    }
-
     public class SeleniumLogger
     {
         private readonly LoggingConfiguration _logConfig;

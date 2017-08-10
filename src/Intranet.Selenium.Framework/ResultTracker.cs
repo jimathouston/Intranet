@@ -4,12 +4,6 @@ using System.Text;
 
 namespace Intranet.Selenium.Framework
 {
-    public enum AssertLevel
-    {
-        Soft,
-        Hard
-    }
-
     public class ResultTracker
     {
         private readonly AssertLevel _assertLevel;

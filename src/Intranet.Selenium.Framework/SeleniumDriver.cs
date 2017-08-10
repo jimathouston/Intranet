@@ -8,14 +8,6 @@ using System;
 
 namespace Intranet.Selenium.Framework
 {
-    public enum Browser
-    {
-        Firefox,
-        Chrome,
-        InternetExplorer,
-        PhantomJS
-    }
-
     public class SeleniumDriver
     {
         private readonly IWebDriver _driver;
