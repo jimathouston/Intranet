@@ -51,23 +51,104 @@ namespace Intranet.Services.FileStorageService
 
             return await GetStreamFromAzureInternalAsync(filename, path);
         }
-        #endregion
-        #region SET
-        public async Task<String> SetBlobAsync(IFormFile file)
-        {
-            var fileName = file.FileName;
-            await _container.CreateIfNotExistsAsync();
-            CloudBlockBlob blockBlob = _container.GetBlockBlobReference(fileName);
 
-            using (var fileStream = file.OpenReadStream())
+        async public Task<StreamWithMetadata> GetImageAsync(string filename, int width, int height)
+        {
+            var path = GetImagePathInternal(filename, width, height);
+
+            return await GetStreamFromAzureInternalAsync(filename, path);
+        }
+
+
+
+        #endregion
+
+        #region SET
+
+        #region SET
+        async public Task<string> SetBlobAsync(IFormFile file)
+        {
+            return await SetStreamToAzureInternalAsync(file, PathsInternal.Files);
+        }
+
+        async public Task<string> SetImageAsync(IFormFile file)
+        {
+            var path = GetImagePathInternal(file.FileName);
+
+            return await SetStreamToAzureInternalAsync(file, path);
+        }
+
+        async public Task<string> SetImageAsync(IFormFile file, int width, int height)
+        {
+            var path = GetImagePathInternal(file.FileName, width, height);
+
+            return await SetStreamToAzureInternalAsync(file, path);
+        }
+
+        async public Task<string> SetImageAsync(Stream stream, string filename, int width, int height)
+        {
+            var path = GetImagePathInternal(filename, width, height);
+            CloudBlockBlob blockBlob = _container.GetBlockBlobReference(filename);
+
+            try
             {
-                await blockBlob.UploadFromStreamAsync(fileStream);
-                return fileName;
+                using (stream)
+                {
+                    await blockBlob.UploadFromStreamAsync(stream);
+
+                    return filename;
+                }
+            }
+            catch (StorageException WaspException)
+            {
+                var invalidCredentials = WaspException.RequestInformation.HttpStatusMessage != null && (
+                    WaspException.RequestInformation.HttpStatusMessage.Equals("InvalidAccessKeyId") ||
+                    WaspException.RequestInformation.HttpStatusMessage.Equals("InvalidSecurity"));
+
+                if (invalidCredentials)
+                {
+                    throw new Exception("Check the provided Azure Credentials.");
+                }
+                else
+                {
+                    throw new Exception("Error occurred: " + WaspException.Message);
+                }
             }
         }
         #endregion
 
         #region Private Methods
+
+        private async Task<string> SetStreamToAzureInternalAsync(IFormFile file, string path)
+        {
+            try
+            {
+                var filename = file.FileName;
+                CloudBlockBlob blockBlob = _container.GetBlockBlobReference(filename);
+                using (var stream = file.OpenReadStream())
+                {
+                    await blockBlob.UploadFromStreamAsync(stream);
+
+                    return filename;
+                }
+            }
+            catch (StorageException WasbException)
+            {
+                var invalidCredentials = WasbException.RequestInformation.HttpStatusMessage != null && (
+                    WasbException.RequestInformation.HttpStatusCode.Equals("InvalidAccessKeyId") ||
+                    WasbException.RequestInformation.HttpStatusCode.Equals("InvalidSecurity"));
+
+                if (invalidCredentials)
+                {
+                    throw new Exception("Check the provided Azure Credentials.");
+                }
+                else
+                {
+                    throw new Exception("Error occurred: " + WasbException.Message);
+                }
+            }
+        }
+        #endregion
         private async Task<StreamWithMetadata> GetStreamFromAzureInternalAsync(string filename, string path)
         {
             try
