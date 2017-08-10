@@ -16,6 +16,10 @@ namespace Intranet.Selenium.Framework
             _logger = logger;
         }
 
+        /// <summary>
+        /// Instruct the webdriver to go to a specific URL
+        /// </summary>
+        /// <param name="url">URL to navigate to</param>
         public void GoToUrl(string url)
         {
             _logger.Write($"NAVIGATE: Go to URL: '{url}'");
@@ -23,6 +27,9 @@ namespace Intranet.Selenium.Framework
             _logger.Write("Navigation Successful");
         }
 
+        /// <summary>
+        /// Instruct the webdriver to refresh the current page
+        /// </summary>
         public void Refresh()
         {
             _logger.Write("NAVIGATE: Refresh");
@@ -30,6 +37,9 @@ namespace Intranet.Selenium.Framework
             _logger.Write("Navigation Successful");
         }
 
+        /// <summary>
+        /// Instruct the webdriver to go to the previous page in the browsing history
+        /// </summary>
         public void GoBack()
         {
             _logger.Write("NAVIGATE: Back");
@@ -37,6 +47,9 @@ namespace Intranet.Selenium.Framework
             _logger.Write("Navigation Successful");
         }
 
+        /// <summary>
+        /// Instruct the webdriver to go the next page in the browsing history
+        /// </summary>
         public void GoForward()
         {
             _logger.Write("NAVIGATE: Forward");
@@ -44,6 +57,10 @@ namespace Intranet.Selenium.Framework
             _logger.Write("Navigation Successful");
         }
 
+        /// <summary>
+        /// Scroll the current page until the specified element is in view
+        /// </summary>
+        /// <param name="target">Element to scroll into view</param>
         public void ScrollToElement(Element target)
         {
             ScrollToElement(target.FirstOrDefault(), target.Name);

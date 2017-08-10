@@ -45,11 +45,20 @@ namespace Intranet.Selenium.Framework
 
         }
 
+        /// <summary>
+        /// Write a message to the log, using default level (info)
+        /// </summary>
+        /// <param name="message">Message to log</param>
         public void Write(string message)
         {
             Write(message, Level.Info);
         }
 
+        /// <summary>
+        /// Write a message to the log, using the specified level
+        /// </summary>
+        /// <param name="message">Message to log</param>
+        /// <param name="level">Level of message</param>
         public void Write(string message, Level level)
         {
             switch (level)
@@ -78,6 +87,10 @@ namespace Intranet.Selenium.Framework
             }
         }
 
+        /// <summary>
+        /// Save a screenshot of the current browser view
+        /// </summary>
+        /// <param name="fileName">Name of screenshot</param>
         public void SaveScreenshot(string fileName)
         {
             Screenshot screenshot = _screenshotDriver.GetScreenshot();
@@ -90,6 +103,12 @@ namespace Intranet.Selenium.Framework
             screenshot.SaveAsFile(fullPath, ScreenshotImageFormat.Png);
         }
 
+        /// <summary>
+        /// Instantiate a Logger with the specified name and minimum message level
+        /// </summary>
+        /// <param name="name">Name of logger</param>
+        /// <param name="minLevel">Messages of lower level than this will not be logged</param>
+        /// <returns>Logger with appropriate name, minimum level and settings</returns>
         private Logger GetLogger(string name, NLog.LogLevel minLevel)
         {
             string savePath = GetSavePath();                                    //Generate save path 
@@ -124,12 +143,19 @@ namespace Intranet.Selenium.Framework
 
         }
 
+        /// <summary>
+        /// Create the directory where logs will be saved (if it does not already exist)
+        /// </summary>
         private void CreateReportDirectory()
         {
             string savePath = GetSavePath();
             Directory.CreateDirectory(savePath);
         }
 
+        /// <summary>
+        /// Calculate and return savepath for logs and screenshots.
+        /// </summary>
+        /// <returns>Savepath as string</returns>
         private string GetSavePath()
         {
             string compiledPath = $@"{_basePath}\log";

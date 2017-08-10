@@ -17,11 +17,20 @@ namespace Intranet.Selenium.Framework
             _logger = logger;
         }
 
+        /// <summary>
+        /// Click the specified Element
+        /// </summary>
+        /// <param name="element">Target element</param>
         public void Click(Element element)
         {
             Click(element.FirstOrDefault(), element.Name);
         }
 
+        /// <summary>
+        /// Click the specified IWebElement
+        /// </summary>
+        /// <param name="element">Target IWebelement</param>
+        /// <param name="name">Name of element (For logging purposes)</param>
         public void Click(IWebElement element, string name)
         {
             _logger.Write($"INTERACT: Click Element {name}");
@@ -38,11 +47,24 @@ namespace Intranet.Selenium.Framework
             }
         }
 
+        /// <summary>
+        /// Click the specified Element, with an offset
+        /// </summary>
+        /// <param name="element">Target element</param>
+        /// <param name="xOffset">Horizontal offset</param>
+        /// <param name="yOffset">Vertical offset</param>
         public void Click(Element element, int xOffset, int yOffset)
         {
             Click(element.FirstOrDefault(), element.Name, xOffset, yOffset);
         }
 
+        /// <summary>
+        /// Click the specified IWebElement, with and offset
+        /// </summary>
+        /// <param name="element">Target IWebElement</param>
+        /// <param name="name">name of element (for logging purposes)</param>
+        /// <param name="xOffset">Horizontal offset</param>
+        /// <param name="yOffset">Vertical offset</param>
         public void Click(IWebElement element, string name, int xOffset, int yOffset)
         {
             _logger.Write($"INTERACT: Click Element {name} with offset X: {xOffset}, Y: {yOffset}");
@@ -64,11 +86,20 @@ namespace Intranet.Selenium.Framework
             }
         }
 
+        /// <summary>
+        /// Emulate a Click action using JavaScript - only use if regular click does not register properly
+        /// </summary>
+        /// <param name="element">Target element</param>
         public void ClickJS(Element element)
         {
             ClickJS(element.FirstOrDefault(), element.Name);
         }
 
+        /// <summary>
+        /// Emulate a Click action using JavaScript - only use if regular click does not register properly
+        /// </summary>
+        /// <param name="element">Target IWebElement</param>
+        /// <param name="name">name of element (for logging purposes)</param>
         public void ClickJS(IWebElement element, string name)
         {
             _logger.Write($"INTERACT: Click Element {name} using JavaScript");
@@ -84,11 +115,22 @@ namespace Intranet.Selenium.Framework
             }
         }
 
+        /// <summary>
+        /// Send key input to element
+        /// </summary>
+        /// <param name="element">Target element</param>
+        /// <param name="input">Input to send</param>
         public void SendKeys(Element element, string input)
         {
             SendKeys(element.FirstOrDefault(), element.Name, input);
         }
 
+        /// <summary>
+        /// Semd key input to IWebElement
+        /// </summary>
+        /// <param name="element">Target IWebElement</param>
+        /// <param name="name">Name fo element (for logging purposes)</param>
+        /// <param name="input">Input to send</param>
         public void SendKeys(IWebElement element, string name, string input)
         {
             _logger.Write($"INTERACT: Send Input to Element {name}: '{input}'");

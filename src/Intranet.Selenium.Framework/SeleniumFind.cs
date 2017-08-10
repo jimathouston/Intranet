@@ -17,6 +17,12 @@ namespace Intranet.Selenium.Framework
             _logger = logger;
         }
 
+        /// <summary>
+        /// Find all IWebElements matching the specified identifier and return as Element object
+        /// </summary>
+        /// <param name="identifier">Identifier describing the element(s) to find</param>
+        /// <param name="elementName">Name of IWebElement(s) for logging purposes</param>
+        /// <returns>Element containing all IWebElements on current page matching identifier</returns>
         public Element Elements(By identifier, string elementName)
         {
             _logger.Write($"FIND: Element(s) {elementName}");
@@ -33,6 +39,14 @@ namespace Intranet.Selenium.Framework
             }
         }
 
+        /// <summary>
+        /// Wait for up to timeOut for at least one IWebElement on the current page to match identifier,
+        /// then return all matching IWebElements as Element object
+        /// </summary>
+        /// <param name="identifier">Identifier describing the element(s) to find</param>
+        /// <param name="elementName">Name of IWebElement(s) for logging purposes</param>
+        /// <param name="timeOut">Time to wait in Milliseconds</param>
+        /// <returns></returns>
         public Element Elements(By identifier, string elementName, int timeOut)
         {
             const int pollFreq = 100;
@@ -59,6 +73,13 @@ namespace Intranet.Selenium.Framework
             }
         }
 
+        /// <summary>
+        /// Returns true if at least one IWebElement on the current page matches the provided identifier,
+        /// also saves any found elements though a reference variable
+        /// </summary>
+        /// <param name="identifier">identifier describing the element(s) to find</param>
+        /// <param name="elements">List of IWebElements to save any matching elements to</param>
+        /// <returns>True if at least one element matches identifier, otherwise false</returns>
         private bool ElementExists(By identifier, ref List<IWebElement> elements)
         {
             try
