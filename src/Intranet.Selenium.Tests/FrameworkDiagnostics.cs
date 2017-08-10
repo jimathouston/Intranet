@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Intranet.Selenium.Tests
 {
-//pragma warning disable S3881 //full implementation of IDisposable not necessary; only used as a workaround (since xUnit does not support [TearDown] or similar)
+#pragma warning disable S3881 //full implementation of IDisposable not necessary; only used as a workaround (since xUnit does not support [TearDown] or similar)
     public class FrameworkDiagnostics : IDisposable
     {
         const string Url = "http://34.248.135.81";
@@ -78,43 +78,10 @@ namespace Intranet.Selenium.Tests
             driver.Log.Write("Test Completed");
         }
 
-        private bool disposedValue = false; // To detect redundant calls
-
-        protected virtual void Dispose(bool disposing)
+        public void Dispose()
         {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    // TODO: dispose managed state (managed objects).
-                }
-
-                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // TODO: set large fields to null.
-
-                disposedValue = true;
-            }
+            driver.Kill();
+            result.Evaluate();
         }
-
-        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~FrameworkDiagnostics() {
-        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-        //   Dispose(false);
-        // }
-
-        // This code added to correctly implement the disposable pattern.
-        void IDisposable.Dispose()
-        {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-            Dispose(true);
-            // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
-        }
-
-        //public void Dispose()
-        //{
-        //    driver.Kill();
-        //    result.Evaluate();
-        //}
     }
 }
