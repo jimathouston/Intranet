@@ -1,0 +1,27 @@
+﻿@model IPagedList
+@{
+    Func<int, string> generatePageUrl = ViewBag.GeneratePageUrl;
+
+    var RenderOptions = new PagedListRenderOptions
+    {
+        DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+        DisplayLinkToLastPage = PagedListDisplayMode.Never,
+
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+
+        DisplayEllipsesWhenNotShowingAllPageNumbers = true,
+
+        MaximumPageNumbersToDisplay = 3,
+
+        LiElementClasses = new List<string> { "waves-effect" },
+        ActiveLiElementClass = "active",
+
+        LinkToNextPageFormat = "<i class=\"material-icons\">chevron_right</i>",
+        LinkToPreviousPageFormat = "<i class=\"material-icons\">chevron_left</i>",
+    };
+}
+
+<div class="row center">
+    @Html.PagedListPager(Model, generatePageUrl, RenderOptions)
+</div>

@@ -30,6 +30,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.1" />
     <PackageReference Include="System.ValueTuple" Version="4.4.0-preview1-25305-02" />
     <PackageReference Include="ImageSharp" Version="1.0.0-alpha9-00171" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="1.0.4-beta" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.1" />

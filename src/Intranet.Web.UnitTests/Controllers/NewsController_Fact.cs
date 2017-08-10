@@ -20,6 +20,7 @@ using System.Text;
 using Xunit;
 using System.Threading.Tasks;
 using Intranet.Services.FileStorageService;
+using X.PagedList;
 
 namespace Intranet.Web.UnitTests.Controllers
 {
@@ -637,6 +638,34 @@ namespace Intranet.Web.UnitTests.Controllers
                 Assert.Equal(newsFromController.Title, title);
                 Assert.Equal(newsFromController.Text, text);
                 Assert.Equal(newsFromController.UserId, username);
+            }
+        }
+
+        [Fact]
+        public async Task Get_All_News_Should_Return_Paginated_News()
+        {
+            // Assign
+            var news = GetFakeNews();
+            var dateTimeFactory = new DateTimeFactory();
+            var fileServiceMock = new Mock<IFileStorageService>();
+
+            DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news));
+
+            using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
+            {
+                var newsController = new NewsController(context, dateTimeFactory, fileServiceMock.Object);
+                var newsController2 = new NewsController(context, dateTimeFactory, fileServiceMock.Object);
+
+                // Act
+                var firstPageResponse = await newsController.Index(1);
+                var secondPageResponse = await newsController2.Index(2);
+                var firstPageModels = firstPageResponse.GetModelAs<IPagedList<NewsViewModel>>();
+                var secondPageModels = secondPageResponse.GetModelAs<IPagedList<NewsViewModel>>();
+
+
+                // Assert
+                Assert.Equal(1, firstPageModels.Count);
+                Assert.Equal(0, secondPageModels.Count);
             }
         }
 

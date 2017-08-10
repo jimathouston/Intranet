@@ -15,6 +15,7 @@ using Intranet.Web.Domain.Helpers;
 using Intranet.Web.Common.Helpers;
 using Intranet.Services.FileStorageService;
 using Intranet.Web.Common.Extensions;
+using X.PagedList;
 
 namespace Intranet.Web.Controllers
 {
@@ -35,7 +36,7 @@ namespace Intranet.Web.Controllers
 
         #region GET
         // GET: News
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromQuery(Name = "page")]int pageNumber = 1)
         {
             try
             {
@@ -46,11 +47,15 @@ namespace Intranet.Web.Controllers
                         .ThenInclude(nt => nt.Tag)
                     .ToListAsync();
 
-                var newsViewModel = news
+                var newsViewModels = news
                     .Select(n => new NewsViewModel(n))
+                    .OrderBy(m => m.Published)
+                    .ThenByDescending(m => m.Created)
                     .ToList();
 
-                return View(newsViewModel);
+                var onePageOfNews = newsViewModels.ToPagedList(pageNumber, pageSize: 5);
+
+                return View(onePageOfNews);
             }
             catch (Exception)
             {
