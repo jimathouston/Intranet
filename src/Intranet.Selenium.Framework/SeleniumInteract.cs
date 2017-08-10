@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using OpenQA.Selenium.Interactions;
+using Intranet.Selenium.Framework.Enums;
 
 namespace Intranet.Selenium.Framework
 {
