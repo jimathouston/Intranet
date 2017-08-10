@@ -7,6 +7,7 @@ using System.Text;
 using Microsoft.DotNet.PlatformAbstractions;
 using System.IO;
 using OpenQA.Selenium;
+using Intranet.Selenium.Framework.Enums;
 
 namespace Intranet.Selenium.Framework
 {

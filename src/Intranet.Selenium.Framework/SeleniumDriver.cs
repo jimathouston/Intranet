@@ -5,6 +5,7 @@ using OpenQA.Selenium.IE;
 using OpenQA.Selenium.PhantomJS;
 using Microsoft.DotNet.PlatformAbstractions;
 using System;
+using Intranet.Selenium.Framework.Enums;
 
 namespace Intranet.Selenium.Framework
 {
