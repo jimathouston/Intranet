@@ -29,26 +29,27 @@ namespace Intranet.Services.FileStorageService
             _container = _client.GetContainerReference("man-container");
         }
         #region Get
-        public async Task<MemoryStream> GetBlobAsync(String blobName)
+        public async Task<StreamWithMetadata> GetBlobAsync(String filename)
         {
-            CloudBlockBlob blockBlob = _container.GetBlockBlobReference(blobName);
-            using (var memoryStream = new MemoryStream())
-            {
-                await blockBlob.DownloadToStreamAsync(memoryStream);
-                return memoryStream;
-            }
+            return await GetStreamFromAzureInternalAsync(filename, PathsInternal.Files);
 
         }
 
-        public async Task<MemoryStream> GetImageAsync(String blobName)
+        async public Task<StreamWithMetadata> GetImageAsync(string filename)
         {
-            CloudBlockBlob blockBlob = _container.GetBlockBlobReference(blobName);
-            using (var memoryStream = new MemoryStream())
+            var path = GetImagePathInternal(filename);
+
+            var streamWithMetadata = await GetStreamFromAzureInternalAsync(filename, path);
+
+            if (streamWithMetadata!=null)
             {
-                await blockBlob.DownloadToStreamAsync(memoryStream);
-                return memoryStream;
+                return streamWithMetadata;
             }
 
+            // If the image didn't exist it could have been added manually to the root of the image folder
+            path = $"{PathsInternal.Images}";
+
+            return await GetStreamFromAzureInternalAsync(filename, path);
         }
         #endregion
         #region SET
@@ -64,10 +65,63 @@ namespace Intranet.Services.FileStorageService
                 return fileName;
             }
         }
-#endregion
+        #endregion
 
+        #region Private Methods
+        private async Task<StreamWithMetadata> GetStreamFromAzureInternalAsync(string filename, string path)
+        {
+            try
+            {
+                var key = $"{path}/{filename}";
 
+                CloudBlockBlob blockBlob = _container.GetBlockBlobReference(key);
 
+                var readstream = await blockBlob.OpenReadAsync();
+                return new StreamWithMetadata(readstream, blockBlob.Properties.ContentType, blockBlob.Properties.ETag);
 
+            }
+            catch (StorageException WasbException)
+            {
+
+                if (WasbException.RequestInformation.HttpStatusCode == (int)System.Net.HttpStatusCode.NotFound)
+                {
+                    return null;
+                }
+
+                var invalidCredentials = WasbException.RequestInformation.HttpStatusMessage != null && (WasbException.RequestInformation.HttpStatusCode.Equals(
+                    "InvalidAccessKeyId") || WasbException.RequestInformation.HttpStatusMessage.Equals("InvalidSecurity"));
+
+                if (invalidCredentials)
+                {
+                    throw new Exception("Check the provided Azure Credentials.");
+                }
+                else
+                {
+                    throw new Exception("Error occurred: " + WasbException.Message);
+                }
+            }
+        }
+        #endregion
+        #region Private Helpers
+        private static string GetImagePathInternal(string filename)
+        {
+            return $"{PathsInternal.Images}/{Path.GetFileNameWithoutExtension(filename)}/original";
+        }
+
+        private static string GetImagePathInternal(string filename, int width, int height)
+        {
+            return $"{PathsInternal.Images}/{Path.GetFileNameWithoutExtension(filename)}/w_{width}-h_{height}";
+        }
+
+        private struct PathsInternal
+        {
+            public const string Files = "files";
+            public const string Images = "images";
+            public const string Original = "original";
+        }
+        #endregion
     }
+
+
+
 }
