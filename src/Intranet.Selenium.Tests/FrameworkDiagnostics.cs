@@ -8,26 +8,28 @@ using System.Linq;
 
 namespace Intranet.Selenium.Tests
 {
-    public class FrameworkDiagnostics
+    public class FrameworkDiagnostics : IDisposable
     {
         const string Url = "http://34.248.135.81";
+        SeleniumDriver driver;
+        ResultTracker result;
 
         [Fact]
         public void LoginTest_Pass()
         {
-            SeleniumDriver driver = new SeleniumDriver(Browser.Chrome, nameof(LoginTest_Pass));
+            driver = new SeleniumDriver(Browser.Chrome, nameof(LoginTest_Pass));
+            result = new ResultTracker(AssertLevel.Hard, driver.Log);
             driver.Log.Write("Test Initiated");
 
             driver.Navigate.GoToUrl(Url);
             try
             {
-                Assert.True(driver.Verify.ElementExists(By.XPath("//form[@class = 'login-form']"), "Login Form"));
-                driver.Log.Write("PASS");
+                Assert.True(driver.Verify.ElementExists(By.XPath("x//form[@class = 'login-form']"), "Login Form"));
+                result.Pass();
             }
-            catch (Xunit.Sdk.TrueException)
+            catch (Xunit.Sdk.TrueException e)
             {
-                driver.Log.Write("FAIL");
-                throw;
+                result.Fail(e);
             }
 
             Element usernameInput =
@@ -43,24 +45,24 @@ namespace Intranet.Selenium.Tests
             driver.Interact.Click(loginButton);
 
             driver.Log.Write("Test Completed");
-            driver.Kill();
         }
 
         [Fact]
         public void LoginTest_Fail()
         {
-            SeleniumDriver driver = new SeleniumDriver(Browser.Chrome, nameof(LoginTest_Fail));
+            driver = new SeleniumDriver(Browser.Chrome, nameof(LoginTest_Fail));
+            result = new ResultTracker(AssertLevel.Soft, driver.Log);
             driver.Log.Write("Test Initiated");
 
             driver.Navigate.GoToUrl(Url);
             try
             {
                 Assert.True(driver.Verify.ElementExists(By.XPath("gibberish"), "Login Form (bad XPath)"));
-                driver.Log.Write("PASS");
+                result.Pass();
             }
-            catch (Xunit.Sdk.TrueException)
+            catch (Xunit.Sdk.TrueException e)
             {
-                driver.Log.Write("FAIL");
+                result.Fail(e);
             }
 
             Element usernameInput =
@@ -72,8 +74,12 @@ namespace Intranet.Selenium.Tests
             driver.Interact.SendKeys(loginButton, "text to a button");
 
             driver.Log.Write("Test Completed");
-            driver.Kill();
+        }
 
+        public void Dispose()
+        {
+            driver.Kill();
+            result.Evaluate();
         }
     }
 }
