@@ -11,15 +11,12 @@
     </environment>
     <environment names="Staging,Production">
     </environment>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="~/assets/css/materialize.light.css" asp-append-version="true" />
     @RenderSection("Styles", required: false)
     @Html.Raw(JavaScriptSnippet.FullScript)
     @Html.Partial("_GoogleAnalytics")
 </head>
 <body>
-    <link rel="stylesheet" href="~/assets/css/materialize.complete.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/assets/css/main.css" asp-append-version="true" />
     <nav>
         @await Html.PartialAsync("Navigation/_Navigation")
     </nav>
@@ -32,6 +29,9 @@
         @Html.Partial("_Footer")
     </footer>
 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="~/assets/css/materialize.complete.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/assets/css/main.css" asp-append-version="true" />
     @Html.Partial("_Scripts")
     @RenderSection("Scripts", required: false)
 </body>
