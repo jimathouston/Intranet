@@ -15,16 +15,16 @@ namespace Intranet.Selenium.Tests
         ResultTracker result;
 
         [Fact]
-        public void LoginTest_Pass()
+        public void LoginTest_Pass() // demo - should pass
         {
             driver = new SeleniumDriver(Browser.Chrome, nameof(LoginTest_Pass));
-            result = new ResultTracker(AssertLevel.Hard, driver.Log);
+            result = new ResultTracker(AssertLevel.Soft, driver.Log);
             driver.Log.Write("Test Initiated");
 
             driver.Navigate.GoToUrl(Url);
             try
             {
-                Assert.True(driver.Verify.ElementExists(By.XPath("x//form[@class = 'login-form']"), "Login Form"));
+                Assert.True(driver.Verify.ElementExists(By.XPath("//form[@class = 'login-form']"), "Login Form"));
                 result.Pass();
             }
             catch (Xunit.Sdk.TrueException e)
@@ -48,7 +48,7 @@ namespace Intranet.Selenium.Tests
         }
 
         [Fact]
-        public void LoginTest_Fail()
+        public void LoginTest_Fail() // demo - should fail
         {
             driver = new SeleniumDriver(Browser.Chrome, nameof(LoginTest_Fail));
             result = new ResultTracker(AssertLevel.Soft, driver.Log);
