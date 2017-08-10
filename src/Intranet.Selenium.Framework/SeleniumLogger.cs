@@ -107,8 +107,8 @@ namespace Intranet.Selenium.Framework
 
             string time = _logStart.ToString("yyyyMMdd-HHmm");
 
-            fileTarget.FileName = $@"{savePath}\{time}_{name}.log";                    //set name (and path) of savefile
-            fileTarget.Layout = @"${date} | ${level} | ${message}";     //Define layout for file
+            fileTarget.FileName = $@"{savePath}\{time}_{name}.log";             //set name (and path) of savefile
+            fileTarget.Layout = @"${date} | ${level} | ${message}";             //Define layout for file
 
             consoleTarget.Layout = @"${time} | ${level} | ${message}";
 
