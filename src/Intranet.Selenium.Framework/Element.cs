@@ -8,7 +8,7 @@ namespace Intranet.Selenium.Framework
 {
     public class Element
     {
-        public List<IWebElement> Elements { get; set; }
+        public IEnumerable<IWebElement> Elements { get; set; }
         public string Name { get; set; }
 
         public Element (IWebElement element, string elementName)
@@ -20,7 +20,7 @@ namespace Intranet.Selenium.Framework
             Name = elementName;
         }
 
-        public Element (List<IWebElement> elements, string elementName)
+        public Element (IEnumerable<IWebElement> elements, string elementName)
         {
             Elements = new List<IWebElement>(elements);
             Name = elementName;
