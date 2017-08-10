@@ -39,12 +39,12 @@ then
   docker build -t buildweb -f Dockerfile-build .
   docker run -v `pwd`:/app -p 80:80 buildweb
   docker build -t web -f Dockerfile .
-elif ["$1" = "run"]
+elif [ "$1" = "run" ]
 then
   docker run -p 80:80 web
 else
   docker build -t buildweb -f Dockerfile-build .
   docker run -v `pwd`:/app -p 80:80 buildweb
   docker build -t web -f Dockerfile .
-  docker run -p 80:80 web
+  docker run -d -p 80:80 web
 fi
