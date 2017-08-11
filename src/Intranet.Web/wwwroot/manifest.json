@@ -1,0 +1,8 @@
+﻿{
+  "short_name": "Intranet",
+  "name": "Certaincy Intranet",
+  "start_url": "/?utm_source=homescreen",
+  "background_color": "#e8eaf6",
+  "theme_color": "#e8eaf6",
+  "display": "fullscreen"
+}

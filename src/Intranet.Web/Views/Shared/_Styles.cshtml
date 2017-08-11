@@ -19,6 +19,13 @@
 </noscript>
 @* END: Complete Stylesheet for Materialize CSS *@
 
+@* BEGIN: Offline.js *@
+<link rel="stylesheet" href="~/assets/css/offline.css" media="none" onload="if (media!=='all') { media='all' }" asp-append-version="true">
+<noscript>
+    <link rel="stylesheet" href="~/assets/css/offline.css" asp-append-version="true" />
+</noscript>
+@* END: Offline.js *@
+
 @* BEGIN: Custom Site CSS *@
 <link rel="stylesheet" href="~/assets/css/main.css" media="none" onload="if (media!=='all') { media='all' }" asp-append-version="true">
 <noscript>

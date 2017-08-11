@@ -130,6 +130,8 @@ namespace Intranet.Web
             );
             #endregion
 
+            // TODO: Enforce SSL: https://docs.microsoft.com/en-us/aspnet/core/security/enforcing-ssl
+
             #region Response Compression
             services.AddResponseCompression();
             #endregion

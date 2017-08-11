@@ -1,4 +1,4 @@
-﻿/// <binding BeforeBuild='default' />
+﻿/// <binding BeforeBuild='default' ProjectOpened='watch' />
 'use strict'
 
 var gulp = require('gulp')
@@ -30,7 +30,8 @@ gulp.task('sass', ['clean-sass'], function () {
             'scss/main.scss',
             'scss/login.scss',
             'scss/materialize.light.scss',
-            'scss/materialize.complete.scss'
+            'scss/materialize.complete.scss',
+            'scss/offline.scss'
         ])
         .pipe(sourcemaps.init({ loadMaps: true }))
         .pipe(sass({ outputStyle: 'compressed' }))
@@ -42,7 +43,7 @@ gulp.task('typescript', ['clean-typescript'], function () {
     return browserify({
         basedir: '.',
         debug: true,
-        entries: ['scripts/main.ts'],
+        entries: ['scripts/main.ts', 'scripts/offline.min.js'],
         cache: {},
         packageCache: {}
     })
