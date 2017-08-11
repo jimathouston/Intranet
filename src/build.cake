@@ -1,6 +1,8 @@
 ﻿#addin "NuGet.Core"
 #addin "Cake.ExtendedNuGet"
 #addin "Cake.Npm"
+#addin "Cake.DocFx"
+#tool "docfx.console"
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
@@ -101,8 +103,12 @@ Task("Run-Unit-Tests")
     }
 });
 
+Task("Generate-Documentation")
+  .Does(() => DocFxBuild("../docfx.json"));
+
 Task("Publish")
     .IsDependentOn("Run-Unit-Tests")
+    .IsDependentOn("Generate-Documentation")
     .Does(() =>
 {
     DotNetCorePublish("./Intranet.Web");

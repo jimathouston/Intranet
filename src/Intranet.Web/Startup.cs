@@ -216,6 +216,11 @@ namespace Intranet.Web
                 Path = "/Assets",
             });
 
+            app.UseProtectFolder(new ProtectFolderOptions
+            {
+                Path = "/Docs",
+            });
+
             app.UseStaticFiles(); // For the wwwroot folder
 
             app.UseStaticFiles(new StaticFileOptions()
@@ -224,6 +229,14 @@ namespace Intranet.Web
                     Path.Combine(Directory.GetCurrentDirectory(), @"Assets")
                 ),
                 RequestPath = new PathString("/Assets")
+            });
+
+            app.UseFileServer(new FileServerOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), @"Documentation")
+                ),
+                RequestPath = new PathString("/Docs")
             });
             #endregion
 

@@ -1,0 +1,1 @@
+﻿This is only a placeholder folder for DocFX and nothing should be added here.

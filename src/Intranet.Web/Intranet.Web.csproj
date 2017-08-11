@@ -13,6 +13,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <!-- Json is included by default so we have to exclude it do avoid duplications -->
+    <Content Include="Documentation\**\*" Exclude="Documentation\**\*.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.3.3" />
     <PackageReference Include="AWSSDK.S3" Version="3.3.8.2" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />

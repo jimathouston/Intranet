@@ -15,6 +15,11 @@
     <li><a asp-area="" asp-controller="Faqs" asp-action="Index">FAQ's</a></li>
     <li><a asp-area="" asp-controller="Policies" asp-action="Index">Policies</a></li>
     <li><div class="divider"></div></li>
+    @if (User.IsDeveloper() || User.IsAdmin())
+    {
+        <li><a href="/docs">Documentation</a></li>
+        <li><div class="divider"></div></li>
+    }
     <li><a class="subheader">External Sites</a></li>
     <li>
         <a href="http://time.certaincy.com/" target="_blank" rel="noopener">

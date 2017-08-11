@@ -23,6 +23,16 @@ namespace Intranet.Web.Extensions
         }
 
         /// <summary>
+        /// Returns true if the user is Developer
+        /// </summary>
+        /// <param name="claimsPrincipal"></param>
+        /// <returns></returns>
+        public static bool IsDeveloper(this ClaimsPrincipal claimsPrincipal)
+        {
+            return claimsPrincipal.IsInRole("Developer");
+        }
+
+        /// <summary>
         /// Get the username
         /// </summary>
         /// <param name="claimsPrincipal"></param>
