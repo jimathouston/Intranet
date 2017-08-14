@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CoreCompat.Selenium.WebDriver" Version="3.4.0-beta001" />
+    <PackageReference Include="Microsoft.DotNet.PlatformAbstractions" Version="1.1.2" />
+    <PackageReference Include="NLog" Version="5.0.0-beta09" />
+    <PackageReference Include="NLog.Config" Version="4.5.0-alpha04" />
+    <PackageReference Include="Selenium.Chrome.WebDriver" Version="2.30.0" />
+    <PackageReference Include="Selenium.Firefox.WebDriver" Version="0.18.0" />
+    <PackageReference Include="Selenium.InternetExplorer.WebDriver" Version="3.4.0" />
+    <PackageReference Include="Selenium.PhantomJS.WebDriver" Version="2.1.1" />
+  </ItemGroup>
+
+</Project>
