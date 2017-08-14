@@ -30,8 +30,8 @@ namespace Intranet.Web.Controllers
         {
             var categories = await _context.Categories
                     .Include(c => c.Faqs)
-                        .ThenInclude(f => f.FaqKeywords)
-                            .ThenInclude(fk => fk.Keyword)
+                        .ThenInclude(f => f.FaqTags)
+                            .ThenInclude(ft => ft.Tag)
                     .ToListAsync() ?? new List<Category>();
 
             return View(categories);
@@ -48,8 +48,8 @@ namespace Intranet.Web.Controllers
 
             var faq = await _context.Faqs
                 .Include(f => f.Category)
-                .Include(f => f.FaqKeywords)
-                    .ThenInclude(fk => fk.Keyword)
+                .Include(f => f.FaqTags)
+                    .ThenInclude(ft => ft.Tag)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
             if (faq.IsNull())
@@ -67,9 +67,16 @@ namespace Intranet.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         // GET: Faqs/Create
         [Authorize("IsAdmin")]
-        public IActionResult Create()
+        public IActionResult Create([FromQuery] string category = null)
         {
-            ViewData["Categories"] = new SelectList(_context.Categories, nameof(Category.Title), nameof(Category.Title));
+            if (category.IsNull())
+            {
+                ViewData["Categories"] = new SelectList(_context.Categories, nameof(Category.Title), nameof(Category.Title));
+            }
+            else
+            {
+                ViewData["Categories"] = new SelectList(_context.Categories, nameof(Category.Title), nameof(Category.Title), category);
+            }
 
             var vm = new FaqViewModel();
             vm.Category = new Category();
@@ -79,7 +86,7 @@ namespace Intranet.Web.Controllers
         [Authorize("IsAdmin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Category,Question,Answer,Keywords")] FaqViewModel faqVM)
+        public async Task<IActionResult> Create([Bind("Category,Question,Answer,Tags")] FaqViewModel faqVM)
         {
             if (ModelState.IsValid)
             {
@@ -108,9 +115,9 @@ namespace Intranet.Web.Controllers
                     Url = CustomUrlHelper.URLFriendly(faqVM.Question),
                 };
 
-                var keywords = KeywordHelpers.GetKeywordsFromString(faqVM.Keywords);
-                var allKeywordEntities = GetAllKeywordEntitiesInternal(faqVM, keywords);
-                KeywordHelpers.SetKeywords<Faq, FaqKeyword>(keywords, faq, allKeywordEntities);
+                var tags = TagHelpers.GetTagsFromString(faqVM.Tags);
+                var allTagEntities = GetAllTagEntitiesInternal(faqVM, tags);
+                TagHelpers.SetTags<Faq, FaqTag>(tags, faq, allTagEntities);
 
                 await _context.AddAsync(faq);
 
@@ -135,8 +142,8 @@ namespace Intranet.Web.Controllers
 
             var faq = await _context.Faqs
                 .Include(f => f.Category)
-                .Include(f => f.FaqKeywords)
-                    .ThenInclude(fk => fk.Keyword)
+                .Include(f => f.FaqTags)
+                    .ThenInclude(ft => ft.Tag)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
             if (faq == null)
@@ -194,9 +201,9 @@ namespace Intranet.Web.Controllers
                 entity.Answer = faqVM.Answer;
                 entity.Question = faqVM.Question;
 
-                var keywords = KeywordHelpers.GetKeywordsFromString(faqVM.Keywords);
-                var allKeywordEntities = GetAllKeywordEntitiesInternal(faqVM, keywords);
-                KeywordHelpers.SetKeywords<Faq, FaqKeyword>(keywords, entity, allKeywordEntities);
+                var tags = TagHelpers.GetTagsFromString(faqVM.Tags);
+                var allTagEntities = GetAllTagEntitiesInternal(faqVM, tags);
+                TagHelpers.SetTags<Faq, FaqTag>(tags, entity, allTagEntities);
 
                 await _context.SaveChangesAsync();
 
@@ -218,8 +225,8 @@ namespace Intranet.Web.Controllers
 
             var faq = await _context.Faqs
                 .Include(f => f.Category)
-                .Include(f => f.FaqKeywords)
-                    .ThenInclude(fk => fk.Keyword)
+                .Include(f => f.FaqTags)
+                    .ThenInclude(ft => ft.Tag)
                 .SingleOrDefaultAsync(m => m.Id == id);
 
             if (faq == null)
@@ -237,8 +244,8 @@ namespace Intranet.Web.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var faq = await _context.Faqs
-                    .Include(f => f.FaqKeywords)
-                        .ThenInclude(fk => fk.Keyword)
+                    .Include(f => f.FaqTags)
+                        .ThenInclude(ft => ft.Tag)
                     .Include(f => f.Category)
                         .ThenInclude(c => c.Faqs)
                     .SingleOrDefaultAsync(f => f.Id == id);
@@ -256,12 +263,12 @@ namespace Intranet.Web.Controllers
                 _context.Remove(faq.Category);
             }
 
-            // If the keywords has no more related entities then delete the category as well
-            foreach (var keyword in faq.FaqKeywords.Select(fk => fk.Keyword))
+            // If the tags has no more related entities then delete the category as well
+            foreach (var tag in faq.FaqTags.Select(ft => ft.Tag))
             {
-                if (await KeywordHelpers.HasNoRelatedEntities(keyword, _context, ignore: faq.FaqKeywords))
+                if (await TagHelpers.HasNoRelatedEntities(tag, _context, ignore: faq.FaqTags))
                 {
-                    _context.Remove(keyword);
+                    _context.Remove(tag);
                 }
             }
 
@@ -272,17 +279,17 @@ namespace Intranet.Web.Controllers
         #endregion
         
         #region Private Helpers
-        private List<Keyword> GetAllKeywordEntitiesInternal(FaqViewModel faq, IEnumerable<string> keywords)
+        private List<Tag> GetAllTagEntitiesInternal(FaqViewModel faq, IEnumerable<string> tags)
         {
-            if (keywords.IsNull())
+            if (tags.IsNull())
             {
-                return new List<Keyword>();
+                return new List<Tag>();
             }
 
-            return _context.Keywords?
-            .Include(k => k.FaqKeywords)
-                .ThenInclude(fk => fk.Faq)?
-            .Where(k => keywords.Contains(k.Name, StringComparer.OrdinalIgnoreCase) || k.FaqKeywords.Any(nk => nk.FaqId.Equals(faq.Id)))
+            return _context.Tags?
+            .Include(k => k.FaqTags)
+                .ThenInclude(ft => ft.Faq)?
+            .Where(k => tags.Contains(k.Name, StringComparer.OrdinalIgnoreCase) || k.FaqTags.Any(nt => nt.FaqId.Equals(faq.Id)))
             .ToList();
         }
 

@@ -308,11 +308,11 @@ namespace Intranet.Web.UnitTests.Controllers
             // Assign
             var faq = new Faq
             {
-                Id = 1,
                 Question = "q",
                 Answer = "",
                 Category = new Category
                 {
+                    Id = 1,
                     Title = "t",
                 },
             };

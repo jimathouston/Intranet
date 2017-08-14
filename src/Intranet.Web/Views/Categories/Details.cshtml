@@ -2,28 +2,31 @@
 
 @{
     ViewData["Title"] = "Details";
+    var from = ViewData["from"] ?? String.Empty;
 }
 
-<h2>Details</h2>
+<h2>@ViewData["Title"]</h2>
 
 <div>
     <h4>Category</h4>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Faqs)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Faqs.Count)
-        </dd>
-    </dl>
+    <table class="striped col s12 responsive-table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Title)</th>
+                <th>Faq's</th>
+                <th>Policies</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.Title)</td>
+                <td>@(Model.Faqs?.Any() == true ? Model.Faqs.Count : 0)</td>
+                <td>@(Model.Policies?.Any() == true ? Model.Policies.Count : 0)</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" asp-route-from="@from">Edit</a> |
+    <a asp-action="Index" asp-route-from="@from">Back to List</a>
 </div>

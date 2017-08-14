@@ -20,22 +20,24 @@ namespace Intranet.Web.Controllers
 
         public CategoriesController(IntranetApiContext context)
         {
-            _context = context;    
+            _context = context;
         }
 
         #region GET
         // GET: Categories
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index([FromQuery] string from = null)
         {
             var categories = await _context.Categories
-                    .Include(m => m.Faqs)
-                    .ToListAsync();
+                .Include(m => m.Faqs)
+                .ToListAsync();
+
+            ViewData["from"] = from;
 
             return View(categories);
         }
 
         // GET: Categories/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, [FromQuery] string from = null)
         {
             if (id == null)
             {
@@ -51,14 +53,18 @@ namespace Intranet.Web.Controllers
                 return NotFound();
             }
 
+            ViewData["from"] = from;
+
             return View(category);
         }
         #endregion
-        
+
         #region CREATE
         // GET: Categories/Create
-        public IActionResult Create()
+        public IActionResult Create([FromQuery] string from = null)
         {
+            ViewData["from"] = from;
+
             return View(new Category());
         }
 
@@ -67,7 +73,7 @@ namespace Intranet.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title")] Category category)
+        public async Task<IActionResult> Create([Bind("Id,Title")] Category category, [FromQuery] string from = null)
         {
             if (ModelState.IsValid)
             {
@@ -88,15 +94,16 @@ namespace Intranet.Web.Controllers
                 await _context.SaveChangesAsync();
 
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Details", new { Id = category.Id });
+                return RedirectToAction("Details", new { Id = category.Id, from });
             }
+            ViewData["from"] = from;
             return View(category);
         }
         #endregion
 
         #region EDIT
         // GET: Categories/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id, [FromQuery] string from = null)
         {
             if (id == null)
             {
@@ -112,6 +119,8 @@ namespace Intranet.Web.Controllers
                 return NotFound();
             }
 
+            ViewData["from"] = from;
+
             return View(category);
         }
 
@@ -120,7 +129,7 @@ namespace Intranet.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title")] Category category, [FromQuery] string from = null)
         {
             if (id != category?.Id)
             {
@@ -153,15 +162,16 @@ namespace Intranet.Web.Controllers
                     throw;
                 }
                 
-                return RedirectToAction("Details", new { Id = id });
+                return RedirectToAction("Details", new { id, from });
             }
+            ViewData["from"] = from;
             return View(category);
         }
         #endregion
 
         #region DELETE
         // GET: Categories/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, [FromQuery] string from = null)
         {
             if (id == null)
             {
@@ -179,8 +189,10 @@ namespace Intranet.Web.Controllers
 
             if (category.Faqs.Any())
             {
-                ModelState.AddModelError("Error", "Must remove all FAQ's first!");
+                ModelState.AddModelError("Error", "Must remove all FAQ's and policies first!");
             }
+
+            ViewData["from"] = from;
 
             return View(category);
         }
@@ -188,7 +200,7 @@ namespace Intranet.Web.Controllers
         // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, [FromQuery] string from = null)
         {
             var category = await _context.Categories
                 .Include(m => m.Faqs)
@@ -201,14 +213,14 @@ namespace Intranet.Web.Controllers
 
             if (category.Faqs.Any())
             {
-                ModelState.AddModelError("Error", "Must remove all FAQ's first!");
+                ModelState.AddModelError("Error", "Must remove all FAQ's and policies first!");
                 return View(category);
             }
 
             _context.Remove(category);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { from });
         }
         #endregion
 

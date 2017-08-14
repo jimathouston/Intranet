@@ -1,36 +1,38 @@
 ﻿@model Intranet.Web.Domain.Models.Entities.Category
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Delete Category";
+    var from = ViewData["from"] ?? String.Empty;
 }
 
-<h2>Delete</h2>
+<h2>@ViewData["Title"]</h2>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>Category</h4>
-    <hr />
     <div asp-validation-summary="All" class="text-danger"></div>
-    <dl class="dl-horizontal">
-        <input type="hidden" asp-for="Id" />
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Faqs)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Faqs.Count)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <table class="striped col s12 responsive-table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Title)</th>
+                <th>Faq's</th>
+                <th>Policies</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.Title)</td>
+                <td>@(Model.Faqs?.Any() == true ? Model.Faqs.Count : 0)</td>
+                <td>@(Model.Policies?.Any() == true ? Model.Policies.Count : 0)</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <form asp-action="Delete" asp-route-from="@from">
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            <a asp-action="Index">Back to List</a>
+            <input type="submit" value="Delete" class="btn" /> |
+            <a asp-action="Index" asp-route-from="@from" class="btn">Cancel</a>
         </div>
     </form>
 </div>

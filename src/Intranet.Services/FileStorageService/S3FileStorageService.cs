@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
+using Microsoft.AspNetCore.Http.Internal;
 
 namespace Intranet.Services.FileStorageService
 {
@@ -84,28 +86,9 @@ namespace Intranet.Services.FileStorageService
         {
             var path = GetImagePathInternal(filename, width, height);
 
-            try
-            {
-                using (stream)
-                {
-                    await _transferUtility.UploadAsync(stream, _settings.BucketName, $"{path}/{filename}");
+            var file = new FormFile(stream, 0, stream.Length, String.Empty, filename);
 
-                    return filename;
-                }
-            }
-            catch (AmazonS3Exception amazonS3Exception)
-            {
-                var invalidCredentials = amazonS3Exception.ErrorCode != null && (amazonS3Exception.ErrorCode.Equals("InvalidAccessKeyId") || amazonS3Exception.ErrorCode.Equals("InvalidSecurity"));
-
-                if (invalidCredentials)
-                {
-                    throw new Exception("Check the provided AWS Credentials.");
-                }
-                else
-                {
-                    throw new Exception("Error occurred: " + amazonS3Exception.Message);
-                }
-            }
+            return await SetStreamToS3InternalAsync(file, path);
         }
         #endregion
 

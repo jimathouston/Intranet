@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Intranet.Web.Domain.Models.Entities
 {
-    public class Policy : IHasKeywords
+    public class Policy : IHasTags
     {
         public int Id { get; set; }
 
@@ -19,10 +19,11 @@ namespace Intranet.Web.Domain.Models.Entities
 
         public string Description { get; set; }
 
-        public ICollection<PolicyKeyword> PolicyKeywords { get; set; }
+        public ICollection<PolicyTag> PolicyTags { get; set; }
 
         public string FileUrl { get; set; }
 
+        [Required]
         public string Url { get; set; }
     }
 }

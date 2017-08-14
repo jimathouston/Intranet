@@ -1,0 +1,20 @@
+﻿@charset "UTF-8";
+
+// Mixins
+@import "materialize/mixins";
+@import "materialize/color";
+
+// Variables;
+@import "materialize/variables";
+
+// Reset
+@import "materialize/normalize";
+
+// components
+@import "materialize/global";
+@import "materialize/grid";
+@import "materialize/navbar";
+@import "materialize/cards";
+@import "materialize/buttons";
+@import "materialize/sideNav";
+@import "materialize/typography";

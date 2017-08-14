@@ -15,24 +15,24 @@ namespace Intranet.Web.UnitTests.ViewModels
             // Assign
             var newsViewModel = new NewsViewModel();
 
-            newsViewModel.NewsKeywords = null;
+            newsViewModel.NewsTags = null;
             // Act
 
             // Assert
-            Assert.Null(newsViewModel.Keywords);
+            Assert.Null(newsViewModel.Tags);
         }
 
         [Fact]
-        public void Return_Keyword()
+        public void Return_Tag()
         {
             // Assign
             var newsViewModel = new NewsViewModel();
 
-            newsViewModel.NewsKeywords = new List<NewsKeyword>
+            newsViewModel.NewsTags = new List<NewsTag>
             {
-                new NewsKeyword
+                new NewsTag
                 {
-                    Keyword = new Keyword
+                    Tag = new Tag
                     {
                         Name = "test",
                     }
@@ -41,27 +41,27 @@ namespace Intranet.Web.UnitTests.ViewModels
             // Act
 
             // Assert
-            Assert.Equal(newsViewModel.Keywords, "test");
+            Assert.Equal(newsViewModel.Tags, "test");
         }
 
         [Fact]
-        public void Return_Keywords()
+        public void Return_Tags()
         {
             // Assign
             var newsViewModel = new NewsViewModel();
 
-            newsViewModel.NewsKeywords = new List<NewsKeyword>
+            newsViewModel.NewsTags = new List<NewsTag>
             {
-                new NewsKeyword
+                new NewsTag
                 {
-                    Keyword = new Keyword
+                    Tag = new Tag
                     {
                         Name = "test",
                     }
                 },
-                new NewsKeyword
+                new NewsTag
                 {
-                    Keyword = new Keyword
+                    Tag = new Tag
                     {
                         Name = "test2",
                     }
@@ -70,27 +70,27 @@ namespace Intranet.Web.UnitTests.ViewModels
             // Act
 
             // Assert
-            Assert.Equal(newsViewModel.Keywords, "test,test2");
+            Assert.Equal(newsViewModel.Tags, "test,test2");
         }
 
         [Fact]
-        public void Return_Keywords_From_News()
+        public void Return_Tags_From_News()
         {
             // Assign
             var news = new News
             {
-                NewsKeywords = new List<NewsKeyword>
+                NewsTags = new List<NewsTag>
                 {
-                    new NewsKeyword
+                    new NewsTag
                     {
-                        Keyword = new Keyword
+                        Tag = new Tag
                         {
                             Name = "test",
                         }
                     },
-                    new NewsKeyword
+                    new NewsTag
                     {
-                        Keyword = new Keyword
+                        Tag = new Tag
                         {
                             Name = "test2",
                         }
@@ -102,20 +102,20 @@ namespace Intranet.Web.UnitTests.ViewModels
             // Act
 
             // Assert
-            Assert.Equal(newsViewModel.Keywords, "test,test2");
+            Assert.Equal(newsViewModel.Tags, "test,test2");
         }
 
         [Fact]
-        public void Should_Be_Possible_To_Set_Keywords()
+        public void Should_Be_Possible_To_Set_Tags()
         {
             // Assign
             var newsViewModel = new NewsViewModel();
 
             // Act
-            newsViewModel.Keywords = "test";
+            newsViewModel.Tags = "test";
 
             // Assert
-            Assert.Equal(newsViewModel.Keywords, "test");
+            Assert.Equal(newsViewModel.Tags, "test");
         }
     }
 }

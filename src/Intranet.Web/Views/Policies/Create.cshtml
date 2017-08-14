@@ -1,0 +1,24 @@
+﻿@model PolicyViewModel
+
+@{
+    ViewData["Title"] = "Create Policy";
+}
+
+<h2>@ViewData["Title"]</h2>
+<div class="row">
+    <form enctype="multipart/form-data" asp-action="Create" class="col s12">
+        <div class="row">
+            <h4>Policy</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            @Html.Partial("_PolicyForm")
+            <div class="row">
+                <input type="submit" value="Create" class="btn" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

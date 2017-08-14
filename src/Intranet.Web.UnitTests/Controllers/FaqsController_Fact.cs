@@ -351,7 +351,7 @@ namespace Intranet.Web.UnitTests.Controllers
         }
 
         [Fact]
-        public async Task Delete_Should_Return_OkResult()
+        public async Task Delete_Faq_Should_Return_OkResult()
         {
             // Assign
             var faq = new Faq
@@ -363,11 +363,11 @@ namespace Intranet.Web.UnitTests.Controllers
                 {
                     Title = "",
                 },
-                FaqKeywords = new List<FaqKeyword>
+                FaqTags = new List<FaqTag>
                 {
-                    new FaqKeyword
+                    new FaqTag
                     {
-                        Keyword = new Keyword
+                        Tag = new Tag
                         {
                             Id = 1,
                         },
@@ -391,7 +391,7 @@ namespace Intranet.Web.UnitTests.Controllers
             {
                 Assert.Equal(0, context.Faqs.Count());
                 Assert.Equal(0, context.Categories.Count());
-                Assert.Equal(0, context.Keywords.Count());
+                Assert.Equal(0, context.Tags.Count());
             }
         }
 

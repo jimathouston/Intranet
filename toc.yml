@@ -8,5 +8,3 @@
   topicHref: src/docs/use-cases/news.md
 - name: API Documentation
   href: src/docs/obj/api/
-- name: REST API
-  href: src/docs/restapi/

@@ -2,13 +2,13 @@
 
 <div asp-validation-summary="All" class="text-danger"></div>
 <div class="row">
-    <div class="input-field col s5">
+    <div class="input-field col s12 m5">
         <select asp-for="Category.Title" asp-items="ViewBag.Categories"></select>
         <label asp-for="Category.Title">Category</label>
     </div>
 </div>
 <div class="row">
-    <div class="input-field col s5">
+    <div class="input-field col s12 m5">
         <input asp-for="Question" />
         <label asp-for="Question"></label>
         <span asp-validation-for="Question" class="text-danger"></span>
@@ -23,9 +23,9 @@
     @Html.Partial("_TextEditor", new TextEditorViewModel { Id = nameof(Model.Answer), Text = Model.Answer })
 </div>
 <div class="row">
-    <div class="input-field col s5">
-        <input asp-for="Keywords" />
-        <label asp-for="Keywords"></label>
-        <span asp-validation-for="Keywords" class="text-danger"></span>
+    <div class="input-field col s12 m5">
+        <input asp-for="Tags" />
+        <label asp-for="Tags"></label>
+        <span asp-validation-for="Tags" class="text-danger"></span>
     </div>
 </div>

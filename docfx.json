@@ -4,8 +4,8 @@
       "src": [
         {
           "files": [ "**/*.csproj" ],
-          "exclude": [ "**/bin/**", "**/obj/**", "**/*.UnitTests*/*.csproj" ],
-          "cwd": "src"
+          "exclude": [ "**/bin/**", "**/obj/**", "**/*.UnitTests*/*.csproj", "**/*.Test.Tools.csproj" ],
+          "src": "."
         }
       ],
       "dest": "src/docs/obj/api"
@@ -15,7 +15,7 @@
     "content": [
       {
         "files": [ "**/*.yml" ],
-        "cwd": "src/docs/obj/api",
+        "src": "src/docs/obj/api",
         "dest": "api"
       },
       {
@@ -37,6 +37,6 @@
         "branch": "develop"
       }
     },
-    "dest": "docs"
+    "dest": "src/Intranet.Web/Documentation"
   }
 }

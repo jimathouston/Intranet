@@ -8,9 +8,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Intranet_Web</title>
+    <title>Login - Certaincy Intranet</title>
     <base href="/" />
-    <link rel="stylesheet" href="~/dist/vendor.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/login.css" />
 </head>
 <body>
@@ -20,6 +19,13 @@
             <form class="login-form" action="@returnUrl" method="post">
                 <input type="text" name="username" placeholder="username" />
                 <input type="password" name="password" placeholder="password" />
+                @{ Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateEntry loginError; }
+                @if (ViewContext.ModelState.TryGetValue("Login", out loginError))
+                {
+                    <p style="color:red;font-weight:bold;">
+                        @loginError.Errors.SingleOrDefault().ErrorMessage
+                    </p>
+                }
                 <button>login</button>
             </form>
         </div>

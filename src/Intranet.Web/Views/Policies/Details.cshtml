@@ -1,0 +1,35 @@
+﻿@model PolicyViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>@ViewData["Title"]</h2>
+<div>
+    <h4>Policy</h4>
+    <ul class="collapsible">
+        <li id="@Html.DisplayFor(modelItem => modelItem.Url)">
+            <div class="collapsible-header valign-wrapper active" style="@(String.IsNullOrWhiteSpace(Model.Description) ? "cursor:default;" : String.Empty)">
+                <i class="material-icons">question_answer</i>
+                <span>
+                    @Html.DisplayFor(modelItem => modelItem.Title)
+                </span>
+            </div>
+            @if (Model.Description.IsNotNull())
+            {
+                <div class="collapsible-body">
+                    <span>
+                        @Html.Raw(Model.Description)
+                    </span>
+                </div>
+            }
+        </li>
+    </ul>
+    <p>
+        Download: <a href="blob/@Model.FileUrl">@Model.FileUrl</a>
+    </p>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

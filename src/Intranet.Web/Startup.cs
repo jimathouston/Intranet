@@ -27,6 +27,8 @@ using Amazon.S3.Transfer;
 using Intranet.Web.Models.Options;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using Microsoft.AspNetCore.ResponseCompression;
+using Intranet.Web.Authentication.Services.E2E;
 
 namespace Intranet.Web
 {
@@ -75,7 +77,15 @@ namespace Intranet.Web
                 services.AddTransient<IAuthenticationProvider, DevelopmentAuthenticationProvider>();
             }
 
-            services.AddTransient<IAuthenticationService, LdapAuthenticationService>();
+            if (CurrentEnvironment.IsE2e())
+            {
+                services.AddTransient<IAuthenticationService, E2EAuthenticationService>();
+            }
+            else
+            {
+                services.AddTransient<IAuthenticationService, LdapAuthenticationService>();
+            }
+
             services.AddTransient<IDateTimeFactory, DateTimeFactory>();
             services.AddTransient<IImageService, ImageService>();
             services.AddAWSService<IAmazonS3>();
@@ -109,6 +119,21 @@ namespace Intranet.Web
             {
                 options.BucketName = Configuration["AWS_BUCKET_NAME"];
             });
+
+            services.Configure<GoogleAnalyticsOptions>(options =>
+            {
+                options.TrackingId = Configuration["GA_TRACKING_ID"];
+            });
+
+            services.Configure<GzipCompressionProviderOptions>(options =>
+                options.Level = System.IO.Compression.CompressionLevel.Optimal
+            );
+            #endregion
+
+            // TODO: Enforce SSL: https://docs.microsoft.com/en-us/aspnet/core/security/enforcing-ssl
+
+            #region Response Compression
+            services.AddResponseCompression();
             #endregion
 
             #region Mvc
@@ -181,10 +206,19 @@ namespace Intranet.Web
             loggerFactory.AddDebug();
             #endregion
 
+            #region Response Compression
+            app.UseResponseCompression();
+            #endregion
+
             #region Static Files
             app.UseProtectFolder(new ProtectFolderOptions
             {
                 Path = "/Assets",
+            });
+
+            app.UseProtectFolder(new ProtectFolderOptions
+            {
+                Path = "/Docs",
             });
 
             app.UseStaticFiles(); // For the wwwroot folder
@@ -195,6 +229,14 @@ namespace Intranet.Web
                     Path.Combine(Directory.GetCurrentDirectory(), @"Assets")
                 ),
                 RequestPath = new PathString("/Assets")
+            });
+
+            app.UseFileServer(new FileServerOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), @"Documentation")
+                ),
+                RequestPath = new PathString("/Docs")
             });
             #endregion
 

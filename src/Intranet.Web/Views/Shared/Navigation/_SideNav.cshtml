@@ -1,0 +1,41 @@
+﻿@using System.Security.Principal
+
+<ul id="slide-out" class="side-nav fixed">
+    <li>
+        <div class="user-view">
+            <div class="background">
+                <img class="lazyload" data-src="/image/w_250/h_160/pexels-photo-303024[1].jpeg" alt="Wet leavs. Background image for side navigation." />
+            </div>
+            @*<a href="#!user"><img src="~/Assets/images/samuel-scrimshaw-76649.jpg" class="circle" /></a>*@
+            <a href="#!name"><span class="white-text name">@User.GetDisplayName()</span></a>
+            <a href="#!email"><span class="white-text email">@User.GetEmail()</span></a>
+        </div>
+    </li>
+    <li><a asp-area="" asp-controller="News" asp-action="Index">News</a></li>
+    <li><a asp-area="" asp-controller="Faqs" asp-action="Index">FAQ's</a></li>
+    <li><a asp-area="" asp-controller="Policies" asp-action="Index">Policies</a></li>
+    <li><div class="divider"></div></li>
+    @if (User.IsDeveloper() || User.IsAdmin())
+    {
+        <li><a href="/docs">Documentation</a></li>
+        <li><div class="divider"></div></li>
+    }
+    <li><a class="subheader">External Sites</a></li>
+    <li>
+        <a href="http://time.certaincy.com/" target="_blank" rel="noopener">
+            <i class="material-icons left">watch_later</i> TIME
+        </a>
+    </li>
+    <li>
+        <a href="https://outlook.office.com/owa/" target="_blank" rel="noopener">
+            <i class="material-icons left">mail</i> Webmail
+        </a>
+    </li>
+    <li><div class="divider"></div></li>
+    <li>
+        <a asp-area="" asp-controller="Authentication" asp-action="Logout">
+            <i class="material-icons left">power_settings_new</i> Sign Out
+        </a>
+    </li>
+</ul>
+<a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>

@@ -71,16 +71,16 @@ namespace Intranet.Web.Authentication.Services
                         };
                     }
                 }
+                return null;
             }
             catch
             {
-                throw;
+                return null;
             }
             finally
             {
                 _connection.Disconnect();
             }
-            return null;
         }
 
         private int Port => _connection.SecureSocketLayer ? LdapConnection.DEFAULT_SSL_PORT : LdapConnection.DEFAULT_PORT;

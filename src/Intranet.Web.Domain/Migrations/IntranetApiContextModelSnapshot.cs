@@ -62,17 +62,17 @@ namespace Intranet.Web.Domain.Migrations
                     b.ToTable("Faq");
                 });
 
-            modelBuilder.Entity("Intranet.Web.Domain.Models.Entities.FaqKeyword", b =>
+            modelBuilder.Entity("Intranet.Web.Domain.Models.Entities.FaqTag", b =>
                 {
                     b.Property<int>("FaqId");
 
-                    b.Property<int>("KeywordId");
+                    b.Property<int>("TagId");
 
-                    b.HasKey("FaqId", "KeywordId");
+                    b.HasKey("FaqId", "TagId");
 
-                    b.HasIndex("KeywordId");
+                    b.HasIndex("TagId");
 
-                    b.ToTable("FaqKeyword");
+                    b.ToTable("FaqTag");
                 });
 
             modelBuilder.Entity("Intranet.Web.Domain.Models.Entities.Image", b =>
@@ -86,26 +86,6 @@ namespace Intranet.Web.Domain.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Image");
-                });
-
-            modelBuilder.Entity("Intranet.Web.Domain.Models.Entities.Keyword", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("Url");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.HasIndex("Url")
-                        .IsUnique();
-
-                    b.ToTable("Keyword");
                 });
 
             modelBuilder.Entity("Intranet.Web.Domain.Models.Entities.News", b =>
@@ -148,17 +128,17 @@ namespace Intranet.Web.Domain.Migrations
                     b.ToTable("News");
                 });
 
-            modelBuilder.Entity("Intranet.Web.Domain.Models.Entities.NewsKeyword", b =>
+            modelBuilder.Entity("Intranet.Web.Domain.Models.Entities.NewsTag", b =>
                 {
                     b.Property<int>("NewsId");
 
-                    b.Property<int>("KeywordId");
+                    b.Property<int>("TagId");
 
-                    b.HasKey("NewsId", "KeywordId");
+                    b.HasKey("NewsId", "TagId");
 
-                    b.HasIndex("KeywordId");
+                    b.HasIndex("TagId");
 
-                    b.ToTable("NewsKeyword");
+                    b.ToTable("NewsTag");
                 });
 
             modelBuilder.Entity("Intranet.Web.Domain.Models.Entities.Policy", b =>
@@ -175,7 +155,8 @@ namespace Intranet.Web.Domain.Migrations
                     b.Property<string>("Title")
                         .IsRequired();
 
-                    b.Property<string>("Url");
+                    b.Property<string>("Url")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -187,17 +168,37 @@ namespace Intranet.Web.Domain.Migrations
                     b.ToTable("Policy");
                 });
 
-            modelBuilder.Entity("Intranet.Web.Domain.Models.Entities.PolicyKeyword", b =>
+            modelBuilder.Entity("Intranet.Web.Domain.Models.Entities.PolicyTag", b =>
                 {
                     b.Property<int>("PolicyId");
 
-                    b.Property<int>("KeywordId");
+                    b.Property<int>("TagId");
 
-                    b.HasKey("PolicyId", "KeywordId");
+                    b.HasKey("PolicyId", "TagId");
 
-                    b.HasIndex("KeywordId");
+                    b.HasIndex("TagId");
 
-                    b.ToTable("PolicyKeyword");
+                    b.ToTable("PolicyTag");
+                });
+
+            modelBuilder.Entity("Intranet.Web.Domain.Models.Entities.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.HasIndex("Url")
+                        .IsUnique();
+
+                    b.ToTable("Tag");
                 });
 
             modelBuilder.Entity("Intranet.Web.Domain.Models.Entities.User", b =>
@@ -221,16 +222,16 @@ namespace Intranet.Web.Domain.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Intranet.Web.Domain.Models.Entities.FaqKeyword", b =>
+            modelBuilder.Entity("Intranet.Web.Domain.Models.Entities.FaqTag", b =>
                 {
                     b.HasOne("Intranet.Web.Domain.Models.Entities.Faq", "Faq")
-                        .WithMany("FaqKeywords")
+                        .WithMany("FaqTags")
                         .HasForeignKey("FaqId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Intranet.Web.Domain.Models.Entities.Keyword", "Keyword")
-                        .WithMany("FaqKeywords")
-                        .HasForeignKey("KeywordId")
+                    b.HasOne("Intranet.Web.Domain.Models.Entities.Tag", "Tag")
+                        .WithMany("FaqTags")
+                        .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -246,16 +247,16 @@ namespace Intranet.Web.Domain.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Intranet.Web.Domain.Models.Entities.NewsKeyword", b =>
+            modelBuilder.Entity("Intranet.Web.Domain.Models.Entities.NewsTag", b =>
                 {
-                    b.HasOne("Intranet.Web.Domain.Models.Entities.Keyword", "Keyword")
-                        .WithMany("NewsKeywords")
-                        .HasForeignKey("KeywordId")
+                    b.HasOne("Intranet.Web.Domain.Models.Entities.News", "News")
+                        .WithMany("NewsTags")
+                        .HasForeignKey("NewsId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Intranet.Web.Domain.Models.Entities.News", "News")
-                        .WithMany("NewsKeywords")
-                        .HasForeignKey("NewsId")
+                    b.HasOne("Intranet.Web.Domain.Models.Entities.Tag", "Tag")
+                        .WithMany("NewsTags")
+                        .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -267,16 +268,16 @@ namespace Intranet.Web.Domain.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Intranet.Web.Domain.Models.Entities.PolicyKeyword", b =>
+            modelBuilder.Entity("Intranet.Web.Domain.Models.Entities.PolicyTag", b =>
                 {
-                    b.HasOne("Intranet.Web.Domain.Models.Entities.Keyword", "Keyword")
-                        .WithMany("PolicyKeywords")
-                        .HasForeignKey("KeywordId")
+                    b.HasOne("Intranet.Web.Domain.Models.Entities.Policy", "Policy")
+                        .WithMany("PolicyTags")
+                        .HasForeignKey("PolicyId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Intranet.Web.Domain.Models.Entities.Policy", "Policy")
-                        .WithMany("PolicyKeywords")
-                        .HasForeignKey("PolicyId")
+                    b.HasOne("Intranet.Web.Domain.Models.Entities.Tag", "Tag")
+                        .WithMany("PolicyTags")
+                        .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

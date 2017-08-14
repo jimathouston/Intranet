@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "Policies";
+    var dummy = new PolicyViewModel();
+    var categories = User.IsInRole("Admin") ? Model : Model.Where(m => m.Policies.Any());
+}
+
+<h2>@ViewData["Title"]</h2>
+<p>
+    <a class="btn" asp-action="Create">Create New</a>
+</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-controller="Categories" asp-route-from="@nameof(Policy)">Edit Categories</a>
+    </p>
+}
+<div class="row">
+    @foreach (var category in categories)
+    {
+        <h3>
+            @category.Title
+        </h3>
+        @if (category.Policies.Any())
+        {
+            <ul class="collapsible" data-collapsible="expandable">
+            @foreach (var policy in category.Policies)
+            {
+                    <li>
+                        <div class="collapsible-header" style="@(String.IsNullOrWhiteSpace(policy.Description) ? "cursor:default;" : String.Empty)">
+                            <div class="row" style="width:100%;margin:0;">
+                                <div class="col s6 valign-wrapper" style="padding:0;height:100%;">
+                                    <a href="blob/@policy.FileUrl" style="color:rgba(0,0,0,0.87);">
+                                        <i class="material-icons">description</i>
+                                    </a>
+                                    <div style="height:100%;">
+                                        @policy.Title
+                                    </div>
+                                </div>
+                                <div class="card col s6 right" style="margin:0;box-shadow:0 0 0 0 rgba(0,0,0,0), 0 0 0 0 rgba(0,0,0,0), 0 0 0 0 rgba(0,0,0,0);">
+                                    <div class="card-action right" style="border-top:0;margin:0;padding:4px 24px 4px 24px;">
+                                        <a style="margin:0 0 0 24px" href="blob/@policy.FileUrl">Download</a>
+                                        @if (User.IsAdmin())
+                                        {
+                                            <a style="margin:0 0 0 24px" asp-action="Edit" asp-route-id="@policy.Id">Edit</a>
+                                            <a style="margin:0 0 0 24px" asp-action="Delete" asp-route-id="@policy.Id">Delete</a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @if (!String.IsNullOrWhiteSpace(policy.Description))
+                        {
+                            <div class="collapsible-body">
+                                <span>
+                                    @Html.Raw(policy.Description)
+                                </span>
+                            </div>
+                        }
+                    </li>
+            }
+            </ul>
+        }
+        else
+        {
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        <i class="material-icons">description</i>
+                        <span>
+                            No policies in this category. Do you want to&nbsp;<a asp-action="Create" asp-route-category="@category.Title">create</a>&nbsp;one?
+                        </span>
+                    </div>
+                </li>
+            </ul>
+        }
+    }
+</div>

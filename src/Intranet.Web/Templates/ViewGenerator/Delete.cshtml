@@ -16,7 +16,7 @@
         }
 @:}
 @:
-@:<h2>@Model.ViewName</h2>
+@:<h2>@@ViewData["Title"]</h2>
 @:
     }
     else
@@ -72,7 +72,7 @@
     @:
     @:<form asp-action="@Model.ViewName">
         @:<div class="form-actions no-color">
-            @:<input type="submit" value="Delete" class="btn btn-default" /> |
+            @:<input type="submit" value="Delete" class="btn" /> |
             @:<a asp-action="Index">Back to List</a>
         @:</div>
     @:</form>

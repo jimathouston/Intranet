@@ -1,0 +1,16 @@
+﻿{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noEmit": true,
+    "noImplicitAny": true,
+    "target": "es5"
+  },
+  "files": [
+    "./scripts/main.ts"
+  ],
+  "exclude": ["**/*.js"],
+  "compileOnSave": false
+}

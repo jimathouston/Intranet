@@ -33,19 +33,28 @@ namespace Intranet.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string username, string password, string returnUrl)
         {
-            var user = _authenticationService.VerifyUser(username, password);
-            var claimsPrinciple = _authenticationProvider.GetClaimsPrincipal(user);
-
-            if (claimsPrinciple == null) return View();
-
-            await HttpContext.Authentication.SignInAsync("Cookies", claimsPrinciple);
-
-            if (Url.IsLocalUrl(returnUrl))
+            if (ModelState.IsValid)
             {
-                return Redirect(returnUrl);
+                var user = _authenticationService.VerifyUser(username, password);
+                var claimsPrinciple = _authenticationProvider.GetClaimsPrincipal(user);
+
+                if (claimsPrinciple == null)
+                {
+                    ViewData["ReturnUrl"] = returnUrl;
+                    ModelState.AddModelError("Login", "Username or password is incorrect.");
+                    return View();
+                };
+
+                await HttpContext.Authentication.SignInAsync("Cookies", claimsPrinciple);
+
+                if (Url.IsLocalUrl(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
             }
 
-            return Redirect("~/");
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
         }
 
         [HttpGet]
