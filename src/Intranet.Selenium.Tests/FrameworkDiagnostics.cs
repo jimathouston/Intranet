@@ -5,83 +5,59 @@ using Xunit;
 using OpenQA.Selenium;
 using Intranet.Selenium.Framework;
 using Intranet.Selenium.Framework.Enums;
+using Intranet.Selenium.Tests.Utils;
 using System.Linq;
 
 namespace Intranet.Selenium.Tests
-{
-#pragma warning disable S3881 //full implementation of IDisposable not necessary; only used as a workaround (since xUnit does not support [TearDown] or similar)
-    public class FrameworkDiagnostics : IDisposable
+{ 
+    public class FrameworkDiagnostics
     {
-        const string Url = "http://34.248.135.81";
-        SeleniumDriver driver;
-        ResultTracker result;
+        const string testUrl = "http://localhost:53491";
 
         [Fact]
-        public void LoginTest_Pass() // demo - should pass
+        public void LoginTest_Admin()
         {
-            driver = new SeleniumDriver(Browser.Chrome, nameof(LoginTest_Pass));
-            result = new ResultTracker(AssertLevel.Soft, driver.Log);
-            driver.Log.Write("Test Initiated");
+            ISeleniumDriver driver = new SeleniumDriver(
+                Browser.PhantomJS, 
+                AssertLevel.Soft, 
+                new SeleniumLogger(nameof(LoginTest_Admin), Level.Info));
 
-            driver.Navigate.GoToUrl(Url);
             try
             {
-                Assert.True(driver.Verify.ElementExists(By.XPath("//form[@class = 'login-form']"), "Login Form"));
-                result.Pass();
+                Navigate.GoToUrl(testUrl, driver);
+
+                LoginUtil.Login(AccountLevel.Admin, driver);
+
+                driver.Log("Test Completed");
             }
-            catch (Xunit.Sdk.TrueException e)
+            finally
             {
-                result.Fail(e);
+                driver.CloseBrowser();
+                driver.TestOutcome.Evaluate();
             }
-
-            Element usernameInput =
-                driver.Find.Elements(By.Name("username"), "Username Input Field");
-            driver.Interact.SendKeys(usernameInput, "aUser");
-
-            Element passwordInput =
-                driver.Find.Elements(By.Name("password"), "Password Input Field");
-            driver.Interact.SendKeys(passwordInput, "aPassword");
-
-            Element loginButton =
-                driver.Find.Elements(By.XPath("//form[@class = 'login-form']/button"), "Login Button");
-            driver.Interact.Click(loginButton);
-
-            driver.Log.Write("Test Completed");
         }
 
         [Fact]
-        public void LoginTest_Fail() // demo - should fail
+        public void LoginTest_User()
         {
-            driver = new SeleniumDriver(Browser.Chrome, nameof(LoginTest_Fail));
-            result = new ResultTracker(AssertLevel.Soft, driver.Log);
-            driver.Log.Write("Test Initiated");
+            ISeleniumDriver driver = new SeleniumDriver(
+                Browser.PhantomJS,
+                AssertLevel.Soft,
+                new SeleniumLogger(nameof(LoginTest_User), Level.Info));
 
-            driver.Navigate.GoToUrl(Url);
             try
             {
-                Assert.True(driver.Verify.ElementExists(By.XPath("gibberish"), "Login Form (bad XPath)"));
-                result.Pass();
+                Navigate.GoToUrl(testUrl, driver);
+
+                LoginUtil.Login(AccountLevel.User, driver);
+
+                driver.Log("Test Completed");
             }
-            catch (Xunit.Sdk.TrueException e)
+            finally
             {
-                result.Fail(e);
+                driver.CloseBrowser();
+                driver.TestOutcome.Evaluate();
             }
-
-            Element usernameInput =
-                driver.Find.Elements(By.Name("burk"), "Username Input Field (bad identifier)");
-            driver.Interact.SendKeys(usernameInput, "aUser");
-
-            Element loginButton =
-                driver.Find.Elements(By.XPath("//form[@class = 'login-form']/button"), "Login Button");
-            driver.Interact.SendKeys(loginButton, "text to a button");
-
-            driver.Log.Write("Test Completed");
-        }
-
-        public void Dispose()
-        {
-            driver.Kill();
-            result.Evaluate();
         }
     }
 }
