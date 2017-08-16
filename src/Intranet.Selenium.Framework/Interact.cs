@@ -7,24 +7,16 @@ using Intranet.Selenium.Framework.Enums;
 
 namespace Intranet.Selenium.Framework
 {
-    public class SeleniumInteract
+    public static class Interact
     {
-        private readonly IWebDriver _driver;
-        private readonly SeleniumLogger _logger;
-
-        public SeleniumInteract(IWebDriver driver, SeleniumLogger logger)
-        {
-            _driver = driver;
-            _logger = logger;
-        }
-
         /// <summary>
         /// Click the specified Element
         /// </summary>
         /// <param name="element">Target element</param>
-        public void Click(Element element)
+        /// <param name="driver">Target webdriver</param>
+        public static void Click(Element element, ISeleniumDriver driver)
         {
-            Click(element.FirstOrDefault(), element.Name);
+            Click(element.FirstOrDefault(), element.Name, driver);
         }
 
         /// <summary>
@@ -32,19 +24,20 @@ namespace Intranet.Selenium.Framework
         /// </summary>
         /// <param name="element">Target IWebelement</param>
         /// <param name="name">Name of element (For logging purposes)</param>
-        public void Click(IWebElement element, string name)
+        /// <param name="driver">Target webdriver</param>
+        public static void Click(IWebElement element, string name, ISeleniumDriver driver)
         {
-            _logger.Write($"INTERACT: Click Element {name}");
+            driver.Log($"INTERACT: Click Element {name}");
             try
             {
                 element.Click();
-                _logger.Write($"Action Completed");
+                driver.Log($"Action Completed");
             }
             catch (Exception e) when (e is InvalidElementStateException || e is ElementNotVisibleException || 
                 e is StaleElementReferenceException || e is NoSuchElementException || e is NullReferenceException)
             {
                 string exception = e.GetType().ToString();
-                _logger.Write($"Element {name} could not be clicked: {exception}", Level.Error);
+                driver.Log($"Element {name} could not be clicked: {exception}", Level.Error);
             }
         }
 
@@ -54,9 +47,10 @@ namespace Intranet.Selenium.Framework
         /// <param name="element">Target element</param>
         /// <param name="xOffset">Horizontal offset</param>
         /// <param name="yOffset">Vertical offset</param>
-        public void Click(Element element, int xOffset, int yOffset)
+        /// <param name="driver">Target webdriver</param>
+        public static void Click(Element element, int xOffset, int yOffset, ISeleniumDriver driver)
         {
-            Click(element.FirstOrDefault(), element.Name, xOffset, yOffset);
+            Click(element.FirstOrDefault(), element.Name, xOffset, yOffset, driver);
         }
 
         /// <summary>
@@ -66,10 +60,11 @@ namespace Intranet.Selenium.Framework
         /// <param name="name">name of element (for logging purposes)</param>
         /// <param name="xOffset">Horizontal offset</param>
         /// <param name="yOffset">Vertical offset</param>
-        public void Click(IWebElement element, string name, int xOffset, int yOffset)
+        /// <param name="driver">Target webdriver</param>
+        public static void Click(IWebElement element, string name, int xOffset, int yOffset, ISeleniumDriver driver)
         {
-            _logger.Write($"INTERACT: Click Element {name} with offset X: {xOffset}, Y: {yOffset}");
-            Actions builder = new Actions(_driver);
+            driver.Log($"INTERACT: Click Element {name} with offset X: {xOffset}, Y: {yOffset}");
+            Actions builder = new Actions(driver.DriverComponent);
             try
             {
                 IAction clickWithOffset = builder
@@ -77,13 +72,13 @@ namespace Intranet.Selenium.Framework
                     .Click()
                     .Build();
                 clickWithOffset.Perform();
-                _logger.Write("Action Completed");
+                driver.Log("Action Completed");
             }
             catch (Exception e) when (e is InvalidElementStateException || e is ElementNotVisibleException || 
                 e is StaleElementReferenceException || e is NoSuchElementException || e is NullReferenceException)
             {
                 string exception = e.GetType().ToString();
-                _logger.Write($"Element {name} could not be clicked: {exception}", Level.Error);
+                driver.Log($"Element {name} could not be clicked: {exception}", Level.Error);
             }
         }
 
@@ -91,9 +86,10 @@ namespace Intranet.Selenium.Framework
         /// Emulate a Click action using JavaScript - only use if regular click does not register properly
         /// </summary>
         /// <param name="element">Target element</param>
-        public void ClickJS(Element element)
+        /// <param name="driver">Target webdriver</param>
+        public static void ClickJS(Element element, ISeleniumDriver driver)
         {
-            ClickJS(element.FirstOrDefault(), element.Name);
+            ClickJS(element.FirstOrDefault(), element.Name, driver);
         }
 
         /// <summary>
@@ -101,18 +97,19 @@ namespace Intranet.Selenium.Framework
         /// </summary>
         /// <param name="element">Target IWebElement</param>
         /// <param name="name">name of element (for logging purposes)</param>
-        public void ClickJS(IWebElement element, string name)
+        /// <param name="driver">Target webdriver</param>
+        public static void ClickJS(IWebElement element, string name, ISeleniumDriver driver)
         {
-            _logger.Write($"INTERACT: Click Element {name} using JavaScript");
+            driver.Log($"INTERACT: Click Element {name} using JavaScript");
             try
             {
-                ((IJavaScriptExecutor)_driver).ExecuteScript("arguments[0].click()", element);
-                _logger.Write("Action Completed");
+                ((IJavaScriptExecutor)driver.DriverComponent).ExecuteScript("arguments[0].click()", element);
+                driver.Log("Action Completed");
             }
             catch (Exception e)
             {
                 string exception = e.GetType().ToString();
-                _logger.Write($"Element {name} could not be clicked: {exception}", Level.Error);
+                driver.Log($"Element {name} could not be clicked: {exception}", Level.Error);
             }
         }
 
@@ -121,9 +118,10 @@ namespace Intranet.Selenium.Framework
         /// </summary>
         /// <param name="element">Target element</param>
         /// <param name="input">Input to send</param>
-        public void SendKeys(Element element, string input)
+        /// <param name="driver">Target webdriver</param>
+        public static void SendKeys(Element element, string input, ISeleniumDriver driver)
         {
-            SendKeys(element.FirstOrDefault(), element.Name, input);
+            SendKeys(element.FirstOrDefault(), element.Name, input, driver);
         }
 
         /// <summary>
@@ -132,19 +130,20 @@ namespace Intranet.Selenium.Framework
         /// <param name="element">Target IWebElement</param>
         /// <param name="name">Name fo element (for logging purposes)</param>
         /// <param name="input">Input to send</param>
-        public void SendKeys(IWebElement element, string name, string input)
+        /// <param name="driver">Target webdriver</param>
+        public static void SendKeys(IWebElement element, string name, string input, ISeleniumDriver driver)
         {
-            _logger.Write($"INTERACT: Send Input to Element {name}: '{input}'");
+            driver.Log($"INTERACT: Send Input to Element {name}: '{input}'");
             try
             {
                 element.SendKeys(input);
-                _logger.Write("Action Completed");
+                driver.Log("Action Completed");
             }
             catch (Exception e) when (e is InvalidElementStateException || e is ElementNotVisibleException || 
                 e is StaleElementReferenceException || e is NoSuchElementException || e is NullReferenceException)
             {
                 string exception = e.GetType().ToString();
-                _logger.Write($"Input could not be sent to Element {name}: {exception}", Level.Error);
+                driver.Log($"Input could not be sent to Element {name}: {exception}", Level.Error);
             }
         }
     }

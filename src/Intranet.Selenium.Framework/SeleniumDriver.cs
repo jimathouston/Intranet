@@ -9,28 +9,28 @@ using Intranet.Selenium.Framework.Enums;
 
 namespace Intranet.Selenium.Framework
 {
-    public class SeleniumDriver
+    public class SeleniumDriver : ISeleniumDriver
     {
-        private readonly IWebDriver _driver;
+        public IWebDriver DriverComponent { get; }
+        public IResultTracker TestOutcome { get; }
 
-        public SeleniumNavigate Navigate { get; }
-        public SeleniumFind Find { get; }
-        public SeleniumVerify Verify { get; }
-        public SeleniumInteract Interact { get; }
-        public SeleniumLogger Log { get; }
+        private readonly ISeleniumLogger _logger;
 
-        public SeleniumDriver(Browser browser, string testName)
+        public SeleniumDriver(Browser browser, AssertLevel assertLevel, ISeleniumLogger logger)
         {
+            _logger = logger;
+            TestOutcome = new ResultTrackerXUnit(AssertLevel.Soft, _logger);
+
             switch (browser)
             {
                 case Browser.Chrome:
                     {
-                        _driver = new ChromeDriver(ApplicationEnvironment.ApplicationBasePath);
+                        DriverComponent = new ChromeDriver(ApplicationEnvironment.ApplicationBasePath);
                         break;
                     }
                 case Browser.Firefox:
                     {
-                        _driver = null;
+                        DriverComponent = null;
                         // Firefox temporary disabled as webdriver does not support specifying the path to the driver.
                         throw new NotImplementedException("Firefox Driver not implemented as driver does not support .NetCore");
                     }
@@ -42,37 +42,40 @@ namespace Intranet.Selenium.Framework
                             RequireWindowFocus = true,  // Required for Clicking, Dragging and Dropping to work.
                             IgnoreZoomLevel = true      // Required as ieDriver will otherwise only function at 100% zoom.
                         };
-                        _driver = new InternetExplorerDriver(ApplicationEnvironment.ApplicationBasePath, options);
+                        DriverComponent = new InternetExplorerDriver(ApplicationEnvironment.ApplicationBasePath, options);
                         break;
                     }
                 case Browser.PhantomJS:
                     {
-                        _driver = new PhantomJSDriver(ApplicationEnvironment.ApplicationBasePath);
+                        DriverComponent = new PhantomJSDriver(ApplicationEnvironment.ApplicationBasePath);
                         break;
                     }
                 default:
                     {
-                        _driver = null;
+                        DriverComponent = null;
                         throw new ArgumentOutOfRangeException($"No entry matching '{browser}' found in Enum 'Browser'");
                     }
             }
-
-            Log = new SeleniumLogger(testName, NLog.LogLevel.Info, DateTime.Now, _driver);
-            Navigate = new SeleniumNavigate(_driver, Log);
-            Find = new SeleniumFind(_driver, Log);
-            Verify = new SeleniumVerify(_driver, Log);
-            Interact = new SeleniumInteract(_driver, Log);
-            
         }
 
-        public IWebDriver DriverComponent()
+        public void Log(string message)
         {
-            return _driver;
+            _logger.Write(message);
         }
 
-        public void Kill()
+        public void Log(string message, Level level)
         {
-            _driver.Quit();
+            _logger.Write(message, level);
+        }
+
+        public void SaveScreenshot(string screenshotName)
+        {
+            _logger.SaveScreenshot(screenshotName, this);
+        }
+
+        public void CloseBrowser()
+        {
+            DriverComponent.Quit();
         }
     }
 }

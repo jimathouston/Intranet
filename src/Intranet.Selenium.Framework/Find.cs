@@ -7,35 +7,27 @@ using Intranet.Selenium.Framework.Enums;
 namespace Intranet.Selenium.Framework
 {
 
-    public class SeleniumFind
+    public static class Find
     {
-        private readonly IWebDriver _driver;
-        private readonly SeleniumLogger _logger;
-
-        public SeleniumFind(IWebDriver driver, SeleniumLogger logger)
-        {
-            _driver = driver;
-            _logger = logger;
-        }
-
         /// <summary>
         /// Find all IWebElements matching the specified identifier and return as Element object
         /// </summary>
         /// <param name="identifier">Identifier describing the element(s) to find</param>
         /// <param name="elementName">Name of IWebElement(s) for logging purposes</param>
+        /// <param name="driver">Target webdriver</param>
         /// <returns>Element containing all IWebElements on current page matching identifier</returns>
-        public Element Elements(By identifier, string elementName)
+        public static Element Elements(By identifier, string elementName, ISeleniumDriver driver)
         {
-            _logger.Write($"FIND: Element(s) {elementName}");
+            driver.Log($"FIND: Element(s) {elementName}");
             try
             {
-                List<IWebElement> elements = new List<IWebElement>(_driver.FindElements(identifier));
-                _logger.Write($"{elements.Count} matching Element(s) found");
+                List<IWebElement> elements = new List<IWebElement>(driver.DriverComponent.FindElements(identifier));
+                driver.Log($"{elements.Count} matching Element(s) found");
                 return new Element(elements, elementName);
             }
             catch (NoSuchElementException)
             {
-                _logger.Write("0 matching Element(s) found", Level.Warn);
+                driver.Log("0 matching Element(s) found", Level.Warn);
                 return null;
             }
         }
@@ -47,16 +39,17 @@ namespace Intranet.Selenium.Framework
         /// <param name="identifier">Identifier describing the element(s) to find</param>
         /// <param name="elementName">Name of IWebElement(s) for logging purposes</param>
         /// <param name="timeOut">Time to wait in Milliseconds</param>
+        /// <param name="driver">Target webdriver</param>
         /// <returns></returns>
-        public Element Elements(By identifier, string elementName, int timeOut)
+        public static Element Elements(By identifier, string elementName, int timeOut, ISeleniumDriver driver)
         {
             const int pollFreq = 100;
             int waited = 0;
 
-            _logger.Write($"FIND: Element(s) {elementName} (timeOut: {timeOut}ms)");
+            driver.Log($"FIND: Element(s) {elementName} (timeOut: {timeOut}ms)");
             List<IWebElement> elements = new List<IWebElement>();
 
-            while (!ElementExists(identifier, ref elements) && waited <= timeOut)
+            while (!ElementExists(identifier, ref elements, driver.DriverComponent) && waited <= timeOut)
             {
                 System.Threading.Thread.Sleep(pollFreq);
                 waited += pollFreq;
@@ -64,12 +57,12 @@ namespace Intranet.Selenium.Framework
 
             if (elements.Count > 0)
             {
-                _logger.Write($"{elements.Count} matching Element(s) found");
+                driver.Log($"{elements.Count} matching Element(s) found");
                 return new Element(elements, elementName);
             }
             else
             {
-                _logger.Write("0 matching Element(s) found within time limit", Level.Warn);
+                driver.Log("0 matching Element(s) found within time limit", Level.Warn);
                 return null;
             }
         }
@@ -80,12 +73,13 @@ namespace Intranet.Selenium.Framework
         /// </summary>
         /// <param name="identifier">identifier describing the element(s) to find</param>
         /// <param name="elements">List of IWebElements to save any matching elements to</param>
+        /// <param name="driver">Target webdriver</param>
         /// <returns>True if at least one element matches identifier, otherwise false</returns>
-        private bool ElementExists(By identifier, ref List<IWebElement> elements)
+        private static bool ElementExists(By identifier, ref List<IWebElement> elements, ISearchContext webdriver)
         {
             try
             {
-                IReadOnlyList<IWebElement> foundElements = _driver.FindElements(identifier);
+                IReadOnlyList<IWebElement> foundElements = webdriver.FindElements(identifier);
                 elements.AddRange(foundElements);
                 return true;
             }

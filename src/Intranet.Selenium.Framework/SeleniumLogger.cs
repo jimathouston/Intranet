@@ -11,28 +11,26 @@ using Intranet.Selenium.Framework.Enums;
 
 namespace Intranet.Selenium.Framework
 {
-    public class SeleniumLogger
+    public class SeleniumLogger : ISeleniumLogger
     {
+        private readonly LogFactory _logFactory;
         private readonly LoggingConfiguration _logConfig;
         private readonly Logger _logger;
-
-        private readonly ITakesScreenshot _screenshotDriver;
 
         private readonly DateTime _logStart;
         private readonly string _basePath;
         private readonly string _logName;
 
-        public SeleniumLogger(string logName, NLog.LogLevel minLevel, DateTime logStart, IWebDriver driver)
+        public SeleniumLogger(string logName, Level minLevel)
         {
             _logName = logName;
-            _logStart = logStart;
+            _logStart = DateTime.Now;
             _basePath = Path.GetFullPath($@"{ApplicationEnvironment.ApplicationBasePath}\..\..\..");
             CreateReportDirectory();
 
+            _logFactory = new LogFactory(new LoggingConfiguration());
             _logConfig = new LoggingConfiguration();
-            _logger = GetLogger(_logName, minLevel);
-
-            _screenshotDriver = driver as ITakesScreenshot;
+            _logger = GetLogger(_logName, GetNlogLevel(minLevel));
 
         }
 
@@ -82,9 +80,9 @@ namespace Intranet.Selenium.Framework
         /// Save a screenshot of the current browser view
         /// </summary>
         /// <param name="fileName">Name of screenshot</param>
-        public void SaveScreenshot(string fileName)
+        public void SaveScreenshot(string fileName, ISeleniumDriver driver)
         {
-            Screenshot screenshot = _screenshotDriver.GetScreenshot();
+            Screenshot screenshot = ((ITakesScreenshot)driver.DriverComponent).GetScreenshot();
             string savePath = GetSavePath();
             string time = _logStart.ToString("yyyyMMdd-HHmm");
 
@@ -128,9 +126,9 @@ namespace Intranet.Selenium.Framework
             _logConfig.LoggingRules.Add(fileRule);                              //...and add to configuration
             _logConfig.LoggingRules.Add(consoleRule);
 
-            LogManager.Configuration = _logConfig;                              //Activate the configuration
+            _logFactory.Configuration = _logConfig;                              //Activate the configuration
 
-            return LogManager.GetLogger(name);
+            return _logFactory.GetLogger(name);
 
         }
 
@@ -152,6 +150,27 @@ namespace Intranet.Selenium.Framework
             string compiledPath = $@"{_basePath}\log";
 
             return compiledPath;
+        }
+
+        private NLog.LogLevel GetNlogLevel(Level level)
+        {
+            switch (level)
+            {
+                case Level.Trace:
+                    return NLog.LogLevel.Trace;
+                case Level.Debug:
+                    return NLog.LogLevel.Debug;
+                case Level.Info:
+                    return NLog.LogLevel.Info;
+                case Level.Warn:
+                    return NLog.LogLevel.Warn;
+                case Level.Error:
+                    return NLog.LogLevel.Error;
+                case Level.Fatal:
+                    return NLog.LogLevel.Fatal;
+                default:
+                    return NLog.LogLevel.Info;
+            }
         }
     }
 }
