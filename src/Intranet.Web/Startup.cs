@@ -57,6 +57,9 @@ namespace Intranet.Web
                 Environment.SetEnvironmentVariable("AWS_SECRET_ACCESS_KEY", Configuration["AWS_SECRET_ACCESS_KEY"]);
                 Environment.SetEnvironmentVariable("AWS_REGION", Configuration["AWS_REGION"]);
                 Environment.SetEnvironmentVariable("AWS_ACCESS_KEY_ID", Configuration["AWS_ACCESS_KEY_ID"]);
+                Environment.SetEnvironmentVariable("AZUREconnectionString", Configuration["AZUREconnectionString"]);
+                Environment.SetEnvironmentVariable("AZURE_CONTAINER_NAME", Configuration["AZURE_CONTAINER_NAME"]);
+
             }
         }
 
@@ -78,9 +81,9 @@ namespace Intranet.Web
             services.AddTransient<IAuthenticationService, LdapAuthenticationService>();
             services.AddTransient<IDateTimeFactory, DateTimeFactory>();
             services.AddTransient<IImageService, ImageService>();
-            services.AddAWSService<IAmazonS3>();
-            services.AddTransient<ITransferUtility, TransferUtility>();
-            services.AddTransient<IFileStorageService, S3FileStorageService>();
+            //services.AddAWSService<IAmazonS3>();
+            //services.AddTransient<ITransferUtility, TransferUtility>();
+            services.AddTransient<IFileStorageService, AzureFileStorageService>();
             #endregion
 
             #region Database
@@ -108,6 +111,12 @@ namespace Intranet.Web
             services.Configure<S3Options>(options =>
             {
                 options.BucketName = Configuration["AWS_BUCKET_NAME"];
+            });
+
+            services.Configure<AzureStorageOptions>(options =>
+            {
+                options.AZUREConnectionString = Configuration["AZUREConnectionString"];
+                options.BucketName = Configuration["AZURE_CONTAINER_NAME"];
             });
             #endregion
 
@@ -146,6 +155,8 @@ namespace Intranet.Web
             var awsOptions = Configuration.GetAWSOptions();
             services.AddDefaultAWSOptions(awsOptions);
             #endregion
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,41 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Auth;
-using Microsoft.WindowsAzure.Storage.Blob;
-using Microsoft.WindowsAzure.Storage.RetryPolicies;
-using System.IO;
-using Intranet.Services.Models;
+﻿using Intranet.Services.Models;
+using Intranet.Web.Common.Models.Options;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Intranet.Services.FileStorageService
 {
-    public class AzureFileStorageService
+    public class AzureFileStorageService : IFileStorageService
     {
-        private readonly CloudStorageAccount _storageAccount;
-        private readonly CloudBlobClient _client;
-        private readonly CloudBlobContainer _container;
+        public readonly String _connectionString;
+        public readonly String _bucket;
 
-        public AzureFileStorageService()
+        public AzureFileStorageService(IOptions<AzureStorageOptions> connectionString, IOptions<AzureStorageOptions> bucket)
         {
-            _storageAccount = CloudStorageAccount.Parse(connectionString: "UseDevelopmentStorage=true");
+            _connectionString = connectionString.Value.AZUREConnectionString;//FROM secrets.json
 
-            // Create a blob client.
-            _client = _storageAccount.CreateCloudBlobClient();
+            _bucket = bucket.Value.BucketName;//FROM secrets.json
 
-            // Get a reference to a container named "mycontainer."
-            _container = _client.GetContainerReference("man-container");
         }
+
         #region Get
         public async Task<StreamWithMetadata> GetBlobAsync(String filename)
         {
             return await GetStreamFromAzureInternalAsync(filename, PathsInternal.Files);
-
         }
 
-        async public Task<StreamWithMetadata> GetImageAsync(string filename)
+        async public Task<StreamWithMetadata> GetImageAsync(String filename)
         {
             var path = GetImagePathInternal(filename);
 
@@ -58,13 +52,8 @@ namespace Intranet.Services.FileStorageService
 
             return await GetStreamFromAzureInternalAsync(filename, path);
         }
-
-
-
         #endregion
-
-        #region SET
-
+    
         #region SET
         async public Task<string> SetBlobAsync(IFormFile file)
         {
@@ -88,55 +77,33 @@ namespace Intranet.Services.FileStorageService
         async public Task<string> SetImageAsync(Stream stream, string filename, int width, int height)
         {
             var path = GetImagePathInternal(filename, width, height);
-            CloudBlockBlob blockBlob = _container.GetBlockBlobReference(filename);
 
-            try
-            {
-                using (stream)
-                {
-                    await blockBlob.UploadFromStreamAsync(stream);
-
-                    return filename;
-                }
-            }
-            catch (StorageException WaspException)
-            {
-                var invalidCredentials = WaspException.RequestInformation.HttpStatusMessage != null && (
-                    WaspException.RequestInformation.HttpStatusMessage.Equals("InvalidAccessKeyId") ||
-                    WaspException.RequestInformation.HttpStatusMessage.Equals("InvalidSecurity"));
-
-                if (invalidCredentials)
-                {
-                    throw new Exception("Check the provided Azure Credentials.");
-                }
-                else
-                {
-                    throw new Exception("Error occurred: " + WaspException.Message);
-                }
-            }
+            return await SetStreamToAzureInternalAsync(stream, filename, path);
         }
         #endregion
 
         #region Private Methods
-
         private async Task<string> SetStreamToAzureInternalAsync(IFormFile file, string path)
         {
             try
             {
                 var filename = file.FileName;
-                CloudBlockBlob blockBlob = _container.GetBlockBlobReference(filename);
+
+                var _storageAccount = CloudStorageAccount.Parse(connectionString:_connectionString);
+                var _client = _storageAccount.CreateCloudBlobClient();
+                var _container = _client.GetContainerReference(_bucket);
+                var blockBlob = _container.GetBlockBlobReference(filename);
+
                 using (var stream = file.OpenReadStream())
                 {
                     await blockBlob.UploadFromStreamAsync(stream);
-
-                    return filename;
                 }
+
+                return filename;
             }
-            catch (StorageException WasbException)
+            catch (StorageException ex)
             {
-                var invalidCredentials = WasbException.RequestInformation.HttpStatusMessage != null && (
-                    WasbException.RequestInformation.HttpStatusCode.Equals("InvalidAccessKeyId") ||
-                    WasbException.RequestInformation.HttpStatusCode.Equals("InvalidSecurity"));
+                var invalidCredentials =ex.RequestInformation.HttpStatusMessage != null && (ex.RequestInformation.HttpStatusCode.Equals("AuthenticationFailed") || ex.RequestInformation.HttpStatusCode.Equals("InsufficientAccountPermissions"));
 
                 if (invalidCredentials)
                 {
@@ -144,33 +111,68 @@ namespace Intranet.Services.FileStorageService
                 }
                 else
                 {
-                    throw new Exception("Error occurred: " + WasbException.Message);
+                    throw new Exception("Error occurred: " + ex.Message);
                 }
             }
         }
-        #endregion
-        private async Task<StreamWithMetadata> GetStreamFromAzureInternalAsync(string filename, string path)
+
+        private async Task<string> SetStreamToAzureInternalAsync(Stream stream, string filename, string path)
+        {
+            try
+            {     
+                var key = $"{path}/{filename}";
+                var _storageAccount = CloudStorageAccount.Parse(connectionString: _connectionString);
+                var _client = _storageAccount.CreateCloudBlobClient();
+                var _container = _client.GetContainerReference(_bucket);
+                var blockBlob = _container.GetBlockBlobReference(key);
+
+                using (stream)
+                {
+                    await blockBlob.UploadFromStreamAsync(stream);
+                }
+
+                return key;
+            }
+            catch (StorageException ex)
+            {
+                var invalidCredentials = ex.RequestInformation.HttpStatusMessage != null && (ex.RequestInformation.HttpStatusCode.Equals("AuthenticationFailed") || ex.RequestInformation.HttpStatusCode.Equals("InsufficientAccountPermissions"));
+
+                if (invalidCredentials)
+                {
+                    throw new Exception("Check the provided Azure Credentials.");
+                }
+                else
+                {
+                    throw new Exception("Error occurred: " + ex.Message);
+                }
+            }
+        }
+
+        private async Task<StreamWithMetadata> GetStreamFromAzureInternalAsync(string filename, string  path)
         {
             try
             {
-                var key = $"{path}/{filename}";
+                //for blob in AZURE, blobname is only filename, no images are found when including the path/filename
+                //var key = $"{path}/{filename}"; 
+                var key = $"{filename}";
 
-                CloudBlockBlob blockBlob = _container.GetBlockBlobReference(key);
+                var _storageAccount = CloudStorageAccount.Parse(connectionString: _connectionString);
+                var _client = _storageAccount.CreateCloudBlobClient();
+                var _container = _client.GetContainerReference(_bucket);
+                var blockBlob = _container.GetBlockBlobReference(key);
 
                 var readstream = await blockBlob.OpenReadAsync();
+
                 return new StreamWithMetadata(readstream, blockBlob.Properties.ContentType, blockBlob.Properties.ETag);
-
             }
-            catch (StorageException WasbException)
+            catch (StorageException ex)
             {
-
-                if (WasbException.RequestInformation.HttpStatusCode == (int)System.Net.HttpStatusCode.NotFound)
+                if (ex.RequestInformation.HttpStatusCode == (int)System.Net.HttpStatusCode.NotFound)
                 {
                     return null;
                 }
 
-                var invalidCredentials = WasbException.RequestInformation.HttpStatusMessage != null && (WasbException.RequestInformation.HttpStatusCode.Equals(
-                    "InvalidAccessKeyId") || WasbException.RequestInformation.HttpStatusMessage.Equals("InvalidSecurity"));
+                var invalidCredentials = ex.RequestInformation.HttpStatusMessage != null && (ex.RequestInformation.HttpStatusCode.Equals("AuthenticationFailed") || ex.RequestInformation.HttpStatusMessage.Equals("InsufficientAccountPermissions"));
 
                 if (invalidCredentials)
                 {
@@ -178,11 +180,12 @@ namespace Intranet.Services.FileStorageService
                 }
                 else
                 {
-                    throw new Exception("Error occurred: " + WasbException.Message);
+                    throw new Exception("Error occurred: " + ex.Message);
                 }
             }
         }
         #endregion
+
         #region Private Helpers
         private static string GetImagePathInternal(string filename)
         {
@@ -202,7 +205,4 @@ namespace Intranet.Services.FileStorageService
         }
         #endregion
     }
-
-
-
 }
