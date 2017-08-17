@@ -78,5 +78,29 @@ namespace Intranet.Selenium.Framework
         }
         #endregion
 
+        #region Basics
+        public static void AreEqual(string expected, string expectedName, string actual, string actualName, ISeleniumDriver driver)
+        {
+            driver.Log($"VERIFY: {actualName} is equal to {expectedName}");
+            driver.Log($"Expected: {expected} | Actual: {actual}");
+            if (actual == expected)
+            {
+                driver.TestOutcome.PassStep();
+            }
+            else driver.TestOutcome.FailStep();
+        }
+
+        public static void AreNotEqual(string expected, string expectedName, string actual, string actualName, ISeleniumDriver driver)
+        {
+            driver.Log($"VERIFY: {actualName} is equal to {expectedName}");
+            driver.Log($"Expected: {expected} | Actual: {actual}");
+            if (actual != expected)
+            {
+                driver.TestOutcome.PassStep();
+            }
+            else driver.TestOutcome.FailStep();
+        }
+        #endregion
+
     }
 }
