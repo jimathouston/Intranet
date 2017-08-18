@@ -21,10 +21,10 @@ namespace Intranet.Selenium.Tests
         [InlineData(AccountLevel.User)]
         public void AllUsersCanCrudOwnNewsItems(AccountLevel account)
         {
-            string pTitle = $"{testTitle}_{DateTime.Now.ToString()}";
+            string pTitle = $"{testTitle} {DateTime.Now.ToString()}";
             string pText = testText;
             string pTags = testTags;
-            string pUpdatedTags = ", BiggerLongerAndUncut";
+            string pExtraTag = "BiggerLongerAndUncut";
 
             // Setup
             ISeleniumDriver driver = new SeleniumDriver(
@@ -40,8 +40,6 @@ namespace Intranet.Selenium.Tests
                 // Login with appropriate account
                 LoginUtil.Login(account, driver);
 
-                Verify.PageTitleIs("News - Certaincy Intranet", driver);
-
                 // *** CREATE ***
 
                 // Find and click the "Create New" button
@@ -53,38 +51,39 @@ namespace Intranet.Selenium.Tests
 
                 Interact.Click(btnCreateNew, driver);
 
-                // Find all required elements
+                // Find all required fields & Input values
                 Element inputTitle = Find.Elements(
                     By.Id("Title"),
                     "Title Input Field",
                     timeOut: 10000,
                     driver: driver);
+                Interact.SendKeys(inputTitle, pTitle, driver);
 
                 Element inputText = Find.Elements(
-                    By.Id("Text"),
+                    By.Id("Text_ifr"),
                     "Text Input Field",
                     driver: driver);
+                Interact.SendKeys(inputText, " ", driver); // Just to get its attention
+                Interact.SendKeys(inputText, pText, driver);
 
                 Element inputTags = Find.Elements(
                     By.Id("Tags"),
                     "Tags Input Field",
                     driver: driver);
+                Interact.SendKeys(inputTags, pTags, driver);
+
+                // Click the publish toggle, then the create button.
 
                 Element togglePublished = Find.Elements(
-                    By.Id("Published"),
+                    By.XPath("//span[@class = 'lever']"),
                     "Publish-toggle",
                     driver: driver);
+                Interact.Click(togglePublished, driver);
 
                 Element btnSubmit = Find.Elements(
                     By.XPath("//div[@class = 'input-field']/input[@class = 'btn']"),
                     "Create Button",
                     driver: driver);
-
-                // Input Values
-                Interact.SendKeys(inputTitle, pTitle, driver);
-                Interact.SendKeys(inputText, pText, driver);
-                Interact.SendKeys(inputTags, pTags, driver);
-                Interact.Click(togglePublished, driver);
                 Interact.Click(btnSubmit, driver);
 
                 // *** READ ***
@@ -136,7 +135,7 @@ namespace Intranet.Selenium.Tests
                     "Tags Input Field",
                     driver: driver);
 
-                Interact.SendKeys(updateTags, pUpdatedTags, driver);
+                Interact.SendKeys(updateTags, $", {pExtraTag}", driver);
 
                 Element btnSubmitUpdate = Find.Elements(
                     By.XPath("//div[@class = 'input-field']/input[@class = 'btn']"),
@@ -157,13 +156,13 @@ namespace Intranet.Selenium.Tests
                     "News Item Tags",
                     driver);
 
-                Verify.AreEqual($"{pTags}{pUpdatedTags}", "Tags of created News Item", UpdatedItemTags.FirstOrDefault().Text, "Tags of Selected News Item", driver);
+                Verify.Contains(pExtraTag, "Tag added in Update operation", UpdatedItemTags.FirstOrDefault().Text, "Tags of Selected News Item", driver);
 
                 // *** DELETE ***
 
                 // Find and Click Delete Button
                 Element btnDelete = Find.Elements(
-                    By.XPath("//div[@class = 'card-action']/a[text() = 'Delete"),
+                    By.XPath("//div[@class = 'card-action']/a[text() = 'Delete']"),
                     "Delete Item button",
                     driver);
 
@@ -201,6 +200,12 @@ namespace Intranet.Selenium.Tests
                         Verify.AreNotEqual(pTitle, "Title of Created News Item", title, "Title of Found News Item", driver);
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                driver.Log($"Unhandled Exception: {e.GetType().ToString()}", Level.Fatal);
+                driver.Log(e.Message, Level.Fatal);
+                driver.Log(e.StackTrace, Level.Fatal);
             }
             finally
             {
