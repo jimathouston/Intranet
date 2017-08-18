@@ -92,9 +92,31 @@ namespace Intranet.Selenium.Framework
 
         public static void AreNotEqual(string expected, string expectedName, string actual, string actualName, ISeleniumDriver driver)
         {
-            driver.Log($"VERIFY: {actualName} is equal to {expectedName}");
-            driver.Log($"Expected: {expected} | Actual: {actual}");
+            driver.Log($"VERIFY: {actualName} is Not equal to {expectedName}");
+            driver.Log($"{expectedName}: {expected} | {actualName}: {actual}");
             if (actual != expected)
+            {
+                driver.TestOutcome.PassStep();
+            }
+            else driver.TestOutcome.FailStep();
+        }
+
+        public static void Contains(string expected, string expectedName, string actual, string actualName, ISeleniumDriver driver)
+        {
+            driver.Log($"VERIFY: {actualName} should contain {expectedName}");
+            driver.Log($"{expectedName}: {expected} | {actualName}: {actual}");
+            if (actual.Contains(expected))
+            {
+                driver.TestOutcome.PassStep();
+            }
+            else driver.TestOutcome.FailStep();
+        }
+
+        public static void DoesNotContain(string expected, string expectedName, string actual, string actualName, ISeleniumDriver driver)
+        {
+            driver.Log($"VERIFY: {actualName} should not contain {expectedName}");
+            driver.Log($"{expectedName}: {expected} | {actualName}: {actual}");
+            if (!actual.Contains(expected))
             {
                 driver.TestOutcome.PassStep();
             }
