@@ -79,48 +79,68 @@ namespace Intranet.Selenium.Framework
         #endregion
 
         #region Basics
-        public static void AreEqual(string expected, string expectedName, string actual, string actualName, ISeleniumDriver driver)
+        public static bool AreEqual(string expected, string expectedName, string actual, string actualName, ISeleniumDriver driver)
         {
             driver.Log($"VERIFY: {actualName} is equal to {expectedName}");
             driver.Log($"Expected: {expected} | Actual: {actual}");
             if (actual == expected)
             {
                 driver.TestOutcome.PassStep();
+                return true;
             }
-            else driver.TestOutcome.FailStep();
+            else
+            {
+                driver.TestOutcome.FailStep();
+                return false;
+            }
         }
 
-        public static void AreNotEqual(string expected, string expectedName, string actual, string actualName, ISeleniumDriver driver)
+        public static bool AreNotEqual(string expected, string expectedName, string actual, string actualName, ISeleniumDriver driver)
         {
             driver.Log($"VERIFY: {actualName} is Not equal to {expectedName}");
             driver.Log($"{expectedName}: {expected} | {actualName}: {actual}");
             if (actual != expected)
             {
                 driver.TestOutcome.PassStep();
+                return true;
             }
-            else driver.TestOutcome.FailStep();
+            else
+            {
+                driver.TestOutcome.FailStep();
+                return false;
+            }
         }
 
-        public static void Contains(string expected, string expectedName, string actual, string actualName, ISeleniumDriver driver)
+        public static bool Contains(string expected, string expectedName, string actual, string actualName, ISeleniumDriver driver)
         {
             driver.Log($"VERIFY: {actualName} should contain {expectedName}");
             driver.Log($"{expectedName}: {expected} | {actualName}: {actual}");
             if (actual.Contains(expected))
             {
                 driver.TestOutcome.PassStep();
+                return true;
             }
-            else driver.TestOutcome.FailStep();
+            else
+            {
+                driver.TestOutcome.FailStep();
+                return false;
+            }
         }
 
-        public static void DoesNotContain(string expected, string expectedName, string actual, string actualName, ISeleniumDriver driver)
+        public static bool DoesNotContain(string expected, string expectedName, string actual, string actualName, ISeleniumDriver driver)
         {
             driver.Log($"VERIFY: {actualName} should not contain {expectedName}");
             driver.Log($"{expectedName}: {expected} | {actualName}: {actual}");
             if (!actual.Contains(expected))
             {
                 driver.TestOutcome.PassStep();
+                return true;
             }
-            else driver.TestOutcome.FailStep();
+            else
+            {
+                driver.TestOutcome.FailStep();
+                return false;
+            }
         }
         #endregion
 
