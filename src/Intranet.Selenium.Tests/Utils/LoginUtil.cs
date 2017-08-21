@@ -41,6 +41,45 @@ namespace Intranet.Selenium.Tests.Utils
             }
         }
 
+        public static void LogOut(ISeleniumDriver driver)
+        {
+            Element btnShowMenu = Find.Elements(
+                By.XPath("//a[@class = 'button-collapse']"),
+                "Show Menu Button",
+                driver);
+
+            if (btnShowMenu.FirstOrDefault().Displayed)
+            {
+                Interact.Click(btnShowMenu, driver);
+            }
+
+            Element btnLogOutTop = Find.Elements(
+                By.XPath("//a[contains (@href, 'Logout')]"),
+                "Logout Button",
+                driver);
+
+            foreach (IWebElement element in btnLogOutTop.Elements)
+            {
+                if (element.Displayed)
+                {
+                    Interact.Click(element, btnLogOutTop.Name, driver);
+                    if (driver.DriverComponent.Url.Contains("Login"))
+                    {
+                        break;
+                    }
+                }
+            }
+            if (driver.DriverComponent.Url.Contains("Login"))
+            {
+                driver.Log("Logout Successful");
+            }
+            else
+            {
+                driver.Log("Logout Failed - see log for details.", Level.Warn);
+            }
+
+        }
+
         private static void PerformLogin(KeyValuePair<string, string> loginCredentials, ISeleniumDriver driver)
         {
             Element usernameInput =
