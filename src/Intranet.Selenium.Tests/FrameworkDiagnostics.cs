@@ -14,7 +14,7 @@ namespace Intranet.Selenium.Tests
     {
         const string testUrl = "http://localhost:53491";
 
-        [Fact]
+        [Fact(Skip = "Diagnostics Only")]
         public void LoginTest_Admin()
         {
             ISeleniumDriver driver = new SeleniumDriver(
@@ -30,6 +30,13 @@ namespace Intranet.Selenium.Tests
 
                 driver.Log("Test Completed");
             }
+            catch (Exception e)
+            {
+                driver.Log($"Unhandled Exception: {e.GetType().ToString()}", Level.Fatal);
+                driver.Log(e.Message, Level.Fatal);
+                driver.Log(e.StackTrace, Level.Fatal);
+                driver.TestOutcome.FailStep();
+            }
             finally
             {
                 driver.CloseBrowser();
@@ -37,7 +44,7 @@ namespace Intranet.Selenium.Tests
             }
         }
 
-        [Fact]
+        [Fact(Skip = "Diagnostics Only")]
         public void LoginTest_User()
         {
             ISeleniumDriver driver = new SeleniumDriver(
@@ -52,6 +59,13 @@ namespace Intranet.Selenium.Tests
                 LoginUtil.Login(AccountLevel.User, driver);
 
                 driver.Log("Test Completed");
+            }
+            catch (Exception e)
+            {
+                driver.Log($"Unhandled Exception: {e.GetType().ToString()}", Level.Fatal);
+                driver.Log(e.Message, Level.Fatal);
+                driver.Log(e.StackTrace, Level.Fatal);
+                driver.TestOutcome.FailStep();
             }
             finally
             {
