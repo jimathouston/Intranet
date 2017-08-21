@@ -28,7 +28,7 @@ namespace Intranet.Selenium.Framework
             catch (NoSuchElementException)
             {
                 driver.Log("0 matching Element(s) found", Level.Warn);
-                return null;
+                return new Element(new List<IWebElement>(), elementName);
             }
         }
 
@@ -63,7 +63,7 @@ namespace Intranet.Selenium.Framework
             else
             {
                 driver.Log("0 matching Element(s) found within time limit", Level.Warn);
-                return null;
+                return new Element(new List<IWebElement>(), elementName);
             }
         }
 
