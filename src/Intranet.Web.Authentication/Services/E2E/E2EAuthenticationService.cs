@@ -9,7 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace Intranet.Web.Authentication.Services.E2E
 {
-    public class E2EAuthenticationService : IAuthenticationService
+    public class E2EAuthenticationService : ICustomAuthenticationService
     {
         private readonly LdapConfig _config;
 

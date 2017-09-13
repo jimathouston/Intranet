@@ -1,4 +1,4 @@
-﻿using Intranet.Web.Controllers;
+using Intranet.Web.Controllers;
 using Intranet.Web.Domain.Data;
 using Intranet.Web.Domain.Models.Entities;
 using Intranet.Test.Tools.Fakes;
@@ -621,7 +621,7 @@ namespace Intranet.Web.UnitTests.Controllers
             var dateTimeFactory = new DateTimeFactory();
             var fileServiceMock = new Mock<IFileStorageService>();
 
-            DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news), ensureDeleted: true);
+            DbContextFake.SeedDb<IntranetApiContext>(c => c.News.AddRange(news));
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
@@ -755,6 +755,7 @@ namespace Intranet.Web.UnitTests.Controllers
                     Text = text,
                     UserId = username,
                     Url = url,
+                    User = new User { Username = username, DisplayName = "My Name" }
                 }
             };
         }

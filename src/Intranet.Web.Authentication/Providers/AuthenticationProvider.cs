@@ -9,9 +9,9 @@ namespace Intranet.Web.Authentication.Providers
 {
     public class AuthenticationProvider : IAuthenticationProvider
     {
-        private readonly IAuthenticationService _authenticationService;
+        private readonly ICustomAuthenticationService _authenticationService;
 
-        public AuthenticationProvider(IAuthenticationService authenticationService)
+        public AuthenticationProvider(ICustomAuthenticationService authenticationService)
         {
             _authenticationService = authenticationService;
         }

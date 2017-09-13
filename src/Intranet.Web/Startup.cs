@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,6 +29,7 @@ using Microsoft.Extensions.FileProviders;
 using System.IO;
 using Microsoft.AspNetCore.ResponseCompression;
 using Intranet.Web.Authentication.Services.E2E;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Intranet.Web
 {
@@ -36,20 +37,9 @@ namespace Intranet.Web
     {
         private readonly IHostingEnvironment CurrentEnvironment;
 
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-
-            if (env.IsDevelopment())
-            {
-                builder.AddUserSecrets<Startup>();
-            }
-
-            Configuration = builder.Build();
+            Configuration = configuration;
             CurrentEnvironment = env;
 
             if (env.IsDevelopment())
@@ -62,7 +52,7 @@ namespace Intranet.Web
             }
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -79,11 +69,11 @@ namespace Intranet.Web
 
             if (CurrentEnvironment.IsE2e())
             {
-                services.AddTransient<IAuthenticationService, E2EAuthenticationService>();
+                services.AddTransient<ICustomAuthenticationService, E2EAuthenticationService>();
             }
             else
             {
-                services.AddTransient<IAuthenticationService, LdapAuthenticationService>();
+                services.AddTransient<ICustomAuthenticationService, LdapAuthenticationService>();
             }
 
             services.AddTransient<IDateTimeFactory, DateTimeFactory>();
@@ -134,6 +124,15 @@ namespace Intranet.Web
 
             #region Response Compression
             services.AddResponseCompression();
+            #endregion
+
+            #region Authentication
+            // TODO: Added validation of user and expiration: https://docs.microsoft.com/en-us/aspnet/core/security/authentication/cookie?tabs=aspnetcore2x#reacting-to-back-end-changes
+            services.AddAuthentication(sharedOptions =>
+            {
+                sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddCookie(opt => opt.LoginPath = new PathString("/Login"));
             #endregion
 
             #region Mvc
@@ -191,14 +190,7 @@ namespace Intranet.Web
 
             #region Cookie Authentication
             // Add Authentication
-            // TODO: Added validation of user and expiration: https://docs.microsoft.com/en-us/aspnet/core/security/authentication/cookie#reacting-to-back-end-changes
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AuthenticationScheme = "Cookies",
-                LoginPath = new PathString("/Login"),
-                AutomaticAuthenticate = true,
-                AutomaticChallenge = true,
-            });
+            app.UseAuthentication();
             #endregion
 
             #region Logging

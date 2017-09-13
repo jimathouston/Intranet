@@ -1,4 +1,4 @@
-﻿using Intranet.Web.Domain.Data;
+using Intranet.Web.Domain.Data;
 using Intranet.Web.Domain.Helpers;
 using Intranet.Web.Domain.Models.Entities;
 using Intranet.Test.Tools.Fakes;
@@ -18,10 +18,12 @@ namespace Intranet.Web.Domain.UnitTests.Helpers
             // Assign
             var result = false;
 
+            DbContextFake.SeedDb<IntranetApiContext>(c => c.Add(new Category()));
+
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
                 // Act
-                result = await CategoryHelpers.HasNoRelatedEntities(new Category(), context);
+                result = await CategoryHelpers.HasNoRelatedEntities(context.Categories.SingleOrDefault(), context);
             }
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
@@ -49,7 +51,7 @@ namespace Intranet.Web.Domain.UnitTests.Helpers
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
                 // Act
-                result = await CategoryHelpers.HasNoRelatedEntities(category, context);
+                result = await CategoryHelpers.HasNoRelatedEntities(context.Categories.SingleOrDefault(), context);
             }
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
@@ -64,20 +66,15 @@ namespace Intranet.Web.Domain.UnitTests.Helpers
         {
             // Assign
             var result = false;
-            var category = new Category
-            {
-                Faqs = new List<Faq>
-                {
-                    new Faq(),
-                },
-            };
 
-            DbContextFake.SeedDb<IntranetApiContext>(c => c.Add(category));
+            DbContextFake.SeedDb<IntranetApiContext>(c => c.Add(new Category()));
+            DbContextFake.SeedDb<IntranetApiContext>(c => c.Add(new Faq()), ensureDeleted: false);
+            DbContextFake.SeedDb<IntranetApiContext>(c => c.Faqs.SingleOrDefault().Category = c.Categories.SingleOrDefault(), ensureDeleted: false);
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
                 // Act
-                result = await CategoryHelpers.HasNoRelatedEntities(category, context, category.Faqs.First());
+                result = await CategoryHelpers.HasNoRelatedEntities(context.Categories.SingleOrDefault(), context, context.Faqs.SingleOrDefault());
             }
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
@@ -106,7 +103,7 @@ namespace Intranet.Web.Domain.UnitTests.Helpers
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
                 // Act
-                result = await CategoryHelpers.HasNoRelatedEntities(category, context, category.Faqs.First());
+                result = await CategoryHelpers.HasNoRelatedEntities(context.Categories.SingleOrDefault(), context, category.Faqs.First());
             }
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,16 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Intranet.Web.Authentication.Providers;
 using Intranet.Web.Authentication.Services;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Intranet.Web.Controllers
 {
     public class AuthenticationController : Controller
     {
         private readonly IAuthenticationProvider _authenticationProvider;
-        private readonly IAuthenticationService _authenticationService;
+        private readonly ICustomAuthenticationService _authenticationService;
 
         public AuthenticationController(IAuthenticationProvider authenticationProvider,
-                                        IAuthenticationService authenticationService)
+                                        ICustomAuthenticationService authenticationService)
         {
             _authenticationProvider = authenticationProvider;
             _authenticationService = authenticationService;
@@ -45,7 +46,7 @@ namespace Intranet.Web.Controllers
                     return View();
                 };
 
-                await HttpContext.Authentication.SignInAsync("Cookies", claimsPrinciple);
+                await HttpContext.SignInAsync(claimsPrinciple);
 
                 if (Url.IsLocalUrl(returnUrl))
                 {
@@ -60,7 +61,7 @@ namespace Intranet.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.Authentication.SignOutAsync("Cookies");
+            await HttpContext.SignOutAsync();
             return Redirect("~/");
         }
     }

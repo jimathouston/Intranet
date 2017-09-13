@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +12,7 @@ namespace Intranet.Web.Domain.Data
     /// </summary>
     public class IntranetApiContext : DbContext
     {
-        public IntranetApiContext(DbContextOptions<IntranetApiContext> options)
+        public IntranetApiContext(DbContextOptions options)
             : base(options)
         {
             // Empty
@@ -33,11 +33,11 @@ namespace Intranet.Web.Domain.Data
             #region News
             modelBuilder.Entity<News>()
                 .Property(n => n.HasEverBeenPublished)
-                .UsePropertyAccessMode(Microsoft.EntityFrameworkCore.Metadata.PropertyAccessMode.FieldDuringConstruction);
+                .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
 
             modelBuilder.Entity<News>()
                 .Property(n => n.Published)
-                .UsePropertyAccessMode(Microsoft.EntityFrameworkCore.Metadata.PropertyAccessMode.Property);
+                .UsePropertyAccessMode(PropertyAccessMode.Property);
 
             modelBuilder.Entity<News>()
                 .HasIndex(n => n.Url);

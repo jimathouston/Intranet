@@ -9,7 +9,7 @@ using Microsoft.Extensions.Options;
 
 namespace Intranet.Web.Authentication.Services
 {
-    public class LdapAuthenticationService : IAuthenticationService
+    public class LdapAuthenticationService : ICustomAuthenticationService
     {
         private const string MemberOfAttribute = "memberOf";
         private const string DisplayNameAttribute = "displayName";

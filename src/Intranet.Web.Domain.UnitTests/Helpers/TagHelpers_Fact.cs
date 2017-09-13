@@ -1,4 +1,4 @@
-﻿using Intranet.Web.Domain.Data;
+using Intranet.Web.Domain.Data;
 using Intranet.Web.Domain.Helpers;
 using Intranet.Web.Domain.Models.Entities;
 using Intranet.Test.Tools.Fakes;
@@ -18,10 +18,12 @@ namespace Intranet.Web.Domain.UnitTests.Helpers
             // Assign
             var result = false;
 
+            DbContextFake.SeedDb<IntranetApiContext>(c => c.Add(new Tag()));
+
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
                 // Act
-                result = await TagHelpers.HasNoRelatedEntities(new Tag(), context);
+                result = await TagHelpers.HasNoRelatedEntities(context.Tags.SingleOrDefault(), context);
             }
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
@@ -44,12 +46,12 @@ namespace Intranet.Web.Domain.UnitTests.Helpers
                 },
             };
 
-            DbContextFake.SeedDb<IntranetApiContext>(c => c.Add(tag));
+            DbContextFake.SeedDb<IntranetApiContext>(c => c.Tags.Add(tag));
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
                 // Act
-                result = await TagHelpers.HasNoRelatedEntities(tag, context);
+                result = await TagHelpers.HasNoRelatedEntities(context.Tags.SingleOrDefault(), context);
             }
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
@@ -64,19 +66,27 @@ namespace Intranet.Web.Domain.UnitTests.Helpers
         {
             // Assign
             var result = false;
-            var tag = new Tag
-            {
-                FaqTags = new List<FaqTag>
-                {
-                    new FaqTag(),
-                },
-            };
 
-            DbContextFake.SeedDb<IntranetApiContext>(c => c.Add(tag));
+            DbContextFake.SeedDb<IntranetApiContext>(c =>
+            {
+                c.Add(new Tag());
+                c.Add(new Faq());
+            });
+
+            DbContextFake.SeedDb<IntranetApiContext>(c =>
+            {
+                c.Add(new FaqTag { Faq = c.Faqs.SingleOrDefault(), Tag = c.Tags.SingleOrDefault() });
+            }, ensureDeleted: false);
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
                 // Act
+                var tag = context.Tags.SingleOrDefault();
+                await context
+                    .Entry(tag)
+                    .Collection(c => c.FaqTags)
+                    .LoadAsync();
+
                 result = await TagHelpers.HasNoRelatedEntities(tag, context, tag.FaqTags);
             }
 
@@ -106,7 +116,7 @@ namespace Intranet.Web.Domain.UnitTests.Helpers
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())
             {
                 // Act
-                result = await TagHelpers.HasNoRelatedEntities(tag, context, new List<FaqTag> { tag.FaqTags.First() });
+                result = await TagHelpers.HasNoRelatedEntities(context.Tags.SingleOrDefault(), context, new List<FaqTag> { tag.FaqTags.First() });
             }
 
             using (var context = DbContextFake.GetDbContext<IntranetApiContext>())

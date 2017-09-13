@@ -1,5 +1,6 @@
-﻿using Intranet.Web.Common.Extensions;
+using Intranet.Web.Common.Extensions;
 using Intranet.Web.Models.Options;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -28,11 +29,11 @@ namespace Intranet.Web.Middlwares
             {
                 var authorized = _policyName.IsNull()
                     ? httpContext.User.Identity.IsAuthenticated 
-                    : await authorizationService.AuthorizeAsync(httpContext.User, null, _policyName);
+                    : (await authorizationService.AuthorizeAsync(httpContext.User, null, _policyName)).Succeeded;
 
                 if (!authorized)
                 {
-                    await httpContext.Authentication.ChallengeAsync();
+                    await httpContext.ChallengeAsync();
                     return;
                 }
             }
