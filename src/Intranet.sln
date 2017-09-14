@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{4BA39C02-8943-4ED6-B37E-637A0BAEB4D8}"
 EndProject
@@ -21,11 +21,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{2203A5F0-AFF7-4316-95B6-18FEF96BCC7F}"
 	ProjectSection(SolutionItems) = preProject
 		..\.editorconfig = ..\.editorconfig
+		..\.gitignore = ..\.gitignore
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{823AD07B-5E14-4A35-B70B-C05F758A5193}"
 	ProjectSection(SolutionItems) = preProject
 		..\docfx.json = ..\docfx.json
+		tools\packages.config = tools\packages.config
 		..\README.md = ..\README.md
 		..\toc.yml = ..\toc.yml
 	EndProjectSection
@@ -52,7 +54,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.Test.Tools", "Intr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.Selenium.Framework", "Intranet.Selenium.Framework\Intranet.Selenium.Framework.csproj", "{299A519C-76D4-46FD-AE54-8C46741C0946}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intranet.Selenium.Tests", "Intranet.Selenium.Tests\Intranet.Selenium.Tests.csproj", "{A3CBA1E1-9BF5-4414-9A19-4325380841E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.Selenium.Tests", "Intranet.Selenium.Tests\Intranet.Selenium.Tests.csproj", "{A3CBA1E1-9BF5-4414-9A19-4325380841E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -246,5 +248,8 @@ Global
 		{0A822E0B-A27E-46FF-911B-01908375A5D6} = {4BA39C02-8943-4ED6-B37E-637A0BAEB4D8}
 		{299A519C-76D4-46FD-AE54-8C46741C0946} = {4BA39C02-8943-4ED6-B37E-637A0BAEB4D8}
 		{A3CBA1E1-9BF5-4414-9A19-4325380841E2} = {4BA39C02-8943-4ED6-B37E-637A0BAEB4D8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2183AE37-F0B7-48CE-9AAE-A1804F6EBFA6}
 	EndGlobalSection
 EndGlobal

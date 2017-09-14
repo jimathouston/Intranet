@@ -1,8 +1,8 @@
-#addin "NuGet.Core"
-#addin "Cake.ExtendedNuGet"
-#addin "Cake.Npm"
-#addin "Cake.DocFx"
-#tool "docfx.console"
+#addin "NuGet.Core&version=2.14.0"
+#addin "Cake.ExtendedNuGet&version=1.0.0.24"
+#addin "Cake.Npm&version=0.11.0"
+#addin "Cake.DocFx&version=0.4.1"
+#tool "docfx.console&version=2.24.0"
 
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
