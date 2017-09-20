@@ -1,4 +1,5 @@
-﻿# [Architecture](architecture.md)
+# [First Setup](first-setup.md)
+# [Architecture](architecture.md)
 ## [Docker](docker.md)
 # [Database](database.md)
 # [Client App](client-app.md)
