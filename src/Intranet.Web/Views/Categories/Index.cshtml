@@ -8,7 +8,7 @@
 <h2>@ViewData["Title"]</h2>
 
 <p>
-    <a class="btn" asp-action="Create">Create New</a>
+    <a class="btn" asp-action="Create" asp-route-from="@from">Create New</a>
 </p>
 <div class="row">
     <table class="striped col s12 responsive-table">
@@ -36,12 +36,13 @@
     </table>
 </div>
 <div>
+    
     @if ((string)ViewData["from"] == nameof(Faq))
     {
-        <a asp-controller="Faqs" asp-action="Index">Back to Faq's</a>
+        <a asp-controller="Faqs" asp-action="Index">Back to FAQ's</a>
     }
     else if ((string)ViewData["from"] == nameof(Policy))
     {
         <a asp-controller="Policies" asp-action="Index">Back to Policies</a>
-    }
+    } 
 </div>
