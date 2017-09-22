@@ -115,6 +115,11 @@ namespace Intranet.Web
                 options.TrackingId = Configuration["GA_TRACKING_ID"];
             });
 
+            services.Configure<TinyMceOptions>(options =>
+            {
+                options.ApiKey = Configuration["TINYMCE_API_KEY"];
+            });
+
             services.Configure<GzipCompressionProviderOptions>(options =>
                 options.Level = System.IO.Compression.CompressionLevel.Optimal
             );
