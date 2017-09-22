@@ -27,10 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{2203A5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{823AD07B-5E14-4A35-B70B-C05F758A5193}"
 	ProjectSection(SolutionItems) = preProject
-		..\docfx.json = ..\docfx.json
 		tools\packages.config = tools\packages.config
 		..\README.md = ..\README.md
-		..\toc.yml = ..\toc.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "docs", "docs\docs.csproj", "{E175DD6A-977B-40C8-B185-1F45588F78A2}"
@@ -56,6 +54,15 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.Selenium.Framework", "Intranet.Selenium.Framework\Intranet.Selenium.Framework.csproj", "{299A519C-76D4-46FD-AE54-8C46741C0946}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intranet.Selenium.Tests", "Intranet.Selenium.Tests\Intranet.Selenium.Tests.csproj", "{A3CBA1E1-9BF5-4414-9A19-4325380841E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{8DE29C9F-F466-4393-82FA-F3DD0CF5A383}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+		Dockerfile-build = Dockerfile-build
+		init-web.sh = init-web.sh
+		intranet.ps1 = intranet.ps1
+		intranet.sh = intranet.sh
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

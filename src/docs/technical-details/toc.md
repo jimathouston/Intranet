@@ -3,7 +3,6 @@
 # [Architecture](architecture.md)
 ## [Docker](docker.md)
 # [Database](database.md)
-# [Client App](client-app.md)
 # [Environment Variables](environment-variables.md)
 # [Authentication Flow](authentication-flow.md)
 # [E2E Testing](e2e-testing.md)

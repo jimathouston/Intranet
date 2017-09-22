@@ -113,7 +113,7 @@ Task("Run-Unit-Tests")
 });
 
 Task("Generate-Documentation")
-  .Does(() => DocFxBuild("../docfx.json"));
+  .Does(() => DocFxBuild("docs/docfx.json"));
 
 Task("Publish")
     .IsDependentOn("Run-Unit-Tests")
