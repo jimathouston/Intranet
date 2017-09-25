@@ -36,6 +36,13 @@ var testSettings = new DotNetCoreTestSettings
     NoBuild = true
 };
 
+var publishSettings = new DotNetCorePublishSettings
+{
+    Framework = "netcoreapp2.0",
+    Configuration = configuration,
+    OutputDirectory = String.Format("./Artifacts/{0}/", configuration)
+};
+
 //////////////////////////////////////////////////////////////////////
 // TASKS
 //////////////////////////////////////////////////////////////////////
@@ -97,6 +104,7 @@ Task("Build")
     foreach(var project in unitTestProjects)
     {
         Information("Building: {0}", project.GetFilenameWithoutExtension());
+        Information(project.FullPath);
         DotNetCoreBuild(project.FullPath, buildSettings);
     }
 });
@@ -116,11 +124,12 @@ Task("Generate-Documentation")
   .Does(() => DocFxBuild("docs/docfx.json"));
 
 Task("Publish")
-    .IsDependentOn("Run-Unit-Tests")
+    .IsDependentOn("Build")
     .IsDependentOn("Generate-Documentation")
     .Does(() =>
 {
-    DotNetCorePublish("./Intranet.Web");
+    Information("Publishing with configuration {0}.", configuration);
+    DotNetCorePublish("./Intranet.Web", publishSettings);
 });
 
 //////////////////////////////////////////////////////////////////////

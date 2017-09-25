@@ -1,6 +1,8 @@
 # args default is empty string
 param([string]$command = "")
 
+clear
+
 If ($command -eq "help")
 {
   Write-Host ""
