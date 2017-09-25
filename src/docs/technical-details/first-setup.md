@@ -12,15 +12,19 @@ Steps:
     ```Powershell
     > Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
     ```
- 2. Run the build script:
-     ```Powershell
-    > .\src\build.ps1
+ 2. Change to the \src\ directory:
+    ```Powershell
+    > cd .\src
     ```
- 3. Set all user secrets either with `dotnet user-secrets set` or from Visual Studio:
+ 3. Run the build script:
+     ```Powershell
+    > .\build.ps1
+    ```
+ 4. Set all user secrets either with `dotnet user-secrets set` or from Visual Studio:
  
     ![Set user secrets in Visual Studio](images/set-user-secrets-in-visual-studio.gif)
- 4. Go to `/src/Intranet.Web`.
- 5. Start the application:
+ 5. Go to `/src/Intranet.Web`.
+ 6. Start the application:
     ```Powershell
     > dotnet run
     ```
